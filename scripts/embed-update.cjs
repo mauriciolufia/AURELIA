@@ -21,6 +21,27 @@ html=html.replace("__v88Move(n,b.escape,n.age==='child'?5:4.2,dt,l.active);", "_
 // A lethal hit can clear every projectile while this loop is in progress.
 html=html.replace('for(let i=_ct.length-1;i>=0;i--){const s=_ct[i];let end=', 'for(const s of [..._ct].reverse()){if(!_ct.includes(s))continue;let end=');
 html=html.replace('s.life-=dt;if(end||s.life<=0){_6.remove(s.g);s.g.geometry.dispose();s.m.dispose();_ct.splice(i,1);}}', 'if(!_ct.includes(s))continue;s.life-=dt;if(end||s.life<=0){_6.remove(s.g);s.g.geometry.dispose();s.m.dispose();const index=_ct.indexOf(s);if(index>=0)_ct.splice(index,1);}}');
+// Scale hostile attack clocks without slowing movement, projectiles or civilian routines.
+for(const timer of ['cooldown','specialCooldown']){
+ html=html.replaceAll('c.'+timer+'-dt)', 'c.'+timer+'-dt*__v102CombatRate(c))');
+ html=html.replaceAll('c.'+timer+'-dt*2.07125)', 'c.'+timer+'-dt*2.07125*__v102CombatRate(c))');
+}
+html=html.replaceAll('c.attackTimer-=dt;', 'c.attackTimer-=dt*__v102CombatRate(c);');
+html=html.replaceAll('c.attackTimer-dt*2.07125)', 'c.attackTimer-dt*2.07125*__v102CombatRate(c))');
+html=html.replaceAll('c.specialAction.time-dt*2.07125)', 'c.specialAction.time-dt*2.07125*__v102CombatRate(c))');
+html=html.replace('shown=c;a.time-=dt;', "shown=c;a.time-=dt*(a.phase==='windup'||a.phase==='fade'?__v102CombatRate(c):1);");
+html=html.replace('e.clock+=dt;if(c.dead||!__v92SameFloor(c))', 'e.clock+=dt*__v102CombatRate(c);if(c.dead||!__v92SameFloor(c))');
+html=html.replace('if(e.action){e.action.time-=dt;', 'if(e.action){e.action.time-=dt*__v102CombatRate(c);');
+html=html.replace('r.next=w.clock+1.5+(r.index%4)*.1;', 'r.next=w.clock+(1.5+(r.index%4)*.1)/__v102CombatRate(c);');
+html=html.replace('const t=(w.clock-r.action.start)/.75,', 'const t=(w.clock-r.action.start)/(.75/__v102CombatRate(c)),');
+html=html.replace('p.next+=2;_5p=.6;', 'p.next+=2/(p.rate102||1);_5p=.6;');
+html=html.replace('_cu.tick+=dt;while(_cu.tick>=1)', '_cu.tick+=dt*__v102Combat.burnRate;while(_cu.tick>=1)');
+// Keep the new cut-and-fill road visible in the mountain terrain itself.
+html=html.replace('new _0.PlaneGeometry(m.r*2,m.r*2,64,64)', 'new _0.PlaneGeometry(m.r*2,m.r*2,128,128)');
+html=html.replace("{areas:[__v83.areas.find(a=>a.key==='crypt')],boss:_m.find(c=>c.boss==='optional-pharaoh')}", '__v102SolarGroup()');
+html=html.replace('if(_eb)_14.set(s.player[0],_dz.y+1.85,s.player[2]);','if(_eb)__v102SolarRestorePosition(s.player);');
+html=html.replaceAll('Cripta del Sol · recorre sus doce cámaras','Pirámide del Sol Eterno · tres plantas conectadas');
+html=html.replaceAll('Capitana Bruma Roja','Barbanegra').replaceAll('Bruma Roja','Barbanegra');
 const begin = '/* AURELIA_UPDATE97_BEGIN */';
 const end = '/* AURELIA_UPDATE97_END */';
 // Service anchors still initialize their NPC, but must not reset a living NPC each frame.
@@ -45,10 +66,13 @@ if(html.includes(oldCotsStart)){
 html=html.replace('__v93Batch(g);g.userData.cull93=', '__v93Batch(g,new Set(__v29Doors.map(d=>d.pivot)));g.userData.cull93=');
 // Nearby NPCs must open public doors even while the observer is in another room.
 html=html.replace('if(dist>35&&Math.abs(d.angle)<.0001)continue;', 'if(dist>180&&Math.abs(d.angle)<.0001)continue;');
-html=html.replace('if(!near&&dist<100)for(const n of _2h)', 'if(!near&&dist<180)for(const n of __v101DoorActors())');
-html=html.replace('if(!near&&dist<180)for(const n of __v88Life.active)', 'if(!near&&dist<180)for(const n of __v101DoorActors())');
+html=html.replace('if(!near&&dist<100)for(const n of _2h)', 'if(!near&&dist<180)for(const n of __v102DoorActors(d.p.x,d.p.z))');
+html=html.replace('if(!near&&dist<180)for(const n of __v88Life.active)', 'if(!near&&dist<180)for(const n of __v102DoorActors(d.p.x,d.p.z))');
 html=html.replace('for(const d of __v29Doors){const dist=', 'for(const d of __v29Doors){if(d.__v101Slide)continue;const dist=');
-const sources = ['quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
+html=html.replace('for(const n of __v101DoorActors())', 'for(const n of __v102DoorActors(d.p.x,d.p.z))');
+html=html.replaceAll('__v102DoorActors(d.p.x,d.p.z))','__v102DoorActors(d.p.x,d.p.z,Math.max(4,d.w*d.scale*.6+2)))');
+html=html.replace('Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<3)', 'Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<Math.max(3,d.w*d.scale*.6+2))');
+const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
 const block = `${begin}\n${sources.join('\n')}\n${end}\n`;
 if (html.includes(begin)) html = html.slice(0, html.indexOf(begin)) + block + html.slice(html.indexOf(end) + end.length).replace(/^\n/, '');
 else {
@@ -56,7 +80,7 @@ else {
   if (!html.includes(marker)) throw new Error('Missing game initialization marker');
   html = html.replace(marker, block + marker);
 }
-html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v101 Rutinas y HUD móvil</title>');
-html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v101-vida-diaria-hud-movil">');
+html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v102 Pirámide, corsarios y castillos</title>');
+html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v102-solar-corsarios-castillos">');
 fs.writeFileSync(file, html);
-console.log('Embedded Aurelia update 101');
+console.log('Embedded Aurelia update 102');

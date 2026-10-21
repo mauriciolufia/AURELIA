@@ -16,7 +16,7 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),
   const run=s=>page.evaluate(s=>window.__dayTest(s),s);await page.click('#ag-start');await page.evaluate(()=>document.getElementById('ag-v85-demo').click());await run(`active=false;_v=true;`);
   await run(`$('cycle').checked=false;$('cycle').dispatchEvent(new Event('change'));`);
   console.log('PASS all villages and castle bedrooms have fixed beds and dining furniture',await run(`(()=>{
-   const audit=__AURELIA_LIFE101__.audit(),beds=new Set();if(audit.npcs!==477||audit.missingBeds.length||audit.missingDining.length)throw Error('Missing home furniture '+JSON.stringify(audit));
+   const audit=__AURELIA_LIFE101__.audit(),beds=new Set();if(audit.npcs!==468||audit.missingBeds.length||audit.missingDining.length)throw Error('Missing home furniture '+JSON.stringify(audit));
    for(const n of _2h){const a=n.__v101;if(!a)continue;const bed=a.bed.furniture,seat=a.dining.furniture,table=a.dining.table;
     if(beds.has(bed.id)||bed.owner!==n.id||bed.home!==a.home||seat.home!==a.home||table.home!==a.home||table.context!=='dining'||!__v101Inside(a.home,bed,.2))throw Error('Furniture belongs to another home/NPC '+n.id);beds.add(bed.id);
     if(__v101Ground(n,a.bed.x,a.bed.z,a.bed.y)===null||__v101Ground(n,a.dining.x,a.dining.z,a.dining.y)===null)throw Error('Furniture has no approach '+n.id);
@@ -46,17 +46,17 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),
     if(!ate||!__v101ValidStation(n,s)||!n.__v100Props.food.visible||!n.__v100Props.mealArms.visible||n.__v100Props.stool.visible||!n.__v100Props.legs.visible)throw Error('NPC does not eat at its fixed dining table '+JSON.stringify({id:n.id,phase:s.phase,action:s.action,x:n.x,z:n.z,y:n.homeY,zone:s.zone,waypoint:s.waypoint,index:s.index,route:s.route.map(p=>[p.x,p.y,p.z]),path:s.pathTarget&&[s.pathTarget.x,s.pathTarget.y,s.pathTarget.z],target:s.target&&[s.target.x,s.target.y,s.target.z],job:__v100Day.jobs.get(n)?.steps,blocked:s.blocked,neighbors:__v88Life.active.filter(o=>o!==n&&Math.hypot(o.x-n.x,o.z-n.z)<2).map(o=>({id:o.id,x:o.x,z:o.z,phase:o.__v100Day?.phase,action:o.__v100Day?.action}))}));
     if(!n.g.visible||!n.g.parent||!Number.isFinite(n.x+n.z+n.homeY)||Math.hypot(n.g.position.x-n.x,n.g.position.z-n.z)>.05)throw Error('Meal model differs from simulated NPC');
     console.log('DAILY meal reached '+n.id);__dayFrames(190);if(!s.mealCount)throw Error('Meal never completes '+n.id);
-    _x=22.1;let slept=false;for(let i=0;i<4500;i++){__dayFrames(1);if(n.sleeping){slept=true;break;}}
+    _x=n.__v101.home.castle?23.1:22.1;let slept=false;for(let i=0;i<4500;i++){__dayFrames(1);if(n.sleeping){slept=true;break;}}
     if(!slept||!__v101ValidStation(n,s)||s.bed.owner!==n.id||Math.abs(n.g.position.y-(s.bed.y+.72))>.02||Math.abs(n.g.rotation.x+Math.PI/2)>.02||n.__v100Props.stool.visible)throw Error('NPC does not lie in its own bed '+n.id+' '+s.phase+' '+s.action);
     console.log('DAILY bed reached '+n.id);__dayFrames(90);if(!n.sleeping)throw Error('Night sleep incorrectly cycles to outdoor tasks');
-    _x=11.1;let outside=false;for(let i=0;i<4500;i++){__dayFrames(1);if(__v101Outdoors(n)){outside=true;break;}}
+    _x=11.1;let outside=false;for(let i=0;i<4500;i++){__dayFrames(1);if(n.__v102Court?!n.sleeping&&Math.hypot(n.x-n.__v102Court.anchor.x,n.z-n.__v102Court.anchor.z)<8&&Math.abs(n.homeY-n.__v102Court.anchor.y)<.6&&!__v102CourtPrivate({x:n.x,z:n.z,y:n.homeY}):__v101Outdoors(n)){outside=true;break;}}
     if(!outside||n.sleeping)throw Error('NPC does not wake up and walk outside '+JSON.stringify({id:n.id,phase:s.phase,action:s.action,x:n.x,z:n.z,homeY:n.homeY,target:s.target&&[s.target.x,s.target.y,s.target.z],job:__v100Day.jobs.has(n),index:s.index,route:s.route.length,pathTarget:s.pathTarget&&[s.pathTarget.x,s.pathTarget.y,s.pathTarget.z],planningSteps:__v100Day.jobs.get(n)?.steps,waypoint:s.waypoint,blocked:s.blocked,near:__v88Life.active.includes(n),actors:__v88Life.active.filter(o=>o!==n&&Math.hypot(o.x-n.x,o.z-n.z)<2).map(o=>({id:o.id,x:o.x,z:o.z,sleep:o.sleeping,phase:o.__v100Day?.phase,action:o.__v100Day?.action}))}));
     if(n.rank==='king'){
      _x=9.1;let returned=false;for(let i=0;i<6000;i++){__dayFrames(1);if(s.phase==='perform'&&n.homeY>n.__v101.home.y+10&&Math.hypot(n.x-n.__v101.origin.x,n.z-n.__v101.origin.z)<7){returned=true;break;}}
      if(!returned)throw Error('King does not return upstairs to work '+JSON.stringify({phase:s.phase,x:n.x,z:n.z,y:n.homeY,job:__v100Day.jobs.get(n)?.steps,path:s.pathTarget&&[s.pathTarget.x,s.pathTarget.y,s.pathTarget.z],target:s.target&&[s.target.x,s.target.y,s.target.z]}));console.log('DAILY king returned upstairs to work');
     }
     return{id:n.id,meters:Math.round(s.traveled-start),meals:s.mealCount,bed:n.__v101.bed.furniture.id,outings:n.__v101.outings,walkedWhileObserverUpstairs:upstairsMeters>.3};
-   })()`);reports.push(result);console.log('PASS real frames: walk, dine at home, sleep in owned bed, wake and go outdoors',result);
+   })()`);reports.push(result);console.log('PASS real frames: walk, dine at a fixed table, sleep in owned bed, wake and return to daytime activities',result);
   }
   console.log('PASS children play varied outdoor games and neighbors talk to one another',await run(`(()=>{
    const n=_2h.find(n=>n.age==='child'&&n.homeSite===1),s=n.__v100Day;_14.set(n.x+2,n.homeY+1.85,n.z+2);_x=14.1;

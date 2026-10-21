@@ -65,8 +65,11 @@ function __v101Segment(n,p,q,doors=false,ignoreOpenDoors=false){if(!Number.isFin
  if(Math.abs(y-startY)<.4){const seen=new Set();for(let ix=Math.floor((Math.min(p.x,q.x)-.4)/32);ix<=Math.floor((Math.max(p.x,q.x)+.4)/32);ix++)for(let iz=Math.floor((Math.min(p.z,q.z)-.4)/32);iz<=Math.floor((Math.max(p.z,q.z)+.4)/32);iz++)for(const c of _1j.get(ix+','+iz)||[]){if(seen.has(c))continue;seen.add(c);if(__v101SweptHit(c,p,q,Math.min(startY,y)))return null;}}
  return y;
 }
+function __v101Depart(n,p){for(let i=0;i<16;i++){const angle=i*Math.PI/8;if(__v101Segment(n,p,{x:p.x+Math.cos(angle)*.65,z:p.z+Math.sin(angle)*.65,y:p.y})!==null)return true;}return false;}
 const __v101OldSegment=__v100Segment;
-__v100Segment=function(n,p,q){if(!n.__v101)return __v101OldSegment(n,p,q);return __v101Segment(n,p,q)!==null;};
+__v100Segment=function(n,p,q){if(!n.__v101)return __v101OldSegment(n,p,q);return __v101Segment(n,p===n?{x:n.x,z:n.z,y:n.homeY}:p,q)!==null;};
+const __v102OldNearby=__v100Nearby;
+__v100Nearby=function(n,s,...args){const target=__v102OldNearby(n,s,...args);if(target||!n.__v101)return target;const p={x:n.x,z:n.z,y:n.homeY};for(let i=0;i<16;i++){const angle=i*Math.PI/8,q={x:p.x+Math.cos(angle)*.65,z:p.z+Math.sin(angle)*.65,y:p.y};if(__v100Free(n,q.x,q.z)&&__v101Segment(n,p,q)!==null)return q;}return null;};
 // Placement is permanent, validates every footprint, keeps entries and stairs clear.
 function __v101AddFurniture(h,type,count){
  const g=new _0.Group();g.position.set(h.x,h.y,h.z);g.rotation.y=h.angle||0;g.name='Mobiliario fijo de '+h.city+' · '+h.type;_8.add(g);const pal=__v29Palette(_1h.find(s=>s.name===h.city)||_1h[1]);let placed=0;
@@ -120,7 +123,7 @@ function __v101Assign(){
  }
  __v101Life.ready=true;
  for(const n of _2h.filter(n=>n.__v101)){
-  if(__v101Ground(n,n.x,n.z)===null){let found=null;for(let r=.4;r<=6&&!found;r+=.3)for(let i=0;i<24;i++){const x=n.x+Math.cos(i*Math.PI/12)*r,z=n.z+Math.sin(i*Math.PI/12)*r,y=__v101Ground(n,x,z);if(y!==null){found={x,z,y};break;}}if(found){n.x=found.x;n.z=found.z;n.homeY=found.y;__v101Life.repairs++;}}
+  if(__v101Ground(n,n.x,n.z)===null||!__v101Depart(n,{x:n.x,z:n.z,y:n.homeY})){let found=null;for(let r=.4;r<=6&&!found;r+=.3)for(let i=0;i<24;i++){const x=n.x+Math.cos(i*Math.PI/12)*r,z=n.z+Math.sin(i*Math.PI/12)*r,y=__v101Ground(n,x,z);if(y!==null&&__v101Depart(n,{x,z,y})){found={x,z,y};break;}}if(!found)for(const p of [n.__v101.bed,n.__v101.dining])if(p&&__v101Ground(n,p.x,p.z,p.y)!==null&&__v101Depart(n,p)){found={x:p.x,z:p.z,y:p.y};break;}if(found){n.x=found.x;n.z=found.z;n.homeY=found.y;__v101Life.repairs++;}}
   const s=__v100Brain(n);__v100Release(n,s);Object.assign(s,{phase:'new',next:0,serial:0,route:[],index:0,action:'walk',lastHour:null,traveled:0,bed:null,seat:null,station:null,visit:0,blocked:0});n.__v100Day=s;n.g.position.set(n.x,n.homeY,n.z);
  }
 }
@@ -147,7 +150,7 @@ Object.assign(__v100Tasks,{sleep:{label:'Durmiendo en su cama',legacy:'sleep'},e
 function __v101Outdoors(n,p={x:n.x,z:n.z,y:n.homeY}){return !__v101Life.homes.some(h=>__v101Inside(h,p,.1)&&Math.abs(p.y-h.y)<1)&&!_43.some(r=>Math.abs(p.y-r.y)<1&&Math.abs(p.x-r.x)<r.w/2&&Math.abs(p.z-r.z)<r.d/2);}
 function __v101Choose(n,s){
  const h=Math.floor(_x),child=n.age==='child';if(s.previousHour!==undefined&&s.previousHour>h)s.day=(s.day||0)+1;s.previousHour=h;s.lastHour=h;
- if(h<6||h>=(child?21:22))return n.__v101.bed?'sleep':'read';
+ if(h<6||h>=(n.__v101.home.castle?23:child?21:22))return n.__v101.bed?'sleep':'read';
  if([8,13,19].includes(h)&&s.mealSlot!==(s.day||0)+':'+h&&n.__v101.dining)return 'eat';
  const primary={6:'stretch',7:'wash',9:'work',10:'serve',11:'walk',12:'cook',14:'inspect',15:'talk',16:'walk',17:'talk',18:'sweep',20:'read',21:'tidy'}[h]||'tidy';
  const outdoors=h>=11&&h<=17&&h!==12&&h!==13,business=h>=9&&h<11&&(n.castleService||n.rank==='king'||n.rank==='noble');s.zone=business?'home':outdoors||!n.__v101.home.castle&&Math.hypot(n.x-n.__v101.home.x,n.z-n.__v101.home.z)>80&&h>=9&&h<18?'outside':'home';
@@ -267,7 +270,7 @@ function __v101Tick(n,b,dt){
  if(s.phase==='travel'&&s.target&&Math.hypot(n.x-s.target.x,n.z-s.target.z)<(s.station?.13:.66)&&(s.zone!=='outside'||s.station||__v101Outdoors(n))&&Math.abs(n.homeY-s.target.y)<.4&&!__v100Day.jobs.has(n)){
   if(['sleep','eat'].includes(s.action)&&!__v101ValidStation(n,s)){__v100Start(n,s,'walk');}else{
    s.phase='perform';s.until=now+(s.action==='walk'||s.action==='inspect'?1:s.action==='eat'?7:4.5);
-   if(s.action==='talk'){const friend=b.partner,fs=friend?.__v100Day;if(friend&&fs&&__v101Outdoors(n)&&__v101Outdoors(friend)&&Math.hypot(friend.x-n.x,friend.z-n.z)<2.5&&__v101Segment(n,n,friend)!==null){__v100Release(friend,fs);fs.action='talk';fs.phase='perform';fs.route=[];fs.lastHour=hour;fs.previousHour=hour;fs.zone='outside';fs.until=now+4.5;__v98NPCBrain(friend).partner=n;a.conversations++;friend.__v101.conversations++;}else{b.partner=null;s.action='greet';}}
+   if(s.action==='talk'){const friend=b.partner,fs=friend?.__v100Day;if(friend&&fs&&__v102CanTalk(n,friend)&&Math.hypot(friend.x-n.x,friend.z-n.z)<2.5&&__v101Segment(n,{x:n.x,z:n.z,y:n.homeY},{x:friend.x,z:friend.z,y:friend.homeY})!==null){__v100Release(friend,fs);fs.action='talk';fs.phase='perform';fs.route=[];fs.lastHour=hour;fs.previousHour=hour;fs.zone=__v101Outdoors(friend)?'outside':'court102';fs.until=now+4.5;__v98NPCBrain(friend).partner=n;a.conversations++;friend.__v101.conversations++;}else{b.partner=null;s.action='greet';}}
   }
  }
  if(s.blocked>1.5&&s.target){s.blocked=0;__v101Plan(n,s,s.pathTarget||s.target);}
@@ -301,7 +304,7 @@ const __v101DoorTick=__v73TickDoors;__v73TickDoors=function(dt){
  const result=__v101DoorTick(dt);if(!_u||_74())return result;
  for(const d of __v101Life.doors){const distance=Math.hypot(d.p.x-_14.x,d.p.z-_14.z);d.pivot.visible=distance<180;
   if(distance>180&&d.slide<.001)continue;
-  const near=distance<4&&Math.abs(_14.y-(d.p.y+.65))<2.6||__v101DoorActors().some(n=>!n.__v88Dead&&Math.abs(n.homeY+1.85-(d.p.y+.65))<2.6&&Math.hypot(n.x-d.p.x,n.z-d.p.z)<3.2);
+  const trigger=Math.max(3.2,d.w*d.scale*.6+2),near=distance<Math.max(4,trigger)&&Math.abs(_14.y-(d.p.y+.65))<2.6||__v102DoorActors(d.p.x,d.p.z,trigger).some(n=>!n.__v88Dead&&Math.abs(n.homeY+1.85-(d.p.y+.65))<2.6&&Math.hypot(n.x-d.p.x,n.z-d.p.z)<trigger);
   d.hold=near?.8:Math.max(0,d.hold-dt);const target=d.hold>0?1:0;d.slide+=(target-d.slide)*(1-Math.exp(-8*Math.min(dt,.1)));if(Math.abs(d.slide-target)<.001)d.slide=target;
   d.angle=d.slide*d.open;d.pivot.rotation.y=0;d.pivot.position.y=d.baseY+d.slide*(d.h+.3);__v73DoorShape(d);
  }

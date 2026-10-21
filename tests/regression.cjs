@@ -24,13 +24,14 @@ const results=[];
  await page.click('#ag-start');await run('active=false');
  await test('PC manual pause freezes the simulation',async()=>{await page.keyboard.press('p');assert.equal(await run('__v59IsPaused()'),true);await page.keyboard.press('p');assert.equal(await run('__v59IsPaused()'),false);return{paused:true,resumed:true};});
  await test('Runtime collision graph: all rooms reachable, main rooms mandatory',async()=>{
+ await run(`__v75Save.riddles=[...new Set([...__v75Save.riddles,...__v102Riddles.seals.map(s=>s.o.id)])]`);
  const all=await run(`__v95Maze.areas.map(a=>{const p=a.plan95,n=p.b*2+1,free=[];for(let z=-p.b;z<=p.b;z++)for(let x=-p.b;x<=p.b;x++){const q=__v83Point(a,[x,z]);free.push(__v83Walkable(a,q.x,q.z,.38)&&!_23(q.x,q.z,a.y+1.85)?1:0);}return{key:a.key,p,n,free};})`);
  for(const {key,p,n,free}of all){const ix=(x,z)=>(z+p.b)*n+x+p.b;const start=ix(...p.centers[0]);
  const search=omit=>{const seen=new Set([start]),q=[start];for(let i=0;i<q.length;i++){const k=q[i],x=k%n-p.b,z=Math.floor(k/n)-p.b;for(const [dx,dz]of[[1,0],[-1,0],[0,1],[0,-1]]){const xx=x+dx,zz=z+dz,t=ix(xx,zz),r=p.rects[omit];if(xx<-p.b||xx>p.b||zz<-p.b||zz>p.b||!free[t]||seen.has(t)||r&&xx>r[0]&&xx<r[2]&&zz>r[1]&&zz<r[3])continue;seen.add(t);q.push(t);}}return seen;};
- const reached=search(-1);for(let i=0;i<9;i++)assert(reached.has(ix(...p.centers[i])),`${key}: room ${i} unreachable`);
+ const reached=search(-1);for(let i=0;i<p.centers.length;i++)assert(reached.has(ix(...p.centers[i])),`${key}: room ${i} unreachable`);
  for(let i=1;i<6;i++)assert(!search(i).has(ix(...p.centers[6])),`${key}: bypass of room ${i}`);
  }
- fs.writeFileSync(path.join(output,'runtime-plans.json'),JSON.stringify(all.map(({free,...r})=>r),null,2));return{floors:all.length,rooms:all.length*9,mandatoryRoomChecks:all.length*5};
+ fs.writeFileSync(path.join(output,'runtime-plans.json'),JSON.stringify(all.map(({free,...r})=>r),null,2));return{floors:all.length,rooms:all.reduce((n,a)=>n+a.p.centers.length,0),mandatoryRoomChecks:all.length*5};
  });
  await test('Unused courtyard space is excluded from navigation',async()=>run(`(()=>{let checked=0;for(const a of __v95Maze.areas){const p=a.plan95;for(const [x,z]of[[p.b-1,0],[0,p.b-1],[-p.b+1,0]]){const q=__v83Point(a,[x,z]);if(__v83Walkable(a,q.x,q.z,.3))throw Error(a.key+' allows unused space');checked++;}}return checked;})()`));
  await test('All staircase samples keep continuous heights and free landings',async()=>run(`(()=>{const old=_14.clone();let samples=0;try{for(const a of __v95Maze.areas)for(const st of a.plan95.stairs.filter(s=>s.lower===a.key)){for(let i=0;i<=20;i++){const t=i/20,p=__v83Point(a,[st.x,st.z0+(st.z1-st.z0)*t]),y=a.y+12*t;_14.set(p.x,y+1.85,p.z);const h=_ei(p.x,p.z);if(Math.abs(h-y)>.15)throw Error(a.key+' stair '+t+': '+h+' != '+y);samples++;}}}finally{_14.copy(old);}return samples;})()`));
