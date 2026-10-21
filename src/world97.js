@@ -9,7 +9,7 @@ const __v97Bevel=new _2.BoxGeometry(1,1,1,2,2,2);
  __v97Bevel.computeVertexNormals();__v66Primitives.set('bevelfalse',__v97Bevel.toNonIndexed());
  // Keep the thousands of small actor details on their inexpensive base geometry.
  __v66Primitives.set('boxfalse',new _2.BoxGeometry(1,1,1).toNonIndexed());
- __v66Primitives.set('spheretrue',new _2.SphereGeometry(1,8,6).toNonIndexed());__v66Cache.clear();
+ __v66Primitives.set('spheretrue',new _2.SphereGeometry(1,16,12).toNonIndexed());__v66Primitives.set('beveltrue',__v97Bevel.toNonIndexed());__v66Cache.clear();
 }
 // Five broad light bands keep painted colors readable in shadow.
 __v66Ramp.image.data=new Uint8Array([82,128,174,219,255]);__v66Ramp.image.width=5;__v66Ramp.needsUpdate=true;
@@ -24,22 +24,23 @@ function __v97ToonMaterial(m){
 }
 function __v97PaintedIce(role){
  if(__v97PaintedMaps.has(role))return __v97PaintedMaps.get(role);
- const c=document.createElement('canvas');c.width=c.height=256;const ctx=c.getContext('2d'),floor=role==='floor',roof=role==='roof',height=floor?128:64,width=128;
+ const c=document.createElement('canvas'),size=__v60Mobile?512:1024;c.width=c.height=size;const ctx=c.getContext('2d');ctx.scale(size/256,size/256);const floor=role==='floor',roof=role==='roof',height=floor?128:64,width=128;
  ctx.fillStyle=roof?'#527997':floor?'#84b4c6':'#75a1b8';ctx.fillRect(0,0,256,256);
  for(let row=0;row<256/height;row++)for(let col=-1;col<3;col++){
   const x=col*width+(floor?0:row%2*64),y=row*height,gradient=ctx.createLinearGradient(x,y,x+width,y+height);
   gradient.addColorStop(0,roof?'#86afc5':floor?'#c3e4e8':'#b9dce5');gradient.addColorStop(.65,roof?'#719ab6':floor?'#b6d8e0':'#a5cbd9');gradient.addColorStop(1,roof?'#5b83a2':floor?'#a6ccd9':'#92b9cc');
   ctx.fillStyle=gradient;ctx.fillRect(x+3,y+3,width-6,height-6);ctx.strokeStyle=roof?'#b1d3df':'#e4f6f2';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+8,y+height-10);ctx.lineTo(x+8,y+8);ctx.lineTo(x+width-9,y+8);ctx.stroke();
   ctx.strokeStyle='#6598b0';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+width-8,y+13);ctx.lineTo(x+width-8,y+height-8);ctx.lineTo(x+14,y+height-8);ctx.stroke();
-  // Sparse broad brush strokes replace the busy repeated fracture motif.
+  // Broad brushwork preserves the cartoon design underneath fine frost detail.
   ctx.strokeStyle='#e5f7f327';ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(x+19,y+height*.55);ctx.lineTo(x+width*.65,y+height*.4);ctx.stroke();
  }
- const tex=new _0.CanvasTexture(c);tex.colorSpace=_0.SRGBColorSpace;tex.wrapS=tex.wrapT=_0.RepeatWrapping;tex.anisotropy=__v60Mobile?1:2;tex.name='Hielo pintado 97 · '+role;__v97PaintedMaps.set(role,tex);return tex;
+ ctx.setTransform(1,0,0,1,0,0);__v98SurfaceDetail(c,'ice',role);
+ const tex=new _0.CanvasTexture(c);tex.colorSpace=_0.SRGBColorSpace;tex.wrapS=tex.wrapT=_0.RepeatWrapping;tex.anisotropy=Math.min(__v60Mobile?4:8,_5.capabilities?.getMaxAnisotropy?.()||1);tex.name='Hielo detallado 98 · '+role;__v97PaintedMaps.set(role,tex);return tex;
 }
 const __v97TowerMaterial=__v94Mat;
 __v94Mat=function(t,role){const m=__v97ToonMaterial(__v97TowerMaterial(t,role));if(t.id==='ice'||t.id==='polar95')m.map=__v97PaintedIce(role);return m;};
-const __v97ArchitectureMaterial=__v85Mat;__v85Mat=function(...args){return __v97ToonMaterial(__v97ArchitectureMaterial(...args));};
-function __v97Model(g,plan){const shaped=plan.map(p=>p[0]==='box'&&Math.min(p[5],p[6],p[7])>.3&&Math.max(p[5],p[6],p[7])>1?['bevel',...p.slice(1)]:p),m=__v66Attach(g,shaped);if(m){m.name='Modelo caricaturesco 97';__v97.models++;}return m;}
+const __v97ArchitectureMaterial=__v85Mat;__v85Mat=function(...args){const m=__v97ToonMaterial(__v97ArchitectureMaterial(...args));if(m.map&&!m.bumpMap){m.bumpMap=m.map;m.bumpScale=args[1]==='floor'?.018:.028;}return m;};
+function __v97Model(g,plan){const shaped=plan.map(p=>p[0]==='box'&&Math.min(p[5],p[6],p[7])>.3&&Math.max(p[5],p[6],p[7])>1?['bevel',...p.slice(1)]:p),m=__v66Attach(g,shaped,true);if(m){__v98TextureModel(m,shaped);m.name='Modelo caricaturesco detallado 98';__v97.models++;}return m;}
 function __v97ClearBody(o){for(const c of [...o.g.children])if(c.isMesh&&c!==o.crystal)c.removeFromParent();}
 const __v97Barrel=__v75Barrel;
 __v75Barrel=function(a,p,i){const n=__v75.objects.length,result=__v97Barrel(a,p,i),o=__v75.objects[n];if(!o||o.type!=='barrel')return result;__v97ClearBody(o);const plan=[];
@@ -98,14 +99,13 @@ function __v97RepairPosition(){
 }
 const __v97Restore=_dn;_dn=function(...args){const r=__v97Restore(...args);if(__v97RepairPosition())_3a('Partida recuperada en el vestíbulo de la fortaleza.');return r;};
 
-// Reduce actor texture storage fourfold while retaining the hand-painted maps.
-function __v97CompressTextures(){for(const tex of __v67Textures.values()){
- const source=tex.image,target=__v60Mobile?128:256;if(!source||source.width<=target)continue;
- const c=document.createElement('canvas');c.width=c.height=target;c.getContext('2d').drawImage(source,0,0,target,target);
- __v97.textureBytesSaved+=(source.width*source.height-target*target)*4;tex.image=c;tex.needsUpdate=true;
+// Fidelity is preserved. Optimization comes from shared textures and geometry.
+function __v97CompressTextures(){for(const [key,tex] of __v67Textures){
+ if(!tex.userData.detail98){__v98SurfaceDetail(tex.image,key.split(':')[0],key);tex.userData.detail98=true;tex.needsUpdate=true;}
+ tex.anisotropy=Math.min(__v60Mobile?4:8,_5.capabilities?.getMaxAnisotropy?.()||1);
 }}
 const __v97TextureAudit=window.__AURELIA_TEXTURES67__.audit;
-window.__AURELIA_TEXTURES67__.audit=()=>({...__v97TextureAudit(),build:97,resolution:__v60Mobile?128:256,estimatedTextureMiB:+([...__v67Textures.values()].reduce((n,t)=>n+t.image.width*t.image.height*4*4/3,0)/1048576).toFixed(2)});
+window.__AURELIA_TEXTURES67__.audit=()=>({...__v97TextureAudit(),build:98,resolution:__v60Mobile?512:1024,estimatedTextureMiB:+([...__v67Textures.values()].reduce((n,t)=>n+t.image.width*t.image.height*4*4/3,0)/1048576).toFixed(2)});
 
 // One reusable particle batch replaces per-impact meshes, materials and allocations.
 function __v97Pool(){
