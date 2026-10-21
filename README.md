@@ -6,7 +6,9 @@ Juego autónomo en `index.html`, con los recursos incluidos. Puedes abrir el arc
 python -m http.server 8000 --bind 127.0.0.1
 ```
 
-En PC: WASD para moverte, ratón para mirar, X para atacar, R para interactuar, G para equipo, M para el mapa, Y para cambiar de cámara y P para pausar. En móvil se conservan los controles táctiles.
+Juega en https://mauriciolufia.github.io/AURELIA/.
+
+PC conserva sus controles. En celular se activa primera persona, cámara táctil de 360°, palanca con carrera automática y cinco botones: atacar, usar magia, escoger magia, usar objeto y saltar. Puedes cambiar la cámara, sensibilidad y carrera en Ajustes. Consulta [la actualización 97](ACTUALIZACION97.md).
 
 Las fortalezas reconstruidas tienen siete salas principales consecutivas y dos salas secundarias con pasillos opcionales. Los desvíos permiten explorar sin saltarse las salas del recorrido principal. Las escaleras enlazan el final de cada planta con el principio de la siguiente.
 
@@ -19,6 +21,7 @@ npm ci
 npm test
 CHROMIUM_PATH=/usr/bin/chromium npm run test:browser
 CHROMIUM_PATH=/usr/bin/chromium npm run test:mobile
+CHROMIUM_PATH=/usr/bin/chromium npm run test:upgrade
 ```
 
 La aplicación no requiere Node.js ni instalación de paquetes para jugar. Playwright se usa únicamente para las pruebas. `CHROMIUM_PATH` debe apuntar a un Chromium instalado. El informe y la captura de las pruebas se escriben en `/tmp/aurelia-regression`; se puede cambiar esa carpeta con `AURELIA_TEST_OUTPUT`.

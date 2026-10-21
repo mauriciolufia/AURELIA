@@ -10,7 +10,7 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
  page.on('pageerror',e=>errors.push(e.message));const url=`http://127.0.0.1:${server.address().port}/`;
  await page.route(url,r=>r.fulfill({contentType:'text/html',body:html.replace('const _ix=_7q();',"_5.render=()=>{};window.__testEval=source=>eval(source);const _ix=_7q();")}));
  await page.goto(url,{waitUntil:'domcontentloaded',timeout:180000});
- await page.waitForFunction(()=>window.__testEval&&!document.getElementById('ag-start').disabled,{timeout:240000});
+ await page.waitForFunction(()=>window.__testEval&&!document.getElementById('ag-start').disabled,null,{timeout:240000});
  const run=s=>page.evaluate(s=>window.__testEval(s),s);
  assert.equal(await page.evaluate(()=>document.documentElement.dataset.aureliaDevice),'mobile');
  await run('active=false');await page.click('#ag-start');await run('active=false');

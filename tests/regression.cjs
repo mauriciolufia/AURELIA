@@ -18,7 +18,7 @@ const results=[];
  const test=async(name,fn)=>{const begin=Date.now();try{const detail=await fn();results.push({name,passed:true,detail,ms:Date.now()-begin});console.log('PASS',name,JSON.stringify(detail??''));}catch(e){results.push({name,passed:false,error:e.message});console.log('FAIL',name,e.message);throw e;}};
  const run=source=>page.evaluate(source=>window.__testEval(source),source);
  console.log('Building world in Chromium…');await page.goto(url,{timeout:180000,waitUntil:'domcontentloaded'});
- await page.waitForFunction(()=>window.__testEval&&!document.getElementById('ag-start').disabled,{timeout:240000});
+ await page.waitForFunction(()=>window.__testEval&&!document.getElementById('ag-start').disabled,null,{timeout:240000});
  await run('active=false');
  await test('World initializes and campaign targets exist',async()=>{assert.deepEqual(errors,[]);const a=await run('__AURELIA_CAMPAIGN95__.audit()');assert.equal(a.ok,true);return{stages:a.stages.length,floors:await run('__v83.areas.length')};});
  await page.click('#ag-start');await run('active=false');
