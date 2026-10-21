@@ -29,31 +29,13 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),
   console.log('PASS all living NPCs have a brain and a visible idle animation, including houses and services',await run(`(()=>{
    const all=_2h.filter(n=>!n.__v88Dead&&!n.__v88Controlled);let interiors=0;
    for(const n of all){if(!n.__v98Active)throw Error('Unmanaged NPC '+n.id);const b=__v98NPCBrain(n);if(!__v98NPCActions.includes(b.action))throw Error('No activity '+n.id);
-    if(n.__v99Area){interiors++;if(!__v99Free(n.__v99Area,n.x,n.z))throw Error('Blocked original spawn '+n.id);}
+    if(n.__v99Area){interiors++;if(!__v100Free(n,n.x,n.z)||!__v100Nearby(n,n.__v100Day))throw Error('NPC has no free initial walking step '+n.id);}
     const clock=__v98AI.clock;__v98NPCPose(n,b,false,.05);const y=n.g.position.y,arm=n.arms[0]?.rotation.z;__v98AI.clock+=.37;__v98NPCPose(n,b,false,.05);__v98AI.clock=clock;
     if(n.g.position.y===y&&n.arms[0]?.rotation.z===arm)throw Error('Frozen idle pose '+n.id);
    }return{animated:all.length,interiors};})()`));
-  console.log('PASS house, king, priest, merchant, mage, innkeeper and quest NPCs walk without crossing walls',await run(`(()=>{
-   const chosen=new Set(['ines','court-2-0','v78-noct-merchant','v78-noct-sorcerer','sidequest92-polar95','sidequest92-maya']);
-   for(const job of['merchant','innkeeper','priest','sorcerer']){const n=_2h.find(n=>n.__v99Area&&n.job===job);if(n)chosen.add(n.id);}
-   const old=_14.clone(),hour=_x,weather=_66,threat=__v97NearestThreat,activeList=__v88Life.active,result=[];
-   try{_x=12;_66=()=>false;__v97NearestThreat=()=>null;
-    for(const id of chosen){const n=_2h.find(n=>n.id===id);if(!n?.__v99Area)throw Error('Missing test role '+id);const a=n.__v99Area,b=__v98NPCBrain(n),start={x:n.x,z:n.z};__v88Life.active=[n];_14.set(n.x+30,n.homeY+1.85,n.z);b.lastGreet=Infinity;b.until=0;b.next=0;
-     let traveled=0;const actions=new Set();for(let i=0;i<1200;i++){const x=n.x,z=n.z;__v98AI.clock+=.05;__v99Life.plans=0;__v99Life.graphMs=0;__v99InteriorTick(n,b,.05);actions.add(b.action);traveled+=Math.hypot(n.x-x,n.z-z);
-      if(!__v99Free(a,n.x,n.z)||!__v99Segment(a,{x,z},n))throw Error('NPC crossed a wall or left its floor '+id);
-     }if(traveled<1||actions.size<2||!a.nodes?.[0].edges.length)throw Error('NPC does not walk/change activities '+id+' '+traveled+' '+[...actions]);
-     result.push({id,traveled:Number(traveled.toFixed(2)),activities:actions.size});
-    }return result;
-   }finally{_14.copy(old);_x=hour;_66=weather;__v97NearestThreat=threat;__v88Life.active=activeList;}
-  })()`));
-  console.log('PASS indoor NPCs can choose all 15 contextual behaviors',await run(`(()=>{
-   const n=_2h.find(n=>n.id==='ines'),b=__v98NPCBrain(n),old=_14.clone(),hour=_x,weather=_66,threat=__v97NearestThreat,seen=new Set();
-   const decide=expected=>{b.until=0;b.target=null;__v99Decision(n,b);seen.add(b.action);if(expected&&b.action!==expected)throw Error(expected+' -> '+b.action);};
-   try{_x=12;_66=()=>false;__v97NearestThreat=()=>null;_14.set(n.x+30,n.homeY+1.85,n.z);b.lastGreet=Infinity;b.energy=.7;b.social=.6;b.curiosity=.5;b.dangerUntil=0;
-    for(let i=0;i<20;i++)decide();_x=23;decide('sleep');_x=12;_66=()=>true;b.action='patrol';decide('shelter');_66=()=>false;
-    _14.set(n.x+2,n.homeY+1.85,n.z);b.lastGreet=-Infinity;decide('greet');__v97NearestThreat=()=>({g:{position:{x:n.x+1,z:n.z}}});b.action='patrol';decide('alert');decide('flee');
-    if(seen.size!==15)throw Error('Unreachable indoor behaviors '+[...seen]);return[...seen];
-   }finally{_14.copy(old);_x=hour;_66=weather;__v97NearestThreat=threat;b.dangerUntil=0;}
+  // Full-frame movement, furniture collisions and the daily schedule are covered by daily-life.cjs.
+  console.log('PASS every indoor NPC retains a free walking step when the player is upstairs',await run(`(()=>{
+   const y=_14.y;let count=0,oldSelectorBlocked=0;try{_14.y+=100;for(const n of _2h.filter(n=>n.__v99Area)){if(!__v99Free(n.__v99Area,n.x,n.z))oldSelectorBlocked++;if(!__v100Free(n,n.x,n.z)||!__v100Nearby(n,n.__v100Day))throw Error('Observer height freezes '+n.id);count++;}if(_14.y!==y+100)throw Error('NPC floor query leaked into player state');return{checked:count,oldSelectorBlocked};}finally{_14.y=y;}
   })()`));
   console.log('PASS per-frame service pins do not reset moving NPCs; shops, magic and quests remain available',await run(`(()=>{
    const positions=new Map(_2h.filter(n=>n.__v99Area).map(n=>[n,{x:n.x,z:n.z}]));__v76PinMerchant();__v78PinNight();__v75Tick(0);

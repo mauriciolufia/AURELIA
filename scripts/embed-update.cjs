@@ -29,7 +29,9 @@ html=html.replace('for(const {n,p}of __v78NightVendors){n.x=p.x;', 'for(const {n
 html=html.replace('for(const n of __v92Maya.npcs){const p=n.__v92Home;', 'for(const n of __v92Maya.npcs){if(n.__v99Area)continue;const p=n.__v92Home;');
 html=html.replace('p=n?.__v94FaroHome;if(n&&p){', 'p=n?.__v94FaroHome;if(n&&p&&!n.__v99Area){');
 html=html.replace('const p=__v54SafeServicePoint(n,svc);if(p&&Number.isFinite(p.x)', 'const p=__v54SafeServicePoint(n,svc);if(!n.__v99Area&&p&&Number.isFinite(p.x)');
-const sources = ['quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'mobile97.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
+html=html.replace('if(__v75.sage){const {npc:n,obj:o}=__v75.sage;', 'if(__v75.sage&&!__v75.sage.npc.__v99Area){const {npc:n,obj:o}=__v75.sage;');
+html=html.replace("const visible=_2h.filter(n=>n.g.visible&&n.rank!=='king'&&n.activity!=='Dormiendo');", "const visible=_2h.filter(n=>!n.__v98Active&&n.g.visible&&n.rank!=='king'&&n.activity!=='Dormiendo');");
+const sources = ['quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'mobile97.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
 const block = `${begin}\n${sources.join('\n')}\n${end}\n`;
 if (html.includes(begin)) html = html.slice(0, html.indexOf(begin)) + block + html.slice(html.indexOf(end) + end.length).replace(/^\n/, '');
 else {
@@ -38,4 +40,4 @@ else {
   html = html.replace(marker, block + marker);
 }
 fs.writeFileSync(file, html);
-console.log('Embedded Aurelia update 99');
+console.log('Embedded Aurelia update 100');
