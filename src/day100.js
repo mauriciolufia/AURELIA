@@ -65,7 +65,7 @@ function __v100Destination(n,s,action){
  if(wanted){const items=room.items.filter(p=>p.type===wanted).sort((p,q)=>Math.hypot(p.x-n.x,p.z-n.z)-Math.hypot(q.x-n.x,q.z-n.z));
   for(const p of items)for(const side of[1,-1]){const point={x:p.x+side*p.sin*(p.d/2+.85),z:p.z+side*p.cos*(p.d/2+.85)};if(__v100Free(n,point.x,point.z))return point;}
  }
- // A portable stool is shown only while seated when this room has no usable chair.
+ // Legacy destination selection; life101 replaces this with owned furniture stations.
  const nearby=__v100Nearby(n,s);if(nearby)return nearby;
  for(let i=0;i<20;i++){const angle=(i/20+s.serial*.13)*Math.PI*2,r=Math.min(a.w,a.d)*.6,p={x:a.x+Math.cos(angle)*r,z:a.z+Math.sin(angle)*r};if(__v100Free(n,p.x,p.z))return p;}
  return null;
@@ -112,7 +112,7 @@ function __v100Equip(n){
  if(n.__v100Props)return n.__v100Props;const root=new _0.Group();root.userData.animated=true;n.g.add(root);
  const stool=new _0.Group(),legs=new _0.Group(),food=new _0.Group(),wash=new _0.Group(),mealArms=new _0.Group();root.add(stool,legs,food,wash,mealArms);
  for(const part of[stool,legs,food,wash,mealArms])part.visible=false;
- __v100Part(stool,'box','#8c603e',0,1.05,0,.88,.14,.8);for(const x of[-.3,.3])for(const z of[-.27,.27])__v100Part(stool,'box','#62452e',x,.72,z,.1,.65,.1);
+
  for(const x of[-.19,.19]){__v100Part(legs,'box','#443a32',x,1.02,-.31,.19,.2,.69);__v100Part(legs,'box','#443a32',x,.75,-.59,.19,.55,.23);__v100Part(legs,'box','#3b3028',x,.48,-.65,.22,.16,.38);}
  __v100Part(food,'ball','#eee0c7',0,1.58,-.47,.29,.12,.23);for(const x of[-.1,.02,.13])__v100Part(food,'ball','#dba65d',x,1.69,-.47,.085,.065,.085);
  const spoon=__v100Part(food,'box','#b8c5cf',.3,1.85,-.43,.045,.3,.045);__v100Part(wash,'ball','#8bdcec',-.15,1.2,-.4,.055,.055,.055);__v100Part(wash,'ball','#8bdcec',.15,1.25,-.42,.045,.045,.045);
@@ -121,7 +121,7 @@ function __v100Equip(n){
  return n.__v100Props={root,stool,legs,food,wash,spoon,mealArms,armRig,originalHands};
 }
 function __v100Pose(n,b,s,moving,dt){
- __v98NPCPose(n,b,moving,dt);const props=__v100Equip(n),t=__v98AI.clock+(n.phase||0),perform=s.phase==='perform',seated=perform&&['eat','sit','read','sleep'].includes(s.action);
+ __v98NPCPose(n,b,moving,dt);const props=__v100Equip(n),t=__v98AI.clock+(n.phase||0),perform=s.phase==='perform',seated=perform&&!!s.seat&&['eat','sit','read'].includes(s.action);
  props.stool.visible=seated&&!s.seat;props.legs.visible=seated;props.food.visible=perform&&s.action==='eat';props.wash.visible=perform&&s.action==='wash';
  props.mealArms.visible=props.food.visible;for(const arm of n.arms||[])arm.visible=!props.food.visible;for(const hand of props.originalHands)hand.visible=!props.food.visible;
  for(const leg of n.legs||[])leg.visible=!seated;
@@ -134,7 +134,7 @@ function __v100Pose(n,b,s,moving,dt){
  if(s.action==='wash')for(const[i,arm]of(n.arms||[]).entries())arm.rotation.x=-.85+Math.sin(t*5+i)*.18;
  if(s.action==='stretch')for(const[i,arm]of(n.arms||[]).entries()){arm.rotation.x=-2.2+Math.sin(t*2)*.3;arm.rotation.z=(i?1:-1)*.3;}
  if(s.action==='sit')for(const[i,arm]of(n.arms||[]).entries())arm.rotation.x=-.35+Math.sin(t*1.8+i)*.08;
- if(s.action==='sleep'){n.g.rotation.x=.18+Math.sin(t*.8)*.025;if(n.book)n.book.visible=false;}
+
 }
 function __v100Tick(n,b,dt){
  const s=__v100Brain(n),now=__v98AI.clock;n.__v100Day=s;

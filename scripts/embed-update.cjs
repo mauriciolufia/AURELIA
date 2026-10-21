@@ -31,7 +31,24 @@ html=html.replace('p=n?.__v94FaroHome;if(n&&p){', 'p=n?.__v94FaroHome;if(n&&p&&!
 html=html.replace('const p=__v54SafeServicePoint(n,svc);if(p&&Number.isFinite(p.x)', 'const p=__v54SafeServicePoint(n,svc);if(!n.__v99Area&&p&&Number.isFinite(p.x)');
 html=html.replace('if(__v75.sage){const {npc:n,obj:o}=__v75.sage;', 'if(__v75.sage&&!__v75.sage.npc.__v99Area){const {npc:n,obj:o}=__v75.sage;');
 html=html.replace("const visible=_2h.filter(n=>n.g.visible&&n.rank!=='king'&&n.activity!=='Dormiendo');", "const visible=_2h.filter(n=>!n.__v98Active&&n.g.visible&&n.rank!=='king'&&n.activity!=='Dormiendo');");
-const sources = ['quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'mobile97.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
+// The old central dormitory and primitive armory/library props overlap the furnished rooms.
+const oldDorm='  const dormG=__v53Group(root,0,20),dormP=';
+if(html.includes(oldDorm)){const start=html.indexOf(oldDorm),end=html.indexOf('\n',start);html=html.slice(0,start)+'  // Bedrooms are built in the west wing by __v101CastleWing.\n'+html.slice(end+1);}
+const oldArmory='for(let i=0;i<6;i++){_1x(2.5,1.7,1.5,wood,x-66+i*7';
+if(html.includes(oldArmory)){const start=html.indexOf(oldArmory),end=html.indexOf('\n',start);html=html.slice(0,start)+'// Furnished service rooms replace the original overlapping primitive tables and racks.\n'+html.slice(end+1);}
+// Replace the obsolete open castle cots with fixed divided bedrooms opposite the library.
+const oldCotsStart='  // Compact beds against the outer wall of the new inn.';
+if(html.includes(oldCotsStart)){
+ const start=html.indexOf(oldCotsStart),end=html.indexOf('  // Exterior banners',start);
+ html=html.slice(0,start)+'  __v101CastleWing(s,index,g);\n'+html.slice(end);
+}
+html=html.replace('__v93Batch(g);g.userData.cull93=', '__v93Batch(g,new Set(__v29Doors.map(d=>d.pivot)));g.userData.cull93=');
+// Nearby NPCs must open public doors even while the observer is in another room.
+html=html.replace('if(dist>35&&Math.abs(d.angle)<.0001)continue;', 'if(dist>180&&Math.abs(d.angle)<.0001)continue;');
+html=html.replace('if(!near&&dist<100)for(const n of _2h)', 'if(!near&&dist<180)for(const n of __v101DoorActors())');
+html=html.replace('if(!near&&dist<180)for(const n of __v88Life.active)', 'if(!near&&dist<180)for(const n of __v101DoorActors())');
+html=html.replace('for(const d of __v29Doors){const dist=', 'for(const d of __v29Doors){if(d.__v101Slide)continue;const dist=');
+const sources = ['quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
 const block = `${begin}\n${sources.join('\n')}\n${end}\n`;
 if (html.includes(begin)) html = html.slice(0, html.indexOf(begin)) + block + html.slice(html.indexOf(end) + end.length).replace(/^\n/, '');
 else {
@@ -39,5 +56,7 @@ else {
   if (!html.includes(marker)) throw new Error('Missing game initialization marker');
   html = html.replace(marker, block + marker);
 }
+html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v101 Rutinas y HUD móvil</title>');
+html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v101-vida-diaria-hud-movil">');
 fs.writeFileSync(file, html);
-console.log('Embedded Aurelia update 100');
+console.log('Embedded Aurelia update 101');
