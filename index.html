@@ -6127,7 +6127,7 @@ function __v55LocalLabel(){if(_70)return'Abrir cofre · R';if(__v55NpcClose(_2i)
 function __v55NearestBoat(max=15){if(_ea&&_e9)return _e9;let best=null,bestD=max;for(const b of(_im||[])){if(!b||!Number.isFinite(b.x)||!Number.isFinite(b.z))continue;const d=Math.hypot(_14.x-b.x,_14.z-b.z);if(d<bestD){best=b;bestD=d;}}return best;}
 const __v55BaseIP=_ip;
 _ip=function(){if(_ea)return'Desembarcar';if(_eb&&_ex(_ez(),13))return'Salir de la cripta';if(!_eb&&_ex(_ey(),13))return'Entrar a la pirámide';if(!_eb){const boat=__v55NearestBoat(15);if(boat){_e9=boat;return'Embarcar';}if(_e9&&Math.hypot(_14.x-_e9.x,_14.z-_e9.z)<15)__v55NpcAudit.staleBoatTargets++;}return null;};
-function __v55RepairCastleNpc(n){if(!n?.castleService)return false;const allowed=['merchant','sorcerer','innkeeper','priest'];if(!allowed.includes(n.castleService)){__v55NpcAudit.invalidServices++;return false;}const site=_1h[n.site],svc=__v20CastleServices.get(n.site);if(!site||!svc){__v55NpcAudit.invalidServiceSites++;return false;}const nearest=__v20NearestTown(site);if(n.castleService==='merchant'){if(!__v55ValidSite(n.shopSite)||_1h[n.shopSite]?.type!=='ciudad')n.shopSite=__v55ValidSite(svc.near)?svc.near:nearest;}else if(n.castleService==='sorcerer'){if(!__v55ValidSite(n.magicSite)||_1h[n.magicSite]?.type!=='ciudad')n.magicSite=__v55ValidSite(svc.near)?svc.near:nearest;}const p=__v54SafeServicePoint(n,svc);if(p&&Number.isFinite(p.x)&&Number.isFinite(p.z)&&Number.isFinite(p.y)){n.x=p.x;n.z=p.z;n.homeY=p.y;n.g.position.set(p.x,p.y,p.z);n.activity=p.activity;n.dayRoute=[{x:p.x,z:p.z,action:p.activity}];n.route=n.dayRoute;n.routeIndex=0;n.goal=null;n.nav=[];n.waiting=99999;}__v55NpcAudit.repairedServices++;return true;}
+function __v55RepairCastleNpc(n){if(!n?.castleService)return false;const allowed=['merchant','sorcerer','innkeeper','priest'];if(!allowed.includes(n.castleService)){__v55NpcAudit.invalidServices++;return false;}const site=_1h[n.site],svc=__v20CastleServices.get(n.site);if(!site||!svc){__v55NpcAudit.invalidServiceSites++;return false;}const nearest=__v20NearestTown(site);if(n.castleService==='merchant'){if(!__v55ValidSite(n.shopSite)||_1h[n.shopSite]?.type!=='ciudad')n.shopSite=__v55ValidSite(svc.near)?svc.near:nearest;}else if(n.castleService==='sorcerer'){if(!__v55ValidSite(n.magicSite)||_1h[n.magicSite]?.type!=='ciudad')n.magicSite=__v55ValidSite(svc.near)?svc.near:nearest;}const p=__v54SafeServicePoint(n,svc);if(!n.__v99Area&&p&&Number.isFinite(p.x)&&Number.isFinite(p.z)&&Number.isFinite(p.y)){n.x=p.x;n.z=p.z;n.homeY=p.y;n.g.position.set(p.x,p.y,p.z);n.activity=p.activity;n.dayRoute=[{x:p.x,z:p.z,action:p.activity}];n.route=n.dayRoute;n.routeIndex=0;n.goal=null;n.nav=[];n.waiting=99999;}__v55NpcAudit.repairedServices++;return true;}
 function __v55AuditAllNpcServices(){__v55NpcAudit.repairedServices=0;__v55NpcAudit.invalidServices=0;__v55NpcAudit.invalidServiceSites=0;for(const n of _2h)if(n?.castleService)__v55RepairCastleNpc(n);return __v55NpcAudit.repairedServices;}
 __v54OpenCastleService=function(n){if(!n?.castleService||!__v55RepairCastleNpc(n))return false;_6p();const svc=__v20CastleServices.get(n.site),site=_1h[n.site];if(!svc||!site)return false;if(n.castleService==='merchant'){let stock=__v55ValidSite(n.shopSite)?n.shopSite:svc.near;if(!__v55ValidSite(stock))stock=__v20NearestTown(site);if(!__v55ValidSite(stock))return false;n.shopSite=stock;_6z=stock;_6y='weapon';_9t('shop','Armería de '+site.name+' · equipo de '+_1h[stock].name);_9u();$('panel-message').textContent=n.dialogue||'Armas y armaduras disponibles.';return true;}if(n.castleService==='sorcerer'){let magic=__v55ValidSite(n.magicSite)?n.magicSite:svc.near;if(!__v55ValidSite(magic))magic=__v20NearestTown(site);if(!__v55ValidSite(magic))return false;n.magicSite=magic;_6z=magic;_6y='magic';__v54ConfigurePuertoMagic();_9t('magic','Mago de la biblioteca · '+site.name);_9u();$('panel-message').textContent=n.dialogue||'Técnicas mágicas disponibles.';return true;}if(n.castleService==='innkeeper'){const inn=_5c.find(i=>i.site===n.site&&i.label)||_5c.find(i=>i.site===n.site);if(inn){_7g(inn);return true;}return false;}return false;};
 const __v55BaseF6=_f6;
@@ -8170,7 +8170,7 @@ const __v76Lower=__v29InteriorLower;__v29InteriorLower=function(g,site,x,z,a,v,p
 const __v76Upper=__v29BuildUpper;__v29BuildUpper=function(g,site,x,z,a,v,pal){const old=__v76FurnitureContext;__v76FurnitureContext={g,v,upper:true,y:v.baseH+.26};try{return __v76Upper(g,site,x,z,a,v,pal);}finally{__v76FurnitureContext=old;}};
 const __v76Service=__v29ServiceInterior;__v29ServiceInterior=function(g,site,kind,w,d,h,pal){const old=__v76FurnitureContext;__v76FurnitureContext={g};try{return __v76Service(g,site,kind,w,d,h,pal);}finally{__v76FurnitureContext=old;}};
 function __v76RestoreMerchant(){const svc=__v20TownServices.get(1),h=svc?.shop;if(!h)return;let n=_2h.find(n=>n.job==='merchant'&&n.homeSite===1&&!n.castle);if(!n){const previous=_1;_1=true;try{_54({id:'v76-puerto-merchant',name:'Mateo',role:'Tiendero de Puerto del Sur',site:1,homeSite:1,dx:h.x-_1h[1].x,dz:h.z-_1h[1].z+3,kind:'resident',gender:'man',job:'merchant',home:h,route:[{x:h.x,z:h.z+3,action:'Atendiendo la tienda'}]});n=_2h.at(-1);_cp(n);}finally{_1=previous;}}let p={x:h.x,z:h.z+3,y:h.y};for(const z of [3,5,0,7,-3])if(!_i7(h.x,h.z+z,h.y+1.85)){p.z=h.z+z;break;}n.job='merchant';n.site=n.homeSite=n.shopSite=1;n.home=h;n.homeY=h.y;n.role='Tiendero de Puerto del Sur';n.route=n.dayRoute=[{x:p.x,z:p.z,action:'Atendiendo la tienda'}];n.goal=null;n.nav=[];__v76Merchant={n,p};__v76PinMerchant();}
-function __v76PinMerchant(){if(!__v76Merchant)return;const {n,p}=__v76Merchant;n.x=p.x;n.z=p.z;n.homeY=p.y;n.g.position.set(p.x,p.y,p.z);n.activity='Atendiendo la tienda';n.waiting=9999;n.routine=0;n.sleeping=false;if(n.book)n.book.visible=false;if(n.broom)n.broom.visible=false;}
+function __v76PinMerchant(){if(!__v76Merchant)return;const {n,p}=__v76Merchant;if(n.__v99Area)return;n.x=p.x;n.z=p.z;n.homeY=p.y;n.g.position.set(p.x,p.y,p.z);n.activity='Atendiendo la tienda';n.waiting=9999;n.routine=0;n.sleeping=false;if(n.book)n.book.visible=false;if(n.broom)n.broom.visible=false;}
 const __v76NPC=_hr;_hr=function(dt){const r=__v76NPC(dt);__v76PinMerchant();return r;};
 /* Cada llave también puede obtenerse del jefe de la etapa anterior. */
 function __v76AssignKeys(){for(const c of _m)c.__v76KeyDrops=[];for(let i=0;i<_bp.length;i++){const q=_bp[i];if(!q.boss?.startsWith('warden-')&&q.boss!=='azrakh')continue;const key=q.boss==='azrakh'?'aurelia:imperial':'aurelia:fort-'+q.site;for(let j=i-1;j>=0;j--){const prev=_bp[j],c=_m.find(c=>prev.boss&&c.boss===prev.boss);if(c&&c.boss!==q.boss){c.__v76KeyDrops.push(key);break;}}}}
@@ -8310,7 +8310,7 @@ function __v78AssignCommerce(){
 function __v78NightMarket(){const site=_1h.findIndex(s=>s.name==='Nocteverde'),svc=__v20TownServices.get(site);__v78NightVendors.length=0;if(site<0||!svc)return;if(!__v56Schools.has(site))__v56Schools.set(site,{site,name:'Artes de la Noche Serena',master:'Maestra Nerea',color:'#b19ad4',spells:[]});
  for(const [job,building,name]of [['merchant','shop','Darío'],['sorcerer','mage','Nerea']]){const h=svc[building];if(!h)continue;const p=__v77SafeSpawn({x:h.x,z:h.z+3,y:h.y,centerX:h.x,centerZ:h.z,w:h.w,d:h.d});if(!p)continue;const id='v78-noct-'+job;let n=_2h.find(n=>n.id===id);if(!n){const previous=_1;_1=true;try{_54({id,name,site,homeSite:site,dx:p.x-_1h[site].x,dz:p.z-_1h[site].z,home:h,kind:'resident',age:'adult',gender:job==='merchant'?'man':'woman',job,role:job==='merchant'?'Armero de la Noche Serena':'Maestra de artes sombrías',route:[{x:p.x,z:p.z,action:'Atendiendo a los viajeros'}],dialogue:'Nuestra tienda sigue abierta en Nocteverde. Ofrecemos especialidades de esta región.'});n=_2h.find(n=>n.id===id);if(n)_cp(n);}finally{_1=previous;}}if(n)__v78NightVendors.push({n,p});}
  __v78PinNight();}
-function __v78PinNight(){for(const {n,p}of __v78NightVendors){n.x=p.x;n.z=p.z;n.homeY=p.y;n.g.position.set(p.x,p.y,p.z);n.activity='Atendiendo a los viajeros';n.waiting=9999;n.sleeping=false;n.goal=null;n.nav=[];}}
+function __v78PinNight(){for(const {n,p}of __v78NightVendors){if(n.__v99Area)continue;n.x=p.x;n.z=p.z;n.homeY=p.y;n.g.position.set(p.x,p.y,p.z);n.activity='Atendiendo a los viajeros';n.waiting=9999;n.sleeping=false;n.goal=null;n.nav=[];}}
 const __v78NPC=_hr;_hr=function(dt){const r=__v78NPC(dt);__v78PinNight();return r;};
 const __v78StockBase=__v56Stock;__v56Stock=function(site){return __v78Stocks.get(site)||__v78StockBase(site);};
 const __v78MarketBase=_7z;_7z=function(site){return __v78Stocks.get(site)||__v78MarketBase(site);};
@@ -10324,7 +10324,7 @@ const __v92MayaWalk=__v83Walkable;__v83Walkable=function(a,x,z,pad=0){if(a?.__v9
 const __v92MayaWorld=_bj;_bj=function(...args){const r=__v92MayaWorld(...args);__v92MayaBuild();return r;};
 const __v92MayaChest=__v85ClaimSecret;__v85ClaimSecret=function(o){if(!o?.__v92MayaReward)return __v92MayaChest(o);if(!__v92Maya.boss.dead){_3a('Ah-Kin aún protege este tesoro.');return false;}const state=__v85SecretState();if(state.secretTreasures85.includes(o.secretId))return false;state.secretWalls85.push(o.secretId);return __v92MayaChest(o);};
 const __v92MayaGuide=__v86Goal;__v86Goal=function(a){if(a?.__v92Maya){if(__v92Maya.boss.dead)return null;const p=a.floor92===0?[24,10]:__v83Local(a,__v92Maya.boss.g.position.x,__v92Maya.boss.g.position.z);return{point:p,stage:a.floor92===0?'Sube la escalera al segundo nivel':'Derrota a Ah-Kin, Guardián de Obsidiana'};}return __v92MayaGuide(a);};
-const __v92MayaTick=__v75Tick;__v75Tick=function(dt){const r=__v92MayaTick(dt);if(_u&&!_74())for(const n of __v92Maya.npcs){const p=n.__v92Home;n.x=p.x;n.z=p.z;n.homeY=p.y;n.g.position.set(p.x,p.y,p.z);n.goal=null;n.waiting=99999;}return r;};
+const __v92MayaTick=__v75Tick;__v75Tick=function(dt){const r=__v92MayaTick(dt);if(_u&&!_74())for(const n of __v92Maya.npcs){if(n.__v99Area)continue;const p=n.__v92Home;n.x=p.x;n.z=p.z;n.homeY=p.y;n.g.position.set(p.x,p.y,p.z);n.goal=null;n.waiting=99999;}return r;};
 window.__AURELIA_V92__.maya=()=>({site:__v92Maya.site,location:{x:__v92Maya.x,z:__v92Maya.z},floors:__v92Maya.areas.map(a=>({name:a.name,y:a.y,rooms:a.design.centers.length,enemies:a.members.length,key:a.entryDoor?.requiredKey||null})),enemies:__v92MayaSpecies.map(([id,name,base,level])=>({id,name,level,base})),questNPCs:__v92Maya.npcs.map(n=>({name:n.name,location:_1h[n.site].name,quest:n.__v92Quest})),optional:true,mainQuestUnchanged:!_bp.some(q=>q.site===26||q.site===__v92Maya.site)});
 
 _1h[26].optional92=true;
@@ -10426,7 +10426,7 @@ function __v94LighthouseShell(x,y,z,material,site){const g=new _0.Group();g.name
 }
 function __v94FaroResident(){const s=__v94Faro.site,n=__v91Land.npcs.find(n=>_1h[n.site]===s);if(!n)return;const p={x:s.x-3,z:s.z+1.5,y:s.level+.12};Object.assign(n,{x:p.x,z:p.z,homeY:p.y,waiting:99999,goal:null,nav:[],navIndex:0,route:[{x:p.x,z:p.z,action:'Cuidando la luz del faro'}],__v94FaroHome:p,dialogue:'Soy Mara, la farera del Cabo Austral. Pasa y descansa junto al mar: aquí duermo, reviso mis cartas de navegación y cuido la luz que guía a los barcos de Puerto del Sur. La escalera exterior lleva a la terraza; mantén la lámpara a tu espalda para encontrar el camino de regreso al puerto.'});n.dayRoute=[...n.route];n.g.position.set(p.x,p.y,p.z);__v94Faro.npc=n;}
 const __v94FaroWorld=_bj;_bj=function(...args){const r=__v94FaroWorld(...args);__v94FaroResident();return r;};
-const __v94FaroTick=__v75Tick;__v75Tick=function(dt){const r=__v94FaroTick(dt),n=__v94Faro.npc,p=n?.__v94FaroHome;if(n&&p){n.x=p.x;n.z=p.z;n.homeY=p.y;n.g.position.set(p.x,p.y,p.z);n.waiting=99999;n.goal=null;}return r;};
+const __v94FaroTick=__v75Tick;__v75Tick=function(dt){const r=__v94FaroTick(dt),n=__v94Faro.npc,p=n?.__v94FaroHome;if(n&&p&&!n.__v99Area){n.x=p.x;n.z=p.z;n.homeY=p.y;n.g.position.set(p.x,p.y,p.z);n.waiting=99999;n.goal=null;}return r;};
 window.__AURELIA_LIGHTHOUSE94__={audit:()=>({name:__v94Faro.site?.name,base:[16,16],oldBase:[12,12],furniture:[...__v94Faro.furniture],npc:__v94Faro.npc?.name,door:!!__v94Faro.door})};
 
 const __v94FaroGround=_ei;_ei=function(x,z){const s=__v94Faro.site;if(s&&Math.abs(x-s.x)<=8.2&&Math.abs(z-s.z)<=8.2&&_14.y-1.85<s.level+5.2)return s.level+.12;return __v94FaroGround(x,z);};
@@ -11134,8 +11134,10 @@ function __v98NPCPose(n,b,moving,dt){
 }
 function __v98NPCTick(dt){
  if(!_u||_74())return;const now=__v98AI.clock;let plans=0;
- for(const n of __v88Life.active){if(n.__v88Dead||n.__v88Controlled||!n.__v98Active)continue;const b=__v98NPCBrain(n);b.energy=_18(b.energy+dt*(b.action==='rest'||b.action==='sleep'?.07:-.004),0,1);
+ const list=__v88Life.active;__v98AI.npcCursor=((__v98AI.npcCursor||0)+3)%Math.max(1,list.length);
+ for(let i=0;i<list.length;i++){const n=list[(i+__v98AI.npcCursor)%list.length];if(n.__v88Dead||n.__v88Controlled||!n.__v98Active)continue;const b=__v98NPCBrain(n);b.energy=_18(b.energy+dt*(b.action==='rest'||b.action==='sleep'?.07:-.004),0,1);
   b.social=_18(b.social+dt*(b.action==='socialise'||b.action==='trade'||b.action==='greet'?.04:-.002),0,1);b.curiosity=_18(b.curiosity+dt*(b.action==='read'?.05:-.001),0,1);
+  if(n.__v99Area){__v99InteriorTick(n,b,dt);continue;}
   if(now>=b.next&&plans<3){b.next=now+.5+(Math.abs(n.phase||0)%1)*.15;__v98NPCDecision(n,b);plans++;}
   if(!b.target)continue;
   const distance=Math.hypot(n.x-b.target.x,n.z-b.target.z);let moving=false;
@@ -11172,6 +11174,128 @@ function __v98DialogueMouth(){if(__v98Speaker?.mouth)__v98Speaker.mouth.scale.y=
  if(!$('dialogue').hidden&&_2i?.mouth&&!document.hidden){__v98Speaker=_2i;_2i.mouth.scale.y=.6+Math.max(0,Math.sin(performance.now()*.012))*.9;__v98MouthFrame=requestAnimationFrame(__v98DialogueMouth);}else __v98MouthFrame=0;}
 new MutationObserver(()=>{if(!__v98MouthFrame&&!$('dialogue').hidden)__v98DialogueMouth();}).observe($('dialogue'),{attributes:true,attributeFilter:['hidden']});
 window.__AURELIA_AI98__={audit:()=>({enemyBehaviors:[...__v98EnemyActions],npcBehaviors:[...__v98NPCActions],activeEnemies:__v98AI.near.length,decisions:__v98AI.decisions,lastDecisionMs:__v98AI.lastMs,decisionBudgetMs:__v60Mobile?.85:1.5,npcs:_2h.length,residents:_2h.filter(n=>n.__v98Active).length,damageMultiplier:1})};
+
+/* Gentler early encounters and bounded, collision-aware routines for service NPCs. */
+function __v99Early(c){return c?.hostile&&Number.isFinite(c.level)&&c.level>=1&&c.level<=40;}
+function __v99Limit(c){
+ if(__v99Life.building||!__v99Early(c)||!c.__v68Skills)return;
+ const skills=c.__v68Skills;if(c.__v99Limited===skills&&skills.length<=2&&skills.includes(c.art))return;
+ const unique=skills.filter((s,i)=>skills.findIndex(a=>(a.name||a.type)===(s.name||s.type))===i);
+ const first=unique.find(a=>!/^heal|buff|guard/.test(a.type))||unique[0],second=unique.find(a=>a!==first&&/^heal|buff|guard/.test(a.type))||unique.find(a=>a!==first);
+ const keep=[first,second].filter(Boolean),indices=keep.map(a=>skills.indexOf(a));
+ c.__v68Skills=keep;c.__v99Limited=keep;
+ if(c.__v85IndoorSkills===skills)c.__v85IndoorSkills=keep;
+ if(c.__v85OutdoorSkills?.length===skills.length)c.__v85OutdoorSkills=indices.map(i=>c.__v85OutdoorSkills[i]);
+ if(!keep.includes(c.art))c.art=keep[0];
+ const b=__v98AI.enemy.get(c);if(b){b.skill=null;b.skillAt=0;b.role=keep.some(a=>a.type==='healAllies')?'support':keep.some(a=>a.type==='projectile')?'ranged':'melee';}
+}
+const __v99Tune=__v68Tune;__v68Tune=function(c){const r=__v99Tune(c);__v99Limit(c);return r;};
+const __v99Choose=__v68Choose;__v68Choose=function(c){__v99Limit(c);return __v99Choose(c);};
+const __v99Detection=__v92Detect;__v92Detect=function(c){return __v99Detection(c)*(__v99Early(c)?.85:1);};
+const __v99Schedule=__v68Schedule;__v68Schedule=function(c){__v99Schedule(c);if(__v99Early(c))c.__v68NextAction=__v68CombatTime+(c.__v68NextAction-__v68CombatTime)*1.2;};
+
+const __v99Life={plans:0,graphMs:0};
+function __v99Area(n){
+ const h=n.home,angle=h?.angle||0,cos=Math.cos(angle),sin=Math.sin(angle);
+ let x=n.x,z=n.z,w=3.5,d=3.5,house=false;
+ if(h&&Number.isFinite(h.w+h.d)){
+  const dx=n.x-h.x,dz=n.z-h.z,lx=dx*cos-dz*sin,lz=dx*sin+dz*cos;
+  if(Math.abs(lx)<h.w/2-.55&&Math.abs(lz)<h.d/2-.55){x=h.x;z=h.z;w=Math.max(.5,h.w/2-.65);d=Math.max(.5,h.d/2-.65);house=true;}
+ }
+ return{x,z,w,d,cos:house?cos:1,sin:house?sin:0,y:n.homeY,house,nodes:null,anchor:{x:n.x,z:n.z},serial:0};
+}
+function __v99Inside(a,x,z){const dx=x-a.x,dz=z-a.z;return Math.abs(dx*a.cos-dz*a.sin)<=a.w&&Math.abs(dx*a.sin+dz*a.cos)<=a.d;}
+function __v99Free(a,x,z){const y=_ei(x,z);return __v99Inside(a,x,z)&&Number.isFinite(y)&&Math.abs(y-a.y)<.45&&!_i7(x,z,a.y+1.85);}
+function __v99Segment(a,p,q){
+ const steps=Math.max(1,Math.ceil(Math.hypot(q.x-p.x,q.z-p.z)/.22));
+ for(let i=1;i<=steps;i++)if(!__v99Free(a,p.x+(q.x-p.x)*i/steps,p.z+(q.z-p.z)*i/steps))return false;return true;
+}
+// A small graph per occupied room, built lazily. Every edge is swept against furniture.
+function* __v99BuildGraph(n){
+ const a=n.__v99Area,step=.8,nodes=[{x:n.x,z:n.z,edges:[]}],grid=new Map(),radius=['merchant','sorcerer','innkeeper','king'].includes(n.job)||n.castleService?3.2:4.8,rx=Math.min(a.w,radius),rz=Math.min(a.d,radius);
+ for(let ix=-Math.floor(rx/step);ix<=Math.floor(rx/step);ix++)for(let iz=-Math.floor(rz/step);iz<=Math.floor(rz/step);iz++){
+  const x=a.anchor.x+ix*step*a.cos+iz*step*a.sin,z=a.anchor.z-ix*step*a.sin+iz*step*a.cos,free=__v99Free(a,x,z);yield;
+  if(!free)continue;grid.set(ix+','+iz,nodes.length);nodes.push({x,z,ix,iz,edges:[]});
+ }
+ for(let i=1;i<nodes.length;i++){
+  const p=nodes[i];for(const[dx,dz]of[[1,0],[0,1],[1,1],[-1,1]]){const j=grid.get((p.ix+dx)+','+(p.iz+dz));if(j!==undefined&&__v99Segment(a,p,nodes[j])){p.edges.push(j);nodes[j].edges.push(i);}yield;}
+  if(Math.hypot(p.x-a.anchor.x,p.z-a.anchor.z)<1.3&&__v99Segment(a,a.anchor,p)){nodes[0].edges.push(i);p.edges.push(0);}yield;
+ }
+ return nodes;
+}
+function __v99Graph(n){
+ const a=n.__v99Area;if(a.nodes)return a.nodes;
+ const budget=__v60Mobile?.6:1.2;if(__v99Life.graphMs>=budget)return null;
+ if(!a.builder)a.builder=__v99BuildGraph(n);const begin=performance.now();
+ for(let i=0;i<40;i++){const step=a.builder.next();if(step.done){a.nodes=step.value;a.builder=null;break;}if(performance.now()-begin+__v99Life.graphMs>=budget)break;}
+ __v99Life.graphMs+=performance.now()-begin;return a.nodes;
+}
+function __v99Route(n,b,action){
+ const a=n.__v99Area,nodes=a.nodes;let start=0,distance=Infinity;
+ for(let i=0;i<nodes.length;i++){const d=Math.hypot(nodes[i].x-n.x,nodes[i].z-n.z);if(d<distance&&__v99Segment(a,n,nodes[i])){distance=d;start=i;}}
+ const queue=[start],parents=new Map([[start,-1]]);for(let i=0;i<queue.length;i++)for(const j of nodes[queue[i]].edges)if(!parents.has(j)){parents.set(j,queue[i]);queue.push(j);}
+ let choices=queue.filter(i=>Math.hypot(nodes[i].x-n.x,nodes[i].z-n.z)>.9);
+ if(action==='greet')choices=[];
+ if(action==='flee'||action==='alert')choices.sort((i,j)=>Math.hypot(nodes[j].x-(b.threat?.x??_14.x),nodes[j].z-(b.threat?.z??_14.z))-Math.hypot(nodes[i].x-(b.threat?.x??_14.x),nodes[i].z-(b.threat?.z??_14.z)));
+ const goal=choices.length?choices[(action==='flee'||action==='alert')?0:(a.serial +Math.floor(Math.abs(n.phase||0)*7))%choices.length]:start,route=[];
+ for(let i=goal;i!==-1;i=parents.get(i))route.push(nodes[i]);route.reverse();
+ b.route=route;b.index=0;b.target={x:nodes[goal].x,z:nodes[goal].z};b.blocked=0;n.goal={...b.target,action:__v98NPCLabels[action]};n.nav=[];
+}
+function __v99Decision(n,b){
+ const now=__v98AI.clock,danger=__v97NearestThreat(n),night=_x>=21||_x<6,weather=_66(n.x,n.z);let action;
+ if(danger){b.threat={x:danger.g.position.x,z:danger.g.position.z};b.dangerUntil=now+5;action=b.action==='alert'||b.action==='flee'?'flee':'alert';}
+ else if(now<b.dangerUntil)action='flee';
+ else if(now<b.until&&b.target)return;
+ else if(Math.hypot(n.x-_14.x,n.z-_14.z)<5&&now-b.lastGreet>25){action='greet';b.lastGreet=now;}
+ else if(night&&b.action!=='sleep')action='sleep';
+ else if(weather&&b.action!=='shelter')action='shelter';
+ else if(b.energy<.22)action='rest';
+ else if(b.curiosity<.15)action='read';
+ else if(b.social<.2)action='socialise';
+ else{const options=['work','trade','read','sweep','cook','patrol','socialise','play','rest','pray'];action=options[(Math.floor(Math.abs(n.phase||0)*13)+n.__v99Area.serial)%options.length];}
+ n.__v99Area.serial++;b.action=action;b.partner=__v88Life.active.find(o=>o!==n&&!o.__v88Dead&&Math.abs(o.homeY-n.homeY)<1&&Math.hypot(o.x-n.x,o.z-n.z)<4&&_5w(n.x,n.z,o.x,o.z,n.homeY+1.4))||null;
+ b.until=now+(action==='alert'?1.2:action==='greet'?2.5:6);n.activity=__v98NPCLabels[action];n.sleeping=action==='sleep';__v99Route(n,b,action);
+ if(action==='alert')for(const other of __v88Life.active)if(other!==n&&Math.hypot(other.x-n.x,other.z-n.z)<12){const friend=__v98NPCBrain(other);friend.threat={...b.threat};friend.dangerUntil=now+5;friend.until=0;}
+}
+function __v99InteriorTick(n,b,dt){
+ const now=__v98AI.clock,a=n.__v99Area;
+ if(!a.nodes&&!__v99Graph(n)){__v98NPCPose(n,b,false,dt);n.activity=__v98NPCLabels[b.action];return;}
+ if(now>=b.next&&__v99Life.plans<3){b.next=now+.5;__v99Life.plans++;__v99Decision(n,b);}
+ let moving=false;const point=b.route[b.index];
+ if(point){const d=Math.hypot(point.x-n.x,point.z-n.z);if(d<.12)b.index++;else{
+  const step=Math.min(d,(b.action==='flee'?2.5:1.15)*Math.min(.05,dt)),x=n.x+(point.x-n.x)/d*step,z=n.z+(point.z-n.z)/d*step;
+  const occupied=__v88Life.active.some(o=>o!==n&&!o.__v88Dead&&Math.abs(o.homeY-n.homeY)<1&&Math.hypot(o.x-x,o.z-z)<.55&&Math.hypot(o.x-n.x,o.z-n.z)>.55);
+  if(!occupied&&__v99Segment(a,n,{x,z})){n.x=x;n.z=z;moving=true;n.g.rotation.y+=Math.atan2(Math.sin(Math.atan2(n.x-point.x,n.z-point.z)-n.g.rotation.y),Math.cos(Math.atan2(n.x-point.x,n.z-point.z)-n.g.rotation.y))*(1-Math.exp(-12*dt));b.blocked=0;}else b.blocked+=dt;
+ }}
+ if(b.blocked>1){b.until=0;b.next=0;b.target=null;b.route=[];b.blocked=0;}
+ if(!moving&&now-b.lastWork>8){if(b.action==='work')b.stock.craft=Math.min(6,b.stock.craft+1);if(b.action==='cook'&&b.stock.grain>0){b.stock.grain--;b.energy=Math.min(1,b.energy+.2);}b.lastWork=now;}
+ if(!moving&&b.action==='trade'&&b.partner&&Math.hypot(n.x-b.partner.x,n.z-b.partner.z)<3&&now-b.lastTrade>12){const other=__v98NPCBrain(b.partner);if(b.stock.craft>0&&other.stock.grain>0){b.stock.craft--;other.stock.craft++;other.stock.grain--;b.stock.grain++;b.lastTrade=other.lastTrade=now;}}
+ __v98NPCPose(n,b,moving,dt);n.activity=__v98NPCLabels[b.action];n.__v88Moving=moving;
+}
+// Idle poses breathe and gesture; an NPC resting or serving is still visibly alive.
+const __v99Pose=__v98NPCPose;__v98NPCPose=function(n,b,moving,dt){__v99Pose(n,b,moving,dt);if(moving)return;
+ const t=__v98AI.clock+(n.phase||0);n.g.position.y+=Math.sin(t*2)*.012;
+ for(const[i,arm]of(n.arms||[]).entries())arm.rotation.z=Math.sin(t*1.7+i)*.045;
+ if(b.action!=='sleep'&&b.action!=='greet'&&!b.partner)n.g.rotation.y+=Math.sin(t*.8)*.12*dt;
+};
+function __v99Register(){
+ const givers=new Set(_bp.map(q=>q.giver));
+ for(const c of _m)__v99Limit(c);
+ for(const n of _2h){if(n.__v88Dead||n.__v88Controlled)continue;n.__v98Active=true;
+  if(!_1h[n.homeSite??n.site]||!n.__v88Added&&(n.home||n.castleService||givers.has(n.id)||['merchant','sorcerer','innkeeper','priest','king'].includes(n.job)||n.__v92Home||n.__v94FaroHome)){
+   const a=n.__v99Area=__v99Area(n);
+   // A few original kings spawn inside their throne's collision box. Repair once at load.
+   if(!__v99Free(a,n.x,n.z)){let fixed=false;for(let r=.4;r<=3.2&&!fixed;r+=.4)for(let i=0;i<16;i++){const x=a.anchor.x+Math.cos(i*Math.PI/8)*r,z=a.anchor.z+Math.sin(i*Math.PI/8)*r;if(!__v99Free(a,x,z))continue;n.x=x;n.z=z;n.g.position.set(x,n.homeY,z);a.anchor={x,z};fixed=true;break;}}
+  }
+  __v98NPCBrain(n);
+ }
+}
+// Species balancing can assign the final level after its initial kit is constructed.
+const __v99World=_bj;_bj=function(...args){const building=__v99Life.building;__v99Life.building=true;let r;try{r=__v99World(...args);}finally{__v99Life.building=building;}__v99Register();return r;};
+const __v99Restore=_dn;_dn=function(...args){const building=__v99Life.building;__v99Life.building=true;let r;try{r=__v99Restore(...args);}finally{__v99Life.building=building;}__v99Register();return r;};
+const __v99Frame=_hr;_hr=function(dt){__v99Life.plans=0;__v99Life.graphMs=0;return __v99Frame(dt);};
+const __v99Sense=__v88Sense;__v88Sense=function(){const r=__v99Sense();for(const n of __v88Life.active)if(!n.__v98Active){n.__v98Active=true;if(!_1h[n.homeSite??n.site])n.__v99Area=__v99Area(n);__v98NPCBrain(n);}return r;};
+window.__AURELIA_AI99__={audit:()=>({earlyMaxTechniques:2,earlyAttackIntervalMultiplier:1.2,earlyDetectionMultiplier:.85,aggressiveFromLevel:41,npcs:_2h.filter(n=>!n.__v88Dead&&!n.__v88Controlled).length,managed:_2h.filter(n=>n.__v98Active&&!n.__v88Dead&&!n.__v88Controlled).length,interiors:_2h.filter(n=>n.__v99Area).length,behaviors:[...__v98NPCActions]})};
 
 /* Mobile input is opt-in by device detection. Desktop handlers stay intact. */
 if (__v60Mobile) {

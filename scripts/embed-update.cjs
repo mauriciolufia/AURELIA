@@ -23,7 +23,13 @@ html=html.replace('for(let i=_ct.length-1;i>=0;i--){const s=_ct[i];let end=', 'f
 html=html.replace('s.life-=dt;if(end||s.life<=0){_6.remove(s.g);s.g.geometry.dispose();s.m.dispose();_ct.splice(i,1);}}', 'if(!_ct.includes(s))continue;s.life-=dt;if(end||s.life<=0){_6.remove(s.g);s.g.geometry.dispose();s.m.dispose();const index=_ct.indexOf(s);if(index>=0)_ct.splice(index,1);}}');
 const begin = '/* AURELIA_UPDATE97_BEGIN */';
 const end = '/* AURELIA_UPDATE97_END */';
-const sources = ['quality98.js', 'world97.js', 'ai98.js', 'mobile97.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
+// Service anchors still initialize their NPC, but must not reset a living NPC each frame.
+html=html.replace('const {n,p}=__v76Merchant;n.x=p.x;', 'const {n,p}=__v76Merchant;if(n.__v99Area)return;n.x=p.x;');
+html=html.replace('for(const {n,p}of __v78NightVendors){n.x=p.x;', 'for(const {n,p}of __v78NightVendors){if(n.__v99Area)continue;n.x=p.x;');
+html=html.replace('for(const n of __v92Maya.npcs){const p=n.__v92Home;', 'for(const n of __v92Maya.npcs){if(n.__v99Area)continue;const p=n.__v92Home;');
+html=html.replace('p=n?.__v94FaroHome;if(n&&p){', 'p=n?.__v94FaroHome;if(n&&p&&!n.__v99Area){');
+html=html.replace('const p=__v54SafeServicePoint(n,svc);if(p&&Number.isFinite(p.x)', 'const p=__v54SafeServicePoint(n,svc);if(!n.__v99Area&&p&&Number.isFinite(p.x)');
+const sources = ['quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'mobile97.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
 const block = `${begin}\n${sources.join('\n')}\n${end}\n`;
 if (html.includes(begin)) html = html.slice(0, html.indexOf(begin)) + block + html.slice(html.indexOf(end) + end.length).replace(/^\n/, '');
 else {
@@ -32,4 +38,4 @@ else {
   html = html.replace(marker, block + marker);
 }
 fs.writeFileSync(file, html);
-console.log('Embedded Aurelia update 98');
+console.log('Embedded Aurelia update 99');

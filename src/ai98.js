@@ -119,8 +119,10 @@ function __v98NPCPose(n,b,moving,dt){
 }
 function __v98NPCTick(dt){
  if(!_u||_74())return;const now=__v98AI.clock;let plans=0;
- for(const n of __v88Life.active){if(n.__v88Dead||n.__v88Controlled||!n.__v98Active)continue;const b=__v98NPCBrain(n);b.energy=_18(b.energy+dt*(b.action==='rest'||b.action==='sleep'?.07:-.004),0,1);
+ const list=__v88Life.active;__v98AI.npcCursor=((__v98AI.npcCursor||0)+3)%Math.max(1,list.length);
+ for(let i=0;i<list.length;i++){const n=list[(i+__v98AI.npcCursor)%list.length];if(n.__v88Dead||n.__v88Controlled||!n.__v98Active)continue;const b=__v98NPCBrain(n);b.energy=_18(b.energy+dt*(b.action==='rest'||b.action==='sleep'?.07:-.004),0,1);
   b.social=_18(b.social+dt*(b.action==='socialise'||b.action==='trade'||b.action==='greet'?.04:-.002),0,1);b.curiosity=_18(b.curiosity+dt*(b.action==='read'?.05:-.001),0,1);
+  if(n.__v99Area){__v99InteriorTick(n,b,dt);continue;}
   if(now>=b.next&&plans<3){b.next=now+.5+(Math.abs(n.phase||0)%1)*.15;__v98NPCDecision(n,b);plans++;}
   if(!b.target)continue;
   const distance=Math.hypot(n.x-b.target.x,n.z-b.target.z);let moving=false;
