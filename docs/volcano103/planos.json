@@ -2321,221 +2321,335 @@
       {
         "id": "v103-0-10",
         "type": "spikes",
-        "cell": 304,
+        "cell": 454,
         "x": -64,
-        "z": 0,
-        "phase": 4.533981496933848
+        "z": 48,
+        "phase": 4.533981496933848,
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
       },
       {
         "id": "v103-0-11",
+        "type": "spikes",
+        "cell": 245,
+        "x": 64,
+        "z": -24,
+        "phase": 0.9675916498526931,
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
+      },
+      {
+        "id": "v103-0-12",
+        "type": "spikes",
+        "cell": 196,
+        "x": 72,
+        "z": -40,
+        "phase": 1.907378891017288,
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
+      },
+      {
+        "id": "v103-0-13",
+        "type": "spikes",
+        "cell": 171,
+        "x": 72,
+        "z": -48,
+        "phase": 5.26497838832438,
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
+      },
+      {
+        "id": "v103-0-14",
+        "type": "spikes",
+        "cell": 109,
+        "x": -24,
+        "z": -64,
+        "phase": 5.5682334755547345,
+        "band": true,
+        "w": 1.8,
+        "d": 3.6
+      },
+      {
+        "id": "v103-0-15",
         "type": "arrows",
         "cell": 532,
         "x": -40,
         "z": 72,
-        "phase": 0.9675916498526931,
+        "phase": 1.242305581457913,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
         "axis": [
           0,
           1
         ]
       },
       {
-        "id": "v103-0-12",
-        "type": "gas",
-        "cell": 212,
-        "x": 0,
-        "z": -32,
-        "phase": 1.907378891017288
-      },
-      {
-        "id": "v103-0-13",
-        "type": "spikes",
-        "cell": 301,
-        "x": -88,
-        "z": 0,
-        "phase": 5.26497838832438
-      },
-      {
-        "id": "v103-0-14",
-        "type": "arrows",
-        "cell": 454,
-        "x": -64,
-        "z": 48,
-        "phase": 5.5682334755547345,
-        "axis": [
-          1,
-          0
-        ]
-      },
-      {
-        "id": "v103-0-15",
-        "type": "gas",
-        "cell": 357,
-        "x": -40,
-        "z": 16,
-        "phase": 1.242305581457913
-      },
-      {
         "id": "v103-0-16",
-        "type": "spikes",
-        "cell": 356,
-        "x": -48,
-        "z": 16,
-        "phase": 4.114384069573134
-      },
-      {
-        "id": "v103-0-17",
         "type": "arrows",
         "cell": 141,
         "x": 32,
         "z": -56,
-        "phase": 0.5598140582442284,
+        "phase": 4.114384069573134,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
         "axis": [
           -1,
           0
         ]
       },
       {
+        "id": "v103-0-17",
+        "type": "arrows",
+        "cell": 153,
+        "x": -72,
+        "z": -48,
+        "phase": 0.5598140582442284,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
+        "axis": [
+          1,
+          0
+        ]
+      },
+      {
         "id": "v103-0-18",
-        "type": "gas",
-        "cell": 514,
-        "x": 16,
-        "z": 64,
-        "phase": 1.9117068112827837
+        "type": "arrows",
+        "cell": 205,
+        "x": -56,
+        "z": -32,
+        "phase": 1.9117068112827837,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
+        "axis": [
+          0,
+          1
+        ]
       },
       {
         "id": "v103-0-19",
-        "type": "spikes",
-        "cell": 440,
-        "x": 24,
-        "z": 40,
-        "phase": 3.1964583126828074
+        "type": "arrows",
+        "cell": 412,
+        "x": 0,
+        "z": 32,
+        "phase": 3.1964583126828074,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
+        "axis": [
+          1,
+          0
+        ]
       },
       {
         "id": "v103-0-20",
+        "type": "lava",
+        "cell": 304,
+        "x": -64,
+        "z": 0,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-0-21",
+        "type": "lava",
+        "cell": 212,
+        "x": 0,
+        "z": -32,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 7.6,
+        "d": 3.6
+      },
+      {
+        "id": "v103-0-22",
+        "type": "lava",
+        "cell": 301,
+        "x": -88,
+        "z": 0,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-0-23",
+        "type": "lava",
+        "cell": 357,
+        "x": -40,
+        "z": 16,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 7.6,
+        "d": 3.6
+      },
+      {
+        "id": "v103-0-24",
+        "type": "lava",
+        "cell": 356,
+        "x": -48,
+        "z": 16,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 7.6,
+        "d": 3.6
+      },
+      {
+        "id": "v103-0-25",
+        "type": "lava",
+        "cell": 514,
+        "x": 16,
+        "z": 64,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-0-26",
+        "type": "lava",
+        "cell": 440,
+        "x": 24,
+        "z": 40,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-0-27",
         "type": "lava",
         "cell": 71,
         "x": 72,
         "z": -80,
         "bridge": false,
         "bridgeAxis": "x",
-        "bridgeCross": false
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
       },
       {
-        "id": "v103-0-21",
+        "id": "v103-0-28",
         "type": "lava",
         "cell": 253,
         "x": -72,
         "z": -16,
         "bridge": false,
         "bridgeAxis": "z",
-        "bridgeCross": false
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
       },
       {
-        "id": "v103-0-22",
+        "id": "v103-0-29",
         "type": "lava",
         "cell": 102,
         "x": -80,
         "z": -64,
         "bridge": false,
         "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-0-23",
-        "type": "lava",
-        "cell": 260,
-        "x": -16,
-        "z": -16,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-0-24",
-        "type": "lava",
-        "cell": 60,
-        "x": -16,
-        "z": -80,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-0-25",
-        "type": "lava",
-        "cell": 538,
-        "x": 8,
-        "z": 72,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-0-26",
-        "type": "lava",
-        "cell": 576,
-        "x": -88,
-        "z": 88,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-0-27",
-        "type": "lava",
-        "cell": 190,
-        "x": 24,
-        "z": -40,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-0-28",
-        "type": "lava",
-        "cell": 387,
-        "x": 0,
-        "z": 24,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-0-29",
-        "type": "lava",
-        "cell": 505,
-        "x": -56,
-        "z": 64,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
       },
       {
         "id": "v103-0-30",
         "type": "barrel",
-        "cell": 341,
-        "x": 32,
-        "z": 8,
+        "cell": 260,
+        "x": -16,
+        "z": -16,
         "barrelKind": "explosive"
       },
       {
         "id": "v103-0-31",
         "type": "barrel",
-        "cell": 187,
-        "x": 0,
-        "z": -40,
+        "cell": 60,
+        "x": -16,
+        "z": -80,
         "barrelKind": "xp"
       },
       {
         "id": "v103-0-32",
         "type": "barrel",
-        "cell": 571,
-        "x": 72,
-        "z": 80,
+        "cell": 538,
+        "x": 8,
+        "z": 72,
         "barrelKind": "gold"
       },
       {
         "id": "v103-0-33",
+        "type": "barrel",
+        "cell": 576,
+        "x": -88,
+        "z": 88,
+        "barrelKind": "gold"
+      },
+      {
+        "id": "v103-0-34",
+        "type": "barrel",
+        "cell": 190,
+        "x": 24,
+        "z": -40,
+        "barrelKind": "explosive"
+      },
+      {
+        "id": "v103-0-35",
+        "type": "barrel",
+        "cell": 387,
+        "x": 0,
+        "z": 24,
+        "barrelKind": "xp"
+      },
+      {
+        "id": "v103-0-36",
+        "type": "barrel",
+        "cell": 505,
+        "x": -56,
+        "z": 64,
+        "barrelKind": "gold"
+      },
+      {
+        "id": "v103-0-37",
+        "type": "barrel",
+        "cell": 341,
+        "x": 32,
+        "z": 8,
+        "barrelKind": "gold"
+      },
+      {
+        "id": "v103-0-38",
+        "type": "barrel",
+        "cell": 187,
+        "x": 0,
+        "z": -40,
+        "barrelKind": "explosive"
+      },
+      {
+        "id": "v103-0-39",
+        "type": "barrel",
+        "cell": 571,
+        "x": 72,
+        "z": 80,
+        "barrelKind": "xp"
+      },
+      {
+        "id": "v103-0-40",
         "type": "barrel",
         "cell": 392,
         "x": 40,
@@ -2543,31 +2657,31 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-0-34",
+        "id": "v103-0-41",
         "type": "barrel",
         "cell": 349,
         "x": 96,
         "z": 8,
-        "barrelKind": "explosive"
+        "barrelKind": "gold"
       },
       {
-        "id": "v103-0-35",
+        "id": "v103-0-42",
         "type": "barrel",
         "cell": 232,
         "x": -40,
         "z": -24,
-        "barrelKind": "xp"
+        "barrelKind": "explosive"
       },
       {
-        "id": "v103-0-36",
+        "id": "v103-0-43",
         "type": "barrel",
         "cell": 597,
         "x": 80,
         "z": 88,
-        "barrelKind": "gold"
+        "barrelKind": "xp"
       },
       {
-        "id": "v103-0-37",
+        "id": "v103-0-44",
         "type": "barrel",
         "cell": 344,
         "x": 56,
@@ -2575,31 +2689,31 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-0-38",
+        "id": "v103-0-45",
         "type": "barrel",
         "cell": 126,
         "x": -88,
         "z": -56,
-        "barrelKind": "explosive"
+        "barrelKind": "gold"
       },
       {
-        "id": "v103-0-39",
+        "id": "v103-0-46",
         "type": "barrel",
         "cell": 213,
         "x": 8,
         "z": -32,
-        "barrelKind": "xp"
+        "barrelKind": "explosive"
       },
       {
-        "id": "v103-0-40",
+        "id": "v103-0-47",
         "type": "barrel",
         "cell": 136,
         "x": -8,
         "z": -56,
-        "barrelKind": "gold"
+        "barrelKind": "xp"
       },
       {
-        "id": "v103-0-41",
+        "id": "v103-0-48",
         "type": "barrel",
         "cell": 570,
         "x": 64,
@@ -2607,31 +2721,31 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-0-42",
+        "id": "v103-0-49",
         "type": "barrel",
         "cell": 526,
         "x": -88,
         "z": 72,
-        "barrelKind": "explosive"
+        "barrelKind": "gold"
       },
       {
-        "id": "v103-0-43",
+        "id": "v103-0-50",
         "type": "barrel",
         "cell": 276,
         "x": -88,
         "z": -8,
-        "barrelKind": "xp"
+        "barrelKind": "explosive"
       },
       {
-        "id": "v103-0-44",
+        "id": "v103-0-51",
         "type": "barrel",
         "cell": 404,
         "x": -64,
         "z": 32,
-        "barrelKind": "gold"
+        "barrelKind": "xp"
       },
       {
-        "id": "v103-0-45",
+        "id": "v103-0-52",
         "type": "barrel",
         "cell": 46,
         "x": 72,
@@ -2639,302 +2753,430 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-0-46",
+        "id": "v103-0-53",
         "type": "barrel",
         "cell": 95,
         "x": 64,
         "z": -72,
-        "barrelKind": "explosive"
-      },
-      {
-        "id": "v103-0-47",
-        "type": "barrel",
-        "cell": 522,
-        "x": 80,
-        "z": 64,
-        "barrelKind": "xp"
-      },
-      {
-        "id": "v103-0-48",
-        "type": "barrel",
-        "cell": 272,
-        "x": 80,
-        "z": -16,
-        "barrelKind": "gold"
-      },
-      {
-        "id": "v103-0-49",
-        "type": "barrel",
-        "cell": 536,
-        "x": -8,
-        "z": 72,
-        "barrelKind": "gold"
-      },
-      {
-        "id": "v103-0-50",
-        "type": "barrel",
-        "cell": 330,
-        "x": -56,
-        "z": 8,
-        "barrelKind": "explosive"
-      },
-      {
-        "id": "v103-0-51",
-        "type": "barrel",
-        "cell": 105,
-        "x": -56,
-        "z": -64,
-        "barrelKind": "xp"
-      },
-      {
-        "id": "v103-0-52",
-        "type": "barrel",
-        "cell": 128,
-        "x": -72,
-        "z": -56,
-        "barrelKind": "gold"
-      },
-      {
-        "id": "v103-0-53",
-        "type": "barrel",
-        "cell": 495,
-        "x": 64,
-        "z": 56,
         "barrelKind": "gold"
       },
       {
         "id": "v103-0-54",
         "type": "enemy",
-        "cell": 551,
-        "x": -88,
-        "z": 80,
+        "cell": 522,
+        "x": 80,
+        "z": 64,
         "species": 0,
         "level": 40
       },
       {
         "id": "v103-0-55",
         "type": "enemy",
-        "cell": 504,
-        "x": -64,
-        "z": 64,
+        "cell": 272,
+        "x": 80,
+        "z": -16,
         "species": 1,
         "level": 41
       },
       {
         "id": "v103-0-56",
         "type": "enemy",
-        "cell": 76,
-        "x": -88,
-        "z": -72,
+        "cell": 536,
+        "x": -8,
+        "z": 72,
         "species": 2,
         "level": 40
       },
       {
         "id": "v103-0-57",
         "type": "enemy",
-        "cell": 407,
-        "x": -40,
-        "z": 32,
+        "cell": 330,
+        "x": -56,
+        "z": 8,
         "species": 3,
         "level": 41
       },
       {
         "id": "v103-0-58",
         "type": "enemy",
-        "cell": 384,
-        "x": -24,
-        "z": 24,
+        "cell": 105,
+        "x": -56,
+        "z": -64,
         "species": 0,
         "level": 40
       },
       {
         "id": "v103-0-59",
         "type": "enemy",
-        "cell": 28,
+        "cell": 128,
         "x": -72,
-        "z": -88,
+        "z": -56,
         "species": 1,
         "level": 41
       },
       {
         "id": "v103-0-60",
         "type": "enemy",
-        "cell": 241,
-        "x": 32,
-        "z": -24,
+        "cell": 495,
+        "x": 64,
+        "z": 56,
         "species": 2,
         "level": 40
       },
       {
         "id": "v103-0-61",
         "type": "enemy",
-        "cell": 263,
-        "x": 8,
-        "z": -16,
+        "cell": 551,
+        "x": -88,
+        "z": 80,
         "species": 3,
         "level": 41
       },
       {
         "id": "v103-0-62",
         "type": "enemy",
-        "cell": 390,
-        "x": 24,
-        "z": 24,
+        "cell": 504,
+        "x": -64,
+        "z": 64,
         "species": 0,
         "level": 40
       },
       {
         "id": "v103-0-63",
         "type": "enemy",
-        "cell": 120,
-        "x": 64,
-        "z": -64,
+        "cell": 76,
+        "x": -88,
+        "z": -72,
         "species": 1,
         "level": 41
       },
       {
         "id": "v103-0-64",
         "type": "enemy",
-        "cell": 553,
-        "x": -72,
-        "z": 80,
+        "cell": 407,
+        "x": -40,
+        "z": 32,
         "species": 2,
         "level": 40
       },
       {
         "id": "v103-0-65",
         "type": "enemy",
-        "cell": 310,
-        "x": -16,
-        "z": 0,
+        "cell": 384,
+        "x": -24,
+        "z": 24,
         "species": 3,
         "level": 41
       },
       {
         "id": "v103-0-66",
         "type": "stalagmite",
+        "cell": 28,
+        "x": -72,
+        "z": -88
+      },
+      {
+        "id": "v103-0-67",
+        "type": "crystal",
+        "cell": 241,
+        "x": 32,
+        "z": -24
+      },
+      {
+        "id": "v103-0-68",
+        "type": "stalagmite",
+        "cell": 263,
+        "x": 8,
+        "z": -16
+      },
+      {
+        "id": "v103-0-69",
+        "type": "crystal",
+        "cell": 390,
+        "x": 24,
+        "z": 24
+      },
+      {
+        "id": "v103-0-70",
+        "type": "stalagmite",
+        "cell": 120,
+        "x": 64,
+        "z": -64
+      },
+      {
+        "id": "v103-0-71",
+        "type": "crystal",
+        "cell": 553,
+        "x": -72,
+        "z": 80
+      },
+      {
+        "id": "v103-0-72",
+        "type": "stalagmite",
+        "cell": 310,
+        "x": -16,
+        "z": 0
+      },
+      {
+        "id": "v103-0-73",
+        "type": "crystal",
         "cell": 345,
         "x": 64,
         "z": 8
       },
       {
-        "id": "v103-0-67",
-        "type": "crystal",
+        "id": "v103-0-74",
+        "type": "stalagmite",
         "cell": 209,
         "x": -24,
         "z": -32
       },
       {
-        "id": "v103-0-68",
-        "type": "stalagmite",
+        "id": "v103-0-75",
+        "type": "crystal",
         "cell": 511,
         "x": -8,
         "z": 64
       },
       {
-        "id": "v103-0-69",
-        "type": "crystal",
+        "id": "v103-0-76",
+        "type": "stalagmite",
         "cell": 53,
         "x": -72,
         "z": -80
       },
       {
-        "id": "v103-0-70",
-        "type": "stalagmite",
-        "cell": 171,
-        "x": 72,
-        "z": -48
-      },
-      {
-        "id": "v103-0-71",
+        "id": "v103-0-77",
         "type": "crystal",
         "cell": 527,
         "x": -80,
         "z": 72
       },
       {
-        "id": "v103-0-72",
+        "id": "v103-0-78",
         "type": "stalagmite",
         "cell": 121,
         "x": 72,
         "z": -64
       },
       {
-        "id": "v103-0-73",
+        "id": "v103-0-79",
         "type": "crystal",
         "cell": 535,
         "x": -16,
         "z": 72
       },
       {
-        "id": "v103-0-74",
+        "id": "v103-0-80",
         "type": "stalagmite",
         "cell": 314,
         "x": 16,
         "z": 0
       },
       {
-        "id": "v103-0-75",
+        "id": "v103-0-81",
         "type": "crystal",
         "cell": 240,
         "x": 24,
         "z": -24
       },
       {
-        "id": "v103-0-76",
+        "id": "v103-0-82",
         "type": "stalagmite",
         "cell": 166,
         "x": 32,
         "z": -48
       },
       {
-        "id": "v103-0-77",
+        "id": "v103-0-83",
         "type": "crystal",
         "cell": 305,
         "x": -56,
         "z": 0
       },
       {
-        "id": "v103-0-78",
-        "type": "stalagmite",
+        "id": "v104-0-enemy-0",
+        "type": "enemy",
         "cell": 289,
         "x": 16,
-        "z": -8
+        "z": -8,
+        "species": 5,
+        "level": 40
       },
       {
-        "id": "v103-0-79",
-        "type": "crystal",
+        "id": "v104-0-enemy-1",
+        "type": "enemy",
         "cell": 510,
         "x": -16,
-        "z": 64
+        "z": 64,
+        "species": 6,
+        "level": 41
       },
       {
-        "id": "v103-0-80",
-        "type": "stalagmite",
+        "id": "v104-0-enemy-2",
+        "type": "enemy",
         "cell": 233,
         "x": -32,
-        "z": -24
+        "z": -24,
+        "species": 0,
+        "level": 40
       },
       {
-        "id": "v103-0-81",
-        "type": "crystal",
+        "id": "v104-0-enemy-3",
+        "type": "enemy",
         "cell": 182,
         "x": -40,
-        "z": -40
+        "z": -40,
+        "species": 1,
+        "level": 41
       },
       {
-        "id": "v103-0-82",
-        "type": "stalagmite",
+        "id": "v104-0-enemy-4",
+        "type": "enemy",
         "cell": 319,
         "x": 56,
-        "z": 0
+        "z": 0,
+        "species": 2,
+        "level": 40
       },
       {
-        "id": "v103-0-83",
-        "type": "crystal",
+        "id": "v104-0-enemy-5",
+        "type": "enemy",
         "cell": 207,
         "x": -40,
-        "z": -32
+        "z": -32,
+        "species": 3,
+        "level": 41
+      },
+      {
+        "id": "v104-0-enemy-6",
+        "type": "enemy",
+        "cell": 409,
+        "x": -24,
+        "z": 32,
+        "species": 5,
+        "level": 40
+      },
+      {
+        "id": "v104-0-enemy-7",
+        "type": "enemy",
+        "cell": 317,
+        "x": 40,
+        "z": 0,
+        "species": 6,
+        "level": 41
+      },
+      {
+        "id": "v104-0-enemy-8",
+        "type": "enemy",
+        "cell": 158,
+        "x": -32,
+        "z": -48,
+        "species": 0,
+        "level": 40
+      },
+      {
+        "id": "v104-0-enemy-9",
+        "type": "enemy",
+        "cell": 327,
+        "x": -80,
+        "z": 8,
+        "species": 1,
+        "level": 41
+      },
+      {
+        "id": "v104-0-enemy-10",
+        "type": "enemy",
+        "cell": 138,
+        "x": 8,
+        "z": -56,
+        "species": 2,
+        "level": 40
+      },
+      {
+        "id": "v104-0-enemy-11",
+        "type": "enemy",
+        "cell": 38,
+        "x": 8,
+        "z": -88,
+        "species": 3,
+        "level": 41
+      },
+      {
+        "id": "v104-0-lava-0",
+        "type": "lava",
+        "cell": 355,
+        "x": -56,
+        "z": 16,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-0-lava-1",
+        "type": "lava",
+        "cell": 94,
+        "x": 56,
+        "z": -72,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-0-lava-2",
+        "type": "lava",
+        "cell": 476,
+        "x": -88,
+        "z": 56,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-0-lava-3",
+        "type": "lava",
+        "cell": 320,
+        "x": 64,
+        "z": 0,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-0-fall-0",
+        "type": "lavafall",
+        "cell": 148,
+        "x": 88,
+        "z": -56,
+        "phase": 2.5542138849850744,
+        "radius": 1.45
+      },
+      {
+        "id": "v104-0-fall-1",
+        "type": "lavafall",
+        "cell": 130,
+        "x": -56,
+        "z": -56,
+        "phase": 6.519380590878427,
+        "radius": 1.45
+      },
+      {
+        "id": "v104-0-fall-2",
+        "type": "lavafall",
+        "cell": 360,
+        "x": -16,
+        "z": 16,
+        "phase": 0.6305077236611396,
+        "radius": 1.45
+      },
+      {
+        "id": "v104-0-wall",
+        "type": "breakwall",
+        "cell": 424,
+        "x": 96,
+        "z": 32,
+        "w": 3.6,
+        "d": 0.7
       }
     ],
     "corridors": [
@@ -6125,90 +6367,128 @@
       {
         "id": "v103-1-10",
         "type": "spikes",
-        "cell": 290,
-        "x": 24,
-        "z": -8,
-        "phase": 3.1946775214746594
+        "cell": 395,
+        "x": 64,
+        "z": 24,
+        "phase": 3.1946775214746594,
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
       },
       {
         "id": "v103-1-11",
+        "type": "spikes",
+        "cell": 154,
+        "x": -64,
+        "z": -48,
+        "phase": 2.017840444575995,
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
+      },
+      {
+        "id": "v103-1-12",
+        "type": "spikes",
+        "cell": 471,
+        "x": 72,
+        "z": 48,
+        "phase": 1.282415695488453,
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
+      },
+      {
+        "id": "v103-1-13",
+        "type": "darkness",
+        "cell": 446,
+        "x": 72,
+        "z": 40,
+        "phase": 0.4019407541491091,
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
+      },
+      {
+        "id": "v103-1-14",
+        "type": "darkness",
+        "cell": 332,
+        "x": -40,
+        "z": 8,
+        "phase": 5.850207882933319,
+        "band": true,
+        "w": 1.8,
+        "d": 3.6
+      },
+      {
+        "id": "v103-1-15",
         "type": "arrows",
         "cell": 324,
         "x": 96,
         "z": 0,
-        "phase": 2.017840444575995,
+        "phase": 4.692747419234365,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
         "axis": [
           -1,
           0
         ]
       },
       {
-        "id": "v103-1-12",
-        "type": "gas",
-        "cell": 84,
-        "x": -24,
-        "z": -72,
-        "phase": 1.282415695488453
-      },
-      {
-        "id": "v103-1-13",
-        "type": "darkness",
-        "cell": 319,
-        "x": 56,
-        "z": 0,
-        "phase": 0.4019407541491091
-      },
-      {
-        "id": "v103-1-14",
-        "type": "spikes",
-        "cell": 406,
-        "x": -48,
-        "z": 32,
-        "phase": 5.850207882933319
-      },
-      {
-        "id": "v103-1-15",
+        "id": "v103-1-16",
         "type": "arrows",
         "cell": 81,
         "x": -48,
         "z": -72,
-        "phase": 4.692747419234365,
+        "phase": 0.8144089188426733,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
         "axis": [
           0,
           1
         ]
       },
       {
-        "id": "v103-1-16",
-        "type": "gas",
-        "cell": 505,
-        "x": -56,
-        "z": 64,
-        "phase": 0.8144089188426733
-      },
-      {
         "id": "v103-1-17",
-        "type": "darkness",
-        "cell": 70,
-        "x": 64,
-        "z": -80,
-        "phase": 1.4220444378443062
+        "type": "arrows",
+        "cell": 256,
+        "x": -48,
+        "z": -16,
+        "phase": 1.4220444378443062,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
+        "axis": [
+          0,
+          1
+        ]
       },
       {
         "id": "v103-1-18",
-        "type": "spikes",
-        "cell": 494,
-        "x": 56,
-        "z": 56,
-        "phase": 5.934310630895197
+        "type": "arrows",
+        "cell": 149,
+        "x": 96,
+        "z": -56,
+        "phase": 5.934310630895197,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
+        "axis": [
+          1,
+          0
+        ]
       },
       {
         "id": "v103-1-19",
         "type": "arrows",
-        "cell": 332,
-        "x": -40,
-        "z": 8,
+        "cell": 83,
+        "x": -32,
+        "z": -72,
         "phase": 3.8192986655049026,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
         "axis": [
           0,
           1
@@ -6217,153 +6497,213 @@
       {
         "id": "v103-1-20",
         "type": "lava",
+        "cell": 290,
+        "x": 24,
+        "z": -8,
+        "bridge": true,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 7.6,
+        "d": 3.6
+      },
+      {
+        "id": "v103-1-21",
+        "type": "lava",
+        "cell": 84,
+        "x": -24,
+        "z": -72,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 7.6,
+        "d": 3.6
+      },
+      {
+        "id": "v103-1-22",
+        "type": "lava",
+        "cell": 319,
+        "x": 56,
+        "z": 0,
+        "bridge": true,
+        "bridgeAxis": "x",
+        "bridgeCross": true,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-1-23",
+        "type": "lava",
+        "cell": 406,
+        "x": -48,
+        "z": 32,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 7.6,
+        "d": 3.6
+      },
+      {
+        "id": "v103-1-24",
+        "type": "lava",
+        "cell": 505,
+        "x": -56,
+        "z": 64,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-1-25",
+        "type": "lava",
+        "cell": 70,
+        "x": 64,
+        "z": -80,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-1-26",
+        "type": "lava",
+        "cell": 494,
+        "x": 56,
+        "z": 56,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-1-27",
+        "type": "lava",
         "cell": 559,
         "x": -24,
         "z": 80,
         "bridge": true,
         "bridgeAxis": "x",
-        "bridgeCross": false
+        "bridgeCross": false,
+        "w": 7.6,
+        "d": 3.6
       },
       {
-        "id": "v103-1-21",
+        "id": "v103-1-28",
         "type": "lava",
         "cell": 264,
         "x": 16,
         "z": -16,
         "bridge": false,
         "bridgeAxis": "x",
-        "bridgeCross": false
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
       },
       {
-        "id": "v103-1-22",
-        "type": "lava",
-        "cell": 446,
-        "x": 72,
-        "z": 40,
-        "bridge": true,
-        "bridgeAxis": "z",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-1-23",
+        "id": "v103-1-29",
         "type": "lava",
         "cell": 428,
         "x": -72,
         "z": 40,
         "bridge": false,
         "bridgeAxis": "z",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-1-24",
-        "type": "lava",
-        "cell": 553,
-        "x": -72,
-        "z": 80,
-        "bridge": false,
-        "bridgeAxis": "z",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-1-25",
-        "type": "lava",
-        "cell": 369,
-        "x": 56,
-        "z": 16,
-        "bridge": true,
-        "bridgeAxis": "z",
-        "bridgeCross": true
-      },
-      {
-        "id": "v103-1-26",
-        "type": "lava",
-        "cell": 89,
-        "x": 16,
-        "z": -72,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-1-27",
-        "type": "lava",
-        "cell": 272,
-        "x": 80,
-        "z": -16,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-1-28",
-        "type": "lava",
-        "cell": 80,
-        "x": -56,
-        "z": -72,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-1-29",
-        "type": "lava",
-        "cell": 269,
-        "x": 56,
-        "z": -16,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
+        "bridgeCross": false,
+        "w": 3.6,
+        "d": 7.6
       },
       {
         "id": "v103-1-30",
         "type": "barrel",
-        "cell": 442,
-        "x": 40,
-        "z": 40,
+        "cell": 553,
+        "x": -72,
+        "z": 80,
         "barrelKind": "explosive"
       },
       {
         "id": "v103-1-31",
         "type": "barrel",
-        "cell": 309,
-        "x": -24,
-        "z": 0,
+        "cell": 369,
+        "x": 56,
+        "z": 16,
         "barrelKind": "xp"
       },
       {
         "id": "v103-1-32",
         "type": "barrel",
-        "cell": 471,
-        "x": 72,
-        "z": 48,
+        "cell": 89,
+        "x": 16,
+        "z": -72,
         "barrelKind": "gold"
       },
       {
         "id": "v103-1-33",
         "type": "barrel",
-        "cell": 88,
-        "x": 8,
-        "z": -72,
+        "cell": 272,
+        "x": 80,
+        "z": -16,
         "barrelKind": "gold"
       },
       {
         "id": "v103-1-34",
         "type": "barrel",
-        "cell": 103,
-        "x": -72,
-        "z": -64,
+        "cell": 80,
+        "x": -56,
+        "z": -72,
         "barrelKind": "explosive"
       },
       {
         "id": "v103-1-35",
         "type": "barrel",
-        "cell": 364,
-        "x": 16,
-        "z": 16,
+        "cell": 269,
+        "x": 56,
+        "z": -16,
         "barrelKind": "xp"
       },
       {
         "id": "v103-1-36",
+        "type": "barrel",
+        "cell": 442,
+        "x": 40,
+        "z": 40,
+        "barrelKind": "gold"
+      },
+      {
+        "id": "v103-1-37",
+        "type": "barrel",
+        "cell": 309,
+        "x": -24,
+        "z": 0,
+        "barrelKind": "gold"
+      },
+      {
+        "id": "v103-1-38",
+        "type": "barrel",
+        "cell": 88,
+        "x": 8,
+        "z": -72,
+        "barrelKind": "explosive"
+      },
+      {
+        "id": "v103-1-39",
+        "type": "barrel",
+        "cell": 103,
+        "x": -72,
+        "z": -64,
+        "barrelKind": "xp"
+      },
+      {
+        "id": "v103-1-40",
+        "type": "barrel",
+        "cell": 364,
+        "x": 16,
+        "z": 16,
+        "barrelKind": "gold"
+      },
+      {
+        "id": "v103-1-41",
         "type": "barrel",
         "cell": 276,
         "x": -88,
@@ -6371,31 +6711,23 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-1-37",
+        "id": "v103-1-42",
         "type": "barrel",
         "cell": 124,
         "x": 96,
         "z": -64,
-        "barrelKind": "gold"
+        "barrelKind": "explosive"
       },
       {
-        "id": "v103-1-38",
+        "id": "v103-1-43",
         "type": "barrel",
         "cell": 501,
         "x": -88,
         "z": 64,
-        "barrelKind": "explosive"
-      },
-      {
-        "id": "v103-1-39",
-        "type": "barrel",
-        "cell": 154,
-        "x": -64,
-        "z": -48,
         "barrelKind": "xp"
       },
       {
-        "id": "v103-1-40",
+        "id": "v103-1-44",
         "type": "barrel",
         "cell": 404,
         "x": -64,
@@ -6403,7 +6735,7 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-1-41",
+        "id": "v103-1-45",
         "type": "barrel",
         "cell": 539,
         "x": 16,
@@ -6411,7 +6743,7 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-1-42",
+        "id": "v103-1-46",
         "type": "barrel",
         "cell": 178,
         "x": -72,
@@ -6419,7 +6751,7 @@
         "barrelKind": "explosive"
       },
       {
-        "id": "v103-1-43",
+        "id": "v103-1-47",
         "type": "barrel",
         "cell": 413,
         "x": 8,
@@ -6427,7 +6759,7 @@
         "barrelKind": "xp"
       },
       {
-        "id": "v103-1-44",
+        "id": "v103-1-48",
         "type": "barrel",
         "cell": 434,
         "x": -24,
@@ -6435,7 +6767,7 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-1-45",
+        "id": "v103-1-49",
         "type": "barrel",
         "cell": 130,
         "x": -56,
@@ -6443,7 +6775,7 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-1-46",
+        "id": "v103-1-50",
         "type": "barrel",
         "cell": 437,
         "x": 0,
@@ -6451,7 +6783,7 @@
         "barrelKind": "explosive"
       },
       {
-        "id": "v103-1-47",
+        "id": "v103-1-51",
         "type": "barrel",
         "cell": 233,
         "x": -32,
@@ -6459,7 +6791,7 @@
         "barrelKind": "xp"
       },
       {
-        "id": "v103-1-48",
+        "id": "v103-1-52",
         "type": "barrel",
         "cell": 346,
         "x": 72,
@@ -6467,7 +6799,7 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-1-49",
+        "id": "v103-1-53",
         "type": "barrel",
         "cell": 354,
         "x": -64,
@@ -6475,39 +6807,43 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-1-50",
-        "type": "barrel",
+        "id": "v103-1-54",
+        "type": "enemy",
         "cell": 232,
         "x": -40,
         "z": -24,
-        "barrelKind": "explosive"
+        "species": 0,
+        "level": 41
       },
       {
-        "id": "v103-1-51",
-        "type": "barrel",
+        "id": "v103-1-55",
+        "type": "enemy",
         "cell": 353,
         "x": -72,
         "z": 16,
-        "barrelKind": "xp"
+        "species": 1,
+        "level": 42
       },
       {
-        "id": "v103-1-52",
-        "type": "barrel",
+        "id": "v103-1-56",
+        "type": "enemy",
         "cell": 372,
         "x": 80,
         "z": 16,
-        "barrelKind": "gold"
+        "species": 2,
+        "level": 41
       },
       {
-        "id": "v103-1-53",
-        "type": "barrel",
+        "id": "v103-1-57",
+        "type": "enemy",
         "cell": 479,
         "x": -64,
         "z": 56,
-        "barrelKind": "gold"
+        "species": 3,
+        "level": 42
       },
       {
-        "id": "v103-1-54",
+        "id": "v103-1-58",
         "type": "enemy",
         "cell": 260,
         "x": -16,
@@ -6516,7 +6852,7 @@
         "level": 41
       },
       {
-        "id": "v103-1-55",
+        "id": "v103-1-59",
         "type": "enemy",
         "cell": 98,
         "x": 88,
@@ -6525,7 +6861,7 @@
         "level": 42
       },
       {
-        "id": "v103-1-56",
+        "id": "v103-1-60",
         "type": "enemy",
         "cell": 274,
         "x": 96,
@@ -6534,7 +6870,7 @@
         "level": 41
       },
       {
-        "id": "v103-1-57",
+        "id": "v103-1-61",
         "type": "enemy",
         "cell": 486,
         "x": -8,
@@ -6543,7 +6879,7 @@
         "level": 42
       },
       {
-        "id": "v103-1-58",
+        "id": "v103-1-62",
         "type": "enemy",
         "cell": 46,
         "x": 72,
@@ -6552,7 +6888,7 @@
         "level": 41
       },
       {
-        "id": "v103-1-59",
+        "id": "v103-1-63",
         "type": "enemy",
         "cell": 254,
         "x": -64,
@@ -6561,7 +6897,7 @@
         "level": 42
       },
       {
-        "id": "v103-1-60",
+        "id": "v103-1-64",
         "type": "enemy",
         "cell": 485,
         "x": -16,
@@ -6570,7 +6906,7 @@
         "level": 41
       },
       {
-        "id": "v103-1-61",
+        "id": "v103-1-65",
         "type": "enemy",
         "cell": 433,
         "x": -32,
@@ -6579,166 +6915,314 @@
         "level": 42
       },
       {
-        "id": "v103-1-62",
-        "type": "enemy",
+        "id": "v103-1-66",
+        "type": "stalagmite",
         "cell": 76,
         "x": -88,
-        "z": -72,
-        "species": 0,
-        "level": 41
+        "z": -72
       },
       {
-        "id": "v103-1-63",
-        "type": "enemy",
+        "id": "v103-1-67",
+        "type": "crystal",
         "cell": 420,
         "x": 64,
-        "z": 32,
-        "species": 1,
-        "level": 42
+        "z": 32
       },
       {
-        "id": "v103-1-64",
-        "type": "enemy",
+        "id": "v103-1-68",
+        "type": "stalagmite",
         "cell": 252,
         "x": -80,
-        "z": -16,
-        "species": 2,
-        "level": 41
+        "z": -16
       },
       {
-        "id": "v103-1-65",
-        "type": "enemy",
+        "id": "v103-1-69",
+        "type": "crystal",
         "cell": 323,
         "x": 88,
-        "z": 0,
-        "species": 3,
-        "level": 42
+        "z": 0
       },
       {
-        "id": "v103-1-66",
+        "id": "v103-1-70",
         "type": "stalagmite",
         "cell": 498,
         "x": 88,
         "z": 56
       },
       {
-        "id": "v103-1-67",
+        "id": "v103-1-71",
         "type": "crystal",
         "cell": 263,
         "x": 8,
         "z": -16
       },
       {
-        "id": "v103-1-68",
+        "id": "v103-1-72",
         "type": "stalagmite",
         "cell": 205,
         "x": -56,
         "z": -32
       },
       {
-        "id": "v103-1-69",
+        "id": "v103-1-73",
         "type": "crystal",
         "cell": 495,
         "x": 64,
         "z": 56
       },
       {
-        "id": "v103-1-70",
+        "id": "v103-1-74",
         "type": "stalagmite",
         "cell": 453,
         "x": -72,
         "z": 48
       },
       {
-        "id": "v103-1-71",
+        "id": "v103-1-75",
         "type": "crystal",
         "cell": 521,
         "x": 72,
         "z": 64
       },
       {
-        "id": "v103-1-72",
+        "id": "v103-1-76",
         "type": "stalagmite",
         "cell": 203,
         "x": -72,
         "z": -32
       },
       {
-        "id": "v103-1-73",
+        "id": "v103-1-77",
         "type": "crystal",
         "cell": 529,
         "x": -64,
         "z": 72
       },
       {
-        "id": "v103-1-74",
+        "id": "v103-1-78",
         "type": "stalagmite",
         "cell": 249,
         "x": 96,
         "z": -24
       },
       {
-        "id": "v103-1-75",
+        "id": "v103-1-79",
         "type": "crystal",
         "cell": 206,
         "x": -48,
         "z": -32
       },
       {
-        "id": "v103-1-76",
+        "id": "v103-1-80",
         "type": "stalagmite",
         "cell": 540,
         "x": 24,
         "z": 72
       },
       {
-        "id": "v103-1-77",
+        "id": "v103-1-81",
         "type": "crystal",
         "cell": 482,
         "x": -40,
         "z": 56
       },
       {
-        "id": "v103-1-78",
+        "id": "v103-1-82",
         "type": "stalagmite",
         "cell": 128,
         "x": -72,
         "z": -56
       },
       {
-        "id": "v103-1-79",
+        "id": "v103-1-83",
         "type": "crystal",
         "cell": 288,
         "x": 8,
         "z": -8
       },
       {
-        "id": "v103-1-80",
-        "type": "stalagmite",
+        "id": "v104-1-enemy-0",
+        "type": "enemy",
         "cell": 273,
         "x": 88,
-        "z": -16
+        "z": -16,
+        "species": 5,
+        "level": 41
       },
       {
-        "id": "v103-1-81",
-        "type": "crystal",
+        "id": "v104-1-enemy-1",
+        "type": "enemy",
         "cell": 390,
         "x": 24,
-        "z": 24
+        "z": 24,
+        "species": 6,
+        "level": 42
       },
       {
-        "id": "v103-1-82",
-        "type": "stalagmite",
+        "id": "v104-1-enemy-2",
+        "type": "enemy",
         "cell": 129,
         "x": -64,
-        "z": -56
+        "z": -56,
+        "species": 0,
+        "level": 41
       },
       {
-        "id": "v103-1-83",
-        "type": "crystal",
+        "id": "v104-1-enemy-3",
+        "type": "enemy",
         "cell": 85,
         "x": -16,
-        "z": -72
+        "z": -72,
+        "species": 1,
+        "level": 42
+      },
+      {
+        "id": "v104-1-enemy-4",
+        "type": "enemy",
+        "cell": 199,
+        "x": 96,
+        "z": -40,
+        "species": 2,
+        "level": 41
+      },
+      {
+        "id": "v104-1-enemy-5",
+        "type": "enemy",
+        "cell": 384,
+        "x": -24,
+        "z": 24,
+        "species": 3,
+        "level": 42
+      },
+      {
+        "id": "v104-1-enemy-6",
+        "type": "enemy",
+        "cell": 333,
+        "x": -32,
+        "z": 8,
+        "species": 5,
+        "level": 41
+      },
+      {
+        "id": "v104-1-enemy-7",
+        "type": "enemy",
+        "cell": 122,
+        "x": 80,
+        "z": -64,
+        "species": 6,
+        "level": 42
+      },
+      {
+        "id": "v104-1-enemy-8",
+        "type": "enemy",
+        "cell": 215,
+        "x": 24,
+        "z": -32,
+        "species": 0,
+        "level": 41
+      },
+      {
+        "id": "v104-1-enemy-9",
+        "type": "enemy",
+        "cell": 237,
+        "x": 0,
+        "z": -24,
+        "species": 1,
+        "level": 42
+      },
+      {
+        "id": "v104-1-enemy-10",
+        "type": "enemy",
+        "cell": 262,
+        "x": 0,
+        "z": -16,
+        "species": 2,
+        "level": 41
+      },
+      {
+        "id": "v104-1-enemy-11",
+        "type": "enemy",
+        "cell": 547,
+        "x": 80,
+        "z": 72,
+        "species": 3,
+        "level": 42
+      },
+      {
+        "id": "v104-1-lava-0",
+        "type": "lava",
+        "cell": 595,
+        "x": 64,
+        "z": 88,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-1-lava-1",
+        "type": "lava",
+        "cell": 504,
+        "x": -64,
+        "z": 64,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-1-lava-2",
+        "type": "lava",
+        "cell": 526,
+        "x": -88,
+        "z": 72,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-1-lava-3",
+        "type": "lava",
+        "cell": 564,
+        "x": 16,
+        "z": 80,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-1-fall-0",
+        "type": "lavafall",
+        "cell": 535,
+        "x": -16,
+        "z": 72,
+        "phase": 1.7822086159139872,
+        "radius": 1.45
+      },
+      {
+        "id": "v104-1-fall-1",
+        "type": "lavafall",
+        "cell": 184,
+        "x": -24,
+        "z": -40,
+        "phase": 2.448880039388314,
+        "radius": 1.45
+      },
+      {
+        "id": "v104-1-fall-2",
+        "type": "lavafall",
+        "cell": 79,
+        "x": -64,
+        "z": -72,
+        "phase": 4.700038643088192,
+        "radius": 1.45
+      },
+      {
+        "id": "v104-1-wall",
+        "type": "breakwall",
+        "cell": 174,
+        "x": 96,
+        "z": -48,
+        "w": 3.6,
+        "d": 0.7
       }
     ],
     "corridors": [
@@ -9927,74 +10411,98 @@
       {
         "id": "v103-2-10",
         "type": "spikes",
-        "cell": 46,
+        "cell": 196,
         "x": 72,
-        "z": -88,
-        "phase": 1.8553735460154712
+        "z": -40,
+        "phase": 1.8553735460154712,
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
       },
       {
         "id": "v103-2-11",
+        "type": "spikes",
+        "cell": 171,
+        "x": 72,
+        "z": -48,
+        "phase": 3.0680892392992973,
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
+      },
+      {
+        "id": "v103-2-12",
+        "type": "spikes",
+        "cell": 245,
+        "x": 64,
+        "z": -24,
+        "phase": 0.6574524999596179,
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
+      },
+      {
+        "id": "v103-2-13",
+        "type": "spikes",
+        "cell": 454,
+        "x": -64,
+        "z": 48,
+        "phase": 1.5389031199738383,
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
+      },
+      {
+        "id": "v103-2-14",
+        "type": "spikes",
+        "cell": 91,
+        "x": 32,
+        "z": -72,
+        "phase": 0.13218229031190276,
+        "band": true,
+        "w": 1.8,
+        "d": 3.6
+      },
+      {
+        "id": "v103-2-15",
         "type": "arrows",
         "cell": 162,
         "x": 0,
         "z": -48,
-        "phase": 3.0680892392992973,
+        "phase": 2.1431892570108175,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
         "axis": [
           1,
           0
         ]
       },
       {
-        "id": "v103-2-12",
-        "type": "gas",
-        "cell": 103,
-        "x": -72,
-        "z": -64,
-        "phase": 0.6574524999596179
-      },
-      {
-        "id": "v103-2-13",
-        "type": "spikes",
-        "cell": 110,
-        "x": -16,
-        "z": -64,
-        "phase": 1.5389031199738383
-      },
-      {
-        "id": "v103-2-14",
+        "id": "v103-2-16",
         "type": "arrows",
         "cell": 92,
         "x": 40,
         "z": -72,
-        "phase": 0.13218229031190276,
+        "phase": 3.5144337681122124,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
         "axis": [
           -1,
           0
         ]
       },
       {
-        "id": "v103-2-15",
-        "type": "gas",
-        "cell": 340,
-        "x": 24,
-        "z": 8,
-        "phase": 2.1431892570108175
-      },
-      {
-        "id": "v103-2-16",
-        "type": "spikes",
-        "cell": 97,
-        "x": 80,
-        "z": -72,
-        "phase": 3.5144337681122124
-      },
-      {
         "id": "v103-2-17",
         "type": "arrows",
-        "cell": 91,
-        "x": 32,
-        "z": -72,
+        "cell": 109,
+        "x": -24,
+        "z": -64,
         "phase": 2.284274817444384,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
         "axis": [
           0,
           1
@@ -10002,146 +10510,236 @@
       },
       {
         "id": "v103-2-18",
-        "type": "gas",
-        "cell": 597,
-        "x": 80,
-        "z": 88,
-        "phase": 3.956914450507611
+        "type": "arrows",
+        "cell": 534,
+        "x": -24,
+        "z": 72,
+        "phase": 3.956914450507611,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
+        "axis": [
+          0,
+          1
+        ]
       },
       {
         "id": "v103-2-19",
-        "type": "spikes",
-        "cell": 520,
+        "type": "arrows",
+        "cell": 220,
         "x": 64,
-        "z": 64,
-        "phase": 4.442139018326998
+        "z": -32,
+        "phase": 4.442139018326998,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
+        "axis": [
+          1,
+          0
+        ]
       },
       {
         "id": "v103-2-20",
+        "type": "lava",
+        "cell": 46,
+        "x": 72,
+        "z": -88,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-2-21",
+        "type": "lava",
+        "cell": 103,
+        "x": -72,
+        "z": -64,
+        "bridge": false,
+        "bridgeAxis": "z",
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-2-22",
+        "type": "lava",
+        "cell": 110,
+        "x": -16,
+        "z": -64,
+        "bridge": true,
+        "bridgeAxis": "z",
+        "bridgeCross": true,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-2-23",
+        "type": "lava",
+        "cell": 340,
+        "x": 24,
+        "z": 8,
+        "bridge": true,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 7.6,
+        "d": 3.6
+      },
+      {
+        "id": "v103-2-24",
+        "type": "lava",
+        "cell": 97,
+        "x": 80,
+        "z": -72,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-2-25",
+        "type": "lava",
+        "cell": 597,
+        "x": 80,
+        "z": 88,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-2-26",
+        "type": "lava",
+        "cell": 520,
+        "x": 64,
+        "z": 64,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-2-27",
         "type": "lava",
         "cell": 288,
         "x": 8,
         "z": -8,
         "bridge": false,
         "bridgeAxis": "x",
-        "bridgeCross": false
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
       },
       {
-        "id": "v103-2-21",
+        "id": "v103-2-28",
         "type": "lava",
         "cell": 287,
         "x": 0,
         "z": -8,
         "bridge": false,
         "bridgeAxis": "x",
-        "bridgeCross": false
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
       },
       {
-        "id": "v103-2-22",
+        "id": "v103-2-29",
         "type": "lava",
         "cell": 215,
         "x": 24,
         "z": -32,
         "bridge": false,
         "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-2-23",
-        "type": "lava",
-        "cell": 354,
-        "x": -64,
-        "z": 16,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-2-24",
-        "type": "lava",
-        "cell": 532,
-        "x": -40,
-        "z": 72,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-2-25",
-        "type": "lava",
-        "cell": 449,
-        "x": 96,
-        "z": 40,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-2-26",
-        "type": "lava",
-        "cell": 213,
-        "x": 8,
-        "z": -32,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-2-27",
-        "type": "lava",
-        "cell": 27,
-        "x": -80,
-        "z": -88,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-2-28",
-        "type": "lava",
-        "cell": 88,
-        "x": 8,
-        "z": -72,
-        "bridge": true,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-2-29",
-        "type": "lava",
-        "cell": 358,
-        "x": -32,
-        "z": 16,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
       },
       {
         "id": "v103-2-30",
         "type": "barrel",
-        "cell": 313,
-        "x": 8,
-        "z": 0,
+        "cell": 354,
+        "x": -64,
+        "z": 16,
         "barrelKind": "explosive"
       },
       {
         "id": "v103-2-31",
         "type": "barrel",
-        "cell": 81,
-        "x": -48,
-        "z": -72,
+        "cell": 532,
+        "x": -40,
+        "z": 72,
         "barrelKind": "xp"
       },
       {
         "id": "v103-2-32",
         "type": "barrel",
-        "cell": 428,
-        "x": -72,
+        "cell": 449,
+        "x": 96,
         "z": 40,
         "barrelKind": "gold"
       },
       {
         "id": "v103-2-33",
+        "type": "barrel",
+        "cell": 213,
+        "x": 8,
+        "z": -32,
+        "barrelKind": "gold"
+      },
+      {
+        "id": "v103-2-34",
+        "type": "barrel",
+        "cell": 27,
+        "x": -80,
+        "z": -88,
+        "barrelKind": "explosive"
+      },
+      {
+        "id": "v103-2-35",
+        "type": "barrel",
+        "cell": 88,
+        "x": 8,
+        "z": -72,
+        "barrelKind": "xp"
+      },
+      {
+        "id": "v103-2-36",
+        "type": "barrel",
+        "cell": 358,
+        "x": -32,
+        "z": 16,
+        "barrelKind": "gold"
+      },
+      {
+        "id": "v103-2-37",
+        "type": "barrel",
+        "cell": 313,
+        "x": 8,
+        "z": 0,
+        "barrelKind": "gold"
+      },
+      {
+        "id": "v103-2-38",
+        "type": "barrel",
+        "cell": 81,
+        "x": -48,
+        "z": -72,
+        "barrelKind": "explosive"
+      },
+      {
+        "id": "v103-2-39",
+        "type": "barrel",
+        "cell": 428,
+        "x": -72,
+        "z": 40,
+        "barrelKind": "xp"
+      },
+      {
+        "id": "v103-2-40",
         "type": "barrel",
         "cell": 596,
         "x": 72,
@@ -10149,31 +10747,31 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-2-34",
+        "id": "v103-2-41",
         "type": "barrel",
         "cell": 28,
         "x": -72,
         "z": -88,
-        "barrelKind": "explosive"
+        "barrelKind": "gold"
       },
       {
-        "id": "v103-2-35",
+        "id": "v103-2-42",
         "type": "barrel",
         "cell": 120,
         "x": 64,
         "z": -64,
-        "barrelKind": "xp"
+        "barrelKind": "explosive"
       },
       {
-        "id": "v103-2-36",
+        "id": "v103-2-43",
         "type": "barrel",
         "cell": 30,
         "x": -56,
         "z": -88,
-        "barrelKind": "gold"
+        "barrelKind": "xp"
       },
       {
-        "id": "v103-2-37",
+        "id": "v103-2-44",
         "type": "barrel",
         "cell": 294,
         "x": 56,
@@ -10181,31 +10779,31 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-2-38",
+        "id": "v103-2-45",
         "type": "barrel",
         "cell": 102,
         "x": -80,
         "z": -64,
-        "barrelKind": "explosive"
+        "barrelKind": "gold"
       },
       {
-        "id": "v103-2-39",
+        "id": "v103-2-46",
         "type": "barrel",
         "cell": 318,
         "x": 48,
         "z": 0,
-        "barrelKind": "xp"
+        "barrelKind": "explosive"
       },
       {
-        "id": "v103-2-40",
+        "id": "v103-2-47",
         "type": "barrel",
         "cell": 424,
         "x": 96,
         "z": 32,
-        "barrelKind": "gold"
+        "barrelKind": "xp"
       },
       {
-        "id": "v103-2-41",
+        "id": "v103-2-48",
         "type": "barrel",
         "cell": 527,
         "x": -80,
@@ -10213,31 +10811,31 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-2-42",
+        "id": "v103-2-49",
         "type": "barrel",
         "cell": 261,
         "x": -8,
         "z": -16,
-        "barrelKind": "explosive"
+        "barrelKind": "gold"
       },
       {
-        "id": "v103-2-43",
+        "id": "v103-2-50",
         "type": "barrel",
         "cell": 578,
         "x": -72,
         "z": 88,
-        "barrelKind": "xp"
+        "barrelKind": "explosive"
       },
       {
-        "id": "v103-2-44",
+        "id": "v103-2-51",
         "type": "barrel",
         "cell": 98,
         "x": 88,
         "z": -72,
-        "barrelKind": "gold"
+        "barrelKind": "xp"
       },
       {
-        "id": "v103-2-45",
+        "id": "v103-2-52",
         "type": "barrel",
         "cell": 203,
         "x": -72,
@@ -10245,302 +10843,430 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-2-46",
+        "id": "v103-2-53",
         "type": "barrel",
         "cell": 570,
         "x": 64,
         "z": 80,
-        "barrelKind": "explosive"
-      },
-      {
-        "id": "v103-2-47",
-        "type": "barrel",
-        "cell": 502,
-        "x": -80,
-        "z": 64,
-        "barrelKind": "xp"
-      },
-      {
-        "id": "v103-2-48",
-        "type": "barrel",
-        "cell": 370,
-        "x": 64,
-        "z": 16,
-        "barrelKind": "gold"
-      },
-      {
-        "id": "v103-2-49",
-        "type": "barrel",
-        "cell": 121,
-        "x": 72,
-        "z": -64,
-        "barrelKind": "gold"
-      },
-      {
-        "id": "v103-2-50",
-        "type": "barrel",
-        "cell": 547,
-        "x": 80,
-        "z": 72,
-        "barrelKind": "explosive"
-      },
-      {
-        "id": "v103-2-51",
-        "type": "barrel",
-        "cell": 83,
-        "x": -32,
-        "z": -72,
-        "barrelKind": "xp"
-      },
-      {
-        "id": "v103-2-52",
-        "type": "barrel",
-        "cell": 504,
-        "x": -64,
-        "z": 64,
-        "barrelKind": "gold"
-      },
-      {
-        "id": "v103-2-53",
-        "type": "barrel",
-        "cell": 322,
-        "x": 80,
-        "z": 0,
         "barrelKind": "gold"
       },
       {
         "id": "v103-2-54",
         "type": "enemy",
-        "cell": 548,
-        "x": 88,
-        "z": 72,
+        "cell": 502,
+        "x": -80,
+        "z": 64,
         "species": 0,
         "level": 42
       },
       {
         "id": "v103-2-55",
         "type": "enemy",
-        "cell": 271,
-        "x": 72,
-        "z": -16,
+        "cell": 370,
+        "x": 64,
+        "z": 16,
         "species": 1,
         "level": 43
       },
       {
         "id": "v103-2-56",
         "type": "enemy",
-        "cell": 533,
-        "x": -32,
-        "z": 72,
+        "cell": 121,
+        "x": 72,
+        "z": -64,
         "species": 2,
         "level": 42
       },
       {
         "id": "v103-2-57",
         "type": "enemy",
-        "cell": 501,
-        "x": -88,
-        "z": 64,
+        "cell": 547,
+        "x": 80,
+        "z": 72,
         "species": 3,
         "level": 43
       },
       {
         "id": "v103-2-58",
         "type": "enemy",
-        "cell": 412,
-        "x": 0,
-        "z": 32,
+        "cell": 83,
+        "x": -32,
+        "z": -72,
         "species": 0,
         "level": 42
       },
       {
         "id": "v103-2-59",
         "type": "enemy",
-        "cell": 454,
+        "cell": 504,
         "x": -64,
-        "z": 48,
+        "z": 64,
         "species": 1,
         "level": 43
       },
       {
         "id": "v103-2-60",
         "type": "enemy",
-        "cell": 153,
-        "x": -72,
-        "z": -48,
+        "cell": 322,
+        "x": 80,
+        "z": 0,
         "species": 2,
         "level": 42
       },
       {
         "id": "v103-2-61",
         "type": "enemy",
-        "cell": 522,
-        "x": 80,
-        "z": 64,
+        "cell": 548,
+        "x": 88,
+        "z": 72,
         "species": 3,
         "level": 43
       },
       {
         "id": "v103-2-62",
         "type": "enemy",
-        "cell": 311,
-        "x": -8,
-        "z": 0,
+        "cell": 271,
+        "x": 72,
+        "z": -16,
         "species": 0,
         "level": 42
       },
       {
         "id": "v103-2-63",
         "type": "enemy",
-        "cell": 240,
-        "x": 24,
-        "z": -24,
+        "cell": 533,
+        "x": -32,
+        "z": 72,
         "species": 1,
         "level": 43
       },
       {
         "id": "v103-2-64",
         "type": "enemy",
-        "cell": 378,
-        "x": -72,
-        "z": 24,
+        "cell": 501,
+        "x": -88,
+        "z": 64,
         "species": 2,
         "level": 42
       },
       {
         "id": "v103-2-65",
         "type": "enemy",
-        "cell": 297,
-        "x": 80,
-        "z": -8,
+        "cell": 412,
+        "x": 0,
+        "z": 32,
         "species": 3,
         "level": 43
       },
       {
         "id": "v103-2-66",
         "type": "stalagmite",
+        "cell": 153,
+        "x": -72,
+        "z": -48
+      },
+      {
+        "id": "v103-2-67",
+        "type": "crystal",
+        "cell": 522,
+        "x": 80,
+        "z": 64
+      },
+      {
+        "id": "v103-2-68",
+        "type": "stalagmite",
+        "cell": 311,
+        "x": -8,
+        "z": 0
+      },
+      {
+        "id": "v103-2-69",
+        "type": "crystal",
+        "cell": 240,
+        "x": 24,
+        "z": -24
+      },
+      {
+        "id": "v103-2-70",
+        "type": "stalagmite",
+        "cell": 378,
+        "x": -72,
+        "z": 24
+      },
+      {
+        "id": "v103-2-71",
+        "type": "crystal",
+        "cell": 297,
+        "x": 80,
+        "z": -8
+      },
+      {
+        "id": "v103-2-72",
+        "type": "stalagmite",
         "cell": 72,
         "x": 80,
         "z": -80
       },
       {
-        "id": "v103-2-67",
+        "id": "v103-2-73",
         "type": "crystal",
         "cell": 45,
         "x": 64,
         "z": -88
       },
       {
-        "id": "v103-2-68",
+        "id": "v103-2-74",
         "type": "stalagmite",
         "cell": 308,
         "x": -32,
         "z": 0
       },
       {
-        "id": "v103-2-69",
+        "id": "v103-2-75",
         "type": "crystal",
         "cell": 360,
         "x": -16,
         "z": 16
       },
       {
-        "id": "v103-2-70",
+        "id": "v103-2-76",
         "type": "stalagmite",
         "cell": 406,
         "x": -48,
         "z": 32
       },
       {
-        "id": "v103-2-71",
+        "id": "v103-2-77",
         "type": "crystal",
         "cell": 545,
         "x": 64,
         "z": 72
       },
       {
-        "id": "v103-2-72",
+        "id": "v103-2-78",
         "type": "stalagmite",
         "cell": 524,
         "x": 96,
         "z": 64
       },
       {
-        "id": "v103-2-73",
+        "id": "v103-2-79",
         "type": "crystal",
         "cell": 319,
         "x": 56,
         "z": 0
       },
       {
-        "id": "v103-2-74",
+        "id": "v103-2-80",
         "type": "stalagmite",
         "cell": 414,
         "x": 16,
         "z": 32
       },
       {
-        "id": "v103-2-75",
+        "id": "v103-2-81",
         "type": "crystal",
         "cell": 495,
         "x": 64,
         "z": 56
       },
       {
-        "id": "v103-2-76",
+        "id": "v103-2-82",
         "type": "stalagmite",
         "cell": 441,
         "x": 32,
         "z": 40
       },
       {
-        "id": "v103-2-77",
+        "id": "v103-2-83",
         "type": "crystal",
         "cell": 178,
         "x": -72,
         "z": -40
       },
       {
-        "id": "v103-2-78",
-        "type": "stalagmite",
+        "id": "v104-2-enemy-0",
+        "type": "enemy",
         "cell": 409,
         "x": -24,
-        "z": 32
+        "z": 32,
+        "species": 5,
+        "level": 42
       },
       {
-        "id": "v103-2-79",
-        "type": "crystal",
+        "id": "v104-2-enemy-1",
+        "type": "enemy",
         "cell": 55,
         "x": -56,
-        "z": -80
+        "z": -80,
+        "species": 6,
+        "level": 43
       },
       {
-        "id": "v103-2-80",
-        "type": "stalagmite",
+        "id": "v104-2-enemy-2",
+        "type": "enemy",
         "cell": 54,
         "x": -64,
-        "z": -80
+        "z": -80,
+        "species": 0,
+        "level": 42
       },
       {
-        "id": "v103-2-81",
-        "type": "crystal",
+        "id": "v104-2-enemy-3",
+        "type": "enemy",
         "cell": 384,
         "x": -24,
-        "z": 24
+        "z": 24,
+        "species": 1,
+        "level": 43
       },
       {
-        "id": "v103-2-82",
-        "type": "stalagmite",
+        "id": "v104-2-enemy-4",
+        "type": "enemy",
         "cell": 531,
         "x": -48,
-        "z": 72
+        "z": 72,
+        "species": 2,
+        "level": 42
       },
       {
-        "id": "v103-2-83",
-        "type": "crystal",
+        "id": "v104-2-enemy-5",
+        "type": "enemy",
         "cell": 51,
         "x": -88,
-        "z": -80
+        "z": -80,
+        "species": 3,
+        "level": 43
+      },
+      {
+        "id": "v104-2-enemy-6",
+        "type": "enemy",
+        "cell": 129,
+        "x": -64,
+        "z": -56,
+        "species": 5,
+        "level": 42
+      },
+      {
+        "id": "v104-2-enemy-7",
+        "type": "enemy",
+        "cell": 510,
+        "x": -16,
+        "z": 64,
+        "species": 6,
+        "level": 43
+      },
+      {
+        "id": "v104-2-enemy-8",
+        "type": "enemy",
+        "cell": 282,
+        "x": -40,
+        "z": -8,
+        "species": 0,
+        "level": 42
+      },
+      {
+        "id": "v104-2-enemy-9",
+        "type": "enemy",
+        "cell": 82,
+        "x": -40,
+        "z": -72,
+        "species": 1,
+        "level": 43
+      },
+      {
+        "id": "v104-2-enemy-10",
+        "type": "enemy",
+        "cell": 252,
+        "x": -80,
+        "z": -16,
+        "species": 2,
+        "level": 42
+      },
+      {
+        "id": "v104-2-enemy-11",
+        "type": "enemy",
+        "cell": 503,
+        "x": -72,
+        "z": 64,
+        "species": 3,
+        "level": 43
+      },
+      {
+        "id": "v104-2-lava-0",
+        "type": "lava",
+        "cell": 105,
+        "x": -56,
+        "z": -64,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-2-lava-1",
+        "type": "lava",
+        "cell": 361,
+        "x": -8,
+        "z": 16,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-2-lava-2",
+        "type": "lava",
+        "cell": 363,
+        "x": 8,
+        "z": 16,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-2-lava-3",
+        "type": "lava",
+        "cell": 298,
+        "x": 88,
+        "z": -8,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-2-fall-0",
+        "type": "lavafall",
+        "cell": 94,
+        "x": 56,
+        "z": -72,
+        "phase": 1.0102033468429,
+        "radius": 1.45
+      },
+      {
+        "id": "v104-2-fall-1",
+        "type": "lavafall",
+        "cell": 29,
+        "x": -64,
+        "z": -88,
+        "phase": 5.378379487898201,
+        "radius": 1.45
+      },
+      {
+        "id": "v104-2-fall-2",
+        "type": "lavafall",
+        "cell": 512,
+        "x": 0,
+        "z": 64,
+        "phase": 1.7695695625152439,
+        "radius": 1.45
+      },
+      {
+        "id": "v104-2-wall",
+        "type": "breakwall",
+        "cell": 374,
+        "x": 96,
+        "z": 16,
+        "w": 3.6,
+        "d": 0.7
       }
     ],
     "corridors": [
@@ -13731,90 +14457,128 @@
       {
         "id": "v103-3-10",
         "type": "spikes",
-        "cell": 384,
-        "x": -24,
-        "z": 24,
-        "phase": 0.516069570556283
+        "cell": 471,
+        "x": 72,
+        "z": 48,
+        "phase": 0.516069570556283,
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
       },
       {
         "id": "v103-3-11",
+        "type": "spikes",
+        "cell": 446,
+        "x": 72,
+        "z": 40,
+        "phase": 4.1183380340225995,
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
+      },
+      {
+        "id": "v103-3-12",
+        "type": "spikes",
+        "cell": 154,
+        "x": -64,
+        "z": -48,
+        "phase": 0.032489304430782795,
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
+      },
+      {
+        "id": "v103-3-13",
+        "type": "darkness",
+        "cell": 395,
+        "x": 64,
+        "z": 24,
+        "phase": 2.6758654857985675,
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
+      },
+      {
+        "id": "v103-3-14",
+        "type": "darkness",
+        "cell": 290,
+        "x": 24,
+        "z": -8,
+        "phase": 0.4141566976904869,
+        "band": true,
+        "w": 1.8,
+        "d": 3.6
+      },
+      {
+        "id": "v103-3-15",
         "type": "arrows",
         "cell": 179,
         "x": -64,
         "z": -40,
-        "phase": 4.1183380340225995,
+        "phase": 5.59363109478727,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
         "axis": [
           -1,
           0
         ]
       },
       {
-        "id": "v103-3-12",
-        "type": "gas",
-        "cell": 562,
-        "x": 0,
-        "z": 80,
-        "phase": 0.032489304430782795
-      },
-      {
-        "id": "v103-3-13",
-        "type": "darkness",
-        "cell": 214,
-        "x": 16,
-        "z": -32,
-        "phase": 2.6758654857985675
-      },
-      {
-        "id": "v103-3-14",
-        "type": "spikes",
-        "cell": 533,
-        "x": -32,
-        "z": 72,
-        "phase": 0.4141566976904869
-      },
-      {
-        "id": "v103-3-15",
+        "id": "v103-3-16",
         "type": "arrows",
         "cell": 83,
         "x": -32,
         "z": -72,
-        "phase": 5.59363109478727,
+        "phase": 0.21445861738175154,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
         "axis": [
           0,
           1
         ]
       },
       {
-        "id": "v103-3-16",
-        "type": "gas",
-        "cell": 287,
-        "x": 0,
-        "z": -8,
-        "phase": 0.21445861738175154
-      },
-      {
         "id": "v103-3-17",
-        "type": "darkness",
-        "cell": 541,
-        "x": 32,
-        "z": 72,
-        "phase": 3.146505197044462
-      },
-      {
-        "id": "v103-3-18",
-        "type": "spikes",
-        "cell": 294,
-        "x": 56,
-        "z": -8,
-        "phase": 1.9795182701200247
-      },
-      {
-        "id": "v103-3-19",
         "type": "arrows",
         "cell": 420,
         "x": 64,
         "z": 32,
+        "phase": 3.146505197044462,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
+        "axis": [
+          1,
+          0
+        ]
+      },
+      {
+        "id": "v103-3-18",
+        "type": "arrows",
+        "cell": 178,
+        "x": -72,
+        "z": -40,
+        "phase": 1.9795182701200247,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
+        "axis": [
+          1,
+          0
+        ]
+      },
+      {
+        "id": "v103-3-19",
+        "type": "arrows",
+        "cell": 274,
+        "x": 96,
+        "z": -16,
         "phase": 5.064979371149093,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
         "axis": [
           1,
           0
@@ -13823,129 +14587,205 @@
       {
         "id": "v103-3-20",
         "type": "lava",
+        "cell": 384,
+        "x": -24,
+        "z": 24,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-3-21",
+        "type": "lava",
+        "cell": 562,
+        "x": 0,
+        "z": 80,
+        "bridge": true,
+        "bridgeAxis": "z",
+        "bridgeCross": true,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-3-22",
+        "type": "lava",
+        "cell": 214,
+        "x": 16,
+        "z": -32,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 7.6,
+        "d": 3.6
+      },
+      {
+        "id": "v103-3-23",
+        "type": "lava",
+        "cell": 533,
+        "x": -32,
+        "z": 72,
+        "bridge": true,
+        "bridgeAxis": "z",
+        "bridgeCross": true,
+        "w": 7.6,
+        "d": 3.6
+      },
+      {
+        "id": "v103-3-24",
+        "type": "lava",
+        "cell": 287,
+        "x": 0,
+        "z": -8,
+        "bridge": true,
+        "bridgeAxis": "z",
+        "bridgeCross": true,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-3-25",
+        "type": "lava",
+        "cell": 541,
+        "x": 32,
+        "z": 72,
+        "bridge": true,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 7.6,
+        "d": 3.6
+      },
+      {
+        "id": "v103-3-26",
+        "type": "lava",
+        "cell": 294,
+        "x": 56,
+        "z": -8,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-3-27",
+        "type": "lava",
         "cell": 257,
         "x": -40,
         "z": -16,
         "bridge": false,
         "bridgeAxis": "x",
-        "bridgeCross": false
+        "bridgeCross": false,
+        "w": 7.6,
+        "d": 3.6
       },
       {
-        "id": "v103-3-21",
+        "id": "v103-3-28",
         "type": "lava",
         "cell": 360,
         "x": -16,
         "z": 16,
         "bridge": false,
         "bridgeAxis": "x",
-        "bridgeCross": false
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
       },
       {
-        "id": "v103-3-22",
+        "id": "v103-3-29",
         "type": "lava",
         "cell": 263,
         "x": 8,
         "z": -16,
         "bridge": false,
         "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-3-23",
-        "type": "lava",
-        "cell": 526,
-        "x": -88,
-        "z": 72,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-3-24",
-        "type": "lava",
-        "cell": 204,
-        "x": -64,
-        "z": -32,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-3-25",
-        "type": "lava",
-        "cell": 348,
-        "x": 88,
-        "z": 8,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-3-26",
-        "type": "lava",
-        "cell": 539,
-        "x": 16,
-        "z": 72,
-        "bridge": true,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-3-27",
-        "type": "lava",
-        "cell": 113,
-        "x": 8,
-        "z": -64,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-3-28",
-        "type": "lava",
-        "cell": 88,
-        "x": 8,
-        "z": -72,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-3-29",
-        "type": "lava",
-        "cell": 85,
-        "x": -16,
-        "z": -72,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
       },
       {
         "id": "v103-3-30",
         "type": "barrel",
-        "cell": 513,
-        "x": 8,
-        "z": 64,
+        "cell": 526,
+        "x": -88,
+        "z": 72,
         "barrelKind": "explosive"
       },
       {
         "id": "v103-3-31",
         "type": "barrel",
-        "cell": 62,
-        "x": 0,
-        "z": -80,
+        "cell": 204,
+        "x": -64,
+        "z": -32,
         "barrelKind": "xp"
       },
       {
         "id": "v103-3-32",
         "type": "barrel",
-        "cell": 490,
-        "x": 24,
-        "z": 56,
+        "cell": 348,
+        "x": 88,
+        "z": 8,
         "barrelKind": "gold"
       },
       {
         "id": "v103-3-33",
+        "type": "barrel",
+        "cell": 539,
+        "x": 16,
+        "z": 72,
+        "barrelKind": "gold"
+      },
+      {
+        "id": "v103-3-34",
+        "type": "barrel",
+        "cell": 113,
+        "x": 8,
+        "z": -64,
+        "barrelKind": "explosive"
+      },
+      {
+        "id": "v103-3-35",
+        "type": "barrel",
+        "cell": 88,
+        "x": 8,
+        "z": -72,
+        "barrelKind": "xp"
+      },
+      {
+        "id": "v103-3-36",
+        "type": "barrel",
+        "cell": 85,
+        "x": -16,
+        "z": -72,
+        "barrelKind": "gold"
+      },
+      {
+        "id": "v103-3-37",
+        "type": "barrel",
+        "cell": 513,
+        "x": 8,
+        "z": 64,
+        "barrelKind": "gold"
+      },
+      {
+        "id": "v103-3-38",
+        "type": "barrel",
+        "cell": 62,
+        "x": 0,
+        "z": -80,
+        "barrelKind": "explosive"
+      },
+      {
+        "id": "v103-3-39",
+        "type": "barrel",
+        "cell": 490,
+        "x": 24,
+        "z": 56,
+        "barrelKind": "xp"
+      },
+      {
+        "id": "v103-3-40",
         "type": "barrel",
         "cell": 199,
         "x": 96,
@@ -13953,31 +14793,31 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-3-34",
+        "id": "v103-3-41",
         "type": "barrel",
         "cell": 129,
         "x": -64,
         "z": -56,
-        "barrelKind": "explosive"
+        "barrelKind": "gold"
       },
       {
-        "id": "v103-3-35",
+        "id": "v103-3-42",
         "type": "barrel",
         "cell": 84,
         "x": -24,
         "z": -72,
-        "barrelKind": "xp"
+        "barrelKind": "explosive"
       },
       {
-        "id": "v103-3-36",
+        "id": "v103-3-43",
         "type": "barrel",
         "cell": 242,
         "x": 40,
         "z": -24,
-        "barrelKind": "gold"
+        "barrelKind": "xp"
       },
       {
-        "id": "v103-3-37",
+        "id": "v103-3-44",
         "type": "barrel",
         "cell": 369,
         "x": 56,
@@ -13985,31 +14825,31 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-3-38",
+        "id": "v103-3-45",
         "type": "barrel",
         "cell": 501,
         "x": -88,
         "z": 64,
-        "barrelKind": "explosive"
+        "barrelKind": "gold"
       },
       {
-        "id": "v103-3-39",
+        "id": "v103-3-46",
         "type": "barrel",
         "cell": 532,
         "x": -40,
         "z": 72,
-        "barrelKind": "xp"
+        "barrelKind": "explosive"
       },
       {
-        "id": "v103-3-40",
+        "id": "v103-3-47",
         "type": "barrel",
         "cell": 382,
         "x": -40,
         "z": 24,
-        "barrelKind": "gold"
+        "barrelKind": "xp"
       },
       {
-        "id": "v103-3-41",
+        "id": "v103-3-48",
         "type": "barrel",
         "cell": 291,
         "x": 32,
@@ -14017,31 +14857,31 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-3-42",
+        "id": "v103-3-49",
         "type": "barrel",
         "cell": 81,
         "x": -48,
         "z": -72,
-        "barrelKind": "explosive"
+        "barrelKind": "gold"
       },
       {
-        "id": "v103-3-43",
+        "id": "v103-3-50",
         "type": "barrel",
         "cell": 587,
         "x": 0,
         "z": 88,
-        "barrelKind": "xp"
+        "barrelKind": "explosive"
       },
       {
-        "id": "v103-3-44",
+        "id": "v103-3-51",
         "type": "barrel",
         "cell": 568,
         "x": 48,
         "z": 80,
-        "barrelKind": "gold"
+        "barrelKind": "xp"
       },
       {
-        "id": "v103-3-45",
+        "id": "v103-3-52",
         "type": "barrel",
         "cell": 273,
         "x": 88,
@@ -14049,137 +14889,81 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-3-46",
+        "id": "v103-3-53",
         "type": "barrel",
         "cell": 433,
         "x": -32,
         "z": 40,
-        "barrelKind": "explosive"
-      },
-      {
-        "id": "v103-3-47",
-        "type": "barrel",
-        "cell": 261,
-        "x": -8,
-        "z": -16,
-        "barrelKind": "xp"
-      },
-      {
-        "id": "v103-3-48",
-        "type": "barrel",
-        "cell": 320,
-        "x": 64,
-        "z": 0,
-        "barrelKind": "gold"
-      },
-      {
-        "id": "v103-3-49",
-        "type": "barrel",
-        "cell": 203,
-        "x": -72,
-        "z": -32,
-        "barrelKind": "gold"
-      },
-      {
-        "id": "v103-3-50",
-        "type": "barrel",
-        "cell": 577,
-        "x": -80,
-        "z": 88,
-        "barrelKind": "explosive"
-      },
-      {
-        "id": "v103-3-51",
-        "type": "barrel",
-        "cell": 523,
-        "x": 88,
-        "z": 64,
-        "barrelKind": "xp"
-      },
-      {
-        "id": "v103-3-52",
-        "type": "barrel",
-        "cell": 72,
-        "x": 80,
-        "z": -80,
-        "barrelKind": "gold"
-      },
-      {
-        "id": "v103-3-53",
-        "type": "barrel",
-        "cell": 258,
-        "x": -32,
-        "z": -16,
         "barrelKind": "gold"
       },
       {
         "id": "v103-3-54",
         "type": "enemy",
-        "cell": 553,
-        "x": -72,
-        "z": 80,
+        "cell": 261,
+        "x": -8,
+        "z": -16,
         "species": 0,
         "level": 43
       },
       {
         "id": "v103-3-55",
         "type": "enemy",
-        "cell": 440,
-        "x": 24,
-        "z": 40,
+        "cell": 320,
+        "x": 64,
+        "z": 0,
         "species": 1,
         "level": 44
       },
       {
         "id": "v103-3-56",
         "type": "enemy",
-        "cell": 270,
-        "x": 64,
-        "z": -16,
+        "cell": 203,
+        "x": -72,
+        "z": -32,
         "species": 2,
         "level": 43
       },
       {
         "id": "v103-3-57",
         "type": "enemy",
-        "cell": 308,
-        "x": -32,
-        "z": 0,
+        "cell": 577,
+        "x": -80,
+        "z": 88,
         "species": 3,
         "level": 44
       },
       {
         "id": "v103-3-58",
         "type": "enemy",
-        "cell": 486,
-        "x": -8,
-        "z": 56,
+        "cell": 523,
+        "x": 88,
+        "z": 64,
         "species": 0,
         "level": 43
       },
       {
         "id": "v103-3-59",
         "type": "enemy",
-        "cell": 302,
-        "x": -80,
-        "z": 0,
+        "cell": 72,
+        "x": 80,
+        "z": -80,
         "species": 1,
         "level": 44
       },
       {
         "id": "v103-3-60",
         "type": "enemy",
-        "cell": 332,
-        "x": -40,
-        "z": 8,
+        "cell": 258,
+        "x": -32,
+        "z": -16,
         "species": 2,
         "level": 43
       },
       {
         "id": "v103-3-61",
         "type": "enemy",
-        "cell": 561,
-        "x": -8,
+        "cell": 553,
+        "x": -72,
         "z": 80,
         "species": 3,
         "level": 44
@@ -14187,164 +14971,348 @@
       {
         "id": "v103-3-62",
         "type": "enemy",
-        "cell": 545,
-        "x": 64,
-        "z": 72,
+        "cell": 440,
+        "x": 24,
+        "z": 40,
         "species": 0,
         "level": 43
       },
       {
         "id": "v103-3-63",
         "type": "enemy",
-        "cell": 364,
-        "x": 16,
-        "z": 16,
+        "cell": 270,
+        "x": 64,
+        "z": -16,
         "species": 1,
         "level": 44
       },
       {
         "id": "v103-3-64",
         "type": "enemy",
-        "cell": 206,
-        "x": -48,
-        "z": -32,
+        "cell": 308,
+        "x": -32,
+        "z": 0,
         "species": 2,
         "level": 43
       },
       {
         "id": "v103-3-65",
         "type": "enemy",
-        "cell": 428,
-        "x": -72,
-        "z": 40,
+        "cell": 486,
+        "x": -8,
+        "z": 56,
         "species": 3,
         "level": 44
       },
       {
         "id": "v103-3-66",
         "type": "stalagmite",
+        "cell": 302,
+        "x": -80,
+        "z": 0
+      },
+      {
+        "id": "v103-3-67",
+        "type": "crystal",
+        "cell": 332,
+        "x": -40,
+        "z": 8
+      },
+      {
+        "id": "v103-3-68",
+        "type": "stalagmite",
+        "cell": 561,
+        "x": -8,
+        "z": 80
+      },
+      {
+        "id": "v103-3-69",
+        "type": "crystal",
+        "cell": 545,
+        "x": 64,
+        "z": 72
+      },
+      {
+        "id": "v103-3-70",
+        "type": "stalagmite",
+        "cell": 364,
+        "x": 16,
+        "z": 16
+      },
+      {
+        "id": "v103-3-71",
+        "type": "crystal",
+        "cell": 206,
+        "x": -48,
+        "z": -32
+      },
+      {
+        "id": "v103-3-72",
+        "type": "stalagmite",
+        "cell": 428,
+        "x": -72,
+        "z": 40
+      },
+      {
+        "id": "v103-3-73",
+        "type": "crystal",
         "cell": 519,
         "x": 56,
         "z": 64
       },
       {
-        "id": "v103-3-67",
-        "type": "crystal",
+        "id": "v103-3-74",
+        "type": "stalagmite",
         "cell": 567,
         "x": 40,
         "z": 80
       },
       {
-        "id": "v103-3-68",
-        "type": "stalagmite",
+        "id": "v103-3-75",
+        "type": "crystal",
         "cell": 352,
         "x": -80,
         "z": 16
       },
       {
-        "id": "v103-3-69",
-        "type": "crystal",
+        "id": "v103-3-76",
+        "type": "stalagmite",
         "cell": 77,
         "x": -80,
         "z": -72
       },
       {
-        "id": "v103-3-70",
-        "type": "stalagmite",
+        "id": "v103-3-77",
+        "type": "crystal",
         "cell": 314,
         "x": 16,
         "z": 0
       },
       {
-        "id": "v103-3-71",
-        "type": "crystal",
+        "id": "v103-3-78",
+        "type": "stalagmite",
         "cell": 354,
         "x": -64,
         "z": 16
       },
       {
-        "id": "v103-3-72",
-        "type": "stalagmite",
+        "id": "v103-3-79",
+        "type": "crystal",
         "cell": 280,
         "x": -56,
         "z": -8
       },
       {
-        "id": "v103-3-73",
-        "type": "crystal",
+        "id": "v103-3-80",
+        "type": "stalagmite",
         "cell": 304,
         "x": -64,
         "z": 0
       },
       {
-        "id": "v103-3-74",
-        "type": "stalagmite",
+        "id": "v103-3-81",
+        "type": "crystal",
         "cell": 531,
         "x": -48,
         "z": 72
       },
       {
-        "id": "v103-3-75",
-        "type": "crystal",
+        "id": "v103-3-82",
+        "type": "stalagmite",
         "cell": 299,
         "x": 96,
         "z": -8
       },
       {
-        "id": "v103-3-76",
-        "type": "stalagmite",
+        "id": "v103-3-83",
+        "type": "crystal",
         "cell": 405,
         "x": -56,
         "z": 32
       },
       {
-        "id": "v103-3-77",
-        "type": "crystal",
+        "id": "v104-3-enemy-0",
+        "type": "enemy",
         "cell": 414,
         "x": 16,
-        "z": 32
+        "z": 32,
+        "species": 5,
+        "level": 43
       },
       {
-        "id": "v103-3-78",
-        "type": "stalagmite",
+        "id": "v104-3-enemy-1",
+        "type": "enemy",
         "cell": 406,
         "x": -48,
-        "z": 32
+        "z": 32,
+        "species": 6,
+        "level": 44
       },
       {
-        "id": "v103-3-79",
-        "type": "crystal",
+        "id": "v104-3-enemy-2",
+        "type": "enemy",
         "cell": 407,
         "x": -40,
-        "z": 32
+        "z": 32,
+        "species": 0,
+        "level": 43
       },
       {
-        "id": "v103-3-80",
-        "type": "stalagmite",
+        "id": "v104-3-enemy-3",
+        "type": "enemy",
         "cell": 403,
         "x": -72,
-        "z": 32
+        "z": 32,
+        "species": 1,
+        "level": 44
       },
       {
-        "id": "v103-3-81",
-        "type": "crystal",
+        "id": "v104-3-enemy-4",
+        "type": "enemy",
         "cell": 192,
         "x": 40,
-        "z": -40
+        "z": -40,
+        "species": 2,
+        "level": 43
       },
       {
-        "id": "v103-3-82",
-        "type": "stalagmite",
+        "id": "v104-3-enemy-5",
+        "type": "enemy",
         "cell": 271,
         "x": 72,
-        "z": -16
+        "z": -16,
+        "species": 3,
+        "level": 44
       },
       {
-        "id": "v103-3-83",
-        "type": "crystal",
+        "id": "v104-3-enemy-6",
+        "type": "enemy",
         "cell": 487,
         "x": 0,
-        "z": 56
+        "z": 56,
+        "species": 5,
+        "level": 43
+      },
+      {
+        "id": "v104-3-enemy-7",
+        "type": "enemy",
+        "cell": 595,
+        "x": 64,
+        "z": 88,
+        "species": 6,
+        "level": 44
+      },
+      {
+        "id": "v104-3-enemy-8",
+        "type": "enemy",
+        "cell": 97,
+        "x": 80,
+        "z": -72,
+        "species": 0,
+        "level": 43
+      },
+      {
+        "id": "v104-3-enemy-9",
+        "type": "enemy",
+        "cell": 337,
+        "x": 0,
+        "z": 8,
+        "species": 1,
+        "level": 44
+      },
+      {
+        "id": "v104-3-enemy-10",
+        "type": "enemy",
+        "cell": 110,
+        "x": -16,
+        "z": -64,
+        "species": 2,
+        "level": 43
+      },
+      {
+        "id": "v104-3-enemy-11",
+        "type": "enemy",
+        "cell": 589,
+        "x": 16,
+        "z": 88,
+        "species": 3,
+        "level": 44
+      },
+      {
+        "id": "v104-3-lava-0",
+        "type": "lava",
+        "cell": 535,
+        "x": -16,
+        "z": 72,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-3-lava-1",
+        "type": "lava",
+        "cell": 480,
+        "x": -56,
+        "z": 56,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-3-lava-2",
+        "type": "lava",
+        "cell": 514,
+        "x": 16,
+        "z": 64,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-3-lava-3",
+        "type": "lava",
+        "cell": 372,
+        "x": 80,
+        "z": 16,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-3-fall-0",
+        "type": "lavafall",
+        "cell": 323,
+        "x": 88,
+        "z": 0,
+        "phase": 0.23819807777181268,
+        "radius": 1.45
+      },
+      {
+        "id": "v104-3-fall-1",
+        "type": "lavafall",
+        "cell": 105,
+        "x": -56,
+        "z": -64,
+        "phase": 1.3078789364080876,
+        "radius": 1.45
+      },
+      {
+        "id": "v104-3-fall-2",
+        "type": "lavafall",
+        "cell": 55,
+        "x": -56,
+        "z": -80,
+        "phase": 5.839100481942296,
+        "radius": 1.45
+      },
+      {
+        "id": "v104-3-wall",
+        "type": "breakwall",
+        "cell": 124,
+        "x": 96,
+        "z": -64,
+        "w": 3.6,
+        "d": 0.7
       }
     ],
     "corridors": [
@@ -17533,213 +18501,311 @@
       {
         "id": "v103-4-10",
         "type": "spikes",
-        "cell": 413,
-        "x": 8,
-        "z": 32,
-        "phase": 3.993332488462329
+        "cell": 196,
+        "x": 72,
+        "z": -40,
+        "phase": 3.993332488462329,
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
       },
       {
         "id": "v103-4-11",
-        "type": "arrows",
-        "cell": 81,
-        "x": -48,
-        "z": -72,
+        "type": "spikes",
+        "cell": 171,
+        "x": 72,
+        "z": -48,
         "phase": 5.176765595097095,
-        "axis": [
-          0,
-          1
-        ]
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
       },
       {
         "id": "v103-4-12",
-        "type": "gas",
-        "cell": 46,
-        "x": 72,
-        "z": -88,
-        "phase": 5.168586828745902
+        "type": "spikes",
+        "cell": 454,
+        "x": -64,
+        "z": 48,
+        "phase": 5.168586828745902,
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
       },
       {
         "id": "v103-4-13",
         "type": "spikes",
-        "cell": 318,
-        "x": 48,
-        "z": 0,
-        "phase": 5.407526108901948
+        "cell": 245,
+        "x": 64,
+        "z": -24,
+        "phase": 5.407526108901948,
+        "band": true,
+        "w": 3.6,
+        "d": 1.8
       },
       {
         "id": "v103-4-14",
+        "type": "spikes",
+        "cell": 81,
+        "x": -48,
+        "z": -72,
+        "phase": 3.8128278516232967,
+        "band": true,
+        "w": 1.8,
+        "d": 3.6
+      },
+      {
+        "id": "v103-4-15",
         "type": "arrows",
         "cell": 532,
         "x": -40,
         "z": 72,
-        "phase": 3.8128278516232967,
+        "phase": 0.696131105069071,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
         "axis": [
           0,
           1
         ]
       },
       {
-        "id": "v103-4-15",
-        "type": "gas",
-        "cell": 495,
-        "x": 64,
-        "z": 56,
-        "phase": 0.696131105069071
-      },
-      {
         "id": "v103-4-16",
-        "type": "spikes",
-        "cell": 552,
-        "x": -80,
-        "z": 80,
-        "phase": 3.044072932563722
-      },
-      {
-        "id": "v103-4-17",
         "type": "arrows",
         "cell": 205,
         "x": -56,
         "z": -32,
-        "phase": 2.9144834666512907,
+        "phase": 3.044072932563722,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
         "axis": [
           0,
           1
         ]
       },
       {
+        "id": "v103-4-17",
+        "type": "arrows",
+        "cell": 474,
+        "x": 96,
+        "z": 48,
+        "phase": 2.9144834666512907,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
+        "axis": [
+          1,
+          0
+        ]
+      },
+      {
         "id": "v103-4-18",
-        "type": "gas",
-        "cell": 245,
-        "x": 64,
-        "z": -24,
-        "phase": 4.00873557664454
+        "type": "arrows",
+        "cell": 308,
+        "x": -32,
+        "z": 0,
+        "phase": 4.00873557664454,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
+        "axis": [
+          1,
+          0
+        ]
       },
       {
         "id": "v103-4-19",
-        "type": "spikes",
-        "cell": 118,
-        "x": 48,
-        "z": -64,
-        "phase": 0.002122089732438326
+        "type": "arrows",
+        "cell": 153,
+        "x": -72,
+        "z": -48,
+        "phase": 0.002122089732438326,
+        "band": false,
+        "w": 3.6,
+        "d": 3.2,
+        "axis": [
+          1,
+          0
+        ]
       },
       {
         "id": "v103-4-20",
+        "type": "lava",
+        "cell": 413,
+        "x": 8,
+        "z": 32,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 7.6,
+        "d": 3.6
+      },
+      {
+        "id": "v103-4-21",
+        "type": "lava",
+        "cell": 46,
+        "x": 72,
+        "z": -88,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-4-22",
+        "type": "lava",
+        "cell": 318,
+        "x": 48,
+        "z": 0,
+        "bridge": true,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 7.6,
+        "d": 3.6
+      },
+      {
+        "id": "v103-4-23",
+        "type": "lava",
+        "cell": 495,
+        "x": 64,
+        "z": 56,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-4-24",
+        "type": "lava",
+        "cell": 552,
+        "x": -80,
+        "z": 80,
+        "bridge": false,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
+      },
+      {
+        "id": "v103-4-25",
+        "type": "lava",
+        "cell": 118,
+        "x": 48,
+        "z": -64,
+        "bridge": true,
+        "bridgeAxis": "x",
+        "bridgeCross": false,
+        "w": 7.6,
+        "d": 3.6
+      },
+      {
+        "id": "v103-4-26",
         "type": "lava",
         "cell": 480,
         "x": -56,
         "z": 56,
         "bridge": false,
         "bridgeAxis": "x",
-        "bridgeCross": false
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
       },
       {
-        "id": "v103-4-21",
+        "id": "v103-4-27",
         "type": "lava",
         "cell": 346,
         "x": 72,
         "z": 8,
         "bridge": false,
         "bridgeAxis": "x",
-        "bridgeCross": false
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
       },
       {
-        "id": "v103-4-22",
+        "id": "v103-4-28",
         "type": "lava",
         "cell": 139,
         "x": 16,
         "z": -56,
         "bridge": false,
         "bridgeAxis": "x",
-        "bridgeCross": false
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
       },
       {
-        "id": "v103-4-23",
+        "id": "v103-4-29",
         "type": "lava",
         "cell": 190,
         "x": 24,
         "z": -40,
         "bridge": false,
         "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-4-24",
-        "type": "lava",
-        "cell": 206,
-        "x": -48,
-        "z": -32,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-4-25",
-        "type": "lava",
-        "cell": 316,
-        "x": 32,
-        "z": 0,
-        "bridge": true,
-        "bridgeAxis": "z",
-        "bridgeCross": true
-      },
-      {
-        "id": "v103-4-26",
-        "type": "lava",
-        "cell": 263,
-        "x": 8,
-        "z": -16,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-4-27",
-        "type": "lava",
-        "cell": 302,
-        "x": -80,
-        "z": 0,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-4-28",
-        "type": "lava",
-        "cell": 297,
-        "x": 80,
-        "z": -8,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
-      },
-      {
-        "id": "v103-4-29",
-        "type": "lava",
-        "cell": 252,
-        "x": -80,
-        "z": -16,
-        "bridge": false,
-        "bridgeAxis": "x",
-        "bridgeCross": false
+        "bridgeCross": false,
+        "w": 6.8,
+        "d": 6.8
       },
       {
         "id": "v103-4-30",
         "type": "barrel",
-        "cell": 454,
-        "x": -64,
-        "z": 48,
+        "cell": 206,
+        "x": -48,
+        "z": -32,
         "barrelKind": "explosive"
       },
       {
         "id": "v103-4-31",
         "type": "barrel",
-        "cell": 432,
-        "x": -40,
-        "z": 40,
+        "cell": 316,
+        "x": 32,
+        "z": 0,
         "barrelKind": "xp"
       },
       {
         "id": "v103-4-32",
+        "type": "barrel",
+        "cell": 263,
+        "x": 8,
+        "z": -16,
+        "barrelKind": "gold"
+      },
+      {
+        "id": "v103-4-33",
+        "type": "barrel",
+        "cell": 302,
+        "x": -80,
+        "z": 0,
+        "barrelKind": "gold"
+      },
+      {
+        "id": "v103-4-34",
+        "type": "barrel",
+        "cell": 297,
+        "x": 80,
+        "z": -8,
+        "barrelKind": "explosive"
+      },
+      {
+        "id": "v103-4-35",
+        "type": "barrel",
+        "cell": 252,
+        "x": -80,
+        "z": -16,
+        "barrelKind": "xp"
+      },
+      {
+        "id": "v103-4-36",
+        "type": "barrel",
+        "cell": 432,
+        "x": -40,
+        "z": 40,
+        "barrelKind": "gold"
+      },
+      {
+        "id": "v103-4-37",
         "type": "barrel",
         "cell": 102,
         "x": -80,
@@ -17747,31 +18813,31 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-4-33",
+        "id": "v103-4-38",
         "type": "barrel",
         "cell": 341,
         "x": 32,
         "z": 8,
-        "barrelKind": "gold"
+        "barrelKind": "explosive"
       },
       {
-        "id": "v103-4-34",
+        "id": "v103-4-39",
         "type": "barrel",
         "cell": 29,
         "x": -64,
         "z": -88,
-        "barrelKind": "explosive"
+        "barrelKind": "xp"
       },
       {
-        "id": "v103-4-35",
+        "id": "v103-4-40",
         "type": "barrel",
         "cell": 595,
         "x": 64,
         "z": 88,
-        "barrelKind": "xp"
+        "barrelKind": "gold"
       },
       {
-        "id": "v103-4-36",
+        "id": "v103-4-41",
         "type": "barrel",
         "cell": 348,
         "x": 88,
@@ -17779,31 +18845,31 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-4-37",
+        "id": "v103-4-42",
         "type": "barrel",
         "cell": 123,
         "x": 88,
         "z": -64,
-        "barrelKind": "gold"
+        "barrelKind": "explosive"
       },
       {
-        "id": "v103-4-38",
+        "id": "v103-4-43",
         "type": "barrel",
         "cell": 101,
         "x": -88,
         "z": -64,
-        "barrelKind": "explosive"
+        "barrelKind": "xp"
       },
       {
-        "id": "v103-4-39",
+        "id": "v103-4-44",
         "type": "barrel",
         "cell": 496,
         "x": 72,
         "z": 56,
-        "barrelKind": "xp"
+        "barrelKind": "gold"
       },
       {
-        "id": "v103-4-40",
+        "id": "v103-4-45",
         "type": "barrel",
         "cell": 531,
         "x": -48,
@@ -17811,31 +18877,31 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-4-41",
+        "id": "v103-4-46",
         "type": "barrel",
         "cell": 270,
         "x": 64,
         "z": -16,
-        "barrelKind": "gold"
+        "barrelKind": "explosive"
       },
       {
-        "id": "v103-4-42",
+        "id": "v103-4-47",
         "type": "barrel",
         "cell": 89,
         "x": 16,
         "z": -72,
-        "barrelKind": "explosive"
+        "barrelKind": "xp"
       },
       {
-        "id": "v103-4-43",
+        "id": "v103-4-48",
         "type": "barrel",
         "cell": 409,
         "x": -24,
         "z": 32,
-        "barrelKind": "xp"
+        "barrelKind": "gold"
       },
       {
-        "id": "v103-4-44",
+        "id": "v103-4-49",
         "type": "barrel",
         "cell": 255,
         "x": -56,
@@ -17843,31 +18909,31 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-4-45",
+        "id": "v103-4-50",
         "type": "barrel",
         "cell": 392,
         "x": 40,
         "z": 24,
-        "barrelKind": "gold"
+        "barrelKind": "explosive"
       },
       {
-        "id": "v103-4-46",
+        "id": "v103-4-51",
         "type": "barrel",
         "cell": 314,
         "x": 16,
         "z": 0,
-        "barrelKind": "explosive"
+        "barrelKind": "xp"
       },
       {
-        "id": "v103-4-47",
+        "id": "v103-4-52",
         "type": "barrel",
         "cell": 47,
         "x": 80,
         "z": -88,
-        "barrelKind": "xp"
+        "barrelKind": "gold"
       },
       {
-        "id": "v103-4-48",
+        "id": "v103-4-53",
         "type": "barrel",
         "cell": 294,
         "x": 56,
@@ -17875,150 +18941,110 @@
         "barrelKind": "gold"
       },
       {
-        "id": "v103-4-49",
-        "type": "barrel",
+        "id": "v103-4-54",
+        "type": "enemy",
         "cell": 407,
         "x": -40,
         "z": 32,
-        "barrelKind": "gold"
-      },
-      {
-        "id": "v103-4-50",
-        "type": "barrel",
-        "cell": 114,
-        "x": 16,
-        "z": -64,
-        "barrelKind": "explosive"
-      },
-      {
-        "id": "v103-4-51",
-        "type": "barrel",
-        "cell": 324,
-        "x": 96,
-        "z": 0,
-        "barrelKind": "xp"
-      },
-      {
-        "id": "v103-4-52",
-        "type": "barrel",
-        "cell": 136,
-        "x": -8,
-        "z": -56,
-        "barrelKind": "gold"
-      },
-      {
-        "id": "v103-4-53",
-        "type": "barrel",
-        "cell": 497,
-        "x": 80,
-        "z": 56,
-        "barrelKind": "gold"
-      },
-      {
-        "id": "v103-4-54",
-        "type": "enemy",
-        "cell": 82,
-        "x": -40,
-        "z": -72,
         "species": 0,
         "level": 44
       },
       {
         "id": "v103-4-55",
         "type": "enemy",
-        "cell": 77,
-        "x": -80,
-        "z": -72,
+        "cell": 114,
+        "x": 16,
+        "z": -64,
         "species": 1,
         "level": 45
       },
       {
         "id": "v103-4-56",
         "type": "enemy",
-        "cell": 390,
-        "x": 24,
-        "z": 24,
+        "cell": 324,
+        "x": 96,
+        "z": 0,
         "species": 2,
         "level": 44
       },
       {
         "id": "v103-4-57",
         "type": "enemy",
-        "cell": 335,
-        "x": -16,
-        "z": 8,
+        "cell": 136,
+        "x": -8,
+        "z": -56,
         "species": 3,
         "level": 45
       },
       {
         "id": "v103-4-58",
         "type": "enemy",
-        "cell": 98,
-        "x": 88,
-        "z": -72,
+        "cell": 497,
+        "x": 80,
+        "z": 56,
         "species": 0,
         "level": 44
       },
       {
         "id": "v103-4-59",
         "type": "enemy",
-        "cell": 524,
-        "x": 96,
-        "z": 64,
+        "cell": 82,
+        "x": -40,
+        "z": -72,
         "species": 1,
         "level": 45
       },
       {
         "id": "v103-4-60",
         "type": "enemy",
-        "cell": 337,
-        "x": 0,
-        "z": 8,
+        "cell": 77,
+        "x": -80,
+        "z": -72,
         "species": 2,
         "level": 44
       },
       {
         "id": "v103-4-61",
         "type": "enemy",
-        "cell": 366,
-        "x": 32,
-        "z": 16,
+        "cell": 390,
+        "x": 24,
+        "z": 24,
         "species": 3,
         "level": 45
       },
       {
         "id": "v103-4-62",
         "type": "enemy",
-        "cell": 405,
-        "x": -56,
-        "z": 32,
+        "cell": 335,
+        "x": -16,
+        "z": 8,
         "species": 0,
         "level": 44
       },
       {
         "id": "v103-4-63",
         "type": "enemy",
-        "cell": 349,
-        "x": 96,
-        "z": 8,
+        "cell": 98,
+        "x": 88,
+        "z": -72,
         "species": 1,
         "level": 45
       },
       {
         "id": "v103-4-64",
         "type": "enemy",
-        "cell": 64,
-        "x": 16,
-        "z": -80,
+        "cell": 524,
+        "x": 96,
+        "z": 64,
         "species": 2,
         "level": 44
       },
       {
         "id": "v103-4-65",
         "type": "enemy",
-        "cell": 319,
-        "x": 56,
-        "z": 0,
+        "cell": 337,
+        "x": 0,
+        "z": 8,
         "species": 3,
         "level": 45
       },
@@ -18034,128 +19060,312 @@
       {
         "id": "v103-4-67",
         "type": "stalagmite",
+        "cell": 366,
+        "x": 32,
+        "z": 16
+      },
+      {
+        "id": "v103-4-68",
+        "type": "crystal",
+        "cell": 405,
+        "x": -56,
+        "z": 32
+      },
+      {
+        "id": "v103-4-69",
+        "type": "stalagmite",
+        "cell": 349,
+        "x": 96,
+        "z": 8
+      },
+      {
+        "id": "v103-4-70",
+        "type": "crystal",
+        "cell": 64,
+        "x": 16,
+        "z": -80
+      },
+      {
+        "id": "v103-4-71",
+        "type": "stalagmite",
+        "cell": 319,
+        "x": 56,
+        "z": 0
+      },
+      {
+        "id": "v103-4-72",
+        "type": "crystal",
         "cell": 281,
         "x": -48,
         "z": -8
       },
       {
-        "id": "v103-4-68",
-        "type": "crystal",
+        "id": "v103-4-73",
+        "type": "stalagmite",
         "cell": 191,
         "x": 32,
         "z": -40
       },
       {
-        "id": "v103-4-69",
-        "type": "stalagmite",
+        "id": "v103-4-74",
+        "type": "crystal",
         "cell": 234,
         "x": -24,
         "z": -24
       },
       {
-        "id": "v103-4-70",
-        "type": "crystal",
+        "id": "v103-4-75",
+        "type": "stalagmite",
         "cell": 178,
         "x": -72,
         "z": -40
       },
       {
-        "id": "v103-4-71",
-        "type": "stalagmite",
+        "id": "v103-4-76",
+        "type": "crystal",
         "cell": 553,
         "x": -72,
         "z": 80
       },
       {
-        "id": "v103-4-72",
-        "type": "crystal",
+        "id": "v103-4-77",
+        "type": "stalagmite",
         "cell": 140,
         "x": 24,
         "z": -56
       },
       {
-        "id": "v103-4-73",
-        "type": "stalagmite",
+        "id": "v103-4-78",
+        "type": "crystal",
         "cell": 26,
         "x": -88,
         "z": -88
       },
       {
-        "id": "v103-4-74",
-        "type": "crystal",
+        "id": "v103-4-79",
+        "type": "stalagmite",
         "cell": 387,
         "x": 0,
         "z": 24
       },
       {
-        "id": "v103-4-75",
-        "type": "stalagmite",
+        "id": "v103-4-80",
+        "type": "crystal",
         "cell": 428,
         "x": -72,
         "z": 40
       },
       {
-        "id": "v103-4-76",
-        "type": "crystal",
+        "id": "v103-4-81",
+        "type": "stalagmite",
         "cell": 126,
         "x": -88,
         "z": -56
       },
       {
-        "id": "v103-4-77",
-        "type": "stalagmite",
+        "id": "v103-4-82",
+        "type": "crystal",
         "cell": 364,
         "x": 16,
         "z": 16
       },
       {
-        "id": "v103-4-78",
-        "type": "crystal",
+        "id": "v103-4-83",
+        "type": "stalagmite",
         "cell": 369,
         "x": 56,
         "z": 16
       },
       {
-        "id": "v103-4-79",
-        "type": "stalagmite",
+        "id": "v103-4-84",
+        "type": "crystal",
         "cell": 60,
         "x": -16,
         "z": -80
       },
       {
-        "id": "v103-4-80",
-        "type": "crystal",
-        "cell": 171,
-        "x": 72,
-        "z": -48
-      },
-      {
-        "id": "v103-4-81",
-        "type": "stalagmite",
+        "id": "v104-4-enemy-0",
+        "type": "enemy",
         "cell": 310,
         "x": -16,
-        "z": 0
+        "z": 0,
+        "species": 5,
+        "level": 44
       },
       {
-        "id": "v103-4-82",
-        "type": "crystal",
+        "id": "v104-4-enemy-1",
+        "type": "enemy",
         "cell": 563,
         "x": 8,
-        "z": 80
+        "z": 80,
+        "species": 6,
+        "level": 45
       },
       {
-        "id": "v103-4-83",
-        "type": "stalagmite",
+        "id": "v104-4-enemy-2",
+        "type": "enemy",
         "cell": 182,
         "x": -40,
-        "z": -40
+        "z": -40,
+        "species": 0,
+        "level": 44
       },
       {
-        "id": "v103-4-84",
-        "type": "crystal",
+        "id": "v104-4-enemy-3",
+        "type": "enemy",
         "cell": 269,
         "x": 56,
-        "z": -16
+        "z": -16,
+        "species": 1,
+        "level": 45
+      },
+      {
+        "id": "v104-4-enemy-4",
+        "type": "enemy",
+        "cell": 370,
+        "x": 64,
+        "z": 16,
+        "species": 2,
+        "level": 44
+      },
+      {
+        "id": "v104-4-enemy-5",
+        "type": "enemy",
+        "cell": 105,
+        "x": -56,
+        "z": -64,
+        "species": 3,
+        "level": 45
+      },
+      {
+        "id": "v104-4-enemy-6",
+        "type": "enemy",
+        "cell": 363,
+        "x": 8,
+        "z": 16,
+        "species": 5,
+        "level": 44
+      },
+      {
+        "id": "v104-4-enemy-7",
+        "type": "enemy",
+        "cell": 141,
+        "x": 32,
+        "z": -56,
+        "species": 6,
+        "level": 45
+      },
+      {
+        "id": "v104-4-enemy-8",
+        "type": "enemy",
+        "cell": 441,
+        "x": 32,
+        "z": 40,
+        "species": 0,
+        "level": 44
+      },
+      {
+        "id": "v104-4-enemy-9",
+        "type": "enemy",
+        "cell": 88,
+        "x": 8,
+        "z": -72,
+        "species": 1,
+        "level": 45
+      },
+      {
+        "id": "v104-4-enemy-10",
+        "type": "enemy",
+        "cell": 579,
+        "x": -64,
+        "z": 88,
+        "species": 2,
+        "level": 44
+      },
+      {
+        "id": "v104-4-enemy-11",
+        "type": "enemy",
+        "cell": 403,
+        "x": -72,
+        "z": 32,
+        "species": 3,
+        "level": 45
+      },
+      {
+        "id": "v104-4-lava-0",
+        "type": "lava",
+        "cell": 527,
+        "x": -80,
+        "z": 72,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-4-lava-1",
+        "type": "lava",
+        "cell": 217,
+        "x": 40,
+        "z": -32,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-4-lava-2",
+        "type": "lava",
+        "cell": 572,
+        "x": 80,
+        "z": 80,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-4-lava-3",
+        "type": "lava",
+        "cell": 530,
+        "x": -56,
+        "z": 72,
+        "w": 6.8,
+        "d": 6.8,
+        "bridge": false
+      },
+      {
+        "id": "v104-4-fall-0",
+        "type": "lavafall",
+        "cell": 55,
+        "x": -56,
+        "z": -80,
+        "phase": 6.635789677966386,
+        "radius": 1.45
+      },
+      {
+        "id": "v104-4-fall-1",
+        "type": "lavafall",
+        "cell": 148,
+        "x": 88,
+        "z": -56,
+        "phase": 6.466192808700725,
+        "radius": 1.45
+      },
+      {
+        "id": "v104-4-fall-2",
+        "type": "lavafall",
+        "cell": 35,
+        "x": -16,
+        "z": -88,
+        "phase": 4.2373783849179745,
+        "radius": 1.45
+      },
+      {
+        "id": "v104-4-wall",
+        "type": "breakwall",
+        "cell": 158,
+        "x": -32,
+        "z": -48,
+        "w": 3.6,
+        "d": 0.7
       }
     ],
     "corridors": [

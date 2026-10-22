@@ -19,13 +19,21 @@ function __v103Plan(floor){
  add(floor?'up':'exit',source);add(floor===4?'relic':'down',floor===4?target+1:target);
  for(const roomIndex of[2,4]){const room=rooms[roomIndex],indices=route.map((c,i)=>room.cells.includes(c)?i:-1).filter(i=>i>=0),last=indices.at(-1),seal=[route[last+1],route[last+2]];if(seal.some(i=>i===undefined))throw Error('Missing seal corridor');add('riddle',room.cell,{seal,answer:(floor+roomIndex)%3,riddle:roomIndex===2?0:1});}
  for(const c of side)add('chest',c);
- const pool=[...active].filter(i=>!used.has(i)&&!main.includes(i));for(let i=pool.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}const take=where=>{if(!where)return pool.pop();const i=pool.findIndex(where);if(i<0)throw Error('No safe corridor for wall trap');return pool.splice(i,1)[0];};
- for(let i=0;i<10;i++){const type=['spikes','arrows','gas',...([1,3].includes(floor)?['darkness']:[])][i%([1,3].includes(floor)?4:3)],c=take(type==='arrows'?c=>!roomCells.has(c)&&links[c].length<=2:null),blocked=[[-1,0,c%25?c-1:-1],[1,0,c%25<24?c+1:-1],[0,-1,c>=25?c-25:-1],[0,1,c<600?c+25:-1]].find(([x,z,j])=>!links[c].includes(j));add(type,c,{phase:random()*6,axis:type==='arrows'?[-blocked[0],-blocked[1]]:undefined});}
+ const mandatory=new Set(route.filter(c=>{const seen=new Set([source]),q=[source];for(let i=0;i<q.length;i++)for(const b of links[q[i]])if(b!==c&&!seen.has(b)){seen.add(b);q.push(b);}return !seen.has(target);}));
+ const pool=[...active].filter(i=>!used.has(i)&&!main.includes(i));for(let i=pool.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}const take=where=>{if(!where)return pool.pop();let i=pool.findIndex(where);if(i<0&&where.band104)i=pool.findIndex(c=>!roomCells.has(c)&&mandatory.has(c)&&links[c].length===2&&Math.abs(links[c][0]-c)===Math.abs(links[c][1]-c));if(i<0)throw Error('No safe corridor for wall trap');return pool.splice(i,1)[0];};
+ // Five mandatory, straight, rock-bounded crossings: a horizontal band cannot be skirted.
+ for(let i=0;i<10;i++){const type=i<5?([1,3].includes(floor)&&i>=3?'darkness':'spikes'):'arrows',c=take(type==='arrows'?c=>!roomCells.has(c)&&links[c].length<=2:Object.assign(c=>!roomCells.has(c)&&mandatory.has(c)&&links[c].length===2&&links[c].every(j=>Math.abs(j-c)===25),{band104:true})),blocked=[[-1,0,c%25?c-1:-1],[1,0,c%25<24?c+1:-1],[0,-1,c>=25?c-25:-1],[0,1,c<600?c+25:-1]].find(([x,z,j])=>!links[c].includes(j));add(type,c,{phase:random()*6,band:type!=='arrows',w:type==='arrows'?3.6:links[c].every(j=>Math.abs(j-c)===25)?3.6:1.8,d:type==='arrows'?3.2:links[c].every(j=>Math.abs(j-c)===25)?1.8:3.6,axis:type==='arrows'?[-blocked[0],-blocked[1]]:undefined});}
  const path=new Set(route);for(let i=0;i<10;i++){const c=take();const index=route.indexOf(c),a=point(c),b=point(route[index+1]??route[index-1]??c),d=point(route[index-1]??route[index+1]??c);add('lava',c,{bridge:path.has(c),bridgeAxis:b.x===a.x?'z':'x',bridgeCross:index>0&&index<route.length-1&&(b.x===a.x)!==(d.x===a.x)});}
  for(let i=0;i<24;i++)add('barrel',take(),{barrelKind:i%4===0?'explosive':i%4===1?'xp':'gold'});
  for(let i=0;i<12;i++)add('enemy',take(),{species:i%4,level:Math.min(45,40+floor+i%2)});
  if(floor===4)add('boss',target,{species:4,level:45});
  for(let i=0;i<18;i++)add(i%2?'crystal':'stalagmite',take());
+ // Append additions so the v103 chest, barrel, creature and puzzle save identifiers stay stable.
+ for(const p of props.filter(p=>p.type==='lava')){const room=roomCells.has(p.cell),horizontal=links[p.cell].some(c=>Math.abs(c-p.cell)===1);p.w=room?6.8:horizontal?7.6:3.6;p.d=room?6.8:horizontal?3.6:7.6;}
+ for(let i=0;i<12;i++)add('enemy',take(),{id:`v104-${floor}-enemy-${i}`,species:[5,6,0,1,2,3][i%6],level:Math.min(45,40+floor+i%2)});
+ for(let i=0;i<4;i++)add('lava',take(c=>roomCells.has(c)&&!route.includes(c)),{id:`v104-${floor}-lava-${i}`,w:6.8,d:6.8,bridge:false});
+ for(let i=0;i<3;i++)add('lavafall',take(c=>roomCells.has(c)&&!route.includes(c)),{id:`v104-${floor}-fall-${i}`,phase:random()*7,radius:1.45});
+ add('breakwall',take(c=>!roomCells.has(c)&&!mandatory.has(c)&&links[c].length===2&&links[c].every(j=>Math.abs(j-c)===25)),{id:`v104-${floor}-wall`,w:3.6,d:.7});
  return{floor,name:__v103Names[floor],n,step,size:200,links,route,main,side,rooms,props,corridors,loops:[...pillars.map(c=>point(c)),...[[5.8,6.2],[14.2,6.2],[5.8,14.5],[14.2,14.5]].map(([x,z])=>({x:(x-12)*8,z:((flip?24-z:z)-12)*8}))],pillars,active:[...active],roomCells:[...roomCells],source,target,point};
 }
 if(typeof module!=='undefined'&&module.exports)module.exports={plan:__v103Plan,names:__v103Names};

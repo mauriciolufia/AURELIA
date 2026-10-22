@@ -42,6 +42,9 @@ html=html.replace("{areas:[__v83.areas.find(a=>a.key==='crypt')],boss:_m.find(c=
 html=html.replace('if(_eb)_14.set(s.player[0],_dz.y+1.85,s.player[2]);','if(_eb)__v102SolarRestorePosition(s.player);');
 html=html.replaceAll('Cripta del Sol · recorre sus doce cámaras','Pirámide del Sol Eterno · tres plantas conectadas');
 html=html.replaceAll('Capitana Bruma Roja','Barbanegra').replaceAll('Bruma Roja','Barbanegra');
+html=html.replace('_14.y-1.85<t.y+3&&__v86TrapContains', "_14.y-1.85<t.y+(['spikes','dark','vapor102','poison'].includes(t.type)?8:3)&&__v86TrapContains");
+// Exterior destinations must not inherit remote interior floor coordinates.
+html=html.replace(/a.site===index&&a.key!=='crypt'(?:&&!a.plan103&&a.tower94!==__v102Solar)*/g, "a.site===index&&a.key!=='crypt'&&!a.plan103&&a.tower94!==__v102Solar");
 // The expanded world has more than 500 breakable barrels; keep every cleared barrel.
 html=html.replace('].slice(0,500);s.blessings=', '].slice(0,2000);s.blessings=');
 const begin = '/* AURELIA_UPDATE97_BEGIN */';
@@ -74,7 +77,7 @@ html=html.replace('for(const d of __v29Doors){const dist=', 'for(const d of __v2
 html=html.replace('for(const n of __v101DoorActors())', 'for(const n of __v102DoorActors(d.p.x,d.p.z))');
 html=html.replaceAll('__v102DoorActors(d.p.x,d.p.z))','__v102DoorActors(d.p.x,d.p.z,Math.max(4,d.w*d.scale*.6+2)))');
 html=html.replace('Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<3)', 'Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<Math.max(3,d.w*d.scale*.6+2))');
-const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
+const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js', 'volcano104.js', 'airship104.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
 sources.push('const __v103Blueprints='+JSON.stringify([1,2,3,4,5].map(i=>'data:image/png;base64,'+fs.readFileSync(path.join(root,'docs/volcano103/planta-'+i+'.png')).toString('base64')))+';');
 const block = `${begin}\n${sources.join('\n')}\n${end}\n`;
 if (html.includes(begin)) html = html.slice(0, html.indexOf(begin)) + block + html.slice(html.indexOf(end) + end.length).replace(/^\n/, '');
@@ -83,7 +86,7 @@ else {
   if (!html.includes(marker)) throw new Error('Missing game initialization marker');
   html = html.replace(marker, block + marker);
 }
-html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v103 Caldera de Obsidiana</title>');
-html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v103-caldera-de-obsidiana">');
+html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v104 Peligros de la Caldera</title>');
+html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v104-peligros-de-la-caldera">');
 fs.writeFileSync(file, html);
-console.log('Embedded Aurelia update 103');
+console.log('Embedded Aurelia update 104');

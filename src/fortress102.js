@@ -68,7 +68,7 @@ Object.assign(__v75TrapNames,{vapor102:'Vapor tóxico'});
 const __v102CloudGeometry=new _2.SphereGeometry(1,10,7),__v102CloudUniform={value:0},__v102CloudMaterial=new _0.MeshBasicMaterial({color:'#a7ca72',transparent:true,opacity:.25,depthWrite:false});
 __v102CloudMaterial.onBeforeCompile=shader=>{shader.uniforms.cloudTime102=__v102CloudUniform;shader.vertexShader='uniform float cloudTime102;\n'+shader.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\n transformed.x += sin(cloudTime102 * 1.4 + position.y * 2.0) * 0.10; transformed.y += sin(cloudTime102 + position.x * 2.5) * 0.16;');};
 function __v102Trap(a,point,type,id){
- const p=__v102Point(a,...point),cfg=a.design.elementalTrap85;let trap;try{a.design.elementalTrap85=null;trap=__v75Trap(a,p.x,p.z,type==='vapor102'?4:2.6,type==='vapor102'?4:2.6,type,1200+id);}finally{a.design.elementalTrap85=cfg;}
+ const rect=__v102Rects(a).find(r=>point[0]>=r[0]&&point[0]<=r[2]&&point[1]>=r[1]&&point[1]<=r[3]),p=__v102Point(a,rect?(rect[0]+rect[2])/2:point[0],point[1]),width=rect?rect[2]-rect[0]-.3:4,cfg=a.design.elementalTrap85;let trap;try{a.design.elementalTrap85=null;trap=__v75Trap(a,p.x,p.z,width,2.2,type,1200+id);}finally{a.design.elementalTrap85=cfg;}
  Object.assign(trap,{__v102:true,damage:type==='dark'?0:type==='vapor102'?.06:.1,phase:id*1.37,period:7.5,location:'sala',permanent:false,__v83:true});for(const o of [...trap.g.children])if(o.isSprite)o.removeFromParent();__v75Label(trap.g,type==='vapor102'?'VAPOR TÓXICO · 6% HP':type==='dark'?'PENUMBRA · LUZ DIVINA':'PICOS · 10% HP',3.6,4);
  if(type==='vapor102'){trap.h.geometry=__v102CloudGeometry;trap.h.material=__v102CloudMaterial;const m=new _0.Matrix4(),p=new _0.Vector3(),q=new _0.Quaternion(),s=new _0.Vector3();for(let i=0;i<trap.h.count;i++){trap.h.getMatrixAt(i,m);m.decompose(p,q,s);p.y=.6+(i%3)*.35;s.set(.55,.8,.55);m.compose(p,q,s);trap.h.setMatrixAt(i,m);}trap.h.instanceMatrix.needsUpdate=true;}
  a.root.attach(trap.g);return trap;
@@ -82,9 +82,7 @@ function __v102FloorDetails(a,random,dark){
   for(const[x,z]of __v102Shuffle([[r[0]+2,r[1]+2],[r[2]-2,r[1]+2],[r[0]+2,r[3]-2],[r[2]-2,r[3]-2],[cx-3,r[1]+2],[cx+3,r[3]-2]],random)){
    if(barrels>=12||!free(x,z,1.1))continue;const o=__v75.objects.length;__v75Barrel(a,__v102Point(a,x,z),2000+barrels);const object=__v75.objects[o];if(!object)continue;a.root.attach(object.g);reserved.push([x,z]);a.design.props.barrels.push({center:[x,z]});if(a.plan95)a.plan95.barrels.push([x,z]);barrels++;
   }
-  if(decor<8){const point=[cx,r[1]+1.2];if(__v102Free(a,...point,.5)){
-   const p=__v102Point(a,...point),g=new _0.Group();g.position.set(p.x,a.y,p.z);a.root.add(g);const color=a.design.accent||'#a7b0be';__v97Model(g,[['box','#5e4b3c',0,3.7,0,3,.16,.2],['box',color,0,2.3,0,2.1,2.7,.08],['box','#e2cf93',0,2.3,-.08,.14,2.1,.05],['gem','#d2b765',0,2.5,-.16,.42,.5,.08],['box','#7c736c',-1,.18,.3,.7,.3,.5],['bevel','#a6a29a',1,.2,.4,.6,.4,.7]]);g.userData.animated=false;decor++;
-  }}
+  // Hanging diamond banners were removed at the player's request.
   const spots=[[cx-4,cz],[cx+4,cz],[cx,cz+5],[cx,cz-5]];
   for(const point of __v102Shuffle(spots,random)){
    if(traps>=3||!free(...point,2.5))continue;const type=dark&&traps===0?'dark':traps%2?'vapor102':'spikes';__v102Trap(a,point,type,traps);reserved.push(point);traps++;

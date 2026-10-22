@@ -1,6 +1,6 @@
 {
   "name": "aurelia-rpg",
-  "version": "103.0.0",
+  "version": "104.0.0",
   "private": true,
   "description": "Aurelia RPG, juego HTML autónomo",
   "scripts": {
@@ -17,7 +17,9 @@
     "test:volcano-plan": "node tests/volcano-plan103.cjs",
     "test:volcano": "node tests/volcano103.cjs",
     "blueprints": "node scripts/volcano-blueprints.cjs",
-    "test:volcano:mobile": "node tests/volcano103.cjs --mobile"
+    "test:volcano:mobile": "node tests/volcano103.cjs --mobile",
+    "test:update": "node tests/update104.cjs",
+    "test:update:mobile": "node tests/update104.cjs --mobile"
   },
   "devDependencies": {
     "playwright": "1.62.1"

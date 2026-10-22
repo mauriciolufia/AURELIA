@@ -8,6 +8,8 @@ python -m http.server 8000 --bind 127.0.0.1
 
 Juega en https://mauriciolufia.github.io/AURELIA/.
 
+La [actualización 104](ACTUALIZACION104.md) amplía la lava y los enemigos de la caverna, añade caídas de lava y cinco muros rompibles, mejora las franjas de trampas y el mapa, y reserva las subidas de las dos montañas a sus caminos. Vado del Sol vende la nave de vuelo por 7500 de oro y tiene un sabio con el catálogo completo de equipo. Las naves aparecen únicamente después de comprarlas.
+
 La [actualización 103](ACTUALIZACION103.md) añade el volcán ampliado, su camino sinuoso y una expedición secundaria de cinco plantas: siete salas grandes, seis grutas medianas y 16 circuitos por nivel, con monstruos de nivel 40–45. Consulta [una imagen por planta con todos sus objetos y peligros](docs/volcano103/).
 
 La [actualización 102](ACTUALIZACION102.md) convierte la Pirámide del Sol Eterno en tres plantas con la mitad de enemigos, añade sellos a los enigmas y fija los horarios públicos de los servicios y el descanso nocturno de los 99 habitantes de los castillos. También añade un camino curvo por la montaña del Yeti, renueva King Candy, reduce la frecuencia de ataques enemigos y amplía cámaras, trampas y decoración de las fortalezas. Comparte el dibujo de barriles y acelera consultas de NPC sin reducir sus texturas.
@@ -26,6 +28,8 @@ Las partidas se guardan localmente en el navegador. El botón de respaldo JSON e
 npm ci
 npm test
 npm run test:volcano-plan
+npm run test:update
+npm run test:update:mobile
 npm run test:volcano
 npm run test:volcano:mobile
 CHROMIUM_PATH=/usr/bin/chromium npm run test:fortress

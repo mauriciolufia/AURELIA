@@ -3,7 +3,7 @@ const __v102Riddles={seals:[],hintAt:0,moving:false};
 const __v102SealHit=__v73Hit;__v73Hit=function(c,...args){if(c.riddle102&&__v75Save.riddles.includes(c.riddle102))return false;const hit=__v102SealHit(c,...args);if(hit&&c.riddle102&&__v102Riddles.moving&&_10>=__v102Riddles.hintAt){__v102Riddles.hintAt=_10+2;_3a('Resuelve el enigma de la estatua para abrir este paso.');}return hit;};
 const __v102SealMove=_3m;_3m=function(dt){__v102Riddles.moving=true;try{return __v102SealMove(dt);}finally{__v102Riddles.moving=false;}};
 function __v102SealedPath(p){return __v102Riddles.seals.some(s=>!__v75Save.riddles.includes(s.o.id)&&Math.abs(_14.y-1.85-s.a.y)<1&&Math.abs(p.y-s.a.y)<1&&__v101SweptHit(s.c,{x:_14.x,z:_14.z},p,s.a.y));}
-const __v102SealTeleport=__v75Move;__v75Move=function(p){if(p&&__v102SealedPath(p)){_3a('El sello del enigma impide atravesar este paso con magia.');return false;}return __v102SealTeleport(p);};
+const __v102SealTeleport=__v75Move;__v75Move=function(p){if(p&&!__v104PlaceTransit&&__v102SealedPath(p)){_3a('El sello del enigma impide atravesar este paso con magia.');return false;}return __v102SealTeleport(p);};
 const __v102SealLanding=__v75Landing;__v75Landing=function(){const p=__v102SealLanding();return p&&!__v102SealedPath(p)?p:null;};
 const __v102SealLanding2=__v87Landing2;__v87Landing2=function(){const p=__v102SealLanding2();return p&&!__v102SealedPath(p)?p:null;};
 function __v102RiddleBuild(){
