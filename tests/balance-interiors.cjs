@@ -10,10 +10,10 @@ const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),
   browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader','--disable-dev-shm-usage']});
   const page=await browser.newPage({viewport:{width:960,height:540}});page.on('pageerror',e=>errors.push(e.message));await page.goto(`http://127.0.0.1:${server.address().port}/`,{waitUntil:'domcontentloaded',timeout:180000});
   await page.waitForFunction(()=>window.__balanceTest&&!document.getElementById('ag-start').disabled,null,{timeout:240000});const run=s=>page.evaluate(s=>window.__balanceTest(s),s);await run('active=false');await page.click('#ag-start');await run('active=false');
-  console.log('PASS actual early enemies have at most 2 techniques; every high-level kit is unchanged',await run(`(()=>{
+  console.log('PASS actual early enemies have at most 2 techniques; high-level kits retain their behaviors with the new boss power',await run(`(()=>{
    const low=_m.filter(__v99Early),high=[...__balanceBaseline];if(!low.length||!high.length)throw Error('Missing enemy level groups');
    for(const c of low)if(c.__v68Skills.length>2||!c.__v68Skills.includes(c.art)||c.__v85IndoorSkills&&c.__v85IndoorSkills!==c.__v68Skills)throw Error('Invalid limited kit '+c.level);
-   for(const[c,skills]of high)if(JSON.stringify(c.__v68Skills)!==skills)throw Error('High-level kit changed '+c.level);
+   for(const[c,skills]of high){const expected=JSON.parse(skills);if(c.boss){const offensive=s=>Number.isFinite(s?.power)&&s.power>0&&!/heal|guard|buff/i.test(s.type||'');const max=Math.max(...expected.filter(offensive).map(s=>s.power));for(const s of expected)if(offensive(s))s.power=s.power===max?1.5:Math.min(1.4,s.power);}if(JSON.stringify(c.__v68Skills)!==JSON.stringify(expected))throw Error('High-level kit changed '+c.level+' '+c.spec?.id+' expected '+JSON.stringify(expected)+' actual '+JSON.stringify(c.__v68Skills));}
    return{earlyEnemies:low.length,highLevelKitsPreserved:high.length};})()`));
   console.log('PASS level boundaries 1, 40, 41 and 60 preserve damage and advanced aggression',await run(`(()=>{
    const result=[];for(const level of[1,40,41,60]){const c={hostile:true,level,phase:.2,damage:123,__v68Skills:[{name:'Fire',type:'projectile'},{name:'Ice',type:'ring'},{name:'Heal',type:'heal'},{name:'Guard',type:'buffDefense'}]},original=c.__v68Skills;

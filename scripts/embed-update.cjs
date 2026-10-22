@@ -47,6 +47,13 @@ html=html.replace('_14.y-1.85<t.y+3&&__v86TrapContains', "_14.y-1.85<t.y+(['spik
 html=html.replace(/a.site===index&&a.key!=='crypt'(?:&&!a.plan103&&a.tower94!==__v102Solar)*/g, "a.site===index&&a.key!=='crypt'&&!a.plan103&&a.tower94!==__v102Solar");
 // The expanded world has more than 500 breakable barrels; keep every cleared barrel.
 html=html.replace('].slice(0,500);s.blessings=', '].slice(0,2000);s.blessings=');
+// NPC battles use the same damage formula as the player, including projectile impacts.
+html=html.replace('__v88HitNPC(target,20+(w.elapsed>65?7:0),p.owner);', "__v88HitNPC(target,.85,p.owner);");
+html=html.replace('__v88HitNPC(d,8+(r.index%4)+(w.elapsed>65?5:0),r);', '__v88HitNPC(d,1,r);');
+html=html.replace('r.c.hp-r.c.maxHp*(.018+(d.index%3)*.002)', 'r.c.hp-__v105Damage(d.atk,r.c.def)');
+html=html.replace('const st=_g4(),factor=_85===2?1.18:1;', 'const st=_g4(),factor=1;');
+html=html.replace("name:'Tríada de energía imperial',type:'projectile',range:46,power:1.25", "name:'Tríada de energía imperial',type:'projectile',range:46,power:1.5");
+html=html.replace('_d0(c,1.25);e.audit.hits++', '_d0(c,1.5);e.audit.hits++');
 const begin = '/* AURELIA_UPDATE97_BEGIN */';
 const end = '/* AURELIA_UPDATE97_END */';
 // Service anchors still initialize their NPC, but must not reset a living NPC each frame.
@@ -77,7 +84,7 @@ html=html.replace('for(const d of __v29Doors){const dist=', 'for(const d of __v2
 html=html.replace('for(const n of __v101DoorActors())', 'for(const n of __v102DoorActors(d.p.x,d.p.z))');
 html=html.replaceAll('__v102DoorActors(d.p.x,d.p.z))','__v102DoorActors(d.p.x,d.p.z,Math.max(4,d.w*d.scale*.6+2)))');
 html=html.replace('Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<3)', 'Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<Math.max(3,d.w*d.scale*.6+2))');
-const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js', 'volcano104.js', 'airship104.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
+const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js', 'volcano104.js', 'airship104.js', 'balance-plan105.js', 'balance105.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
 sources.push('const __v103Blueprints='+JSON.stringify([1,2,3,4,5].map(i=>'data:image/png;base64,'+fs.readFileSync(path.join(root,'docs/volcano103/planta-'+i+'.png')).toString('base64')))+';');
 const block = `${begin}\n${sources.join('\n')}\n${end}\n`;
 if (html.includes(begin)) html = html.slice(0, html.indexOf(begin)) + block + html.slice(html.indexOf(end) + end.length).replace(/^\n/, '');
@@ -86,7 +93,7 @@ else {
   if (!html.includes(marker)) throw new Error('Missing game initialization marker');
   html = html.replace(marker, block + marker);
 }
-html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v104 Peligros de la Caldera</title>');
-html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v104-peligros-de-la-caldera">');
+html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v105 Nueva escala de combate</title>');
+html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v105-escala-de-combate">');
 fs.writeFileSync(file, html);
-console.log('Embedded Aurelia update 104');
+console.log('Embedded Aurelia update 105');

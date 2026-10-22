@@ -8,6 +8,8 @@ python -m http.server 8000 --bind 127.0.0.1
 
 Juega en https://mauriciolufia.github.io/AURELIA/.
 
+La [actualización 105](ACTUALIZACION105.md) aplica la fórmula `(ATK / DEF) × 8`, renueva la progresión de niveles, el equipo y la magia, y limita las variaciones entre enemigos del mismo nivel a ÷1,20–×1,20. El Emperador tiene 48.000 HP, 38.000 ATK y 450 DEF.
+
 La [actualización 104](ACTUALIZACION104.md) amplía la lava y los enemigos de la caverna, añade caídas de lava y cinco muros rompibles, mejora las franjas de trampas y el mapa, y reserva las subidas de las dos montañas a sus caminos. Vado del Sol vende la nave de vuelo por 7500 de oro y tiene un sabio con el catálogo completo de equipo. Las naves aparecen únicamente después de comprarlas.
 
 La [actualización 103](ACTUALIZACION103.md) añade el volcán ampliado, su camino sinuoso y una expedición secundaria de cinco plantas: siete salas grandes, seis grutas medianas y 16 circuitos por nivel, con monstruos de nivel 40–45. Consulta [una imagen por planta con todos sus objetos y peligros](docs/volcano103/).
@@ -22,11 +24,15 @@ Las fortalezas reconstruidas tienen siete salas principales consecutivas y dos s
 
 Las partidas se guardan localmente en el navegador. El botón de respaldo JSON está en el menú. Una partida abierta desde un archivo local y otra desde GitHub Pages usan almacenamientos distintos.
 
+Descarga la [guía de atributos, equipo y magia en Word](docs/balance105/Aurelia_v105_Atributos_Equipo_y_Magia.docx), actualizada a la escala v105.
+
 ## Validación
 
 ```sh
 npm ci
 npm test
+npm run test:scale
+npm run test:scale:browser
 npm run test:volcano-plan
 npm run test:update
 npm run test:update:mobile
