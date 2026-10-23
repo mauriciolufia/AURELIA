@@ -1,6 +1,6 @@
 {
   "name": "aurelia-rpg",
-  "version": "109.0.0",
+  "version": "110.0.0",
   "private": true,
   "description": "Aurelia RPG, juego HTML autónomo",
   "scripts": {
@@ -30,7 +30,9 @@
     "test:world-update:mobile": "node tests/update108.cjs --mobile",
     "test:techniques": "node tests/technique-plan109.cjs",
     "test:techniques:browser": "node tests/techniques109-browser.cjs",
-    "test:techniques:mobile": "node tests/techniques109-browser.cjs --mobile"
+    "test:techniques:mobile": "node tests/techniques109-browser.cjs --mobile",
+    "test:player": "node tests/player110.cjs",
+    "test:player:mobile": "node tests/player110.cjs --mobile"
   },
   "devDependencies": {
     "playwright": "1.62.1"

@@ -2,8 +2,8 @@
 const __v105Scale=(()=>{
  const level=n=>Math.max(1,Math.min(60,Math.round(Number(n)||1)));
  const curve=(a,b,n)=>Math.round(a*Math.pow(b/a,(level(n)-1)/59));
- // v109: twenty percent more base HP, ATK and DEF at every level; gear remains additive.
- const hero=n=>({maxHp:Math.round(curve(75,7500,n)*1.2),atk:Math.round(curve(10,25000,n)*1.2),def:Math.round(curve(12,380,n)*1.2)});
+ // v109 HP/DEF bonus retained; v110 final hero ATK endpoints are 20 and 100000.
+ const hero=n=>({maxHp:Math.round(curve(75,7500,n)*1.2),atk:curve(20,100000,n),def:Math.round(curve(12,380,n)*1.2)});
  const standard=n=>({maxHp:curve(20,12000,n),atk:curve(6,65000,n),def:curve(10,650,n)});
  const hash=s=>{let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0;};
  const profile=(id,rank='normal')=>{
@@ -18,10 +18,11 @@ const __v105Scale=(()=>{
   keys.forEach((k,i)=>{o[k]=Math.max(Math.ceil(b[k]/1.2),Math.min(Math.floor(b[k]*1.2),Math.round(b[k]*p[i])));});return o;
  };
  const armorEnds={head:[3,350],body:[5,500],feet:[2,250],shield:[4,450]};
- const gear=(n,slot)=>slot==='weapon'?{atk:curve(5,60000,n),def:0}:{atk:0,def:curve(...(armorEnds[slot]||armorEnds.body),n)};
- const magic=n=>curve(8,70000,n);
+ const gear=(n,slot)=>slot==='weapon'?{atk:2*curve(5,60000,n),def:0}:{atk:0,def:curve(...(armorEnds[slot]||armorEnds.body),n)};
+ const magic=n=>curve(100,140000,n);
+ const mana=n=>curve(100,5000,n);
  // Whole HP: round once at the point of damage; a positive attack always causes at least 1 HP.
  const damage=(atk,def)=>{atk=Number(atk);def=Number(def);if(!Number.isFinite(atk)||atk<=0)return 0;if(!Number.isFinite(def)||def<=0)def=1;return Math.max(1,Math.round(atk/def*8));};
- return{level,curve,hero,standard,profile,enemy,gear,magic,damage,armorEnds,variation:{min:1/1.2,max:1.2}};
+ return{level,curve,hero,standard,profile,enemy,gear,magic,mana,damage,armorEnds,variation:{min:1/1.2,max:1.2}};
 })();
 if(typeof module!=='undefined'&&module.exports)module.exports=__v105Scale;

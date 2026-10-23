@@ -8,6 +8,8 @@ python -m http.server 8000 --bind 127.0.0.1
 
 Juega en https://mauriciolufia.github.io/AURELIA/.
 
+La [actualización 110](ACTUALIZACION110.md) añade **G** para alternar la cámara, magias ofensivas de **100–140.000 de ATK elemental**, MP de **100–5.000** según el nivel y orden por **nivel o alfabético** para Equipo y Magia. El ATK base del héroe va de **20 a 100.000** y las armas duplican su ATK. Conserva los porcentajes de MP de las partidas anteriores.
+
 La [actualización 109](ACTUALIZACION109.md) reduce un 40% el desplazamiento y la frecuencia de ataque de todos los enemigos respecto a la versión anterior, conservando las quince decisiones estratégicas de la IA. Revisa las técnicas por especie y nivel y aumenta un 20% el HP, ATK y DEF base del héroe del nivel 1 al 60, con migración de partidas guardadas.
 
 La [actualización 108](ACTUALIZACION108.md) mejora las franjas de trampas, las estalactitas del techo, la destrucción física de árboles y rocas y las flechas de los enigmas. Los hitos reciben texturas de 2048 píxeles y detalles arquitectónicos a escala. Una cordillera cierra el acceso terrestre al territorio infernal y volcánico; puedes cruzar mediante vuelo, aeronave o teletransportación.
@@ -40,6 +42,8 @@ Descarga la [guía de atributos, equipo y magia en Word](docs/balance105/Aurelia
 npm ci
 npm test
 npm run test:scale
+npm run test:player
+npm run test:player:mobile
 npm run test:techniques
 npm run test:techniques:browser
 npm run test:techniques:mobile

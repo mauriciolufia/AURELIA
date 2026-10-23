@@ -28,7 +28,7 @@ _g4=function(){
  return{maxHp:Math.round(b.maxHp*(1+v.filter(s=>s==='hp').length*.05)),
   atk:Math.round((b.atk+(w?.atk||0))*(rpg.buff>0?1+(rpg.buffPct||.2):1)*(1+v.filter(s=>s==='atk').length*.03)),
   def:Math.round((b.def+items.reduce((n,i)=>n+i.def,0))*(rpg.shield>0?1+(rpg.defPct||.2):1)*(1+v.filter(s=>s==='def').length*.03)),
-  maxMp:65+(__v105Scale.level(rpg.level)-1)*9,reach:w?.reach||10};
+  maxMp:__v105Scale.mana(rpg.level),reach:w?.reach||10};
 };
 __v87Reference=function(level){const b=__v105Scale.hero(level);return{level:__v105Scale.level(level),...b,armor:[]};};
 __v87EnemyStats=function(c){
@@ -66,7 +66,7 @@ function __v105Spells(){
   Object.defineProperty(s,'power',{configurable:true,enumerable:true,get(){return __v105Scale.magic(__v87SupremeArts.some(a=>a[0]===this.id)?60:this.level);}});
   s.__v105Balanced=true;
  }
- __v92.calibration={formula:'(poder elemental / DEF) × 8',minPower:8,maxPower:70000,version:105};
+ __v92.calibration={formula:'(ATK elemental / DEF) × 8',minPower:100,maxPower:140000,version:110};
 }
 const __v105OldSpellBalance=__v92BalanceSpells;
 __v92BalanceSpells=function(){__v105OldSpellBalance();__v105Spells();};
@@ -93,4 +93,4 @@ __v88MakeFighter=function(n,index,p){
 const __v105HitNPC=__v88HitNPC;
 __v88HitNPC=function(d,power,source){if(!d)return;const damage=__v105Damage((source?.c?.damage||source?.damage||0)*power,d.def);const r=__v105HitNPC(d,damage,source);d.n.hp=d.hp;return r;};
 __v105Gear();__v105Spells();
-window.__AURELIA_BALANCE105__={hero:__v105Scale.hero,standard:__v105Scale.standard,enemy:__v105Scale.enemy,gear:__v105Scale.gear,magic:__v105Scale.magic,damage:__v105Damage,variation:__v105Scale.variation,slots:__v105Slots};
+window.__AURELIA_BALANCE105__={hero:__v105Scale.hero,standard:__v105Scale.standard,enemy:__v105Scale.enemy,gear:__v105Scale.gear,magic:__v105Scale.magic,mana:__v105Scale.mana,damage:__v105Damage,variation:__v105Scale.variation,slots:__v105Slots};
