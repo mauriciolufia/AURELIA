@@ -55,13 +55,13 @@ function __v107CandyTrees(){
  const root=new _0.Group();root.name='Arboleda de caramelo · bastones y algodón de azúcar';root.userData.cull93={x:_ha.x,z:_ha.z,r:_ha.r+200};_8.add(root);s.treeRoot=root;__v93.cullGroups.push(root);
  const trunk=__v97ToonMaterial(new _0.MeshStandardMaterial({color:'#fff4eb',roughness:.65}));trunk.map=__v107CandyTexture();trunk.needsUpdate=true;
  const batches=new Map(),m=new _0.Matrix4(),q=new _0.Quaternion(),v=new _0.Vector3(),scale=new _0.Vector3();
- function add(key,geo,material,p,x,y,z,sx,sy,sz){if(!batches.has(key))batches.set(key,{geo,material,items:[]});v.set(p.x+x*p.scale,p.y+y*p.scale,p.z+z*p.scale);scale.set(sx*p.scale,sy*p.scale,sz*p.scale);m.compose(v,q,scale);batches.get(key).items.push(m.clone());}
+ function add(key,geo,material,p,x,y,z,sx,sy,sz){if(!batches.has(key))batches.set(key,{geo,material,items:[]});v.set(p.x+x*p.scale,p.y+y*p.scale,p.z+z*p.scale);scale.set(sx*p.scale,sy*p.scale,sz*p.scale);m.compose(v,q,scale);batches.get(key).items.push(m.clone());(batches.get(key).owners??=[]).push(__v108SceneryObject('tree',p.x,p.y,p.z,.38*p.scale).id);}
  const stem=new _0.CylinderGeometry(.23,.34,4.4,12),crown=new _0.SphereGeometry(1,16,12),lollipop=new _0.TorusGeometry(1,.27,10,28),colors=['#f789c0','#c29aef','#f8d17e'],mats=colors.map(color=>__v97ToonMaterial(new _0.MeshStandardMaterial({color,roughness:.8})));
  for(const p of s.trees){add('stem',stem,trunk,p,0,2.2,0,1,1,1);if(p.kind===0){for(let i=0;i<3;i++)add('cotton'+p.palette,crown,mats[p.palette],p,(i-1)*.65,4.7+(i===1?.65:0),i%2*.25,1.15,1.05,1);}
   else{add('sweet'+p.palette,crown,mats[p.palette],p,0,5,0,1.4,1.4,.48);add('ring'+p.palette,lollipop,trunk,p,0,5,-.5,1,1,.65);}
   _q.push({x:p.x,z:p.z,r:.38*p.scale,bottom:p.y,top:p.y+4.4*p.scale,tag:'candyTree107'});
  }
- for(const b of batches.values()){const mesh=new _0.InstancedMesh(b.geo,b.material,b.items.length);b.items.forEach((m,i)=>mesh.setMatrixAt(i,m));mesh.receiveShadow=true;mesh.castShadow=false;mesh.computeBoundingSphere?.();root.add(mesh);}
+ for(const b of batches.values()){const mesh=new _0.InstancedMesh(b.geo,b.material,b.items.length);b.items.forEach((m,i)=>mesh.setMatrixAt(i,m));mesh.userData.destruct108=b.owners;mesh.receiveShadow=true;mesh.castShadow=false;mesh.computeBoundingSphere?.();root.add(mesh);}
 }
 function __v107ClearTrees(){const root=__v107WorldState.treeRoot;if(!root)return;const geos=new Set(),mats=new Set(),maps=new Set();root.traverse(o=>{if(o.geometry)geos.add(o.geometry);if(o.material)mats.add(o.material);});for(const m of mats){if(m.map)maps.add(m.map);m.dispose();}for(const g of geos)g.dispose();for(const t of maps)t.dispose();root.removeFromParent();__v107WorldState.treeRoot=null;}
 const __v107SystemsWorld=_bj;_bj=function(...args){__v107ClearTrees();const r=__v107SystemsWorld(...args);for(const c of _m)if(c.hostile)__v107Limit(c);__v107CandyTrees();return r;};

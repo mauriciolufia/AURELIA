@@ -43,6 +43,7 @@ html=html.replace('if(_eb)_14.set(s.player[0],_dz.y+1.85,s.player[2]);','if(_eb)
 html=html.replaceAll('Cripta del Sol · recorre sus doce cámaras','Pirámide del Sol Eterno · tres plantas conectadas');
 html=html.replaceAll('Capitana Bruma Roja','Barbanegra').replaceAll('Bruma Roja','Barbanegra');
 html=html.replace('_14.y-1.85<t.y+3&&__v86TrapContains', "_14.y-1.85<t.y+(['spikes','dark','vapor102','poison'].includes(t.type)?8:3)&&__v86TrapContains");
+html=html.replaceAll("['spikes','dark','vapor102','poison'].includes(t.type)?8:3", "['spikes','dark','vapor102','poison','poisongas','firejet','burn','fire108'].includes(t.type)?11.8:3");
 // Exterior destinations must not inherit remote interior floor coordinates.
 html=html.replace(/a.site===index&&a.key!=='crypt'(?:&&!a.plan103&&a.tower94!==__v102Solar)*/g, "a.site===index&&a.key!=='crypt'&&!a.plan103&&a.tower94!==__v102Solar");
 // The expanded world has more than 500 breakable barrels; keep every cleared barrel.
@@ -60,6 +61,30 @@ html=html.replace("Math.abs(_2r(xx,zz)-y)>.65||_i7(xx,zz,y+1.85)","Math.abs(_2r(
 html=html.replace("e.specialCursor++%2?'darkness':'energy'", "['darkness','energy','pulse'][e.specialCursor++%3]");
 html=html.replace("type:r.fire&&Math.random()<.65?'fire':'claw'", "type:['claw','fire','pulse'][(r.__v107Turns=(r.__v107Turns||0)+1)%3]");
 html=html.replace("if(r.action.type==='fire')__v88Spit(r,d);else if(Math.hypot", "if(r.action.type==='fire')__v88Spit(r,d);else if(r.action.type==='pulse')__v107RaidPulse(r);else if(Math.hypot");
+html=html.replace('for(const c of items){const inside=c.w!==undefined?', 'for(const c of items){if(c.destruct108&&(c.destruct108===__v108Scenery.ignore||__v108Scenery.broken.has(c.destruct108)))continue;const inside=c.w!==undefined?');
+html=html.replace("list.push({x,y,z,s:b.id==='polar'?", "list.push({x,y,z,rock108:true,s:b.id==='polar'?");
+// Preserve per-tree and per-rock ownership through streamed sector geometry.
+html=html.replace('m.castShadow=m.receiveShadow=true;_8.add(m);return m;', 'm.castShadow=m.receiveShadow=true;_8.add(m);__v108SceneryPart(m,items,geo);return m;');
+html=html.replace('else _bb(o.geometry,o.material,o.matrixWorld,o.castShadow);', 'else _bb(o.geometry,o.material,o.matrixWorld,o.castShadow,__v108SceneryMeshId(o));');
+html=html.replace('_bb(o.geometry,o.material,new _0.Matrix4().multiplyMatrices(o.matrixWorld,m),o.castShadow);', '_bb(o.geometry,o.material,new _0.Matrix4().multiplyMatrices(o.matrixWorld,m),o.castShadow,o.userData.destruct108?.[i]);');
+html=html.replace('for(const r of p.records){const base=_b9(r.geometry);', 'for(const r of p.records){if(r.destruct108&&__v108Scenery.broken.has(r.destruct108))continue;const base=_b9(r.geometry);');
+html=html.replace("if(i%3===0){\n      mesh(new _0.CylinderGeometry(.2,.26,4.3,6)", "if(i%3===0){g.userData.tree108=true;\n      mesh(new _0.CylinderGeometry(.2,.26,4.3,6)");
+
+// Late withered trees also retain ownership through their shared instance batches.
+html=html.replaceAll('batches.get(key).push({x,y,z,sx,sy,sz,ry,rz});', 'batches.get(key).push({x,y,z,sx,sy,sz,ry,rz,owner108:__v108Scenery.scopeOwner?.id});');
+html=html.replace("for(const[i,p]of trees.entries()){const h=5+rng88()", "for(const[i,p]of trees.entries()){__v108Scenery.scopeOwner=__v108SceneryObject('tree',p.x,p.y,p.z,.58);const h=5+rng88()");
+html=html.replace("tag:'withered88'};_q.push(c);}", "tag:'withered88'};_q.push(c);__v108Scenery.scopeOwner=null;}");
+html=html.replace("for(const p of trees){const h=6+random()", "for(const p of trees){__v108Scenery.scopeOwner=__v108SceneryObject('tree',p.x,p.y,p.z,.6);const h=6+random()");
+html=html.replace("tag:'withered91'});\n }", "tag:'withered91'});__v108Scenery.scopeOwner=null;\n }");
+html=html.replace('batches.get(key).push({matrix:obj.matrix.clone()});', 'batches.get(key).push({matrix:obj.matrix.clone(),owner108:__v108Scenery.scopeOwner?.id});');
+html=html.replaceAll('mesh.setMatrixAt(i,obj.matrix);}mesh.instanceMatrix', 'mesh.setMatrixAt(i,obj.matrix);if(p.owner108)__v108OwnInstance(__v108Scenery.objects.get(p.owner108),mesh,i);}mesh.instanceMatrix');
+html=html.replace('mesh.setMatrixAt(i,p.matrix);continue;', 'mesh.setMatrixAt(i,p.matrix);if(p.owner108)__v108OwnInstance(__v108Scenery.objects.get(p.owner108),mesh,i);continue;');
+html=html.replace(/root.name='Yermo del Eclipse · árboles, osamentas y ruinas';(?:root\.userData\.animated=true;)*/g, "root.name='Yermo del Eclipse · árboles, osamentas y ruinas';root.userData.animated=true;");
+html=html.replace(/root.name='Ruinas detalladas y arboleda marchita del Eclipse';(?:root\.userData\.animated=true;)*/g, "root.name='Ruinas detalladas y arboleda marchita del Eclipse';root.userData.animated=true;");
+
+// Windows on tapered windmill shells must sit outside the masonry at their actual height.
+html=html.replace('__v91LWindow(g,dx+side*4.7,h,(j%2)*15,1.4,2,side*Math.PI/2,p)', '__v91LWindow(g,dx+side*(6-h*.125+.12),h,(j%2)*15,1.4,2,side*Math.PI/2,p)');
+html=html.replace('const g=base.index?base.toNonIndexed():base.clone();g.applyMatrix4(r.matrix);', 'const g=base.index?base.toNonIndexed():base.clone();__v108LandApplyUV(g,r.geometry);g.applyMatrix4(r.matrix);');
 const begin = '/* AURELIA_UPDATE97_BEGIN */';
 const end = '/* AURELIA_UPDATE97_END */';
 // Service anchors still initialize their NPC, but must not reset a living NPC each frame.
@@ -90,7 +115,7 @@ html=html.replace('for(const d of __v29Doors){const dist=', 'for(const d of __v2
 html=html.replace('for(const n of __v101DoorActors())', 'for(const n of __v102DoorActors(d.p.x,d.p.z))');
 html=html.replaceAll('__v102DoorActors(d.p.x,d.p.z))','__v102DoorActors(d.p.x,d.p.z,Math.max(4,d.w*d.scale*.6+2)))');
 html=html.replace('Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<3)', 'Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<Math.max(3,d.w*d.scale*.6+2))');
-const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js', 'volcano104.js', 'airship104.js', 'balance-plan105.js', 'balance105.js', 'lighting106.js', 'world107.js', 'castle107.js', 'enemy-collision107.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
+const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js', 'volcano104.js', 'airship104.js', 'balance-plan105.js', 'balance105.js', 'lighting106.js', 'world107.js', 'castle107.js', 'enemy-collision107.js', 'destruction108.js', 'hazards108.js', 'riddle-arrows108.js', 'landmarks108.js', 'frontier108.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
 sources.push('const __v103Blueprints='+JSON.stringify([1,2,3,4,5].map(i=>'data:image/png;base64,'+fs.readFileSync(path.join(root,'docs/volcano103/planta-'+i+'.png')).toString('base64')))+';');
 const block = `${begin}\n${sources.join('\n')}\n${end}\n`;
 if (html.includes(begin)) html = html.slice(0, html.indexOf(begin)) + block + html.slice(html.indexOf(end) + end.length).replace(/^\n/, '');
@@ -99,7 +124,7 @@ else {
   if (!html.includes(marker)) throw new Error('Missing game initialization marker');
   html = html.replace(marker, block + marker);
 }
-html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v107 Fortalezas y biomas</title>');
-html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v107-fortalezas-y-biomas">');
+html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v108 Trampas y mundo destructible</title>');
+html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v108-trampas-y-mundo-destructible">');
 fs.writeFileSync(file, html);
-console.log('Embedded Aurelia update 107');
+console.log('Embedded Aurelia update 108');
