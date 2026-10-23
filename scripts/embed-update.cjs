@@ -85,6 +85,16 @@ html=html.replace(/root.name='Ruinas detalladas y arboleda marchita del Eclipse'
 // Windows on tapered windmill shells must sit outside the masonry at their actual height.
 html=html.replace('__v91LWindow(g,dx+side*4.7,h,(j%2)*15,1.4,2,side*Math.PI/2,p)', '__v91LWindow(g,dx+side*(6-h*.125+.12),h,(j%2)*15,1.4,2,side*Math.PI/2,p)');
 html=html.replace('const g=base.index?base.toNonIndexed():base.clone();g.applyMatrix4(r.matrix);', 'const g=base.index?base.toNonIndexed():base.clone();__v108LandApplyUV(g,r.geometry);g.applyMatrix4(r.matrix);');
+// Audited charge distances apply outside as well as inside a fortress.
+html=html.replace('__v85Indoor(c)?Math.max(0,a.art.range-(a.travelled85||0)):Infinity', '(a.art.technique109||__v85Indoor(c))?Math.max(0,a.art.range-(a.travelled85||0)):Infinity');
+html=html.replace('if(__v85Indoor(c)&&a.travelled85>=a.art.range)', 'if((a.art.technique109||__v85Indoor(c))&&a.travelled85>=a.art.range)');
+// Slow hostile locomotion only; leave NPCs, player, perception and decision clocks intact.
+for(const native of ['sp=c.speed*.35*__v92Speed(c)','sp=c.speed*__v92Speed(c)','sp=c.speed*.9*__v92Speed(c)'])
+ html=html.replace(native+'*__v109MoveRate(c)',native).replace(native,native+'*__v109MoveRate(c)');
+html=html.replace('c.speed*dt*(hunting?1:.3)','c.speed*__v109MoveRate(c)*dt*(hunting?1:.3)');
+html=html.replace('1.3*__v92Speed(c),','1.3*__v92Speed(c)*__v109MoveRate(c),');
+html=html.replace('dt*(e.pending?10.5:8.7)*__v109MoveRate(c)','dt*(e.pending?10.5:8.7)').replace('dt*(e.pending?10.5:8.7)','dt*(e.pending?10.5:8.7)*__v109MoveRate(c)');
+html=html.replace('Math.max(7.6,(c.spec.speed||4)*2),dt,crowd)','Math.max(7.6,(c.spec.speed||4)*2)*__v109MoveRate(c),dt,crowd)');
 const begin = '/* AURELIA_UPDATE97_BEGIN */';
 const end = '/* AURELIA_UPDATE97_END */';
 // Service anchors still initialize their NPC, but must not reset a living NPC each frame.
@@ -115,7 +125,7 @@ html=html.replace('for(const d of __v29Doors){const dist=', 'for(const d of __v2
 html=html.replace('for(const n of __v101DoorActors())', 'for(const n of __v102DoorActors(d.p.x,d.p.z))');
 html=html.replaceAll('__v102DoorActors(d.p.x,d.p.z))','__v102DoorActors(d.p.x,d.p.z,Math.max(4,d.w*d.scale*.6+2)))');
 html=html.replace('Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<3)', 'Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<Math.max(3,d.w*d.scale*.6+2))');
-const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js', 'volcano104.js', 'airship104.js', 'balance-plan105.js', 'balance105.js', 'lighting106.js', 'world107.js', 'castle107.js', 'enemy-collision107.js', 'destruction108.js', 'hazards108.js', 'riddle-arrows108.js', 'landmarks108.js', 'frontier108.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
+const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js', 'volcano104.js', 'airship104.js', 'balance-plan105.js', 'balance105.js', 'lighting106.js', 'world107.js', 'castle107.js', 'enemy-collision107.js', 'destruction108.js', 'hazards108.js', 'riddle-arrows108.js', 'landmarks108.js', 'frontier108.js', 'technique-plan109.js', 'techniques109.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
 sources.push('const __v103Blueprints='+JSON.stringify([1,2,3,4,5].map(i=>'data:image/png;base64,'+fs.readFileSync(path.join(root,'docs/volcano103/planta-'+i+'.png')).toString('base64')))+';');
 const block = `${begin}\n${sources.join('\n')}\n${end}\n`;
 if (html.includes(begin)) html = html.slice(0, html.indexOf(begin)) + block + html.slice(html.indexOf(end) + end.length).replace(/^\n/, '');
@@ -124,7 +134,7 @@ else {
   if (!html.includes(marker)) throw new Error('Missing game initialization marker');
   html = html.replace(marker, block + marker);
 }
-html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v108 Trampas y mundo destructible</title>');
-html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v108-trampas-y-mundo-destructible">');
+html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v109 Técnicas por especie y nivel</title>');
+html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v109-tecnicas-por-especie-y-nivel">');
 fs.writeFileSync(file, html);
-console.log('Embedded Aurelia update 108');
+console.log('Embedded Aurelia update 109');

@@ -2,7 +2,8 @@
 const __v105Scale=(()=>{
  const level=n=>Math.max(1,Math.min(60,Math.round(Number(n)||1)));
  const curve=(a,b,n)=>Math.round(a*Math.pow(b/a,(level(n)-1)/59));
- const hero=n=>({maxHp:curve(75,7500,n),atk:curve(10,25000,n),def:curve(12,380,n)});
+ // v109: twenty percent more base HP, ATK and DEF at every level; gear remains additive.
+ const hero=n=>({maxHp:Math.round(curve(75,7500,n)*1.2),atk:Math.round(curve(10,25000,n)*1.2),def:Math.round(curve(12,380,n)*1.2)});
  const standard=n=>({maxHp:curve(20,12000,n),atk:curve(6,65000,n),def:curve(10,650,n)});
  const hash=s=>{let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0;};
  const profile=(id,rank='normal')=>{

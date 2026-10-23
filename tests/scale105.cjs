@@ -1,7 +1,8 @@
 const assert=require('node:assert/strict'),S=require('../src/balance-plan105.js');
-assert.deepEqual(S.hero(1),{maxHp:75,atk:10,def:12});assert.deepEqual(S.hero(60),{maxHp:7500,atk:25000,def:380});
+assert.deepEqual(S.hero(1),{maxHp:90,atk:12,def:14});assert.deepEqual(S.hero(60),{maxHp:9000,atk:30000,def:456});
 assert.deepEqual(S.enemy(1,'slime'),{maxHp:20,atk:6,def:10});assert.deepEqual(S.enemy(60,'supreme_emperor','boss'),{maxHp:48000,atk:38000,def:450});
 for(let n=1;n<=60;n++){
+ for(const [key,a,b]of [['maxHp',75,7500],['atk',10,25000],['def',12,380]])assert.equal(S.hero(n)[key],Math.round(S.curve(a,b,n)*1.2));
  for(const rank of ['normal','elite','boss'])for(const id of ['slime','wolf','golem','supreme_emperor','pirate','guard','archdevil']){
   if(id==='supreme_emperor')continue;const e=S.enemy(n,id,rank),b=S.standard(n);if(rank==='boss'){b.maxHp*=2;b.def=Math.round(b.def*1.5);}for(const k of Object.keys(b))assert(e[k]>=b[k]/1.2&&e[k]<=b[k]*1.2,`${id}/${rank}/${n}/${k}`);
  }
