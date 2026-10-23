@@ -35,7 +35,7 @@ __v87EnemyStats=function(c){
  if(!c?.hostile)return;
  const fraction=c.maxHp>0?Math.max(0,Math.min(1,c.hp/c.maxHp)):1;
  const id=c.boss==='azrakh'?'supreme_emperor':c.spec?.id||c.id||'unknown';
- const rank=c.boss?'boss':c.elite||c.questElite?'elite':'normal',s=__v105Scale.enemy(c.level,id,rank);
+ const rank=c.boss?'boss':c.elite||c.questElite?'elite':'normal',bossAttack=!!c.boss||(typeof __v109Context==='function'&&__v109Context(c).boss),s=__v105Scale.enemy(c.level,id,rank,bossAttack);
  c.maxHp=s.maxHp;c.hp=c.dead?0:Math.max(fraction>0?1:0,Math.round(s.maxHp*fraction));
  c.atk=c.damage=c.previousAtk=s.atk;c.def=c.__v87BaseDef=s.def;
  if(c.__v87DefTime>0)c.def=Math.round(s.def*1.35);
@@ -87,7 +87,7 @@ const __v105Load=_dn;_dn=function(s){
 const __v105Save=_iv;_iv=function(...args){const r=__v105Save(...args);if(_u)try{const s=JSON.parse(__v96ReadSave());s.balance105={version:105};__v96WriteSave(JSON.stringify(s));}catch(e){}return r;};
 const __v105Fighter=__v88MakeFighter;
 __v88MakeFighter=function(n,index,p){
- const d=__v105Fighter(n,index,p),level=45+index%4,s=__v105Scale.enemy(level,'forjabrasa-defender-'+index,'elite');
+ const d=__v105Fighter(n,index,p),level=45+index%4,s=__v105Scale.defender(level,'forjabrasa-defender-'+index);
  Object.assign(d,{level,atk:s.atk,def:s.def,hp:s.maxHp,maxHp:s.maxHp});Object.assign(n,{level,atk:s.atk,damage:s.atk,def:s.def,hp:s.maxHp,maxHp:s.maxHp});return d;
 };
 const __v105HitNPC=__v88HitNPC;
