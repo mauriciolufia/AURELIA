@@ -8,6 +8,8 @@ python -m http.server 8000 --bind 127.0.0.1
 
 Juega en https://mauriciolufia.github.io/AURELIA/.
 
+La [actualización 106](ACTUALIZACION106.md) suaviza la luz en fortalezas y cavernas, mantiene visibles los detalles y equilibra las antorchas con transiciones graduales, sin ray tracing ni luces adicionales.
+
 La [actualización 105](ACTUALIZACION105.md) aplica la fórmula `(ATK / DEF) × 8`, renueva la progresión de niveles, el equipo y la magia, y limita las variaciones entre enemigos del mismo nivel a ÷1,20–×1,20. El Emperador tiene 48.000 HP, 38.000 ATK y 450 DEF.
 
 La [actualización 104](ACTUALIZACION104.md) amplía la lava y los enemigos de la caverna, añade caídas de lava y cinco muros rompibles, mejora las franjas de trampas y el mapa, y reserva las subidas de las dos montañas a sus caminos. Vado del Sol vende la nave de vuelo por 7500 de oro y tiene un sabio con el catálogo completo de equipo. Las naves aparecen únicamente después de comprarlas.
@@ -33,6 +35,8 @@ npm ci
 npm test
 npm run test:scale
 npm run test:scale:browser
+npm run test:lighting
+npm run test:lighting:mobile
 npm run test:volcano-plan
 npm run test:update
 npm run test:update:mobile
