@@ -8,6 +8,8 @@ python -m http.server 8000 --bind 127.0.0.1
 
 Juega en https://mauriciolufia.github.io/AURELIA/.
 
+La [actualización 107](ACTUALIZACION107.md) corrige enemigos incrustados en muros, fija dos técnicas hasta nivel 40 y tres desde nivel 41, verifica las arenas movedizas y añade 72 árboles de caramelo. Los comerciantes de castillos atienden de 09:00 a 15:00 y los reyes permanecen en el salón real de 06:00 a 18:00.
+
 La [actualización 106](ACTUALIZACION106.md) suaviza la luz en fortalezas y cavernas, mantiene visibles los detalles y equilibra las antorchas con transiciones graduales, sin ray tracing ni luces adicionales.
 
 La [actualización 105](ACTUALIZACION105.md) aplica la fórmula `(ATK / DEF) × 8`, renueva la progresión de niveles, el equipo y la magia, y limita las variaciones entre enemigos del mismo nivel a ÷1,20–×1,20. El Emperador tiene 48.000 HP, 38.000 ATK y 450 DEF.
@@ -37,6 +39,8 @@ npm run test:scale
 npm run test:scale:browser
 npm run test:lighting
 npm run test:lighting:mobile
+npm run test:enemy-collision
+npm run test:enemy-collision:mobile
 npm run test:volcano-plan
 npm run test:update
 npm run test:update:mobile
