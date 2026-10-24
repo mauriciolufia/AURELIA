@@ -1,0 +1,500 @@
+[
+  {
+    "scene": "town",
+    "samples": 450,
+    "unoptimized": true,
+    "performance": {
+      "mobile": true,
+      "totalActors": 6261,
+      "streamCandidates": 148,
+      "groundQueries": 194,
+      "groundCacheHits": 18,
+      "walkQueries": 0,
+      "walkCacheHits": 0,
+      "resolutionPreserved": true,
+      "texturesPreserved": true,
+      "elementsPreserved": true,
+      "buffer": [
+        1920,
+        1080
+      ]
+    },
+    "median": 5,
+    "p95": 9.900000035762787,
+    "total": 2561.0000001192093,
+    "top": [
+      [
+        "_ei",
+        219
+      ],
+      [
+        "(anonymous:947)",
+        136
+      ],
+      [
+        "_bg",
+        117
+      ],
+      [
+        "(program)",
+        98
+      ],
+      [
+        "__v75Tick",
+        74
+      ],
+      [
+        "_he",
+        66
+      ],
+      [
+        "__v93Visibility",
+        53
+      ],
+      [
+        "_aa",
+        51
+      ],
+      [
+        "querySelector",
+        50
+      ],
+      [
+        "_d8",
+        47
+      ],
+      [
+        "__v84PointInRing",
+        45
+      ],
+      [
+        "_eh",
+        45
+      ],
+      [
+        "__v101Ground",
+        43
+      ],
+      [
+        "__v87MiniDraw",
+        43
+      ],
+      [
+        "__v101SweptHit",
+        41
+      ],
+      [
+        "_23",
+        35
+      ],
+      [
+        "__v101Segment",
+        31
+      ],
+      [
+        "_8g",
+        31
+      ],
+      [
+        "__v114Neighbors",
+        30
+      ],
+      [
+        "_2r",
+        30
+      ],
+      [
+        "__v102DoorActors",
+        27
+      ],
+      [
+        "(garbage collector)",
+        27
+      ],
+      [
+        "(anonymous:7853)",
+        25
+      ],
+      [
+        "(anonymous:9322)",
+        25
+      ],
+      [
+        "__v73TickDoors",
+        23
+      ],
+      [
+        "_78",
+        21
+      ],
+      [
+        "_74",
+        20
+      ],
+      [
+        "setFromEuler",
+        20
+      ],
+      [
+        "_8l",
+        19
+      ],
+      [
+        "__v99InteriorTick",
+        18
+      ],
+      [
+        "_hr",
+        17
+      ],
+      [
+        "__v114Text",
+        17
+      ],
+      [
+        "__v100Pose",
+        17
+      ],
+      [
+        "__v101Tick",
+        17
+      ],
+      [
+        "_37",
+        16
+      ]
+    ]
+  },
+  {
+    "scene": "house",
+    "samples": 450,
+    "unoptimized": true,
+    "performance": {
+      "mobile": true,
+      "totalActors": 6261,
+      "streamCandidates": 148,
+      "groundQueries": 194,
+      "groundCacheHits": 18,
+      "walkQueries": 0,
+      "walkCacheHits": 0,
+      "resolutionPreserved": true,
+      "texturesPreserved": true,
+      "elementsPreserved": true,
+      "buffer": [
+        1920,
+        1080
+      ]
+    },
+    "median": 4.199999988079071,
+    "p95": 9.299999952316284,
+    "total": 2330.7000001072884,
+    "top": [
+      [
+        "(anonymous:947)",
+        142
+      ],
+      [
+        "_bg",
+        132
+      ],
+      [
+        "_ei",
+        105
+      ],
+      [
+        "(garbage collector)",
+        96
+      ],
+      [
+        "_d8",
+        82
+      ],
+      [
+        "_he",
+        62
+      ],
+      [
+        "querySelector",
+        56
+      ],
+      [
+        "_aa",
+        54
+      ],
+      [
+        "__v87MiniDraw",
+        44
+      ],
+      [
+        "__v75Tick",
+        41
+      ],
+      [
+        "__v114Neighbors",
+        29
+      ],
+      [
+        "__v73TickDoors",
+        29
+      ],
+      [
+        "_23",
+        28
+      ],
+      [
+        "__v101Ground",
+        28
+      ],
+      [
+        "__v93Visibility",
+        27
+      ],
+      [
+        "setFromEuler",
+        27
+      ],
+      [
+        "_78",
+        26
+      ],
+      [
+        "_74",
+        25
+      ],
+      [
+        "_8g",
+        25
+      ],
+      [
+        "__v101Tick",
+        25
+      ],
+      [
+        "__v102DoorActors",
+        24
+      ],
+      [
+        "(anonymous:7853)",
+        22
+      ],
+      [
+        "_hr",
+        22
+      ],
+      [
+        "_8l",
+        22
+      ],
+      [
+        "__v84PointInRing",
+        21
+      ],
+      [
+        "(anonymous:9322)",
+        21
+      ],
+      [
+        "_eh",
+        20
+      ],
+      [
+        "(program)",
+        19
+      ],
+      [
+        "getBoundingClientRect",
+        19
+      ],
+      [
+        "_2r",
+        19
+      ],
+      [
+        "(anonymous:178)",
+        18
+      ],
+      [
+        "__v101SweptHit",
+        17
+      ],
+      [
+        "__v73Hit",
+        16
+      ],
+      [
+        "_i7",
+        15
+      ],
+      [
+        "__v100Pose",
+        15
+      ]
+    ]
+  },
+  {
+    "scene": "fortress",
+    "samples": 450,
+    "unoptimized": true,
+    "performance": {
+      "mobile": true,
+      "totalActors": 6261,
+      "streamCandidates": 148,
+      "groundQueries": 194,
+      "groundCacheHits": 18,
+      "walkQueries": 0,
+      "walkCacheHits": 0,
+      "resolutionPreserved": true,
+      "texturesPreserved": true,
+      "elementsPreserved": true,
+      "buffer": [
+        1920,
+        1080
+      ]
+    },
+    "median": 7.800000011920929,
+    "p95": 11.699999988079071,
+    "total": 3668.9999997615814,
+    "top": [
+      [
+        "__v84PointInRing",
+        600
+      ],
+      [
+        "_i7",
+        224
+      ],
+      [
+        "(anonymous:947)",
+        161
+      ],
+      [
+        "_77",
+        153
+      ],
+      [
+        "_23",
+        140
+      ],
+      [
+        "_bg",
+        122
+      ],
+      [
+        "__v75Tick",
+        118
+      ],
+      [
+        "__v73Hit",
+        109
+      ],
+      [
+        "_8g",
+        100
+      ],
+      [
+        "__v91Blocked",
+        99
+      ],
+      [
+        "_78",
+        60
+      ],
+      [
+        "querySelector",
+        59
+      ],
+      [
+        "__v93Visibility",
+        54
+      ],
+      [
+        "__v83Walkable",
+        52
+      ],
+      [
+        "contains",
+        49
+      ],
+      [
+        "(garbage collector)",
+        47
+      ],
+      [
+        "_aa",
+        47
+      ],
+      [
+        "(anonymous:8549)",
+        43
+      ],
+      [
+        "setFromEuler",
+        33
+      ],
+      [
+        "_he",
+        32
+      ],
+      [
+        "(anonymous:7853)",
+        31
+      ],
+      [
+        "_d6",
+        24
+      ],
+      [
+        "(anonymous:8629)",
+        23
+      ],
+      [
+        "__v83Protected",
+        21
+      ],
+      [
+        "getBoundingClientRect",
+        21
+      ],
+      [
+        "__v75Nearby",
+        21
+      ],
+      [
+        "__v73TickDoors",
+        20
+      ],
+      [
+        "_hr",
+        19
+      ],
+      [
+        "__v91Guard",
+        18
+      ],
+      [
+        "(anonymous:9322)",
+        18
+      ],
+      [
+        "_d8",
+        18
+      ],
+      [
+        "_ik",
+        18
+      ],
+      [
+        "__v109Ensure",
+        18
+      ],
+      [
+        "(program)",
+        17
+      ],
+      [
+        "_4z",
+        17
+      ]
+    ]
+  }
+]

@@ -100,7 +100,7 @@ function __v101Assign(){
  for(const p of __v100Day.furniture)if(p.type!=='seat'&&!p.home?.castle)__v101Collider(p,p.type==='bed'?.65:p.type==='table'?1.05:2.7);
  _22();
  const available=__v101Life.homes.filter(h=>!h.castle),givers=new Set(_bp.map(q=>q.giver));
- for(const n of _2h){if(n.__v88Dead||n.__v88Controlled)continue;const site=_1h[n.homeSite??n.site];let h=available.includes(n.home)?n.home:null;
+ for(const n of _2h){if(n.__v88Dead||n.__v88Controlled)continue;const site=_1h[n.homeSite??n.site];let h=n===__v75.sage?.npc&&available.includes(__v75.sage.house)?__v75.sage.house:available.includes(n.home)?n.home:null;
   const castle=__v101Life.castleHomes.filter(h=>h.castle===(n.homeSite??n.site));
   if(castle.length)h=castle.find(h=>h.members.length<2)||castle[0];
   if(!h){const candidates=available.filter(h=>!site||h.city===site.name);h=(candidates.length?candidates:available).slice().sort((a,b)=>Math.hypot(a.x-n.x,a.z-n.z)+a.members.length*10-(Math.hypot(b.x-n.x,b.z-n.z)+b.members.length*10))[0];}
@@ -255,7 +255,7 @@ function __v101Tick(n,b,dt){
  let moving=false;const point=s.route[s.index],portalClear=s.phase!=='travel'||s.waypoint===s.waypoints.length-1||(__v101Inside(a.home,s.pathTarget||n,.1)?__v101Inside(a.home,n,.6):!__v101Inside(a.home,n,-.6));
  if(s.phase==='travel'&&point){const distance=Math.hypot(point.x-n.x,point.z-n.z),last=s.index===s.route.length-1,final=s.waypoint===s.waypoints.length-1,context=s.zone!=='outside'||__v101Outdoors(n),radius=last?(final?(s.station?.07:context?.65:.07):portalClear?.75:.12):.65;if(distance<radius&&(last||distance<.02||__v101Segment(n,{x:n.x,z:n.z,y:n.homeY},s.route[s.index+1],true)!==null))s.index++;else{
   const speed=n.age==='child'?(s.action==='tag'?3:2.1):1.95,step=Math.min(distance,speed*Math.min(.05,Math.max(0,dt))),dx=(point.x-n.x)/distance,dz=(point.z-n.z)/distance;
-  const occupied=(x,z)=>__v88Life.active.some(o=>o!==n&&!o.__v88Dead&&!o.sleeping&&Math.abs(o.homeY-n.homeY)<.6&&Math.hypot(o.x-x,o.z-z)<.5&&Math.hypot(o.x-x,o.z-z)<Math.hypot(o.x-n.x,o.z-n.z)-.001);
+  const occupied=(x,z)=>__v114NPCBlocked(n,x,z);
   let x=n.x+dx*step,z=n.z+dz*step,y=__v101Segment(n,{x:n.x,z:n.z,y:n.homeY},{x,z},true),sidestepped=false;
   if(occupied(x,z)){
    y=null;const side=Math.floor(Math.abs(n.phase||0)*100)%2?1:-1;

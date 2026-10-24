@@ -23,7 +23,7 @@ function __v105MigrateEquipment(){
 }
 _g4=function(){
  const b=__v105Scale.hero(rpg.level),e=rpg.equipped,v=Object.values(__v75Save.blessings),items=[];
- for(const slot of __v105Slots){const i=_5l.find(i=>i.id===e[slot]&&i.slot===slot);if(i&&i.minLevel<=rpg.level)items.push(i);}
+ for(const slot of __v105Slots){if(!e[slot])continue;const i=_5l.find(i=>i.id===e[slot]&&i.slot===slot);if(i&&i.minLevel<=rpg.level)items.push(i);}
  const w=items.find(i=>i.slot==='weapon');
  return{maxHp:Math.round(b.maxHp*(1+v.filter(s=>s==='hp').length*.05)),
   atk:Math.round((b.atk+(w?.atk||0))*(rpg.buff>0?1+(rpg.buffPct||.2):1)*(1+v.filter(s=>s==='atk').length*.03)),

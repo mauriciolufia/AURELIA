@@ -16,7 +16,7 @@ const __v110OrderBar=__v110OrderControl('ag-catalog-order','Ordenar por');
 $('item-list').before(__v110OrderBar);__v110OrderBar.hidden=true;
 const __v110OrderStyle=document.createElement('style');__v110OrderStyle.textContent='.catalog-order110{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0;font:600 14px system-ui}.catalog-order110[hidden]{display:none}.catalog-order110 select{box-sizing:border-box;min-height:44px;max-width:100%;flex:1 1 180px;width:auto!important;padding:8px;font:inherit;color:#fff3ce;background:#163643;border:1px solid #d8c895;border-radius:8px}';document.head.append(__v110OrderStyle);
 function __v110SortPanel(){
- const active=['inventory','shop','magic'].includes(_6x)&&['weapon','armor','magic','spellBook76'].includes(_6y);
+ const active=['inventory','shop','magic'].includes(_6x)&&['weapon','armor','magic','spellBook76','sell114'].includes(_6y);
  __v110OrderBar.hidden=!active;if(!active)return;
  __v110OrderBar.querySelector('select').value=__v110Order.mode;
  const list=$('item-list'),rows=[...list.children].filter(row=>row.classList.contains('item-row')).map(row=>({row,item:row.__v110Item})).filter(p=>p.item);

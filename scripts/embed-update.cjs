@@ -114,6 +114,41 @@ html=html.replace("range=r.fire?10:3", "range=__v113RaidChoice(r)==='normal'?3:(
 html=html.replace("offset=r.fire?7:2.6", "offset=range>3?7:2.6");
 html=html.replace("type:['claw','fire','pulse'][(r.__v107Turns=(r.__v107Turns||0)+1)%3]", "type:__v113RaidAttack(r)");
 html=html.replace('_dy(28+c.level*16);', '__v113EliteXP(c,28+c.level*16);');
+// Regional additions have their own fixed tiers; exclude them from the legacy redistribution pool.
+html=html.replace("const pool=_5l.filter(i=>(i.slot!=='weapon')===armor&&!i.id.startsWith('candy-')&&i.tier<8)", "const pool=_5l.filter(i=>i.__v114Site===undefined&&(i.slot!=='weapon')===armor&&!i.id.startsWith('candy-')&&i.tier<8)");
+// Avoid rewriting unchanged mobile HUD text.
+html=html.replaceAll("$('hp-item').textContent='Poción HP '+_9e.hp+wait;", "__v114Text($('hp-item'),'Poción HP '+_9e.hp+wait);");
+html=html.replaceAll("$('mp-item').textContent='Poción MP '+_9e.mp+wait;", "__v114Text($('mp-item'),'Poción MP '+_9e.mp+wait);");
+html=html.replaceAll("if(_5p===0)$('damage-text').textContent='';", "if(_5p===0)__v114Text($('damage-text'),'');");
+html=html.replaceAll('function __v76NearestEnemy(){let out=null,d=24;for(const c of _m)', 'function __v76NearestEnemy(){let out=null,d=24;for(const c of __v114LocalEnemies())');
+html=html.replaceAll("$('talk').textContent=label||'Hablar / interactuar';", "__v114Text($('talk'),label||'Hablar / interactuar');");
+html=html.replaceAll("$('enemy-name').textContent=(target.name||target.spec.name)+' · Niv. '+target.level;", "__v114Text($('enemy-name'),(target.name||target.spec.name)+' · Niv. '+target.level);");
+html=html.replaceAll("$('enemy-hp').textContent=target.hp+' / '+target.maxHp+' HP · DEF '+target.def;", "__v114Text($('enemy-hp'),target.hp+' / '+target.maxHp+' HP · DEF '+target.def);");
+html=html.replaceAll("$('danger').textContent=_2n>.7?'Enemigo cerca · ataca o esquiva':_2n>0?'Criaturas hostiles en los alrededores':'';", "__v114Text($('danger'),_2n>.7?'Enemigo cerca · ataca o esquiva':_2n>0?'Criaturas hostiles en los alrededores':'');");
+// Quarter-MP display retains the usable fractions introduced by the discount.
+html=html.replaceAll('Math.floor(rpg.mp)', '__v114MPDisplay()');
+// Teleportation's original controller used literal MP costs; use the shared spell value.
+html=html.replaceAll('rpg.mp<24','rpg.mp<__v114TeleportCost()').replaceAll('rpg.mp-=24','rpg.mp-=__v114TeleportCost()');
+html=html.replace("textContent='24 MP · 2 segundos", "textContent=__v114TeleportCost()+' MP · 2 segundos").replace("'Viajar · 24 MP'", "'Viajar · '+__v114TeleportCost()+' MP'");
+html=html.replace("'Necesitas 12 MP para lanzar Meteoro.'", "'Necesitas '+spell.cost+' MP para lanzar Meteoro.'").replace("'Necesitas 6 MP para Pasos guía.'", "'Necesitas '+s.cost+' MP para Pasos guía.'");
+html=html.replace("'Necesitas 45 MP.'", "'Necesitas '+s.cost+' MP.'").replace("'Necesitas 65 MP.'", "'Necesitas '+s.cost+' MP.'");
+html=html.replaceAll('Coste: 45 MP.', "Coste: '+s.cost+' MP.").replaceAll('Coste: 65 MP.', "Coste: '+s.cost+' MP.");
+html=html.replaceAll('Cuesta 6 MP.', "Cuesta '+s.cost+' MP.").replaceAll('Nivel 15 · 28 MP.', "Nivel 15 · '+s.cost+' MP.").replaceAll('Nivel 20 · 45 MP.', "Nivel 20 · '+s.cost+' MP.");
+html=html.replaceAll('Nivel 40 · 65 MP.', "Nivel 40 · '+s.cost+' MP.").replaceAll('Nivel 10 · 15 MP ·', "Nivel 10 · '+s.cost+' MP ·").replaceAll('Nivel 20 · 25 MP ·', "Nivel 20 · '+s.cost+' MP ·");
+html=html.replace('_m.find(c=>c.dialogue&&!c.dead&&Math.hypot', '__v114SpeechCandidates().find(c=>c.dialogue&&!c.dead&&Math.hypot');
+// A fresh game has no save to apply; the old null restore repeated costly world preparation.
+html=html.replace('_bj(_f);_dn(_ix);', '_bj(_f);if(_ix)_dn(_ix);');
+// Keep exact floor/stair math but consider only spatially relevant records on mobile.
+html=html.replace('for(const f of __v20Floors)if(Math.abs(x-f.x)', 'for(const f of __v114FloorItems(__v20Floors,x,z))if(Math.abs(x-f.x)');
+html=html.replace('for(const f of __v24Floors){const dx=x-f.x', 'for(const f of __v114FloorItems(__v24Floors,x,z)){const dx=x-f.x');
+html=html.replace('for(const st of __v24Stairs){const vx=st.x1', 'for(const st of __v114FloorItems(__v24Stairs,x,z)){const vx=st.x1');
+// Mobile streaming reads spatial candidates, while all desktop passes retain their original arrays.
+html=html.replace('for(const a of _b0){const o=a.owner,alive', 'for(const a of __v114StreamActors(force)){const o=a.owner,alive');
+html=html.replace('for(const a of _b0){\n    const o=a.owner;', 'for(const a of __v114StreamActors(force)){\n    const o=a.owner;');
+html=html.replace('for(const a of _b0){\n    const o=a.owner; if(!a?.g||!o)', 'for(const a of __v114StreamActors(force)){\n    const o=a.owner; if(!a?.g||!o)');
+html=html.replace('for(const a of _b0){\n      if(!a?.g||!a.owner)continue;', 'for(const a of __v114StreamActors(force)){\n      if(!a?.g||!a.owner)continue;');
+html=html.replace('for(const n of _2h){ if(!n?.g) continue; n.g.visible=Math.hypot', 'for(const n of __v114StreamNPCs()){ if(!n?.g) continue; n.g.visible=Math.hypot');
+html=html.replace('for(const c of _m){ if(!c?.g||c.dead) continue; if(Math.hypot', 'for(const c of __v114StreamCreatures()){ if(!c?.g||c.dead) continue; if(Math.hypot');
 const begin = '/* AURELIA_UPDATE97_BEGIN */';
 const end = '/* AURELIA_UPDATE97_END */';
 // Service anchors still initialize their NPC, but must not reset a living NPC each frame.
@@ -144,7 +179,7 @@ html=html.replace('for(const d of __v29Doors){const dist=', 'for(const d of __v2
 html=html.replace('for(const n of __v101DoorActors())', 'for(const n of __v102DoorActors(d.p.x,d.p.z))');
 html=html.replaceAll('__v102DoorActors(d.p.x,d.p.z))','__v102DoorActors(d.p.x,d.p.z,Math.max(4,d.w*d.scale*.6+2)))');
 html=html.replace('Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<3)', 'Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<Math.max(3,d.w*d.scale*.6+2))');
-const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js', 'volcano104.js', 'airship104.js', 'balance-plan105.js', 'balance105.js', 'lighting106.js', 'world107.js', 'castle107.js', 'enemy-collision107.js', 'destruction108.js', 'hazards108.js', 'riddle-arrows108.js', 'landmarks108.js', 'frontier108.js', 'technique-plan109.js', 'techniques109.js', 'player110.js', 'catalog110.js', 'enemy-balance111.js', 'combat112.js', 'graphics112.js', 'mobile-map112.js', 'experience112.js', 'interaction113.js', 'combat113.js', 'experience113.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
+const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js', 'volcano104.js', 'airship104.js', 'balance-plan105.js', 'balance105.js', 'lighting106.js', 'world107.js', 'castle107.js', 'enemy-collision107.js', 'destruction108.js', 'hazards108.js', 'riddle-arrows108.js', 'landmarks108.js', 'frontier108.js', 'technique-plan109.js', 'techniques109.js', 'player110.js', 'catalog110.js', 'enemy-balance111.js', 'combat112.js', 'graphics112.js', 'mobile-map112.js', 'experience112.js', 'interaction113.js', 'combat113.js', 'experience113.js', 'performance114.js', 'crowd114.js', 'services114.js', 'commerce114.js', 'graphics114.js', 'town-map114.js', 'selling114.js', 'mana114.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
 sources.push('const __v103Blueprints='+JSON.stringify([1,2,3,4,5].map(i=>'data:image/png;base64,'+fs.readFileSync(path.join(root,'docs/volcano103/planta-'+i+'.png')).toString('base64')))+';');
 const block = `${begin}\n${sources.join('\n')}\n${end}\n`;
 if (html.includes(begin)) html = html.slice(0, html.indexOf(begin)) + block + html.slice(html.indexOf(end) + end.length).replace(/^\n/, '');
@@ -153,7 +188,7 @@ else {
   if (!html.includes(marker)) throw new Error('Missing game initialization marker');
   html = html.replace(marker, block + marker);
 }
-html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v113 Diálogos táctiles y combate</title>');
-html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v113-dialogos-combate-exp">');
+html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v114 Comercio, magia y rendimiento móvil</title>');
+html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v114-comercio-magia-rendimiento">');
 fs.writeFileSync(file, html);
-console.log('Embedded Aurelia update 113');
+console.log('Embedded Aurelia update 114');
