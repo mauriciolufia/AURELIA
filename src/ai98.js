@@ -24,7 +24,7 @@ function __v98EnemyDecision(c){
  if(c.stun>0){b.action='recover';b.target=null;return;}
  if(!seen){if(b.lastSeen&&__v98AI.clock-b.seenAt<3){action='investigate';target={...b.lastSeen};}else{b.action='patrol';b.target=null;return;}}
  else if(_84>0&&d<Math.max(reach*1.2,Math.min(8,_g4().reach||4))&&health<.65){action='evade';target={x:p.x-dz*side*2.4+dx,z:p.z+dx*side*2.4+dz};}
- else if(health<.28&&b.role!=='melee'){action='retreat';target={x:p.x+dx*4-dz*side,z:p.z+dz*4+dx*side};}
+ else if(health<.22&&b.role!=='melee'){action='retreat';target={x:p.x+dx*4-dz*side,z:p.z+dz*4+dx*side};}
  else if(b.role==='support'&&__v98Neighbors(c).some(a=>a.hp<a.maxHp*.55)){
   action='support';const ally=__v98Neighbors(c).filter(a=>a.hp<a.maxHp*.55).sort((a,b)=>a.hp/a.maxHp-b.hp/b.maxHp)[0];target={x:ally.g.position.x+dx*2,z:ally.g.position.z+dz*2};
  }else if(b.role==='ranged'||b.role==='support'){
