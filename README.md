@@ -8,6 +8,8 @@ python -m http.server 8000 --bind 127.0.0.1
 
 Juega en https://mauriciolufia.github.io/AURELIA/.
 
+La [actualización 113](ACTUALIZACION113.md) corrige el desplazamiento táctil de diálogos, tiendas y sabios; mejora detección, acercamiento y puntería enemigos; duplica otra vez su frecuencia de ataque y la EXP de **todos** los enemigos respecto a v112. Cada bloque de diez decisiones contiene **tres técnicas y siete ataques normales**, también en los controladores del Emperador y la invasión.
+
 La [actualización 112](ACTUALIZACION112.md) mejora la reacción visual de los enemigos, duplica su frecuencia de ataque y la EXP de los normales, y aumenta su daño ×1,5. El atlas del celular ocupa todo el visor con textos y controles en una columna derecha; PC conserva su mapa. Añade **1080p · 60 FPS · Colores vivos** en Ajustes.
 
 La [actualización 111](ACTUALIZACION111.md) fija al slime de nivel 1 en **35 ATK** y ajusta proporcionalmente el ataque enemigo. El golpe normal del Emperador quita **1.125 HP**, un octavo de los 9.000 HP de un héroe de nivel 60 con sus cuatro mejores armaduras. Los normales y élites tienen un máximo de **125.000 ATK**; los jefes siguen una curva distinta. Consulta la [comparación por nivel](docs/equilibrio111/COMPARACION.md).
@@ -46,6 +48,8 @@ Descarga la [guía de atributos, equipo y magia en Word](docs/balance105/Aurelia
 npm ci
 npm test
 npm run test:scale
+npm run test:interaction
+npm run test:interaction:mobile
 npm run test:experience
 npm run test:experience:mobile
 npm run test:enemy-balance
