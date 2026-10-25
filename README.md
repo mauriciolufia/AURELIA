@@ -8,6 +8,8 @@ python -m http.server 8000 --bind 127.0.0.1
 
 Juega en https://mauriciolufia.github.io/AURELIA/. Cualquiera de los dos HTML puede descargarse y abrirse por separado.
 
+La [actualización 118](ACTUALIZACION118.md) duplica el alcance enemigo solo en exteriores y conserva el alcance de fortalezas; duplica la velocidad de ataque y la detección en ambos lugares. Limita a tres los enemigos que pueden perseguir y atacar al héroe simultáneamente. Invierte el espadazo hacia afuera y añade una media luna de viento visible al cortar.
+
 La [actualización 117](ACTUALIZACION117.md) ajusta élites, jefes y guardianes a la misión y planta correspondiente; refuerza el espadazo horizontal y su sonido; limita los avisos de cada líder a dos aliados. Las magias apuntan al enemigo que miras, con línea de visión y alcance real, y permiten un 30% de evasión. Los enemigos anticipan mejor tu movimiento; sus golpes fallan al salir del alcance, permiten un 30% de evasión fuera del contacto cercano y conservan dos técnicas hasta nivel 40 y tres desde el 41.
 
 La [actualización 116](ACTUALIZACION116.md) corrige el error **Failed to fetch** de la carga de imágenes. Restaura el archivo único completo en ambos enlaces y carga las imágenes integradas directamente, sin `fetch`, URLs Blob ni archivos vecinos.

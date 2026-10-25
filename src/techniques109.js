@@ -14,10 +14,10 @@ function __v109Context(c){
 }
 function __v109Ensure(c){
  if(!c?.hostile||__v99Life.building||__v107WorldState.choosing)return;
- const context=__v109Context(c),inside=__v85Indoor(c),key=[context.id,context.level,context.role,context.boss,context.spiked,context.spawnId?.startsWith('polar95-')?'polar':context.spawnId?.startsWith('yeti95-')?'yeti':'',context.biome,inside].join('|');
+ const context=__v109Context(c),inside=__v85Indoor(c),key=[context.id,context.level,context.role,context.boss,context.spiked,context.spawnId?.startsWith('polar95-')?'polar':context.spawnId?.startsWith('yeti95-')?'yeti':'',context.biome,inside,'range118'].join('|');
  if(c.__v109Stamp===key&&c.__v68Skills===c.__v109Kit&&c.__v68Skills.includes(c.art))return;
  const plan=__v109Techniques.build(context),scale=inside&&!['emperor','raid'].includes(plan.family)?1/3:1;
- const kit=plan.skills.map(s=>({...s,range:s.range*scale,radius:s.radius*scale,v68:true,technique109:true,family109:plan.family,level109:plan.level}));
+ const kit=plan.skills.map(s=>({...s,range:s.range*scale*__v118Range(c),radius:s.radius*scale*(s.type==='projectile'?1:__v118Range(c)),v68:true,technique109:true,family109:plan.family,level109:plan.level}));
  if(c.specialAction)_d3(c);
  c.__v68Skills=kit;c.art=kit[0];c.__v109Kit=kit;c.__v109Stamp=key;c.__v109Family=plan.family;c.__v99Limited=kit;
  if(inside){c.__v85IndoorSkills=kit;c.__v85OutdoorSkills=kit.map(s=>({...s,range:s.range*3,radius:s.radius*3}));c.__v85IndoorTuned=true;}
@@ -28,7 +28,7 @@ function __v109Ensure(c){
 __v99Limit=__v109Ensure;__v107Limit=__v109Ensure;
 const __v109Cast=_d4;_d4=function(c){__v109Ensure(c);return __v109Cast(c);};
 // Exterior projectiles previously lived for two seconds regardless of their stated range.
-const __v109Release=_d5;_d5=function(c){const before=new Set(_ct),r=__v109Release(c);for(const p of _ct)if(!before.has(p)&&p.art?.technique109){p.remaining=p.art.range;p.life=Math.min(p.life,p.art.range/73.71+.1);}return r;};
+const __v109Release=_d5;_d5=function(c){const before=new Set(_ct),r=__v109Release(c);for(const p of _ct)if(!before.has(p)&&p.art?.technique109){p.remaining=p.art.range;p.life=Math.min(p.life,p.art.range/__v118ProjectileSpeed(c)+.1);}return r;};
 const __v109World=_bj;_bj=function(...args){const r=__v109World(...args);for(const c of _m)__v109Ensure(c);return r;};
 const __v109Load=_dn;_dn=function(s,...args){const r=__v109Load(s,...args);
  // Preserve the health proportion of pre-109 saves, once. Older legacy formats migrate in v105.

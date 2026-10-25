@@ -26,8 +26,8 @@ const __v107EmperorRelease=__v94EmperorRelease;__v94EmperorRelease=function(kind
  if(Math.hypot(_14.x-p.x,_14.z-p.z)<12&&__v92LOS(c))_d0(c,1.5,'stun');
 };
 function __v107RaidPulse(r){
- const p=r.c.g.position;__v88Spark(p,'#ef9f70',2);for(const d of __v88War.fighters)if(!d.n.__v88Dead&&!d.wounded&&Math.hypot(d.n.x-p.x,d.n.z-p.z)<5&&_5w(p.x,p.z,d.n.x,d.n.z,p.y+1.5))__v88HitNPC(d,.9,r);
- if(Math.hypot(_14.x-p.x,_14.z-p.z)<5&&__v92LOS(r.c))_d0(r.c,.9,'stun');
+ const p=r.c.g.position,scale=__v118Range(r.c);__v88Spark(p,'#ef9f70',2*scale);for(const d of __v88War.fighters)if(!d.n.__v88Dead&&!d.wounded&&Math.hypot(d.n.x-p.x,d.n.z-p.z)<5*scale&&_5w(p.x,p.z,d.n.x,d.n.z,p.y+1.5))__v88HitNPC(d,.9,r);
+ if(Math.hypot(_14.x-p.x,_14.z-p.z)<5*scale&&__v92LOS(r.c))_d0(r.c,.9,'stun');
 }
 function __v107ConformSand(){
  for(const f of __v95Sand.fields)for(const m of f.g.children){

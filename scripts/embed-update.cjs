@@ -167,6 +167,21 @@ html=html.replace("if(Math.hypot(_14.x-p.x,_14.z-p.z)<8.4){_d0(c,1);", "if(Math.
 html=html.replace("range=__v113RaidChoice(r)==='normal'?3:(r.fire?10:3)", "range=__v113RaidChoice(r)==='normal'?(d.__v113Hero?__v117MeleeReach(c):3):(r.fire?10:3)");
 html=html.replace('offset=range>3?7:d.__v113Hero?__v117MeleeReach(c)*.72:2.6', 'offset=range>3?7:2.6');
 html=html.replace('offset=range>3?7:2.6', "offset=d.__v113Hero&&__v113RaidChoice(r)==='normal'?__v117MeleeReach(c)*.72:range>3?7:2.6");
+// v118: double hostile execution speed, with swept collision steps kept at 0.45 m.
+html=html.replace('steps=Math.ceil(dt*73.71/.45)', 'steps=Math.ceil(dt*__v118ProjectileSpeed(s.c)/.45)');
+html=html.replace('Math.min(73.71*dt/steps,s.remaining', 'Math.min(__v118ProjectileSpeed(s.c)*dt/steps,s.remaining');
+html=html.replace('life:__v85Indoor(c)?art.range/73.71:2', 'life:__v85Indoor(c)?art.range/__v118ProjectileSpeed(c):2');
+html=html.replace('dt*(c.boss?42:36)*1.5', 'dt*__v118Speed(c)*(c.boss?42:36)*1.5');
+html=html.replace("d<(c.spec.id==='jellyfish'?6:4)*1.5*.7*1.5", 'd<__v117MeleeReach(c)');
+html=html.replace('new _0.Vector3(p.x,p.y+1.8,p.z),19,46)', 'new _0.Vector3(p.x,p.y+1.8,p.z),19*__v118Speed(c),46*__v118Range(c))');
+html=html.replace('id,life:3.5,vx:Math.sin(a+off)*19,vz:Math.cos(a+off)*19', 'id,life:3.5*__v118Range(c)/__v118Speed(c),vx:Math.sin(a+off)*19*__v118Speed(c),vz:Math.cos(a+off)*19*__v118Speed(c)');
+html=html.replace('w.radius+=dt*13;', 'w.radius+=dt*13*__v118Speed(c);');
+html=html.replace('const step=22*dt,old={x:p.x,z:p.z}', 'const step=22*__v118Speed(p.owner.c)*dt,old={x:p.x,z:p.z}');
+html=html.replace('life:1.5,owner:r,target:d,hit:false', 'life:1.5*__v118Range(r.c)/__v118Speed(r.c),owner:r,target:d,hit:false');
+html=html.replace("if(_i7(p.x,p.z,p.y)){p.life=0;__v88Spark", "if(_i7(p.x,p.z,p.y)||!_77(old.x,p.y,old.z,p.x,p.y,p.z)){p.life=0;__v88Spark");
+html=html.replace("range=__v113RaidChoice(r)==='normal'?(d.__v113Hero?__v117MeleeReach(c):3):(r.fire?10:3)", 'range=__v118RaidRange(r,d)');
+html=html.replace("offset=d.__v113Hero&&__v113RaidChoice(r)==='normal'?__v117MeleeReach(c)*.72:range>3?7:2.6", 'offset=__v118RaidOffset(r,d)');
+html=html.replace('Math.hypot(p.x-d.n.x,p.z-d.n.z)<3.8&&', 'Math.hypot(p.x-d.n.x,p.z-d.n.z)<3.8*__v118Range(c)&&');
 const begin = '/* AURELIA_UPDATE97_BEGIN */';
 const end = '/* AURELIA_UPDATE97_END */';
 // Service anchors still initialize their NPC, but must not reset a living NPC each frame.
@@ -197,7 +212,7 @@ html=html.replace('for(const d of __v29Doors){const dist=', 'for(const d of __v2
 html=html.replace('for(const n of __v101DoorActors())', 'for(const n of __v102DoorActors(d.p.x,d.p.z))');
 html=html.replaceAll('__v102DoorActors(d.p.x,d.p.z))','__v102DoorActors(d.p.x,d.p.z,Math.max(4,d.w*d.scale*.6+2)))');
 html=html.replace('Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<3)', 'Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<Math.max(3,d.w*d.scale*.6+2))');
-const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js', 'volcano104.js', 'airship104.js', 'balance-plan105.js', 'balance105.js', 'lighting106.js', 'world107.js', 'castle107.js', 'enemy-collision107.js', 'destruction108.js', 'hazards108.js', 'riddle-arrows108.js', 'landmarks108.js', 'frontier108.js', 'technique-plan109.js', 'techniques109.js', 'player110.js', 'catalog110.js', 'enemy-balance111.js', 'combat112.js', 'graphics112.js', 'mobile-map112.js', 'experience112.js', 'interaction113.js', 'combat113.js', 'experience113.js', 'performance114.js', 'crowd114.js', 'services114.js', 'commerce114.js', 'graphics114.js', 'town-map114.js', 'selling114.js', 'mana114.js', 'startup115.js', 'schedules115.js', 'progression117.js', 'combat117.js', 'enemy-combat117.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
+const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js', 'volcano104.js', 'airship104.js', 'balance-plan105.js', 'balance105.js', 'lighting106.js', 'world107.js', 'castle107.js', 'enemy-collision107.js', 'destruction108.js', 'hazards108.js', 'riddle-arrows108.js', 'landmarks108.js', 'frontier108.js', 'technique-plan109.js', 'techniques109.js', 'player110.js', 'catalog110.js', 'enemy-balance111.js', 'combat112.js', 'graphics112.js', 'mobile-map112.js', 'experience112.js', 'interaction113.js', 'combat113.js', 'experience113.js', 'performance114.js', 'crowd114.js', 'services114.js', 'commerce114.js', 'graphics114.js', 'town-map114.js', 'selling114.js', 'mana114.js', 'startup115.js', 'schedules115.js', 'progression117.js', 'combat117.js', 'enemy-combat117.js', 'combat118.js', 'attack-slots118.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
 sources.push('const __v103Blueprints='+JSON.stringify([1,2,3,4,5].map(i=>'data:image/png;base64,'+fs.readFileSync(path.join(root,'docs/volcano103/planta-'+i+'.png')).toString('base64')))+';');
 const block = `${begin}\n${sources.join('\n')}\n${end}\n`;
 if (html.includes(begin)) html = html.slice(0, html.indexOf(begin)) + block + html.slice(html.indexOf(end) + end.length).replace(/^\n/, '');
@@ -206,8 +221,8 @@ else {
   if (!html.includes(marker)) throw new Error('Missing game initialization marker');
   html = html.replace(marker, block + marker);
 }
-html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v117 Progresión y combate preciso</title>');
-html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v117-progresion-espada-magia">');
+html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v118 Combate veloz y corte de viento</title>');
+html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v118-combate-veloz-corte-exterior">');
 fs.writeFileSync(file, html);
-console.log('Embedded Aurelia update 117');
+console.log('Embedded Aurelia update 118');
 require('./package-standalone116.cjs')(root);

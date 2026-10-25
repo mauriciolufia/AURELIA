@@ -2,15 +2,15 @@
 const __v117Sword={active:false,contact:false,hit:0,swings:0,hits:0,sounds:0,noise:null,context:null};
 function __v117Blend(a,b,k){k=_18(k,0,1);k=k*k*(3-2*k);const p={};for(const key in a)p[key]=a[key]+(b[key]-a[key])*k;return p;}
 function __v117Cut(t,combo,third=false){
- const side=combo===1?-1:1;
+ const side=1;
  const poses=third?[
   {ax:0,ay:0,az:.12,px:0,py:-.72,pz:-.02,wx:.16,wy:0,wz:-.16},
-  {ax:-.9,ay:side*1.1,az:-.3,px:0,py:-.72,pz:-.02,wx:.35,wy:side*.15,wz:-side*1.15},
-  {ax:-.85,ay:-side*1.3,az:.15,px:0,py:-.72,pz:-.08,wx:.35,wy:-side*.15,wz:-side*1.15}
+  {ax:-.9,ay:-side*1.3,az:-.3,px:0,py:-.72,pz:-.02,wx:.35,wy:-side*.15,wz:-side*1.15},
+  {ax:-.85,ay:side*1.1,az:.15,px:0,py:-.72,pz:-.08,wx:.35,wy:side*.15,wz:-side*1.15}
  ]:[
   {x:.30,y:-.30,z:-.90,rx:-.10,ry:-.04,rz:-.24},
-  {x:side*.52,y:-.18,z:-.88,rx:.15,ry:side*.9,rz:-side*1.35},
-  {x:-side*.48,y:-.16,z:-.94,rx:.12,ry:-side*.9,rz:-side*1.25}
+  {x:-side*.24,y:-.18,z:-.88,rx:.15,ry:-side*.9,rz:-side*1.25},
+  {x:side*.76,y:-.16,z:-.94,rx:.12,ry:side*.9,rz:-side*1.35}
  ];
  if(t<.18)return __v117Blend(poses[0],poses[1],t/.18);
  if(t<.52)return __v117Blend(poses[1],poses[2],(t-.18)/.34);
@@ -23,11 +23,11 @@ function __v117SwordSound(impact=false){
  if(!_6d)return;_6p();if(!_3d||!_6i)return;
  const s=__v117Sword,ctx=_3d,t=ctx.currentTime;
  if(s.context!==ctx||!s.noise){s.context=ctx;s.noise=ctx.createBuffer(1,Math.ceil(ctx.sampleRate*.24),ctx.sampleRate);const samples=s.noise.getChannelData(0);for(let i=0;i<samples.length;i++)samples[i]=Math.random()*2-1;}
- const source=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),gain=ctx.createGain(),pan=ctx.createStereoPanner?.(),duration=impact?.13:.21,side=_85===1?-1:1;
+ const source=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),gain=ctx.createGain(),pan=ctx.createStereoPanner?.(),duration=impact?.13:.21,side=1;
  source.buffer=s.noise;filter.type=impact?'bandpass':'highpass';filter.Q.value=impact?.9:.6;
  filter.frequency.setValueAtTime(impact?1250:6500,t);filter.frequency.exponentialRampToValueAtTime(impact?350:700,t+duration);
  gain.gain.setValueAtTime(.001,t);gain.gain.exponentialRampToValueAtTime(impact?.8:.6,t+.008);gain.gain.exponentialRampToValueAtTime(.001,t+duration);
- source.connect(filter);filter.connect(gain);if(pan){pan.pan.setValueAtTime(side*.6,t);pan.pan.linearRampToValueAtTime(-side*.6,t+duration);gain.connect(pan);pan.connect(_6i);}else gain.connect(_6i);
+ source.connect(filter);filter.connect(gain);if(pan){pan.pan.setValueAtTime(-side*.5,t);pan.pan.linearRampToValueAtTime(side*.7,t+duration);gain.connect(pan);pan.connect(_6i);}else gain.connect(_6i);
  source.onended=()=>{source.disconnect();filter.disconnect();gain.disconnect();pan?.disconnect();};source.start(t);source.stop(t+duration);
  if(impact){_6rb(155,52,.15,.42,'sine');_6q(1550,.075,.17,'triangle');}else _6rb(590,140,.18,.22,'triangle');s.sounds++;
 }

@@ -58,7 +58,7 @@ const __v113RaidTargets=new WeakMap(),__v113RaidTick=__v88DemonTick;
 __v88DemonTick=function(r,dt,fighters,crowd){
  const c=r.c,p=c.g.position,distance=Math.hypot(_14.x-p.x,_14.z-p.z);
  const closest=Math.min(Infinity,...fighters.filter(d=>!d.wounded&&!d.n.__v88Dead).map(d=>Math.hypot(d.n.x-p.x,d.n.z-p.z)));
- const attackHero=!c.dead&&_2l>0&&distance<Math.min(24,__v92Detect(c))&&(distance<closest+2||__v88War.clock<(c.__v113PlayerUntil||0))&&__v92LOS(c);
+ const attackHero=!c.dead&&_2l>0&&__v118Slot(c)&&distance<Math.min(48,__v92Detect(c))&&(distance<closest+2||__v88War.clock<(c.__v113PlayerUntil||0))&&__v92LOS(c);
  const think=r.think;
  if(attackHero){
   let target=__v113RaidTargets.get(r);if(!target){target={__v113Hero:true,n:{g:{position:new _0.Vector3()},__v88Dead:false},wounded:false};__v113RaidTargets.set(r,target);}

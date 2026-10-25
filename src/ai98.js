@@ -7,7 +7,7 @@ function __v98EnemyBrain(c){let b=__v98AI.enemy.get(c);if(!b){const skills=c.__v
 function __v98EnemySense(dt){
  const a=__v98AI;if(a.clock<a.nextSense)return;a.nextSense=a.clock+.25;
  if(a.player&&Math.hypot(_14.x-a.player.x,_14.z-a.player.z)<12){const span=Math.max(.05,a.clock-a.player.t);a.velocity.x=_18((_14.x-a.player.x)/span,-24,24);a.velocity.z=_18((_14.z-a.player.z)/span,-24,24);}else a.velocity.x=a.velocity.z=0;
- a.player={x:_14.x,z:_14.z,t:a.clock};a.near=__v68Pool().filter(c=>c.hostile&&!c.dead&&!c.__v83Retired&&Math.hypot(c.g.position.x-_14.x,c.g.position.z-_14.z)<65).sort((c,d)=>c.g.position.distanceToSquared(_14)-d.g.position.distanceToSquared(_14)).slice(0,96);a.grid.clear();
+ a.player={x:_14.x,z:_14.z,t:a.clock};a.near=__v68Pool().filter(c=>c.hostile&&!c.dead&&!c.__v83Retired&&Math.hypot(c.g.position.x-_14.x,c.g.position.z-_14.z)<130).sort((c,d)=>c.g.position.distanceToSquared(_14)-d.g.position.distanceToSquared(_14)).slice(0,96);a.grid.clear();
  for(const c of a.near){const p=c.g.position,key=Math.floor(p.x/12)+','+Math.floor(p.z/12);if(!a.grid.has(key))a.grid.set(key,[]);a.grid.get(key).push(c);}
  for(const [key,r] of a.reservations)if(r.until<a.clock||r.c.dead)a.reservations.delete(key);
 }
