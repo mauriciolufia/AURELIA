@@ -1,6 +1,6 @@
 {
   "name": "aurelia-rpg",
-  "version": "119.0.0",
+  "version": "120.0.0",
   "private": true,
   "description": "Aurelia RPG, juego HTML autónomo",
   "scripts": {
@@ -59,7 +59,9 @@
     "test:mana": "node tests/mana-plan119.cjs && node tests/mana119.cjs",
     "test:mana:mobile": "node tests/mana119.cjs --mobile",
     "test:magic": "node tests/magic119.cjs",
-    "test:magic:mobile": "node tests/magic119.cjs --mobile"
+    "test:magic:mobile": "node tests/magic119.cjs --mobile",
+    "test:travelers": "node tests/travelers120.cjs",
+    "test:travelers:mobile": "node tests/travelers120.cjs --mobile"
   },
   "devDependencies": {
     "playwright": "1.62.1"

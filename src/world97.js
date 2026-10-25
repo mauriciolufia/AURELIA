@@ -121,7 +121,7 @@ __v68Burst=function(p,color,kind='impact',radius=1,life=.7,follow=null,direction
 };
 __v68UpdateFx=function(dt){
  const pool=__v97Pool(),capacity=__v60Mobile?192:384;let cursor=0;
- for(let i=__v97.effects.length-1;i>=0;i--){const f=__v97.effects[i];f.age+=Math.max(0,Math.min(dt,.1));if(f.age>=f.maxLife||(f.kind==='trail'&&!f.follow?.parent)){__v97.effects.splice(i,1);continue;}
+ for(let i=__v97.effects.length-1;i>=0;i--){const f=__v97.effects[i];f.age+=Math.max(0,Math.min(dt,.1))*(f.player120?2:1);if(f.age>=f.maxLife||(f.kind==='trail'&&!f.follow?.parent)){__v97.effects.splice(i,1);continue;}
   const p=f.follow?.parent?f.follow.position:f.p,t=f.age/f.maxLife,heal=/heal|buff/.test(f.kind),cast=f.kind==='cast',n=__v60Mobile?16:24;__v97FxColor.set(f.color||'#c6efff');
   for(let j=0;j<n&&cursor<capacity;j++){
    const k=j/n,a=k*Math.PI*2+f.age*(heal?2:cast?-4:1),r=f.radius*(cast?.6:heal?.7:.2+t*1.4),trail=f.kind==='trail';
