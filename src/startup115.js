@@ -11,15 +11,14 @@ function __v115BandSolids(a,x,z){
  return [...index.fallback,...index.grid.get(Math.floor(x/16)+','+Math.floor(z/16))||[]];
 }
 const __v115CrossSection=__v108CrossSection;__v108CrossSection=function(...args){const previous=__v114Perf.stableGeometry;__v114Perf.stableGeometry=true;try{return __v115CrossSection(...args);}finally{__v114Perf.stableGeometry=previous;}};
-/* Decode at most two architectural sheets at once and release their full-size bitmaps before world construction. */
+/* Decode embedded images directly: no fetch, Blob URLs, sibling files or network dependency. */
 const __v115Decode={active:0,peak:0,released:0,loaded:0};
 async function __v115LoadArtwork(){
  await Promise.resolve();const entries=Object.entries(__v72AtlasData);let next=0;
  async function worker(){for(;;){const index=next++;if(index>=entries.length)return;const[set,data]=entries[index];let image,close=()=>{};__v115Decode.active++;__v115Decode.peak=Math.max(__v115Decode.peak,__v115Decode.active);
   try{
-   const response=await fetch(data);if(!response.ok)throw Error('HTTP '+response.status);const url=URL.createObjectURL(await response.blob());
-   close=()=>{if(image){image.onload=image.onerror=null;image.removeAttribute('src');}URL.revokeObjectURL(url);__v115Decode.released++;};
-   image=await new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(new Error('No se pudo cargar el atlas '+set));img.src=url;});
+   image=await new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(new Error('No se pudo leer la imagen integrada de '+set+'. Vuelve a descargar el HTML completo.'));img.src=data;});
+   close=()=>{image.onload=image.onerror=null;image.removeAttribute('src');__v115Decode.released++;};
    const w=image.width/5,h=image.height/2;
    for(let slot=0;slot<10;slot++){const t=__v72Tex(set,slot),c=t.image,ctx=c.getContext('2d');ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(image,(slot%5)*w+.5,Math.floor(slot/5)*h+.5,w-1,h-1,0,0,c.width,c.height);t.needsUpdate=true;}
    __v72Loaded.add(set);__v115Decode.loaded++;

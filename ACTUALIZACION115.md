@@ -1,5 +1,7 @@
 # Actualización 115 · Valdoria, horarios, arranque y carrera
 
+La carga en archivos separados descrita aquí fue sustituida por la [reparación v116](ACTUALIZACION116.md). Los cambios de Valdoria, horarios y carrera siguen vigentes.
+
 Berta, la vendedora de magia de **Valdoria**, estaba vinculada a la casa de misiones, aunque su trabajo era el de maga. La casa quedaba a unos 190 metros de la tienda señalada en el mapa. Ahora comerciantes, magos y posaderos reciben la vivienda correspondiente a su servicio **antes** de asignar las camas y las mesas. Berta tiene su cama y mesa en la tienda de magia y se puede hablar con ella y abrir su catálogo allí.
 
 Al cambiar la hora en Ajustes, todos los habitantes disponibles se colocan según su rutina actual, incluso mientras el juego está pausado por el menú. Se eliminan las rutas pendientes de la hora anterior y se mantienen las reservas de sus muebles fijos. Durante la noche buscan su cama; durante el día respetan el hogar, las salidas y los puestos del castillo. Los personajes muertos o controlados por una escena o invasión conservan su estado.

@@ -3,8 +3,8 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const file = path.join(root, 'index.html');
 let html = fs.readFileSync(file, 'utf8');
-const webGuard='<script id="aurelia-web115-redirect">if(location.hostname==="mauriciolufia.github.io"&&!window.__AURELIA_WEB115__&&!new URLSearchParams(location.search).has("completo"))location.replace("play.html"+location.search+location.hash);</script>';
-if(!html.includes('id="aurelia-web115-redirect"'))html=html.replace('<head>','<head>'+webGuard);
+// Both public URLs must also work when downloaded as one HTML file.
+html=html.replace(/<script id="aurelia-web115-redirect">[\s\S]*?<\/script>/,'');
 const furnitureStart=' for(const i of[1,2,4,5,7]){const[x,z]=pl.centers[i]';
 if(html.includes(furnitureStart)){
  const start=html.indexOf(furnitureStart),end=html.indexOf('\n',start);
@@ -193,8 +193,8 @@ else {
   if (!html.includes(marker)) throw new Error('Missing game initialization marker');
   html = html.replace(marker, block + marker);
 }
-html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v115 Horarios, carga rápida y carrera</title>');
-html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v115-horarios-carga-carrera">');
+html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v116 Reparación de carga y archivo completo</title>');
+html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v116-carga-integrada-sin-fetch">');
 fs.writeFileSync(file, html);
-console.log('Embedded Aurelia update 115');
-require('./package-web115.cjs')(root);
+console.log('Embedded Aurelia update 116');
+require('./package-standalone116.cjs')(root);

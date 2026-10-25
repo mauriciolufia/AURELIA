@@ -1,14 +1,16 @@
 # Aurelia RPG
 
-Juego autónomo en `index.html`, con los recursos incluidos. Puedes abrir el archivo descargado directamente en un navegador o servir la carpeta con:
+Juego autónomo en `index.html` y `play.html`, ambos con todos los recursos incluidos. Puedes abrir el archivo descargado directamente en un navegador o servir la carpeta con:
 
 ```sh
 python -m http.server 8000 --bind 127.0.0.1
 ```
 
-Juega en https://mauriciolufia.github.io/AURELIA/play.html. La entrada principal también abre esta edición web; el archivo `index.html` conserva el juego autónomo para descargar.
+Juega en https://mauriciolufia.github.io/AURELIA/. Cualquiera de los dos HTML puede descargarse y abrirse por separado.
 
-La [actualización 115](ACTUALIZACION115.md) coloca a Berta en la tienda de magia de Valdoria, actualiza la ubicación y las rutinas de los NPC al cambiar la hora en Ajustes y aumenta un **30% la carrera a pie**. La edición web separa las imágenes para reutilizar la caché y reduce aproximadamente un **44% la descarga inicial**, sin rebajar los recursos activos.
+La [actualización 116](ACTUALIZACION116.md) corrige el error **Failed to fetch** de la carga de imágenes. Restaura el archivo único completo en ambos enlaces y carga las imágenes integradas directamente, sin `fetch`, URLs Blob ni archivos vecinos.
+
+La [actualización 115](ACTUALIZACION115.md) coloca a Berta en la tienda de magia de Valdoria, actualiza la ubicación y las rutinas de los NPC al cambiar la hora en Ajustes y aumenta un **30% la carrera a pie**. Su sistema de carga en archivos separados fue sustituido por la reparación de v116.
 
 La [actualización 114](ACTUALIZACION114.md) reduce el consumo de MP de todas las magias al **25%**, permite vender armas y armaduras sin equipar por el **75%** de su precio, con recompra; amplía los catálogos regionales a un mínimo de **15 armas, 15 armaduras y 15 magias** por pueblo y añade los ocho elementos cada cinco niveles. Corrige la presencia y separación de los NPC, rotula los servicios en el mapa y refuerza los colores vivos. `index.html` conserva el juego autónomo completo.
 
@@ -52,6 +54,9 @@ Descarga la [guía de atributos, equipo y magia en Word](docs/balance105/Aurelia
 npm ci
 npm test
 npm run test:scale
+npm run test:load
+npm run test:load:mobile
+npm run test:package
 npm run test:schedules
 npm run test:web
 npm run test:web:mobile
