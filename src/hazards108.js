@@ -2,7 +2,7 @@
 const __v108Hazards={bands:[],fireSites:[],ceiling:[],clock:0};
 const __v108BandTypes=new Set(['spikes','poison','poisongas','vapor102','dark','burn','firejet','fire108']);
 function __v108CrossSection(a,x,z,axis){
- const alongX=Math.abs(axis.x)>Math.abs(axis.z),free=(xx,zz)=>__v83Walkable(a,xx,zz,0)&&!a.colliders.some(c=>!c.secret85&&!c.riddle102&&!c.spikes88&&c.tag!=='trap'&&__v73Hit(c,xx,zz,a.y+1.85,.05,1.7));
+ const alongX=Math.abs(axis.x)>Math.abs(axis.z),free=(xx,zz)=>__v83Walkable(a,xx,zz,0)&&!__v115BandSolids(a,xx,zz).some(c=>__v73Hit(c,xx,zz,a.y+1.85,.05,1.7));
  if(!free(x,z)){let found=false;for(let r=.5;r<=16&&!found;r+=.5)for(let k=0;k<16;k++){const xx=x+Math.cos(k*Math.PI/8)*r,zz=z+Math.sin(k*Math.PI/8)*r;if(free(xx,zz)){x=xx;z=zz;found=true;break;}}}
  let lo=0,hi=0;for(let sign of[-1,1])for(let d=.2;d<=Math.max(250,a.w*2+a.d*2);d+=.2){if(!free(x+(alongX?0:sign*d),z+(alongX?sign*d:0)))break;if(sign<0)lo=-d;else hi=d;}
  return{x:x+(alongX?0:(hi+lo)/2),z:z+(alongX?(hi+lo)/2:0),w:alongX?1.8:hi-lo+.4,d:alongX?hi-lo+.4:1.8,axis};

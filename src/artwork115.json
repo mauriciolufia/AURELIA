@@ -1,0 +1,26 @@
+{
+  "bd97b8bb1c148ba2262dcb6ac058c5453b592f55903efec947cab469c3574a20": {
+    "file": "assets/game115/7667e039b0daecb7ee4f.webp",
+    "sha256": "7667e039b0daecb7ee4f735035980f67ad7719513970c12d5a314fd721b1d598",
+    "pixels": "83f7dc180717a3294f558d90a79021d283eced36df05463b7666c9dee6f76b01",
+    "size": [
+      1254,
+      1254
+    ],
+    "originalBytes": 1511223,
+    "optimizedBytes": 1103452,
+    "lossless": true
+  },
+  "10f5cf8199ca488236caf0c8deb842b5820a09813f132cad799e88d170036345": {
+    "file": "assets/game115/9c33c70786bf6cffadf0.webp",
+    "sha256": "9c33c70786bf6cffadf0d15eb8b14a0b8b8348689674aec8f5158c750d1abc47",
+    "pixels": "ca7dfe8654392f7f1dd26b6e4a4ac7d719d7833a1d6d772217b144ed31ef5d7d",
+    "size": [
+      1254,
+      1254
+    ],
+    "originalBytes": 1575117,
+    "optimizedBytes": 1042124,
+    "lossless": true
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "version": 115,
+  "completeBytes": 27070926,
+  "completeGzipBytes": 17684145,
+  "webBytes": 5081341,
+  "webGzipBytes": 1803827,
+  "sha256": "9e08eb74a955f15dfdcee8d7ccbc601ea1ea4cc8c6c567ce8b2530a092727a0b",
+  "resources": [
+    {
+      "file": "assets/game115/7667e039b0daecb7ee4f.webp",
+      "bytes": 1103452,
+      "originalSha256": "bd97b8bb1c148ba2262dcb6ac058c5453b592f55903efec947cab469c3574a20",
+      "startup": true,
+      "lossless": true
+    },
+    {
+      "file": "assets/game115/9c33c70786bf6cffadf0.webp",
+      "bytes": 1042124,
+      "originalSha256": "10f5cf8199ca488236caf0c8deb842b5820a09813f132cad799e88d170036345",
+      "startup": true,
+      "lossless": true
+    },
+    {
+      "file": "assets/game115/2a994a96041049351978.jpg",
+      "bytes": 658454,
+      "originalSha256": "2a994a960410493519786e80fddc8bbaac888e0abd7a6a7b7228091f47b342ca",
+      "startup": true,
+      "lossless": true
+    },
+    {
+      "file": "assets/game115/d33337d52709125836dc.jpg",
+      "bytes": 650010,
+      "originalSha256": "d33337d52709125836dc7a5cdedb946a52dbe685adb2704f361a4774af306554",
+      "startup": true,
+      "lossless": true
+    },
+    {
+      "file": "assets/game115/40ceb1496f3f2c21da56.jpg",
+      "bytes": 462108,
+      "originalSha256": "40ceb1496f3f2c21da562cfaaff15d55f402bfe7e1918819446df50382cafa03",
+      "startup": true,
+      "lossless": true
+    },
+    {
+      "file": "assets/game115/84e7bd0e0b43e001b3f1.jpg",
+      "bytes": 552240,
+      "originalSha256": "84e7bd0e0b43e001b3f1746a3609bcf12d928ae357788d163f645c361cfce2aa",
+      "startup": true,
+      "lossless": true
+    },
+    {
+      "file": "assets/game115/b447e5ab1b1ae6f3f98c.jpg",
+      "bytes": 666198,
+      "originalSha256": "b447e5ab1b1ae6f3f98c68a55a09d1a1a27bd0feb40e1795ad531f931043710e",
+      "startup": true,
+      "lossless": true
+    },
+    {
+      "file": "assets/game115/a39ca314c5c2eecea05e.jpg",
+      "bytes": 573619,
+      "originalSha256": "a39ca314c5c2eecea05e1031129e542c79a82c6a73317e3ee78d6932234967c9",
+      "startup": true,
+      "lossless": true
+    },
+    {
+      "file": "assets/game115/351c1c197bedc09e5776.jpg",
+      "bytes": 531390,
+      "originalSha256": "351c1c197bedc09e5776832d4d381872e5824d9a96df01071054cb8f18155f00",
+      "startup": true,
+      "lossless": true
+    },
+    {
+      "file": "assets/game115/3f5d9ea7f1c0cafd8b3d.jpg",
+      "bytes": 657470,
+      "originalSha256": "3f5d9ea7f1c0cafd8b3d5e15b935fccfdecc7998ab2d0d982cd23ca466616def",
+      "startup": true,
+      "lossless": true
+    },
+    {
+      "file": "assets/game115/af244c5a3f52e3cda283.jpg",
+      "bytes": 636581,
+      "originalSha256": "af244c5a3f52e3cda2836f577061b8542876d192b39da63e1b02da44981a2cfd",
+      "startup": true,
+      "lossless": true
+    },
+    {
+      "file": "assets/game115/41aab36287808e709ffc.jpg",
+      "bytes": 580203,
+      "originalSha256": "41aab36287808e709ffc2130d54ce3fa443f0a46547f844fd6bb4525cdc94fbe",
+      "startup": true,
+      "lossless": true
+    },
+    {
+      "file": "assets/game115/a47fa730a1eb8ac83b4b.png",
+      "bytes": 343939,
+      "originalSha256": "a47fa730a1eb8ac83b4b34c8d9dd3681cc31458ae15864926dd46139ee4fa60a",
+      "startup": false,
+      "lossless": true
+    },
+    {
+      "file": "assets/game115/04438342e18978d4e37f.png",
+      "bytes": 345392,
+      "originalSha256": "04438342e18978d4e37fa2f9d71145c7930577daecca18f6d17c6f49851cfbe8",
+      "startup": false,
+      "lossless": true
+    },
+    {
+      "file": "assets/game115/9e23868f2512d563b195.png",
+      "bytes": 340778,
+      "originalSha256": "9e23868f2512d563b195f7dfa4b146641bb3a857f6e0d97c2714c37acd2a2332",
+      "startup": false,
+      "lossless": true
+    },
+    {
+      "file": "assets/game115/8811fe12c7b2127f2883.png",
+      "bytes": 344561,
+      "originalSha256": "8811fe12c7b2127f2883df6633a2f70802a6b2692ec47746b3c887f057a75524",
+      "startup": false,
+      "lossless": true
+    },
+    {
+      "file": "assets/game115/c5f231b2e396bc3b53f1.png",
+      "bytes": 344039,
+      "originalSha256": "c5f231b2e396bc3b53f198f9a19770fcb1b1f7b34ead4f74271504b12b9aecde",
+      "startup": false,
+      "lossless": true
+    }
+  ],
+  "initialDownloadBytes": 9917676
+}

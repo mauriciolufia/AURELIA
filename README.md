@@ -6,7 +6,9 @@ Juego autónomo en `index.html`, con los recursos incluidos. Puedes abrir el arc
 python -m http.server 8000 --bind 127.0.0.1
 ```
 
-Juega en https://mauriciolufia.github.io/AURELIA/.
+Juega en https://mauriciolufia.github.io/AURELIA/play.html. La entrada principal también abre esta edición web; el archivo `index.html` conserva el juego autónomo para descargar.
+
+La [actualización 115](ACTUALIZACION115.md) coloca a Berta en la tienda de magia de Valdoria, actualiza la ubicación y las rutinas de los NPC al cambiar la hora en Ajustes y aumenta un **30% la carrera a pie**. La edición web separa las imágenes para reutilizar la caché y reduce aproximadamente un **44% la descarga inicial**, sin rebajar los recursos activos.
 
 La [actualización 114](ACTUALIZACION114.md) reduce el consumo de MP de todas las magias al **25%**, permite vender armas y armaduras sin equipar por el **75%** de su precio, con recompra; amplía los catálogos regionales a un mínimo de **15 armas, 15 armaduras y 15 magias** por pueblo y añade los ocho elementos cada cinco niveles. Corrige la presencia y separación de los NPC, rotula los servicios en el mapa y refuerza los colores vivos. `index.html` conserva el juego autónomo completo.
 
@@ -50,6 +52,9 @@ Descarga la [guía de atributos, equipo y magia en Word](docs/balance105/Aurelia
 npm ci
 npm test
 npm run test:scale
+npm run test:schedules
+npm run test:web
+npm run test:web:mobile
 npm run test:residents
 npm run test:residents:mobile
 npm run test:commerce

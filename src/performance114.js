@@ -8,13 +8,14 @@ function __v114SpeechCandidates(){
 }
 function __v114LocalEnemies(){return __v60Mobile?__v68Pool():_m;}
 function __v114FloorItems(items,x,z){
- if(!__v60Mobile||__v114Perf.building)return items;
+ if(!__v60Mobile&&!__v114Perf.building)return items;
  let index=__v114Perf.floorGrids.get(items);
- if(!index||index.length!==items.length){
-  index={length:items.length,grid:new Map()};
-  for(const p of items){const stair=p.x0!==undefined,cx=stair?(p.x0+p.x1)/2:p.x,cz=stair?(p.z0+p.z1)/2:p.z,r=stair?Math.hypot(p.x1-p.x0,p.z1-p.z0)/2+p.w+.35:Math.hypot(p.w,p.d);
+ if(!index||index.length>items.length){index=null;}
+ if(!index||index.length<items.length){
+  index??={length:0,grid:new Map()};
+  for(const p of items.slice(index.length)){const stair=p.x0!==undefined,cx=stair?(p.x0+p.x1)/2:p.x,cz=stair?(p.z0+p.z1)/2:p.z,r=stair?Math.hypot(p.x1-p.x0,p.z1-p.z0)/2+p.w+.35:Math.hypot(p.w,p.d);
    for(let ix=Math.floor((cx-r)/32);ix<=Math.floor((cx+r)/32);ix++)for(let iz=Math.floor((cz-r)/32);iz<=Math.floor((cz+r)/32);iz++){const key=ix+','+iz;let cell=index.grid.get(key);if(!cell)index.grid.set(key,cell=[]);cell.push(p);}
-  }__v114Perf.floorGrids.set(items,index);
+  }index.length=items.length;__v114Perf.floorGrids.set(items,index);
  }return index.grid.get(Math.floor(x/32)+','+Math.floor(z/32))||[];
 }
 function __v114Track(a){
@@ -39,7 +40,7 @@ function __v114StreamNPCs(){if(!__v60Mobile)return _2h;__v114StreamActors();retu
 function __v114StreamCreatures(){if(!__v60Mobile)return _m;__v114StreamActors();return __v114Perf.creatures;}
 if(__v60Mobile){
  const inRing=__v84PointInRing;__v84PointInRing=function(p,ring){
-  const s=__v114Perf;if(s.building||ring.length<12)return inRing(p,ring);s.ringQueries++;let index=s.rings.get(ring);
+  const s=__v114Perf;if(s.building&&!s.stableGeometry||ring.length<12)return inRing(p,ring);s.ringQueries++;let index=s.rings.get(ring);
   if(!index||index.length!==ring.length){index={length:ring.length,bands:new Map(),minX:Infinity,maxX:-Infinity,minY:Infinity,maxY:-Infinity};
    for(let i=0,j=ring.length-1;i<ring.length;j=i++){const a=ring[i],b=ring[j];index.minX=Math.min(index.minX,a[0]);index.maxX=Math.max(index.maxX,a[0]);index.minY=Math.min(index.minY,a[1]);index.maxY=Math.max(index.maxY,a[1]);if(a[1]===b[1])continue;for(let band=Math.floor(Math.min(a[1],b[1])/8);band<=Math.floor(Math.max(a[1],b[1])/8);band++){let edges=index.bands.get(band);if(!edges)index.bands.set(band,edges=[]);edges.push([a[0],a[1],b[0],b[1]]);}}
    s.rings.set(ring,index);

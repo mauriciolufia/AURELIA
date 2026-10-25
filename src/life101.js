@@ -100,7 +100,7 @@ function __v101Assign(){
  for(const p of __v100Day.furniture)if(p.type!=='seat'&&!p.home?.castle)__v101Collider(p,p.type==='bed'?.65:p.type==='table'?1.05:2.7);
  _22();
  const available=__v101Life.homes.filter(h=>!h.castle),givers=new Set(_bp.map(q=>q.giver));
- for(const n of _2h){if(n.__v88Dead||n.__v88Controlled)continue;const site=_1h[n.homeSite??n.site];let h=n===__v75.sage?.npc&&available.includes(__v75.sage.house)?__v75.sage.house:available.includes(n.home)?n.home:null;
+ for(const n of _2h){if(n.__v88Dead||n.__v88Controlled)continue;const site=_1h[n.homeSite??n.site];let h=__v115ServiceHome(n,available);h=h||(n===__v75.sage?.npc&&available.includes(__v75.sage.house)?__v75.sage.house:available.includes(n.home)?n.home:null);
   const castle=__v101Life.castleHomes.filter(h=>h.castle===(n.homeSite??n.site));
   if(castle.length)h=castle.find(h=>h.members.length<2)||castle[0];
   if(!h){const candidates=available.filter(h=>!site||h.city===site.name);h=(candidates.length?candidates:available).slice().sort((a,b)=>Math.hypot(a.x-n.x,a.z-n.z)+a.members.length*10-(Math.hypot(b.x-n.x,b.z-n.z)+b.members.length*10))[0];}
