@@ -35,11 +35,11 @@ __v87EnemyStats=function(c){
  if(!c?.hostile)return;
  const fraction=c.maxHp>0?Math.max(0,Math.min(1,c.hp/c.maxHp)):1;
  const id=c.boss==='azrakh'?'supreme_emperor':c.spec?.id||c.id||'unknown';
- const rank=c.boss?'boss':c.elite||c.questElite?'elite':'normal',bossAttack=!!c.boss||(typeof __v109Context==='function'&&__v109Context(c).boss),s=__v105Scale.enemy(c.level,id,rank,bossAttack);
+ const bossAttack=!!c.boss||(typeof __v109Context==='function'&&__v109Context(c).boss),rank=bossAttack?'boss':c.elite||c.questElite?'elite':'normal',s=__v105Scale.enemy(c.level,id,rank,bossAttack);
  c.maxHp=s.maxHp;c.hp=c.dead?0:Math.max(fraction>0?1:0,Math.round(s.maxHp*fraction));
  c.atk=c.damage=c.previousAtk=s.atk;c.def=c.__v87BaseDef=s.def;
  if(c.__v87DefTime>0)c.def=Math.round(s.def*1.35);
- if(c.boss){
+ if(bossAttack){
   const offensive=s=>Number.isFinite(s?.power)&&s.power>0&&!/heal|guard|buff/i.test(s.type||'');
   const copies=new Map();for(const key of ['__v68Skills','__v85IndoorSkills','__v85OutdoorSkills']){
    const kit=c[key];if(!kit?.some(offensive))continue;if(copies.has(kit)){c[key]=copies.get(kit);continue;}

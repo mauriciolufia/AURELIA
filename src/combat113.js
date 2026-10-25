@@ -2,11 +2,13 @@
 __v109Combat.aggression*=2;
 const __v113Combat={turns:new WeakMap(),choices:0,techniques:0,leads:0};
 function __v113Telegraph(c,opacity){
+ const radius=__v117MeleeReach(c);
  if(!c.warning?.material){
-  const old=c.warning,radius=__v85EnemyRange(c,(c.defn?.range||4)*1.3*1.5*.7*1.5);
+  const old=c.warning;
   const ring=new _0.Mesh(new _0.RingGeometry(Math.max(.1,radius-.16),radius,48),new _0.MeshBasicMaterial({color:'#ee9d69',transparent:true,opacity,side:_0.DoubleSide,depthWrite:false}));
   ring.rotation.x=-Math.PI/2;(old?.parent||_8).add(ring);old?.removeFromParent();c.warning=ring;
  }
+ if(c.warning.geometry?.parameters?.outerRadius)c.warning.scale.setScalar(radius/c.warning.geometry.parameters.outerRadius);
  c.warning.position.set(c.g.position.x,c.g.position.y+.12,c.g.position.z);c.warning.visible=true;
  for(const material of Array.isArray(c.warning.material)?c.warning.material:[c.warning.material])material.opacity=opacity;
 }

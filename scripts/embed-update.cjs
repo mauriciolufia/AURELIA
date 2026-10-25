@@ -3,6 +3,13 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const file = path.join(root, 'index.html');
 let html = fs.readFileSync(file, 'utf8');
+// Replace the legacy 20% roll once; contact and distance now share one 30% decision.
+html=html.replace('if(enemy&&Math.random()<.20){','if(enemy&&__v117HeroEvades(c)){');
+html=html.replace('const reach=__v85EnemyRange(c,(c.boss?c.defn.range*.72:c.elite?4:2.4)*1.3*1.5*.7*1.5);if(d<reach', 'const reach=__v117MeleeReach(c);if(d<reach');
+html=html.replace('_d0(s.c,s.art.power,s.art.status);','__v117RangedHit(s.c,s.art.power,s.art.status,s.art);');
+html=html.replace('const a=Math.atan2(_14.x-p.x,_14.z-p.z);for(const off', 'const aim117=__v117EnemyAim(c,new _0.Vector3(p.x,p.y+1.8,p.z),19,46),a=Math.atan2(aim117.x-p.x,aim117.z-p.z);for(const off');
+// A bell must use the same two-ally recruitment cap as visual alerts.
+html=html.replace("for(const ally of a.members)if(!ally.dead&&Math.abs(ally.__v75Room-c.__v75Room)<=1)ally.__v75AlertUntil=__v75.clock+12;", '__v117Alarm(a,c);');
 // Both public URLs must also work when downloaded as one HTML file.
 html=html.replace(/<script id="aurelia-web115-redirect">[\s\S]*?<\/script>/,'');
 const furnitureStart=' for(const i of[1,2,4,5,7]){const[x,z]=pl.centers[i]';
@@ -154,6 +161,12 @@ html=html.replace('for(const c of _m){ if(!c?.g||c.dead) continue; if(Math.hypot
 // The previous loader retained all full-size decoded atlas images through synchronous world construction.
 html=html.replace(/const __v72Ready=Promise\.all\(Object\.entries\(__v72AtlasData\)[^\n]*\n/, 'const __v72Ready=__v115LoadArtwork();\n');
 html=html.replace('(_v?55:_w||_15.ShiftLeft?18:9)', '(_v?55:_w||_15.ShiftLeft?(_9d?18:23.4):9)');
+// Dedicated controllers must approach the same contact reach as ordinary enemies.
+html=html.replace("e.pending!=='physical'||distance<8", "e.pending!=='physical'||distance<__v117MeleeReach(c)*.95");
+html=html.replace("if(Math.hypot(_14.x-p.x,_14.z-p.z)<8.4){_d0(c,1);", "if(Math.hypot(_14.x-p.x,_14.z-p.z)<__v117MeleeReach(c)){_d0(c,1);");
+html=html.replace("range=__v113RaidChoice(r)==='normal'?3:(r.fire?10:3)", "range=__v113RaidChoice(r)==='normal'?(d.__v113Hero?__v117MeleeReach(c):3):(r.fire?10:3)");
+html=html.replace('offset=range>3?7:d.__v113Hero?__v117MeleeReach(c)*.72:2.6', 'offset=range>3?7:2.6');
+html=html.replace('offset=range>3?7:2.6', "offset=d.__v113Hero&&__v113RaidChoice(r)==='normal'?__v117MeleeReach(c)*.72:range>3?7:2.6");
 const begin = '/* AURELIA_UPDATE97_BEGIN */';
 const end = '/* AURELIA_UPDATE97_END */';
 // Service anchors still initialize their NPC, but must not reset a living NPC each frame.
@@ -184,7 +197,7 @@ html=html.replace('for(const d of __v29Doors){const dist=', 'for(const d of __v2
 html=html.replace('for(const n of __v101DoorActors())', 'for(const n of __v102DoorActors(d.p.x,d.p.z))');
 html=html.replaceAll('__v102DoorActors(d.p.x,d.p.z))','__v102DoorActors(d.p.x,d.p.z,Math.max(4,d.w*d.scale*.6+2)))');
 html=html.replace('Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<3)', 'Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<Math.max(3,d.w*d.scale*.6+2))');
-const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js', 'volcano104.js', 'airship104.js', 'balance-plan105.js', 'balance105.js', 'lighting106.js', 'world107.js', 'castle107.js', 'enemy-collision107.js', 'destruction108.js', 'hazards108.js', 'riddle-arrows108.js', 'landmarks108.js', 'frontier108.js', 'technique-plan109.js', 'techniques109.js', 'player110.js', 'catalog110.js', 'enemy-balance111.js', 'combat112.js', 'graphics112.js', 'mobile-map112.js', 'experience112.js', 'interaction113.js', 'combat113.js', 'experience113.js', 'performance114.js', 'crowd114.js', 'services114.js', 'commerce114.js', 'graphics114.js', 'town-map114.js', 'selling114.js', 'mana114.js', 'startup115.js', 'schedules115.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
+const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js', 'volcano104.js', 'airship104.js', 'balance-plan105.js', 'balance105.js', 'lighting106.js', 'world107.js', 'castle107.js', 'enemy-collision107.js', 'destruction108.js', 'hazards108.js', 'riddle-arrows108.js', 'landmarks108.js', 'frontier108.js', 'technique-plan109.js', 'techniques109.js', 'player110.js', 'catalog110.js', 'enemy-balance111.js', 'combat112.js', 'graphics112.js', 'mobile-map112.js', 'experience112.js', 'interaction113.js', 'combat113.js', 'experience113.js', 'performance114.js', 'crowd114.js', 'services114.js', 'commerce114.js', 'graphics114.js', 'town-map114.js', 'selling114.js', 'mana114.js', 'startup115.js', 'schedules115.js', 'progression117.js', 'combat117.js', 'enemy-combat117.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
 sources.push('const __v103Blueprints='+JSON.stringify([1,2,3,4,5].map(i=>'data:image/png;base64,'+fs.readFileSync(path.join(root,'docs/volcano103/planta-'+i+'.png')).toString('base64')))+';');
 const block = `${begin}\n${sources.join('\n')}\n${end}\n`;
 if (html.includes(begin)) html = html.slice(0, html.indexOf(begin)) + block + html.slice(html.indexOf(end) + end.length).replace(/^\n/, '');
@@ -193,8 +206,8 @@ else {
   if (!html.includes(marker)) throw new Error('Missing game initialization marker');
   html = html.replace(marker, block + marker);
 }
-html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v116 Reparación de carga y archivo completo</title>');
-html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v116-carga-integrada-sin-fetch">');
+html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v117 Progresión y combate preciso</title>');
+html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v117-progresion-espada-magia">');
 fs.writeFileSync(file, html);
-console.log('Embedded Aurelia update 116');
+console.log('Embedded Aurelia update 117');
 require('./package-standalone116.cjs')(root);

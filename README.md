@@ -8,6 +8,8 @@ python -m http.server 8000 --bind 127.0.0.1
 
 Juega en https://mauriciolufia.github.io/AURELIA/. Cualquiera de los dos HTML puede descargarse y abrirse por separado.
 
+La [actualización 117](ACTUALIZACION117.md) ajusta élites, jefes y guardianes a la misión y planta correspondiente; refuerza el espadazo horizontal y su sonido; limita los avisos de cada líder a dos aliados. Las magias apuntan al enemigo que miras, con línea de visión y alcance real, y permiten un 30% de evasión. Los enemigos anticipan mejor tu movimiento; sus golpes fallan al salir del alcance, permiten un 30% de evasión fuera del contacto cercano y conservan dos técnicas hasta nivel 40 y tres desde el 41.
+
 La [actualización 116](ACTUALIZACION116.md) corrige el error **Failed to fetch** de la carga de imágenes. Restaura el archivo único completo en ambos enlaces y carga las imágenes integradas directamente, sin `fetch`, URLs Blob ni archivos vecinos.
 
 La [actualización 115](ACTUALIZACION115.md) coloca a Berta en la tienda de magia de Valdoria, actualiza la ubicación y las rutinas de los NPC al cambiar la hora en Ajustes y aumenta un **30% la carrera a pie**. Su sistema de carga en archivos separados fue sustituido por la reparación de v116.

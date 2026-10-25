@@ -9,7 +9,7 @@ const __v109OldAudit=window.__AURELIA_COMBAT102__.audit;
 window.__AURELIA_COMBAT102__.audit=()=>({...__v109OldAudit(),attackRate:__v102CombatRate({hostile:true}),attackIntervalMultiplier:1/__v102CombatRate({hostile:true}),enemyPoisonInterval:2/__v102CombatRate({hostile:true}),movementRelativeTo108:__v109Combat.movement,attackFrequencyRelativeTo108:__v109Combat.aggression});
 function __v109Context(c){
  let role=null;if(c.boss==='azrakh')role='emperor';else if(c.__v88Raid)role='raid';else if(c===__v94Candy.boss)role='candyKing';else if(c===__v94Ice.boss)role='winterKing';
- const sideBoss=c===__v94Candy.boss||c===__v94Ice.boss||c===__v95North.king||c===__v95North.yeti||c===__v88Island.dragon;
+ const sideBoss=c===__v94Candy.boss||c===__v94Ice.boss||c===__v95North.king||c===__v95North.yeti||c===__v88Island.dragon||c===__v92Maya.boss;
  return{id:c.spec?.id||'unknown',name:c.name||c.spec?.name,spawnId:c.spawnId,level:c.level,biome:c.biome,boss:!!c.boss||sideBoss,spiked:!!c.__v102Guard,role};
 }
 function __v109Ensure(c){
