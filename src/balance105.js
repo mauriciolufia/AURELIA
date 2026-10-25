@@ -63,7 +63,7 @@ function __v105Spells(){
   if(!(__v58Offensive.has(s.element)&&s.range>0))continue;
   // Supreme elemental techniques have level 60 power, and keep their level 55 learning requirement.
   s.__v105PowerLevel=__v87SupremeArts.some(a=>a[0]===s.id)?60:__v105Scale.level(s.level);
-  Object.defineProperty(s,'power',{configurable:true,enumerable:true,get(){return __v105Scale.magic(__v87SupremeArts.some(a=>a[0]===this.id)?60:this.level);}});
+  Object.defineProperty(s,'power',{configurable:true,enumerable:true,get(){return this.elemental119?__v119ElementPower(this):__v105Scale.magic(__v87SupremeArts.some(a=>a[0]===this.id)?60:this.level);}});
   s.__v105Balanced=true;
  }
  __v92.calibration={formula:'(ATK elemental / DEF) × 8',minPower:100,maxPower:140000,version:110};

@@ -35,7 +35,7 @@ const __v105Scale=(()=>{
  const defender=(n,id)=>{const o=enemy(n,id,'elite'),base=curve(6,65000,n);o.atk=Math.max(Math.ceil(base/1.2),Math.min(Math.floor(base*1.2),Math.round(base*profile(id,'elite')[1])));return o;};
  const armorEnds={head:[3,350],body:[5,500],feet:[2,250],shield:[4,450]};
  const gear=(n,slot)=>slot==='weapon'?{atk:2*curve(5,60000,n),def:0}:{atk:0,def:curve(...(armorEnds[slot]||armorEnds.body),n)};
- const magic=n=>curve(100,140000,n);
+ const magic=n=>{n=level(n);return n<=55?Math.round(100*Math.pow(800,(n-1)/54)):Math.round(80000*Math.pow(1.75,(n-55)/5));};
  const mana=n=>curve(100,5000,n);
  // Whole HP: round once at the point of damage; a positive attack always causes at least 1 HP.
  const damage=(atk,def)=>{atk=Number(atk);def=Number(def);if(!Number.isFinite(atk)||atk<=0)return 0;if(!Number.isFinite(def)||def<=0)def=1;return Math.max(1,Math.round(atk/def*8));};

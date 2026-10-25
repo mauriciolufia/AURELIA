@@ -15,7 +15,7 @@ for(let n=1;n<=60;n++)assert.equal(S.gear(n,'weapon').atk,S.curve(5,60000,n)*2);
 for(let n=2;n<=60;n++){assert(S.mana(n)>S.mana(n-1));assert(S.magic(n)>S.magic(n-1));}
 assert.equal(S.gear(1,'weapon').atk,10);assert.equal(S.gear(60,'weapon').atk,120000);
 for(const slot of Object.keys(S.armorEnds)){assert(S.gear(1,slot).def>=2&&S.gear(1,slot).def<=5);assert(S.gear(60,slot).def>=250&&S.gear(60,slot).def<=500);}
-assert.equal(S.magic(1),100);assert.equal(S.magic(60),140000);assert.equal(S.damage(10,10),8);assert.equal(S.damage(65000,380),1368);assert.equal(S.damage(0,12),0);assert.equal(S.damage(10,0),80);
+assert.equal(S.magic(55),80000);assert.equal(S.magic(1),100);assert.equal(S.magic(60),140000);assert.equal(S.damage(10,10),8);assert.equal(S.damage(65000,380),1368);assert.equal(S.damage(0,12),0);assert.equal(S.damage(10,0),80);
 console.log('PASS exact anchors, all 60 levels, bounded archetypes, four armor types, magic and damage formula');
 
 assert.equal(S.damage(S.enemy(60,'supreme_emperor','boss').atk,1658),9000/8);

@@ -8,6 +8,8 @@ python -m http.server 8000 --bind 127.0.0.1
 
 Juega en https://mauriciolufia.github.io/AURELIA/. Cualquiera de los dos HTML puede descargarse y abrirse por separado.
 
+La [actualización 119](ACTUALIZACION119.md) entrega Elementalista al vencer a Ígneo: +50% de poder elemental durante 15 minutos. Añade Sueño, Petrificación, Congelación, Veneno y Confusión con 50% de éxito contra enemigos y élites, y 20% contra jefes. Fija la recarga en 2,5 segundos y el consumo entre 15 y 500 MP; reorganiza las magias elementales, curaciones y aumentos. Consulta el [catálogo con nombres, niveles, poderes y costes](docs/magias119.md).
+
 La [actualización 118](ACTUALIZACION118.md) duplica el alcance enemigo solo en exteriores y conserva el alcance de fortalezas; duplica la velocidad de ataque y la detección en ambos lugares. Limita a tres los enemigos que pueden perseguir y atacar al héroe simultáneamente. Invierte el espadazo hacia afuera y añade una media luna de viento visible al cortar.
 
 La [actualización 117](ACTUALIZACION117.md) ajusta élites, jefes y guardianes a la misión y planta correspondiente; refuerza el espadazo horizontal y su sonido; limita los avisos de cada líder a dos aliados. Las magias apuntan al enemigo que miras, con línea de visión y alcance real, y permiten un 30% de evasión. Los enemigos anticipan mejor tu movimiento; sus golpes fallan al salir del alcance, permiten un 30% de evasión fuera del contacto cercano y conservan dos técnicas hasta nivel 40 y tres desde el 41.

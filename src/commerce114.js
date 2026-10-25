@@ -1,12 +1,11 @@
 /* Stable regional items and complete five-level elemental progression. Existing saves keep their IDs. */
-const __v114Market={gear:new Map(),spells:new Map(),elements:[...__v58Offensive],tiers:[1,...Array.from({length:12},(_,i)=>(i+1)*5)]};
+const __v114Market={gear:new Map(),spells:new Map(),elements:[...__v58Offensive],tiers:[...__v119ElementLevels]};
 const __v114ElementNames={fire:'Fuego',ice:'Hielo',storm:'Rayo',wind:'Viento',earth:'Tierra',nature:'Naturaleza',light:'Luz',shadow:'Sombra'};
 const __v114ElementColors={fire:'#ff994a',ice:'#95e5ff',storm:'#c8b4ff',wind:'#b9f4de',earth:'#dfb77f',nature:'#91e27d',light:'#fff2ae',shadow:'#ca8ce9'};
 function __v114AddSpell(spell){let s=_5n.find(s=>s.id===spell.id);if(!s){s=spell;_5n.push(s);}__v114Market.spells.set(s.id,s);return s;}
 for(const level of __v114Market.tiers)for(const element of __v114Market.elements){
- const grade=level===1?'Inicial':String(level/5),id='elemental114-'+element+'-'+level;
- const s=__v114AddSpell({id,name:__v114ElementNames[element]+' · Grado '+grade,element,level,cost:Math.round(8+__v105Scale.mana(level)*.045),power:__v105Scale.magic(level),range:12+level*.3,price:Math.round(70+level*45+level*level*1.3),cooldown:1.1+level*.008,color:__v114ElementColors[element],elemental114:true});
- Object.defineProperty(s,'power',{configurable:true,enumerable:true,get(){return __v105Scale.magic(this.level);}});s.__v105Balanced=true;
+ const id='elemental114-'+element+'-'+level,s=__v114AddSpell(__v119ElementSpell(element,level));
+ Object.defineProperty(s,'power',{configurable:true,enumerable:true,get(){return __v119ElementPower(this);}});s.__v105Balanced=true;
 }
 function __v114CreateGear(site,slot,index){
  const range=__v78Range(site),n=slot==='weapon'?15:16,level=Math.round(range.min+(range.max-range.min)*index/(n-1)),base=slot==='weapon'?_5k.filter(t=>t.slot==='weapon')[index%5]:_5k.find(t=>t.slot===slot),id='regional114-'+site+'-'+slot+'-'+index;
@@ -21,11 +20,12 @@ function __v114RegionalCatalog(){
   for(let i=0;i<15;i++)__v114CreateGear(site,'weapon',i);
   for(let i=0;i<16;i++)__v114CreateGear(site,['head','body','feet','shield'][i%4],i);
   const range=__v78Range(site),templates=['cura','sanar','guardia_ligera','fuerza','celeridad','barrera','aegis'];
-  for(let i=0;i<7;i++){const t=_5n.find(s=>s.id===templates[i]),level=range.min+Math.round((range.max-range.min)*i/6),id='apoyo114-'+site+'-'+i;
+  for(const i of[4]){const t=_5n.find(s=>s.id===templates[i]),level=range.min+Math.round((range.max-range.min)*i/6),id='apoyo114-'+site+'-'+i;
    const s=__v114AddSpell({...t,id,name:t.name+' de '+town.name,level,cost:Math.round(8+__v105Scale.mana(level)*.04),price:Math.round(70+level*level*1.2+i*30),regional114:site,range:0});
    if(s.element==='heal')Object.defineProperty(s,'power',{configurable:true,enumerable:true,get(){return Math.max(1,Math.round(__v105Scale.hero(rpg.level).maxHp*(i===0?.22:.38))-rpg.level*4);}});
   }
  }
+ __v119Schools();
 }
 // Register before the initial save is read, so purchased regional IDs validate on a new visit.
 __v114RegionalCatalog();
@@ -43,6 +43,7 @@ function __v114Commerce(){
   school.spells=[...spells];school.master114=site===highest;
   for(const t of [..._7u,..._7v])if(t.site===site)t.spells=[...school.spells];
  }
+ __v119Schools();
 }
 const __v114BalancedRefresh=__v111Refresh;__v111Refresh=function(...args){__v114Commerce();return __v114BalancedRefresh(...args);};
 const __v114OldCommerce=__v87Commerce;__v87Commerce=function(...args){const r=__v114OldCommerce(...args);__v114Commerce();return r;};

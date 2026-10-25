@@ -1,0 +1,13 @@
+# Actualización 119 — Elementalista y catálogo mágico
+
+Vencer a Ígneo en la quinta planta de la Caldera de Obsidiana entrega **Elementalista** una sola vez. Esta magia aumenta un **50% el poder elemental durante 900 segundos de juego**. Renovarla reinicia el tiempo sin acumular el multiplicador. La recompensa y el tiempo restante se guardan; las partidas que ya habían vencido a Ígneo reciben la magia al cargar. No se ofrece en tiendas.
+
+Se añaden **Sueño, Petrificación, Congelación, Veneno y Confusión**, con una sola tirada por impacto: **50% de éxito contra normales y élites, 20% contra jefes**. Requieren mirar a un objetivo visible dentro del alcance, y el proyectil respeta paredes y plantas. Sueño, hielo y piedra impiden movimiento y ataques; el veneno causa daño periódico mediante la fórmula de combate; la confusión desvía movimiento y puntería. Se señalan sobre el enemigo y expiran tras unos segundos. Se reutilizan las cinco texturas de estado y se liberan los materiales de los marcadores al terminar.
+
+El catálogo contiene **72 técnicas elementales**, ocho elementos en niveles **1, 5, 10, 20, 30, 40, 50, 55 y 60**. El poder base escala de **100 a 140000**, con **80000 en nivel 55**. Los nombres, alcance y área de cada técnica figuran en el [catálogo](docs/magias119.md). Se mantienen exactamente cinco curaciones de **100, 300, 500, 1500 y 9999 HP**, y cinco aumentos por estadística de **15%, 40%, 65%, 100% y 150%**.
+
+Todas las magias tienen **2,5 segundos de recarga** y costes crecientes entre **15 y 500 MP**. La base anterior descontada se triplica antes de ajustar la curva al nivel y a sus límites. El MP del héroe aumenta en los 60 niveles desde **100 hasta 5000**. Los aumentos temporales de estadísticas y las protecciones, luz, guía y exploración de fortalezas duran **15 minutos**. Se elimina un segundo descuento por fotograma que acortaba los aumentos de estadísticas. Los menús detienen los temporizadores.
+
+Se migran identificadores antiguos antes de validar la partida para conservar las técnicas aprendidas, la magia seleccionada y los espacios de acceso rápido. Las escuelas actualizan sus referencias y cada pueblo conserva al menos 15 magias disponibles. Los dos HTML siguen siendo archivos autónomos idénticos, con sus 17 imágenes integradas.
+
+Validación: `npm run test:mana`, `npm run test:mana:mobile`, `npm run test:magic`, `npm run test:magic:mobile`, `npm run test:commerce`, `npm run test:combat:118`, `npm run test:package`, `npm run test:load` y `npm run test:load:mobile`. Las pruebas de estados recorren 100 resultados controlados para cada combinación de estado y rango, además de probar proyectiles reales, daño de veneno, recompensa de Ígneo, duración efectiva, guardado y migración.

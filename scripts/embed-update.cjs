@@ -182,6 +182,28 @@ html=html.replace("if(_i7(p.x,p.z,p.y)){p.life=0;__v88Spark", "if(_i7(p.x,p.z,p.
 html=html.replace("range=__v113RaidChoice(r)==='normal'?(d.__v113Hero?__v117MeleeReach(c):3):(r.fire?10:3)", 'range=__v118RaidRange(r,d)');
 html=html.replace("offset=d.__v113Hero&&__v113RaidChoice(r)==='normal'?__v117MeleeReach(c)*.72:range>3?7:2.6", 'offset=__v118RaidOffset(r,d)');
 html=html.replace('Math.hypot(p.x-d.n.x,p.z-d.n.z)<3.8&&', 'Math.hypot(p.x-d.n.x,p.z-d.n.z)<3.8*__v118Range(c)&&');
+// Travel and exploration use the same fixed spell cooldown as every other magic.
+html=html.replace('rpg.mp-=__v114TeleportCost();_5o=5;', "rpg.mp-=__v114TeleportCost();_5o=_5n.find(s=>s.id==='teletransporte').cooldown;");
+html=html.replace('rpg.mp-=s.cost;__v88MapTimers()[id]=s.duration;_5o=3;', 'rpg.mp-=s.cost;__v88MapTimers()[id]=s.duration;_5o=s.cooldown;');
+// Timed player magic lasts 900 play seconds; one clock owns stat-buff countdowns.
+html=html.replace("for(const p of['buff','shield','haste'])rpg[p]=Math.max(0,rpg[p]-dt);", '/* Stat-buff clocks advance once in _ge. */');
+html=html.replace('const __v86Duration={guide:900,light:300,power:120}', 'const __v86Duration={guide:900,light:900,power:900}');
+html=html.replace('Math.max(0,Math.min(300,value)):300', 'Math.max(0,Math.min(900,value)):900');
+html=html.replace('__v75Save.lit.map(k=>[k,300])', '__v75Save.lit.map(k=>[k,900])');
+html=html.replace('__v86LightState()[a.key]=300;', '__v86LightState()[a.key]=s.duration;');
+html=html.replace('(timers[key]??300)-dt', '(timers[key]??900)-dt');
+html=html.replace('__v86LightState()[a.key]??300', '__v86LightState()[a.key]??900');
+html=html.replace('rpg.buff=Math.min(rpg.buff||0,120);rpg.shield=Math.min(rpg.shield||0,120)', 'rpg.buff=Math.min(rpg.buff||0,900);rpg.shield=Math.min(rpg.shield||0,900)');
+html=html.replace('guideDuration:900,lightDuration:300,powerDuration:120', 'guideDuration:900,lightDuration:900,powerDuration:900');
+html=html.replaceAll('iluminación restaurada durante 5 minutos', 'iluminación restaurada durante 15 minutos').replaceAll('la luz vuelve durante 5 minutos', 'la luz vuelve durante 15 minutos').replaceAll('Restaura durante 5 minutos', 'Restaura durante 15 minutos');
+html=html.replaceAll("toFixed(1)+' durante 2 min'", "toFixed(1)+' durante 15 min'");
+html=html.replace("s.cost+' MP · 30 minutos. Revela", "s.cost+' MP · 15 minutos. Revela").replace("s.cost+' MP · 20 minutos. En el mapa", "s.cost+' MP · 15 minutos. En el mapa");
+html=html.replace('rpg.shield=25;rpg.shieldPower=spell.power;', 'rpg.shield=spell.duration;rpg.shieldPower=spell.power;').replace("rpg.buff=30;_3a('Filo encantado · ATK +34 durante 30 s')", "rpg.buff=spell.duration;_3a('Filo encantado · ATK +34 durante 15 min')").replace("rpg.haste=25;_3a('Paso del viento · velocidad aumentada durante 25 s')", "rpg.haste=spell.duration;_3a('Paso del viento · velocidad aumentada durante 15 min')");
+html=html.replace('rpg.buff=30;rpg.buffPct=', 'rpg.buff=s.duration;rpg.buffPct=').replace('rpg.shield=30;rpg.defPct=', 'rpg.shield=s.duration;rpg.defPct=');
+// Healing has fixed HP values and canonical elemental spells carry their area metadata.
+html=html.replaceAll('spell.power+rpg.level*4','__v119HealHP(spell)').replaceAll('s.power+rpg.level*4','__v119HealHP(s)').replaceAll('sp.power+rpg.level*4','__v119HealHP(sp)');
+html=html.replace("area=['llama','inferno','ventisca','cero','trueno','tempestad','torbellino','sismo','luz','eclipse'].includes(f.spell.id)", "area=f.spell.area119||['llama','inferno','ventisca','cero','trueno','tempestad','torbellino','sismo','luz','eclipse'].includes(f.spell.id)");
+html=html.replace('radius=area?Math.min(5.4,2+f.spell.level*.06):.8+f.spell.level*.025', 'radius=area?(f.spell.areaRadius119||Math.min(5.4,2+f.spell.level*.06)):.8+f.spell.level*.025');
 const begin = '/* AURELIA_UPDATE97_BEGIN */';
 const end = '/* AURELIA_UPDATE97_END */';
 // Service anchors still initialize their NPC, but must not reset a living NPC each frame.
@@ -212,7 +234,7 @@ html=html.replace('for(const d of __v29Doors){const dist=', 'for(const d of __v2
 html=html.replace('for(const n of __v101DoorActors())', 'for(const n of __v102DoorActors(d.p.x,d.p.z))');
 html=html.replaceAll('__v102DoorActors(d.p.x,d.p.z))','__v102DoorActors(d.p.x,d.p.z,Math.max(4,d.w*d.scale*.6+2)))');
 html=html.replace('Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<3)', 'Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<Math.max(3,d.w*d.scale*.6+2))');
-const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js', 'volcano104.js', 'airship104.js', 'balance-plan105.js', 'balance105.js', 'lighting106.js', 'world107.js', 'castle107.js', 'enemy-collision107.js', 'destruction108.js', 'hazards108.js', 'riddle-arrows108.js', 'landmarks108.js', 'frontier108.js', 'technique-plan109.js', 'techniques109.js', 'player110.js', 'catalog110.js', 'enemy-balance111.js', 'combat112.js', 'graphics112.js', 'mobile-map112.js', 'experience112.js', 'interaction113.js', 'combat113.js', 'experience113.js', 'performance114.js', 'crowd114.js', 'services114.js', 'commerce114.js', 'graphics114.js', 'town-map114.js', 'selling114.js', 'mana114.js', 'startup115.js', 'schedules115.js', 'progression117.js', 'combat117.js', 'enemy-combat117.js', 'combat118.js', 'attack-slots118.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
+const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js', 'volcano104.js', 'airship104.js', 'balance-plan105.js', 'balance105.js', 'lighting106.js', 'world107.js', 'castle107.js', 'enemy-collision107.js', 'destruction108.js', 'hazards108.js', 'riddle-arrows108.js', 'landmarks108.js', 'frontier108.js', 'technique-plan109.js', 'techniques109.js', 'player110.js', 'catalog110.js', 'enemy-balance111.js', 'combat112.js', 'graphics112.js', 'mobile-map112.js', 'experience112.js', 'interaction113.js', 'combat113.js', 'experience113.js', 'performance114.js', 'crowd114.js', 'services114.js', 'magic-catalog119.js', 'commerce114.js', 'graphics114.js', 'town-map114.js', 'selling114.js', 'mana-plan119.js', 'mana119.js', 'mana114.js', 'startup115.js', 'schedules115.js', 'progression117.js', 'combat117.js', 'enemy-combat117.js', 'combat118.js', 'attack-slots118.js', 'spell-effects119.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
 sources.push('const __v103Blueprints='+JSON.stringify([1,2,3,4,5].map(i=>'data:image/png;base64,'+fs.readFileSync(path.join(root,'docs/volcano103/planta-'+i+'.png')).toString('base64')))+';');
 const block = `${begin}\n${sources.join('\n')}\n${end}\n`;
 if (html.includes(begin)) html = html.slice(0, html.indexOf(begin)) + block + html.slice(html.indexOf(end) + end.length).replace(/^\n/, '');
@@ -221,8 +243,8 @@ else {
   if (!html.includes(marker)) throw new Error('Missing game initialization marker');
   html = html.replace(marker, block + marker);
 }
-html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v118 Combate veloz y corte de viento</title>');
-html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v118-combate-veloz-corte-exterior">');
+html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v119 Elementalista y catálogo mágico</title>');
+html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v119-elementalista-estados-catalogo">');
 fs.writeFileSync(file, html);
-console.log('Embedded Aurelia update 118');
+console.log('Embedded Aurelia update 119');
 require('./package-standalone116.cjs')(root);
