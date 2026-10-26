@@ -1,6 +1,6 @@
 {
   "name": "aurelia-rpg",
-  "version": "121.0.0",
+  "version": "122.0.0",
   "private": true,
   "description": "Aurelia RPG, juego HTML autónomo",
   "scripts": {
@@ -65,7 +65,11 @@
     "test:startup": "node tests/startup121.cjs",
     "test:startup:vivid": "node tests/startup121.cjs --vivid --resume",
     "test:startup:mobile": "node tests/startup121.cjs --mobile --vivid",
-    "test:startup:timeout": "node tests/startup121.cjs --timeout"
+    "test:startup:timeout": "node tests/startup121.cjs --timeout",
+    "test:entry": "node tests/entry122.cjs",
+    "test:entry:mobile": "node tests/entry122.cjs --mobile",
+    "test:startup:compatible": "node tests/startup121.cjs --vivid --compatible",
+    "test:startup:recovery": "node tests/startup121.cjs --vivid --compatible --cave --lost"
   },
   "devDependencies": {
     "playwright": "1.62.1"

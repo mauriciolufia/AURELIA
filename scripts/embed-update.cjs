@@ -215,6 +215,9 @@ html=html.replace('o.position.addScaledVector(o.userData.velocity,dt);o.rotation
 html=html.replace('if(!active||__v96GraphicsLost)return;if(__v59IsPaused())', 'if(!active||__v96GraphicsLost)return;if(!__v121FrameAllowed())return;if(__v59IsPaused())');
 const oldBootLine=html.split('\n').find(line=>line.startsWith("$('start').disabled=true;__v72Ready.then("));
 if(oldBootLine)html=html.replace(oldBootLine,'__v121Start(_ix);');
+// The explicit compatible route keeps full resolution and detailed assets, using a fresh non-MSAA GPU context.
+html=html.replace("antialias:document.documentElement.dataset.aureliaDevice!=='mobile',powerPreference:document.documentElement.dataset.aureliaDevice==='mobile'?'low-power':'default'", "antialias:document.documentElement.dataset.aureliaDevice!=='mobile'&&new URLSearchParams(location.search).get('gpu')!=='compatible',powerPreference:document.documentElement.dataset.aureliaDevice==='mobile'?'low-power':new URLSearchParams(location.search).get('gpu')==='compatible'?'high-performance':'default'");
+html=html.replace('let dt=Math.min((now-previous)/1000,.04);', 'let dt=Math.max(0,Math.min((now-previous)/1000,.04));');
 const begin = '/* AURELIA_UPDATE97_BEGIN */';
 const end = '/* AURELIA_UPDATE97_END */';
 // Service anchors still initialize their NPC, but must not reset a living NPC each frame.
@@ -254,8 +257,8 @@ else {
   if (!html.includes(marker)) throw new Error('Missing game initialization marker');
   html = html.replace(marker, block + marker);
 }
-html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v121 Inicio de PC corregido</title>');
-html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v121-inicio-pc">');
+html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v122 Entrada en Edge y cavernas</title>');
+html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v122-entrada-edge-cavernas">');
 fs.writeFileSync(file, html);
-console.log('Embedded Aurelia update 121');
+console.log('Embedded Aurelia update 122');
 require('./package-standalone116.cjs')(root);

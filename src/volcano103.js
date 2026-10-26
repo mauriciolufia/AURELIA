@@ -62,6 +62,12 @@ function __v103Exterior(){
 }
 function __v103Cavern(a){
  const p=a.plan103,root=a.root=new _0.Group();root.name='Caverna natural · '+a.name;_8.add(root);a.groups.push(root);
+ // The desktop minimap consumes the same polygon contract as other dungeons.
+ // Without it, Cartography in a saved cave throws before the first frame can render.
+ const ring=(x0,z0,x1,z1)=>[[x0,-z0],[x1,-z0],[x1,-z1],[x0,-z1]];
+ a.design.floor='#8b786a';a.design.polygons=p.rooms.map(r=>({outer:ring(r.x-r.w/2,r.z-r.d/2,r.x+r.w/2,r.z+r.d/2),holes:p.pillars.filter(i=>r.cells.includes(i)).map(i=>{const q=p.point(i);return ring(q.x-4,q.z-4,q.x+4,q.z+4);})}));
+ for(const i of p.active){if(p.roomCells.includes(i))continue;const c=p.point(i);a.design.polygons.push({outer:ring(c.x-1.8,c.z-1.8,c.x+1.8,c.z+1.8),holes:[]});for(const j of p.links[i]){const q=p.point(j),dx=Math.sign(q.x-c.x),dz=Math.sign(q.z-c.z);a.design.polygons.push({outer:dx?ring(c.x+(dx<0?-4:0),c.z-1.8,c.x+(dx>0?4:0),c.z+1.8):ring(c.x-1.8,c.z+(dz<0?-4:0),c.x+1.8,c.z+(dz>0?4:0)),holes:[]});}}
+
  const walls=[],matrix=new _0.Matrix4(),quaternion=new _0.Quaternion(),rock=__v103Mat('#554653');
  function wall(x,z,w,d){if(w<.01||d<.01)return;walls.push({x:a.x+x,z:a.z+z,w,d});_q.push({x:a.x+x,z:a.z+z,w:w/2,d:d/2,bottom:a.y,top:a.y+8,tag:'cavern103',__v83:a.key});}
  for(const i of p.active){const c=p.point(i),r=p.roomCells.includes(i)?4:1.8,t=4-r;for(const sx of[-1,1])for(const sz of[-1,1])wall(c.x+sx*(r+t/2),c.z+sz*(r+t/2),t,t);
@@ -79,7 +85,7 @@ function __v103Prop(a,p){
  if(p.type==='barrel'){__v75Barrel(a,pos,p.id);const o=__v75.objects.at(-1);o.g.removeFromParent();a.root.add(o.g);o.__v103Prop=p;o.__v103Variant=p.barrelKind;p.object=o;g.removeFromParent();return;}
  if(p.type==='breakwall'){
   g.name='Roca agrietada · muro rompible';__v103Mesh(g,new _0.BoxGeometry(p.w,7.8,p.d),__v103Mat('#807074'),0,3.9,0);for(const side of[-1,1])for(let i=0;i<7;i++)__v97Model(g,[['box','#2b2037',Math.sin(i*2.3)*.45,.4+i*.5,side*.36,.08,.7,.025,0,0,Math.sin(i)*.45]]);
-  const c={x:pos.x,z:pos.z,w:p.w/2,d:p.d/2,bottom:a.y,top:a.y+8,tag:'secretWall',__v83:a.key,secret85:p.id};_q.push(c);a.colliders.push(c);const def={id:p.id,hp:Math.max(2,Math.round(__v87Base(1).atk*2)),wall:{center:[p.x,-p.z],axis:[0,1],width:p.w},polygons:[]};a.design.secretRooms85.push(def);p.wall={id:p.id,area:a,s:def,g,c,x:pos.x,z:pos.z,hp:def.hp,maxHp:def.hp,__v102:true};__v85Secrets.walls.push(p.wall);return;
+  const c={x:pos.x,z:pos.z,w:p.w/2,d:p.d/2,bottom:a.y,top:a.y+8,tag:'secretWall',__v83:a.key,secret85:p.id};_q.push(c);a.colliders.push(c);const def={id:p.id,hp:Math.max(2,Math.round(__v87Base(1).atk*2)),wall:{center:[p.x,-p.z],axis:p.w>=p.d?[0,1]:[1,0],width:Math.max(p.w,p.d)},polygons:[],kind87:'wall',treasure:[p.x,-p.z]};a.design.secretRooms85.push(def);p.wall={id:p.id,area:a,s:def,g,c,x:pos.x,z:pos.z,hp:def.hp,maxHp:def.hp,__v102:true};__v85Secrets.walls.push(p.wall);return;
  }
  if(p.type==='lava'){__v103Mesh(g,new _0.BoxGeometry(p.w,.13,p.d),__v103Mat('#ce4528','lava'),0,.065,0);if(p.bridge)__v97Model(g,p.bridgeCross?[['box','#6a5140',0,.24,0,p.w,.22,1.1],['box','#6a5140',0,.24,0,1.1,.22,p.d]]:[['box','#6a5140',0,.24,0,p.bridgeAxis==='x'?p.w:1.1,.22,p.bridgeAxis==='x'?1.1:p.d]]);a.hazards.push(p);return;}
  if(p.type==='lavafall'){
