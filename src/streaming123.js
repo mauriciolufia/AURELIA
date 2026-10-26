@@ -24,7 +24,7 @@ function __v123Reconcile(n){
 function __v123Refresh(force=false){
  const s=__v123;if(!s.ready||s.busy)return;s.busy=true;
  try{
-  if(s.reindex){force=true;s.reindex=false;}if(s.npcSource&&s.npcSet.size!==s.npcSource.length)s.npcSet=new Set(s.npcSource);
+  if(s.reindex){force=true;s.reindex=false;}if(s.npcSource!==_2h&&!__v50Candy.active){s.npcSource=_2h;s.npcSet=new Set(_2h);}if(s.npcSource&&s.npcSet.size!==s.npcSource.length)s.npcSet=new Set(s.npcSource);
   const area=__v75At()?.key||null;
   if(!force&&s.records===_b0&&s.count===_b0.length&&_10-s.last<.1&&__v123Distance({x:s.x,z:s.z})<4&&area===s.area)return;
   if(s.records!==_b0||_b0.length<s.count){s.records=_b0;s.count=0;s.grid=new Map();s.loaded.clear();s.npcSet=new Set(_2h);}

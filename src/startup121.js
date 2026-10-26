@@ -53,7 +53,7 @@ async function __v121Start(saved){
   await __v72Ready;__v121Message('world','Preparando el mundo y sus habitantes…');await __v121Paint();_bj(_f);
   __v121Message('finishing','Terminando la preparación…');await __v121Paint();
   if(saved){__v121Message('save','Recuperando tu partida…');await __v121Paint();_dn(saved);await __v121Paint();}
-  __v121Boot.readyAt=performance.now();__v121Message('ready','Listo para jugar');$('start').textContent=_7o?'Continuar aventura':'Comenzar en el sur';$('start').disabled=false;previous=performance.now();requestAnimationFrame(frame);
+  __v121Boot.readyAt=performance.now();__v121Message('ready','Listo para jugar');$('start').textContent=_7o?'Continuar aventura':'Comenzar en el sur';$('start').disabled=false;previous=performance.now();__v124ScheduleFrame();
  }catch(e){__v121Boot.error=e.message;__v121Message('failed','No se pudo completar la carga. Puedes volver a intentarlo.');$('error').hidden=false;$('error').textContent='No se pudo iniciar el juego: '+e.message;$('start').textContent='Reintentar carga';$('start').disabled=false;console.error(e);}
 }
 window.__AURELIA_BOOT121__={audit:__v122Audit};

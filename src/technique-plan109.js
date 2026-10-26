@@ -63,17 +63,18 @@ const __v109Techniques=(()=>{
   jellyfish:[ring('tentacles','Descarga de tentáculos','storm','stun'),shot('stormorb','Esfera de tormenta','storm','stun'),guard('jellyfloat','Deriva protectora')],
   demon:[shot('hellfire','Orbe infernal','fire','burn'),rage('demonicfury','Furia demoníaca'),ring('hellpulse','Pulso infernal','fire','burn')],
   winged:[shot('abysslance','Lanza del abismo','shadow','dizzy'),pool('hellrift','Grieta infernal','fire','burn'),guard('wingguard','Guardia alada')],
-  archdevil:[shot('voidlance','Lanzas del vacío','shadow','dizzy'),pool('damnation','Grieta de condena','fire','burn'),ring('cataclysm','Corona del cataclismo','shadow','slow')],
+  archdevil:[shot('archdarkorb','Bola de Oscuridad Superior','shadow','dizzy'),art('archheal','Restauración Infernal · 30% HP','heal','fire',null,{healFraction124:.3}),shot('archfireorb','Bola de Fuego Infernal','fire','burn')],
   abyssKnight:[hit('abyssblade','Tajo del Abismo','shadow'),shield('abyssarmor','Armadura del Abismo'),ring('abysssweep','Barrido de condena','shadow','slow')],
   reaper:[hit('reaperscythe','Siega del vacío','shadow'),art('spectrallament','Lamento espectral','gaze','shadow','sleep'),pool('voidrift','Grieta del vacío','shadow','slow')],
-  abyssEye:[shot('eyelaser','Láser del Ojo Espinoso','shadow','dizzy',{custom92:'eye'}),art('eyebarrier','Barrera del ojo','buffBarrier','shadow'),ring('eyepulse','Pulso de espinas','shadow','slow')],
-  spinedBeast:[hit('spinecharge','Embestida de espinas','physical','stun'),rage('spinefury','Furia de espinas'),ring('spinerake','Barrido de espinas')],
-  devourer:[shot('furnace','Aliento de horno','fire','burn',{custom92:'flame'}),ring('furnacepulse','Pulso del horno','fire','burn'),rage('furnacefury','Furia del horno')],
+  abyssEye:[shot('darkorb','Bola de oscuridad','shadow','dizzy'),art('eyebarrier','Barrera del ojo','buffBarrier','shadow'),ring('eyepulse','Pulso de espinas','shadow','slow')],
+  spinedBeast:[hit('megabite','Mega Mordisco','physical','stun'),shot('spinevolley','Lanzamiento de Espinas','physical')],
+  devourer:[shot('furnaceorb','Bola de Fuego Ígneo','fire','burn'),ring('furnacepulse','Pulso del horno','fire','burn'),art('ira124','Ira · ATK +50% · 10 minutos','buffAttack124','fire',null,{duration124:600,attackFactor124:1.5})],
   dragon:[shot('dragonbreath','Aliento del dragón','fire','burn'),hit('dragondive','Picado del dragón'),ring('dragonwings','Vendaval de alas','wind','slow')],
   chimera:[hit('chimeradive','Picado de la quimera'),shot('chimerafire','Aliento de la quimera','fire','burn'),ring('chimerawings','Vendaval de la quimera','wind','slow')],
   animal:[hit('defensivehit','Embestida defensiva'),guard('animalguard','Evasión defensiva'),ring('defensivesweep','Barrido defensivo')]
  };
  function family(c){const id=String(c.id||'').toLowerCase(),spawn=String(c.spawnId||'');
+  if(c.role==='raid'&&/archdevil/.test(id))return'archdevil';
   if(c.role)return c.role;
   if(c.spiked)return 'spiked';if(spawn.startsWith('yeti95-'))return'yeti';if(spawn.startsWith('polar95-'))return'iceKnight';if(spawn==='corsair95-key-guard')return'pirate';
   if(id.startsWith('volcano103-'))return['beetle','firebat','salamander','obsidian','igneousBoss','magmascorpion','ashMage'][Number(id.split('-')[1])];
@@ -90,11 +91,14 @@ const __v109Techniques=(()=>{
   if(/deer|fox|rabbit|penguin|turtle|crab|snail/.test(id))return'animal';return'knight';
  }
  function build(c){
-  const level=Math.max(1,Math.min(60,Math.round(c.level||1))),t=(level-1)/59,f=family(c),count=level<=40?2:3;
+  const level=Math.max(1,Math.min(60,Math.round(c.level||1))),t=(level-1)/59,f=family(c),count=f==='spinedBeast'?2:level<=40?2:3;
   if(f==='emperor')return{family:f,level,skills:[{id:'imperialenergy',name:'Tríada de energía imperial',type:'projectile',element:'shadow',range:46,radius:1.1,windup:.85,power:1.5,color:color.shadow},{id:'imperialdarkness',name:'Onda de oscuridad',type:'pool',element:'shadow',range:32,radius:32,windup:1.1,power:1.1,status:'slow',color:color.shadow},{id:'imperialpulse',name:'Pulso sísmico imperial',type:'ring',element:'earth',range:12,radius:12,windup:1.1,power:1.5,status:'stun',color:color.earth}]};
   if(f==='raid')return{family:f,level,skills:[{id:'raidclaw',name:'Zarpazo infernal',type:'charge',element:'physical',range:4,radius:3.8,windup:1.9,power:1,color:'#ef9f70'},{id:'raidfire',name:'Escupitajo infernal',type:'projectile',element:'fire',range:28,radius:1.4,windup:1.65,power:.85,status:'burn',color:color.fire},{id:'raidpulse',name:'Onda de garras',type:'ring',element:'earth',range:5,radius:5,windup:1.9,power:.9,status:'stun',color:'#ef9f70'}].slice(0,count)};
   const skills=(profiles[f]||profiles.knight).slice(0,count).map((s,i)=>{
    const a={...s,color:color[s.element]||color.physical,windup:Math.round((1.65-.3*t+(s.type==='pool'?.2:0))*100)/100,power:/^heal|^buff|^guard/.test(s.type)?0:Math.round((.65+.4*t)*(i===2?1.08:1)*100)/100};
+   if(f==='archdevil'&&a.type==='projectile')a.power=Math.round((1.0+.5*t)*100)/100;
+   if(f==='devourer'&&a.id==='furnaceorb')a.power=Math.round((1.05+.45*t)*100)/100;
+   if(f==='spinedBeast'&&a.id==='megabite')a.power=Math.round((1.05+.3*t)*100)/100;
    if(a.type==='projectile'){a.range=10+16*t;a.radius=.65+.55*t;}
    else if(a.type==='charge'){a.range=5+7*t;a.radius=1.05+1.15*t;}
    else if(a.type==='gaze'){a.range=7+12*t;a.radius=2+3*t;}

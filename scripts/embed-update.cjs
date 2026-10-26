@@ -250,7 +250,25 @@ html=html.replace('for(const d of __v29Doors){const dist=', 'for(const d of __v2
 html=html.replace('for(const n of __v101DoorActors())', 'for(const n of __v102DoorActors(d.p.x,d.p.z))');
 html=html.replaceAll('__v102DoorActors(d.p.x,d.p.z))','__v102DoorActors(d.p.x,d.p.z,Math.max(4,d.w*d.scale*.6+2)))');
 html=html.replace('Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<3)', 'Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<Math.max(3,d.w*d.scale*.6+2))');
-const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js', 'volcano104.js', 'airship104.js', 'balance-plan105.js', 'balance105.js', 'lighting106.js', 'world107.js', 'castle107.js', 'enemy-collision107.js', 'destruction108.js', 'hazards108.js', 'riddle-arrows108.js', 'landmarks108.js', 'frontier108.js', 'technique-plan109.js', 'techniques109.js', 'player110.js', 'catalog110.js', 'enemy-balance111.js', 'combat112.js', 'graphics112.js', 'mobile-map112.js', 'experience112.js', 'interaction113.js', 'combat113.js', 'experience113.js', 'performance114.js', 'crowd114.js', 'services114.js', 'magic-catalog119.js', 'commerce114.js', 'graphics114.js', 'town-map114.js', 'selling114.js', 'mana-plan119.js', 'mana119.js', 'mana114.js', 'startup115.js', 'schedules115.js', 'progression117.js', 'combat117.js', 'enemy-combat117.js', 'combat118.js', 'attack-slots118.js', 'spell-effects119.js', 'travelers120.js', 'magic-speed120.js', 'streaming123.js', 'startup121.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
+html=html.replace('arrowCap:32','arrowCap:48');
+html=html.replace('x>=0&&x<6):[],guards:Array.isArray(v.guards)?v.guards.slice(0,6)', 'x>=0&&x<10):[],guards:Array.isArray(v.guards)?v.guards.slice(0,10)');
+// Ten friendly combatants in this scene; other settlements and the five raiders are unchanged.
+html=html.replace("const base=__v87ForgeNPCs().filter(n=>!n.__v88Temporary),additional=6;", "const base=__v87ForgeNPCs().filter(n=>!n.__v88Temporary),additional=10;");
+html=html.replace("for(let i=0;i<6;i++){const n=w.extras[i];if(n)w.fighters.push(__v88MakeFighter(n,i,slots[(i*3+4)%slots.length]));}", "for(let i=0;i<additional;i++){const n=w.extras[i];if(n)w.fighters.push(__v88MakeFighter(n,i,slots[(i+4)%slots.length]));}");
+html=html.replace('5 archidiablos · 6 defensores', '5 archidiablos · 10 defensores');
+html=html.replace('d.index===Math.floor(w.clock/6)%6', 'd.index===Math.floor(w.clock/6)%10');
+// Automatic background pause is owned by lifecycle124; legacy listeners still release input/save.
+html=html.replace("window.addEventListener('blur',()=>{__v59ReleaseControls();if(_u)__v59SetPause(true);});", "window.addEventListener('blur',()=>{__v59ReleaseControls();});");
+html=html.replace("__v59ReleaseControls();__v59Save(false);if(_u)__v59SetPause(true);", "__v59ReleaseControls();__v59Save(false);");
+// One tracked animation chain can be cancelled on backgrounding and restarted on return.
+html=html.replace('function frame(now){requestAnimationFrame(frame);', 'function frame(now){__v124ScheduleFrame();');
+html=html.replaceAll("window.__v124MobilePause=__v59SetPause;", "");
+html=html.replace("const __v59BaseFL=_fl;","window.__v124MobilePause=__v59SetPause;const __v59BaseFL=_fl;");
+html=html.replaceAll("if(['heal124','shadow124','fire124'].includes(r.action.type))__v124RaidRelease(r,d);else ", "");
+html=html.replace("if(r.action.type==='fire')__v88Spit(r,d);", "if(['heal124','shadow124','fire124'].includes(r.action.type))__v124RaidRelease(r,d);else if(r.action.type==='fire')__v88Spit(r,d);");
+html=html.replace('__v88HitNPC(target,.85,p.owner);','__v88HitNPC(target,p.power124||.85,p.owner);');
+html=html.replace("_d0(p.owner.c,.85,'burn');", "_d0(p.owner.c,p.power124||.85,p.element124==='shadow'?'dizzy':'burn');");
+const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js', 'volcano104.js', 'airship104.js', 'balance-plan105.js', 'balance105.js', 'lighting106.js', 'world107.js', 'castle107.js', 'enemy-collision107.js', 'destruction108.js', 'hazards108.js', 'riddle-arrows108.js', 'landmarks108.js', 'frontier108.js', 'technique-plan109.js', 'techniques109.js', 'player110.js', 'catalog110.js', 'enemy-balance111.js', 'combat112.js', 'graphics112.js', 'mobile-map112.js', 'experience112.js', 'interaction113.js', 'combat113.js', 'experience113.js', 'performance114.js', 'crowd114.js', 'services114.js', 'magic-catalog119.js', 'commerce114.js', 'graphics114.js', 'town-map114.js', 'selling114.js', 'mana-plan119.js', 'mana119.js', 'mana114.js', 'startup115.js', 'schedules115.js', 'progression117.js', 'combat117.js', 'enemy-combat117.js', 'combat118.js', 'attack-slots118.js', 'spell-effects119.js', 'travelers120.js', 'magic-speed120.js', 'battle124.js', 'cave124.js', 'eclipse124.js', 'hazards124.js', 'skills124.js', 'enemies124.js', 'streaming123.js', 'startup121.js', 'lifecycle124.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
 sources.push('const __v103Blueprints='+JSON.stringify([1,2,3,4,5].map(i=>'data:image/png;base64,'+fs.readFileSync(path.join(root,'docs/volcano103/planta-'+i+'.png')).toString('base64')))+';');
 const block = `${begin}\n${sources.join('\n')}\n${end}\n`;
 if (html.includes(begin)) html = html.slice(0, html.indexOf(begin)) + block + html.slice(html.indexOf(end) + end.length).replace(/^\n/, '');
@@ -259,8 +277,8 @@ else {
   if (!html.includes(marker)) throw new Error('Missing game initialization marker');
   html = html.replace(marker, block + marker);
 }
-html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v123 Mundo por distancia</title>');
-html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v123-mundo-por-distancia">');
+html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v124 Eclipse, combate y cavernas</title>');
+html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v124-eclipse-combate-cavernas">');
 fs.writeFileSync(file, html);
-console.log('Embedded Aurelia update 123');
+console.log('Embedded Aurelia update 124');
 require('./package-standalone116.cjs')(root);

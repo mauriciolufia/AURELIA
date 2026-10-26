@@ -8,6 +8,8 @@ python -m http.server 8000 --bind 127.0.0.1
 
 Juega en https://mauriciolufia.github.io/AURELIA/. Cualquiera de los dos HTML puede descargarse y abrirse por separado.
 
+La [actualización 124](ACTUALIZACION124.md) añade estatuas demoníacas y trampas de rayos negros al Eclipse, corrige las franjas de trampas y la caverna volcánica, actualiza combate y Forjabrasa, y pausa el juego al salir del navegador con recuperación al regresar.
+
 La [actualización 123](ACTUALIZACION123.md) carga y descarga terreno, decoraciones y personajes por distancia al avanzar. Suspende el trabajo detallado lejano y recupera horarios y estado al regresar, conservando texturas, modelos, misiones y resolución.
 
 La [actualización 122](ACTUALIZACION122.md) prepara los gráficos por etapas y dibuja el primer fotograma antes de activar la simulación. Incluye una opción compatible con Edge, recuperación visible de errores y correcciones de los minimapas de la caverna. La prueba de Edge inicia una partida nueva y comprueba movimiento con WASD a 1920×1080.

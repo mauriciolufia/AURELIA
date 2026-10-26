@@ -10,7 +10,7 @@ __v85EnemySight=function(c,d){
  const now=__v68CombatTime,p=c.g.position,b=__v98EnemyBrain(c);let s=__v112Combat.awareness.get(c);
  if(!s){s={at:-Infinity,seen:-Infinity,visible:false,px:Infinity,pz:Infinity,cx:Infinity,cz:Infinity,y:Infinity,alerted:false};__v112Combat.awareness.set(c,s);}
  if(now>=s.at||Math.hypot(_14.x-s.px,_14.z-s.pz)>1||Math.hypot(p.x-s.cx,p.z-s.cz)>1||Math.abs(_14.y-s.y)>.5){
-  s.visible=d<__v92Detect(c)&&__v92LOS(c);s.at=now+.1;s.px=_14.x;s.pz=_14.z;s.cx=p.x;s.cz=p.z;s.y=_14.y;__v112Combat.checks++;
+  s.visible=d<__v92Detect(c)&&__v92LOS(c);s.at=now+.06;s.px=_14.x;s.pz=_14.z;s.cx=p.x;s.cz=p.z;s.y=_14.y;__v112Combat.checks++;
  }
  if(s.visible){
   if(!s.alerted&&!c.specialAction&&!['windup','recover'].includes(c.ai)&&!(c.stun>0)){

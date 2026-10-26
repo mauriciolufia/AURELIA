@@ -5,9 +5,9 @@ const __v98NPCActions=['work','trade','read','sweep','cook','patrol','socialise'
 const __v98Detection=__v92Detect;__v92Detect=function(c){return __v85Indoor(c)?Math.max(18,__v98Detection(c)):__v98Detection(c);};
 function __v98EnemyBrain(c){let b=__v98AI.enemy.get(c);if(!b){const skills=c.__v68Skills||[],role=skills.some(a=>a.type==='healAllies')?'support':skills.some(a=>a.type==='projectile')?'ranged':'melee';b={role,action:'patrol',next:0,target:null,lastSeen:null,seenAt:-Infinity,slot:Math.abs(Math.floor((c.phase||0)*137+c.x*3+c.z*7))%8,lastX:c.g.position.x,lastZ:c.g.position.z,stuck:0};__v98AI.enemy.set(c,b);}return b;}
 function __v98EnemySense(dt){
- const a=__v98AI;if(a.clock<a.nextSense)return;a.nextSense=a.clock+.25;
+ const a=__v98AI;if(a.clock<a.nextSense)return;a.nextSense=a.clock+.12;
  if(a.player&&Math.hypot(_14.x-a.player.x,_14.z-a.player.z)<12){const span=Math.max(.05,a.clock-a.player.t);a.velocity.x=_18((_14.x-a.player.x)/span,-24,24);a.velocity.z=_18((_14.z-a.player.z)/span,-24,24);}else a.velocity.x=a.velocity.z=0;
- a.player={x:_14.x,z:_14.z,t:a.clock};a.near=__v68Pool().filter(c=>c.hostile&&!c.dead&&!c.__v83Retired&&Math.hypot(c.g.position.x-_14.x,c.g.position.z-_14.z)<130).sort((c,d)=>c.g.position.distanceToSquared(_14)-d.g.position.distanceToSquared(_14)).slice(0,96);a.grid.clear();
+ a.player={x:_14.x,z:_14.z,t:a.clock};a.near=__v68Pool().filter(c=>c.hostile&&!c.dead&&!c.__v83Retired&&Math.hypot(c.g.position.x-_14.x,c.g.position.z-_14.z)<Math.min(225,Math.max(130,__v92Detect(c)))).sort((c,d)=>c.g.position.distanceToSquared(_14)-d.g.position.distanceToSquared(_14)).slice(0,96);a.grid.clear();
  for(const c of a.near){const p=c.g.position,key=Math.floor(p.x/12)+','+Math.floor(p.z/12);if(!a.grid.has(key))a.grid.set(key,[]);a.grid.get(key).push(c);}
  for(const [key,r] of a.reservations)if(r.until<a.clock||r.c.dead)a.reservations.delete(key);
 }
