@@ -158,6 +158,8 @@ html=html.replace('for(const a of _b0){\n    const o=a.owner; if(!a?.g||!o)', 'f
 html=html.replace('for(const a of _b0){\n      if(!a?.g||!a.owner)continue;', 'for(const a of __v114StreamActors(force)){\n      if(!a?.g||!a.owner)continue;');
 html=html.replace('for(const n of _2h){ if(!n?.g) continue; n.g.visible=Math.hypot', 'for(const n of __v114StreamNPCs()){ if(!n?.g) continue; n.g.visible=Math.hypot');
 html=html.replace('for(const c of _m){ if(!c?.g||c.dead) continue; if(Math.hypot', 'for(const c of __v114StreamCreatures()){ if(!c?.g||c.dead) continue; if(Math.hypot');
+// Runtime NPC animation reads local records; save/quest/world registries stay complete.
+html=html.replace('function _98(dt){_8l(dt);for(const n of _2h)', 'function _98(dt){_8l(dt);for(const n of __v123NPCPool())');
 // The previous loader retained all full-size decoded atlas images through synchronous world construction.
 html=html.replace(/const __v72Ready=Promise\.all\(Object\.entries\(__v72AtlasData\)[^\n]*\n/, 'const __v72Ready=__v115LoadArtwork();\n');
 html=html.replace('(_v?55:_w||_15.ShiftLeft?18:9)', '(_v?55:_w||_15.ShiftLeft?(_9d?18:23.4):9)');
@@ -248,7 +250,7 @@ html=html.replace('for(const d of __v29Doors){const dist=', 'for(const d of __v2
 html=html.replace('for(const n of __v101DoorActors())', 'for(const n of __v102DoorActors(d.p.x,d.p.z))');
 html=html.replaceAll('__v102DoorActors(d.p.x,d.p.z))','__v102DoorActors(d.p.x,d.p.z,Math.max(4,d.w*d.scale*.6+2)))');
 html=html.replace('Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<3)', 'Math.hypot((n.x??0)-d.p.x,(n.z??0)-d.p.z)<Math.max(3,d.w*d.scale*.6+2))');
-const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js', 'volcano104.js', 'airship104.js', 'balance-plan105.js', 'balance105.js', 'lighting106.js', 'world107.js', 'castle107.js', 'enemy-collision107.js', 'destruction108.js', 'hazards108.js', 'riddle-arrows108.js', 'landmarks108.js', 'frontier108.js', 'technique-plan109.js', 'techniques109.js', 'player110.js', 'catalog110.js', 'enemy-balance111.js', 'combat112.js', 'graphics112.js', 'mobile-map112.js', 'experience112.js', 'interaction113.js', 'combat113.js', 'experience113.js', 'performance114.js', 'crowd114.js', 'services114.js', 'magic-catalog119.js', 'commerce114.js', 'graphics114.js', 'town-map114.js', 'selling114.js', 'mana-plan119.js', 'mana119.js', 'mana114.js', 'startup115.js', 'schedules115.js', 'progression117.js', 'combat117.js', 'enemy-combat117.js', 'combat118.js', 'attack-slots118.js', 'spell-effects119.js', 'travelers120.js', 'magic-speed120.js', 'startup121.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
+const sources = ['settlement102.js', 'corsair-plan102.js', 'quality98.js', 'world97.js', 'ai98.js', 'ai99.js', 'day100.js', 'life101.js', 'mobile97.js', 'mobile101.js', 'combat102.js', 'performance102.js', 'king102.js', 'mountain102.js', 'corsair102.js', 'castle102.js', 'solar102.js', 'riddles102.js', 'fortress102.js', 'volcano-plan103.js', 'volcano103.js', 'volcano104.js', 'airship104.js', 'balance-plan105.js', 'balance105.js', 'lighting106.js', 'world107.js', 'castle107.js', 'enemy-collision107.js', 'destruction108.js', 'hazards108.js', 'riddle-arrows108.js', 'landmarks108.js', 'frontier108.js', 'technique-plan109.js', 'techniques109.js', 'player110.js', 'catalog110.js', 'enemy-balance111.js', 'combat112.js', 'graphics112.js', 'mobile-map112.js', 'experience112.js', 'interaction113.js', 'combat113.js', 'experience113.js', 'performance114.js', 'crowd114.js', 'services114.js', 'magic-catalog119.js', 'commerce114.js', 'graphics114.js', 'town-map114.js', 'selling114.js', 'mana-plan119.js', 'mana119.js', 'mana114.js', 'startup115.js', 'schedules115.js', 'progression117.js', 'combat117.js', 'enemy-combat117.js', 'combat118.js', 'attack-slots118.js', 'spell-effects119.js', 'travelers120.js', 'magic-speed120.js', 'streaming123.js', 'startup121.js'].map(name => fs.readFileSync(path.join(root, 'src', name), 'utf8'));
 sources.push('const __v103Blueprints='+JSON.stringify([1,2,3,4,5].map(i=>'data:image/png;base64,'+fs.readFileSync(path.join(root,'docs/volcano103/planta-'+i+'.png')).toString('base64')))+';');
 const block = `${begin}\n${sources.join('\n')}\n${end}\n`;
 if (html.includes(begin)) html = html.slice(0, html.indexOf(begin)) + block + html.slice(html.indexOf(end) + end.length).replace(/^\n/, '');
@@ -257,8 +259,8 @@ else {
   if (!html.includes(marker)) throw new Error('Missing game initialization marker');
   html = html.replace(marker, block + marker);
 }
-html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v122 Entrada en Edge y cavernas</title>');
-html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v122-entrada-edge-cavernas">');
+html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v123 Mundo por distancia</title>');
+html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v123-mundo-por-distancia">');
 fs.writeFileSync(file, html);
-console.log('Embedded Aurelia update 122');
+console.log('Embedded Aurelia update 123');
 require('./package-standalone116.cjs')(root);

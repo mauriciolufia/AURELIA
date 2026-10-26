@@ -7,7 +7,7 @@ function __v114CrowdPut(n){
  if(n.__v114CrowdGrid===c.grid)c.grid.get(n.__v114CrowdKey)?.delete(n);
  let cell=c.grid.get(key);if(!cell)c.grid.set(key,cell=new Set());cell.add(n);n.__v114CrowdGrid=c.grid;n.__v114CrowdKey=key;n.__v114CrowdIX=ix;n.__v114CrowdIZ=iz;
 }
-function __v114CrowdIndex(){const c=__v114Crowd;if(c.tick===_10&&c.source===_2h&&c.count===_2h.length)return;c.tick=_10;if(c.source!==_2h||c.count!==_2h.length){c.source=_2h;c.count=_2h.length;c.grid=new Map();c.members=new Set();}for(const n of _2h)if(!n.__v88Dead&&Number.isFinite(n.x+n.z+n.homeY)){c.members.add(n);__v114CrowdPut(n);}}
+function __v114CrowdIndex(){const c=__v114Crowd;if(c.tick===_10&&c.source===_2h&&c.count===_2h.length)return;c.tick=_10;if(c.source!==_2h||c.count!==_2h.length){c.source=_2h;c.count=_2h.length;c.grid=new Map();c.members=new Set();}for(const n of __v123NPCPool())if(!n.__v88Dead&&Number.isFinite(n.x+n.z+n.homeY)){c.members.add(n);__v114CrowdPut(n);}}
 function __v114Neighbors(n,x=n.x,z=n.z){__v114CrowdIndex();const result=[];for(let ix=Math.floor((x-2)/3);ix<=Math.floor((x+2)/3);ix++)for(let iz=Math.floor((z-2)/3);iz<=Math.floor((z+2)/3);iz++)for(const o of __v114Crowd.grid.get(ix+','+iz)||[])if(o!==n&&!o.__v88Dead&&Math.abs(o.homeY-n.homeY)<.65)result.push(o);return result;}
 function __v114Gap(n,o){return n.__v100Day?.station||o.__v100Day?.station?.furniture?.type==='seat'?.78:n.age==='child'&&o.age==='child'?1:1.2;}
 function __v114NPCBlocked(n,x,z){

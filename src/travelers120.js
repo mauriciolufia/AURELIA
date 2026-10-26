@@ -50,14 +50,14 @@ function __v120DayPlan(){
 }
 function __v120Plaza(n,source=false){const r=n.__v120,g=r.group,t=__v120Travel.towns.find(t=>t.site===(source?g.from:g.to));return t.plazas[g.id>=__v120Travel.towns.length?1:0]?.trio[r.index];}
 function __v120ResetAt(n,p){if(!p)return;__v114MoveNPC(n,p);__v114ResetRoutine(n);n.__v120.roadD=null;n.__v120.detour=null;n.g.rotation.x=n.g.rotation.z=0;}
-function __v120Reconcile(){
- for(const n of __v120Travel.npcs){const r=n.__v120,g=r.group;r.mode=null;let p;
+function __v120Reconcile(npcs=__v120Travel.npcs,refresh=true){
+ for(const n of npcs){const r=n.__v120,g=r.group;r.mode=null;let p;
   if(__v120Night()){p=_x<6||_x>=23?n.__v101.bed:n.__v101.dining;p=p||__v114ServicePoint(n);}
   else if(g.travel&&_x>=7&&_x<15.5&&g.track){const d=g.track.length*(_x-7)/8.5-r.index*2.2,q=__v120At(g.track,d);q.y=__v101Floor(q.x,q.z,_2r(q.x,q.z));p=__v120Free(n,q);r.roadD=Math.max(0,d);}
   else p=__v120Plaza(n,_x<7);
   if(p){const d=r.roadD;__v120ResetAt(n,p);r.roadD=d;}n.dialogue=__v120Dialog(n);
  }
- __v114PerfReset();__v88Sense();
+ if(refresh){__v114PerfReset();__v88Sense();}
 }
 function __v120Build(){
  const v=__v120Travel;v.npcs=_2h.filter(n=>n.kind==='traveler');v.groups=[];v.errors=[];v.lastHour=_x;v.clock=0;v.source=_2h;v.forge=_1h.find(s=>/forja\s?brasa/i.test(s.name));

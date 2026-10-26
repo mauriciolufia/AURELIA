@@ -8,6 +8,8 @@ python -m http.server 8000 --bind 127.0.0.1
 
 Juega en https://mauriciolufia.github.io/AURELIA/. Cualquiera de los dos HTML puede descargarse y abrirse por separado.
 
+La [actualización 123](ACTUALIZACION123.md) carga y descarga terreno, decoraciones y personajes por distancia al avanzar. Suspende el trabajo detallado lejano y recupera horarios y estado al regresar, conservando texturas, modelos, misiones y resolución.
+
 La [actualización 122](ACTUALIZACION122.md) prepara los gráficos por etapas y dibuja el primer fotograma antes de activar la simulación. Incluye una opción compatible con Edge, recuperación visible de errores y correcciones de los minimapas de la caverna. La prueba de Edge inicia una partida nueva y comprueba movimiento con WASD a 1920×1080.
 
 La [actualización 121](ACTUALIZACION121.md) corrige el inicio de PC: termina la preparación y la recuperación de la partida antes de habilitar «Comenzar», muestra la etapa de carga y evita renderizar la escena completa detrás de la bienvenida. Mantiene la resolución seleccionada y los archivos autónomos.
