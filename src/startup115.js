@@ -17,11 +17,11 @@ async function __v115LoadArtwork(){
  await Promise.resolve();const entries=Object.entries(__v72AtlasData);let next=0;
  async function worker(){for(;;){const index=next++;if(index>=entries.length)return;const[set,data]=entries[index];let image,close=()=>{};__v115Decode.active++;__v115Decode.peak=Math.max(__v115Decode.peak,__v115Decode.active);
   try{
-   image=await new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(new Error('No se pudo leer la imagen integrada de '+set+'. Vuelve a descargar el HTML completo.'));img.src=data;});
+   image=await new Promise((resolve,reject)=>{const img=new Image();let done=false;const finish=(error)=>{if(done)return;done=true;clearTimeout(timer);img.onload=img.onerror=null;if(error){img.removeAttribute('src');reject(error);}else resolve(img);},timer=setTimeout(()=>finish(new Error('La textura '+set+' no terminó de cargar. Vuelve a intentarlo.')),60000);img.onload=()=>finish();img.onerror=()=>finish(new Error('No se pudo leer la imagen integrada de '+set+'. Vuelve a descargar el HTML completo.'));img.src=data;});
    close=()=>{image.onload=image.onerror=null;image.removeAttribute('src');__v115Decode.released++;};
    const w=image.width/5,h=image.height/2;
    for(let slot=0;slot<10;slot++){const t=__v72Tex(set,slot),c=t.image,ctx=c.getContext('2d');ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(image,(slot%5)*w+.5,Math.floor(slot/5)*h+.5,w-1,h-1,0,0,c.width,c.height);t.needsUpdate=true;}
-   __v72Loaded.add(set);__v115Decode.loaded++;
+   __v72Loaded.add(set);__v115Decode.loaded++;if(typeof __v121ArtworkProgress==='function')__v121ArtworkProgress(__v115Decode.loaded,entries.length);
   }finally{close();__v115Decode.active--;}
  }}await Promise.all([worker(),worker()]);
 }

@@ -8,6 +8,8 @@ python -m http.server 8000 --bind 127.0.0.1
 
 Juega en https://mauriciolufia.github.io/AURELIA/. Cualquiera de los dos HTML puede descargarse y abrirse por separado.
 
+La [actualización 121](ACTUALIZACION121.md) corrige el inicio de PC: termina la preparación y la recuperación de la partida antes de habilitar «Comenzar», muestra la etapa de carga y evita renderizar la escena completa detrás de la bienvenida. Mantiene la resolución seleccionada y los archivos autónomos.
+
 La [actualización 120](ACTUALIZACION120.md) restaura los viajes de los 48 viajeros: caminos, conversaciones en tríos y posadas de 18:00 a 6:00, sin entrar en Forjabrasa ni en el territorio de la cordillera. Añade relatos sobre los pueblos y las mercancías que llevan. Duplica la velocidad de los proyectiles y las animaciones mágicas del héroe, manteniendo la recarga de 2,5 segundos.
 
 La [actualización 119](ACTUALIZACION119.md) entrega Elementalista al vencer a Ígneo: +50% de poder elemental durante 15 minutos. Añade Sueño, Petrificación, Congelación, Veneno y Confusión con 50% de éxito contra enemigos y élites, y 20% contra jefes. Fija la recarga en 2,5 segundos y el consumo entre 15 y 500 MP; reorganiza las magias elementales, curaciones y aumentos. Consulta el [catálogo con nombres, niveles, poderes y costes](docs/magias119.md).
