@@ -8,6 +8,10 @@ python -m http.server 8000 --bind 127.0.0.1
 
 Juega en https://mauriciolufia.github.io/AURELIA/. Cualquiera de los dos HTML puede descargarse y abrirse por separado.
 
+La [actualización 127](ACTUALIZACION127.md) limita el dibujo a la planta actual de fortalezas, castillos con enemigos y caverna; muestra la planta contigua cerca de su escalera y limita el exterior a sectores cercanos.
+
+La [actualización 126](ACTUALIZACION126.md) limita las cámaras del Eclipse a 3–4 enemigos, agrupa decoraciones y evita trabajo de renderizado y visibilidad de elementos ocultos.
+
 La [actualización 125](ACTUALIZACION125.md) amplía el Eclipse a seis plantas, elimina las barreras físicas de las trampas dañinas, mejora la selección de técnicas y el renderizado del castillo, y da al Emperador Supremo cuatro ataques mientras se desplaza por su salón.
 
 La [actualización 124](ACTUALIZACION124.md) añade estatuas demoníacas y trampas de rayos negros al Eclipse, corrige las franjas de trampas y la caverna volcánica, actualiza combate y Forjabrasa, y pausa el juego al salir del navegador con recuperación al regresar.
