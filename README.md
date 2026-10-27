@@ -8,6 +8,8 @@ python -m http.server 8000 --bind 127.0.0.1
 
 Juega en https://mauriciolufia.github.io/AURELIA/. Cualquiera de los dos HTML puede descargarse y abrirse por separado.
 
+La [actualización 128](ACTUALIZACION128.md) detalla la anatomía de los monstruos demoníacos y volcánicos, con geometría compartida y detalle según distancia; eleva el salón final del Eclipse a 23,4 metros.
+
 La [actualización 127](ACTUALIZACION127.md) limita el dibujo a la planta actual de fortalezas, castillos con enemigos y caverna; muestra la planta contigua cerca de su escalera y limita el exterior a sectores cercanos.
 
 La [actualización 126](ACTUALIZACION126.md) limita las cámaras del Eclipse a 3–4 enemigos, agrupa decoraciones y evita trabajo de renderizado y visibilidad de elementos ocultos.
