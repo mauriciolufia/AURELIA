@@ -40,7 +40,7 @@ function __v126Static(){
   a.root.updateMatrixWorld(true);freeze(a.root);
  }
 }
-const __v126World=_bj;_bj=function(...args){const r=__v126World(...args);__v126Population();__v126Static();if(__v123.ready)__v123RootsBuild();return r;};
+const __v126World=_bj;_bj=function(...args){const r=__v126World(...args);__v126Population();if(__v123.ready)for(const record of __v123.roots)if(!record.retired&&!record.loaded)__v123RootSet(record,true);__v126Static();if(__v123.ready){__v123RootsBuild();__v123Scenery();}return r;};
 const __v126Load=_dn;_dn=function(...args){const r=__v126Load(...args);__v126Population();return r;};
 // Three.js normally updates matrices even beneath invisible floors and distant scenery.
 // During an interior draw update visible branches only. Re-entry updates them before their first draw.

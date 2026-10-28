@@ -12,14 +12,16 @@ function __v127Floors(a){
  return visible;
 }
 const __v127Visibility=__v93Visibility;
-__v93Visibility=function(){const r=__v127Visibility(),a=__v75At();if(!__v126Interior(a))return r;const visible=__v127Floors(a);
+__v93Visibility=function(){const r=__v127Visibility(),a=__v75At();if(!__v126Interior(a))return r;const visible=__v127Floors(a);for(const floor of visible)__v127EnsureResident(floor);
  for(const f of __v83.areas)if(f.root)f.root.visible=visible.has(f);
  for(const st of __v88Eclipse.stairs)st.root.visible=st.lower===a||st.upper===a;
  for(const t of [...(__v94.towers||[]),__v102Solar])for(const st of t.flights||[])if(st.root)st.root.visible=st.lower===a||st.upper===a;
  for(const rec of __v123.loaded){const c=rec.owner;if(c.__v83Area&&c.__v83Area!==a.key){rec.g.visible=false;if(c.warning)c.warning.visible=false;}}
  return r;
 };
-function __v127Roots(){__v126.interiorRoots=new Set(__v83.areas.flatMap(a=>[a.root,...a.groups].filter(Boolean)));}
+let __v127StreamRoots=new WeakMap();
+function __v127EnsureResident(a){for(const g of [a.root,...a.groups].filter(Boolean)){const r=__v127StreamRoots.get(g);if(r&&!r.loaded){r.retired=false;__v123RootSet(r,true);}if(!g.parent&&g===a.root)_8.add(g);}}
+function __v127Roots(){__v127StreamRoots=new WeakMap();for(const r of __v123.roots)__v127StreamRoots.set(r.g,r);__v126.interiorRoots=new Set(__v83.areas.flatMap(a=>[a.root,...a.groups].filter(Boolean)));}
 const __v127World=_bj;_bj=function(...args){const r=__v127World(...args);__v127Roots();return r;};
 const __v127Load=_dn;_dn=function(...args){const r=__v127Load(...args);__v127Roots();return r;};
 window.__AURELIA_INTERIORS127__={audit:()=>({current:__v75At()?.key||null,visible:[...__v127Floors(__v75At())].map(a=>a.key),stairRadius:22,exteriorRadius:96,preservesFloorState:true})};
