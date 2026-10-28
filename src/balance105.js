@@ -54,8 +54,8 @@ __v87HeroDamage=function(c,amount,kind){
  if(c.__v87BarrierTime>0&&c.__v87BarrierHP>0){const absorbed=Math.min(damage,c.__v87BarrierHP);c.__v87BarrierHP-=absorbed;damage-=absorbed;if(c.__v87BarrierHP<=0)c.__v87BarrierTime=0;}
  return damage;
 };
-__v87EnemyDamage=function(c,power=1){return __v105Damage(c.damage*power,_g4().def);};
-// Levels affect actual attributes, never an additional hidden incoming damage multiplier.
+__v87EnemyDamage=function(c,power=1){return __v105Damage(c.damage*power*__v111IncomingScale(c),_g4().def);};
+// The enemy level sets the reference; the player's actual defense still determines incoming damage.
 _cz=function(c,amount,kind='physical'){if(c.dead)return;_c8(c,amount,kind);if(c.dead&&c.specialAction)_d3(c);};
 function __v105Spells(){
  for(const s of _5n){

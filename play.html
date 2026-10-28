@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="Aurelia RPG local: diez biomas, cuarenta y seis lugares, ciudad de caramelo, arquitectura única, habitantes con rutinas y combate elemental."><meta name="theme-color" content="#102a35"><title>Aurelia RPG · v135 Pociones, elixires y personaje 3D</title><style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#102a35}body{display:grid;place-items:center}#aurelia-game{width:100vw!important;height:auto!important;min-height:0!important;aspect-ratio:16/9;border-radius:0!important}@media(orientation:landscape){#aurelia-game{height:100dvh!important;aspect-ratio:auto}}</style><meta name="aurelia-build" content="v135-pociones-elixires-personaje">
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="Aurelia RPG local: diez biomas, cuarenta y seis lugares, ciudad de caramelo, arquitectura única, habitantes con rutinas y combate elemental."><meta name="theme-color" content="#102a35"><title>Aurelia RPG · v136 Ataque enemigo y daño equilibrado</title><style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#102a35}body{display:grid;place-items:center}#aurelia-game{width:100vw!important;height:auto!important;min-height:0!important;aspect-ratio:16/9;border-radius:0!important}@media(orientation:landscape){#aurelia-game{height:100dvh!important;aspect-ratio:auto}}</style><meta name="aurelia-build" content="v136-ataque-dano-equilibrado">
 <style id="aurelia-hud-x3">
 /* Solo los textos superiores señalados: x3 respecto a su tamaño original */
 #aurelia-game .brand .eyebrow{font-size:15px!important;line-height:1.1!important;letter-spacing:2.5px!important}
@@ -12765,20 +12765,23 @@ const __v105Scale=(()=>{
  const curve=(a,b,n)=>Math.round(a*Math.pow(b/a,(level(n)-1)/59));
  // v109 HP/DEF bonus retained; v110 final hero ATK endpoints are 20 and 100000.
  const hero=n=>({maxHp:Math.round(curve(75,7500,n)*1.2),atk:curve(20,100000,n),def:Math.round(curve(12,380,n)*1.2)});
+ // These are final combat ATK values; the legacy .4 scaling is applied exactly once.
+ const attackMultiplier=.4,enemyAttack=Object.freeze({min:14,max:350000,emperor:700000});
+ const rawEnemyAttack=Object.fromEntries(Object.entries(enemyAttack).map(([key,value])=>[key,value/attackMultiplier]));
  const attackReference={};let attackCurves=null;
  const calibrateEnemyAttack=def=>{
-  const maxHp=hero(60).maxHp,targetDamage=Math.round(maxHp/8);
-  Object.assign(attackReference,{level:60,maxHp,def,targetDamage,atk:Math.round(targetDamage*def/8)});attackCurves=null;
+  const maxHp=hero(60).maxHp,atk=rawEnemyAttack.emperor,targetDamage=Math.round(atk*8/Math.max(1,def));
+  Object.assign(attackReference,{level:60,maxHp,def,targetDamage,atk});attackCurves=null;
   return{...attackReference};
  };
  // Current best obtainable head/boots/shield are level 55; the definitive body is level 60.
  // The runtime verifies this reference against the actual catalogue after world creation.
  calibrateEnemyAttack(hero(60).def+curve(3,350,55)+500+curve(2,250,55)+curve(4,450,55));
- const attackMultiplier=.4,attack=atk=>Math.max(1,Math.round(atk*attackMultiplier));
- const standardBaseline=n=>({maxHp:curve(20,12000,n),atk:attackCurves?.normal[level(n)-1]??curve(35,125000,n),def:curve(10,650,n)});
- const bossStandardBaseline=n=>({...standardBaseline(n),atk:attackCurves?.boss[level(n)-1]??curve(35,attackReference.atk,n)});
+ const attack=atk=>Math.max(1,Math.round(atk*attackMultiplier));
+ const standardBaseline=n=>({maxHp:curve(20,12000,n),atk:attackCurves?.normal[level(n)-1]??curve(rawEnemyAttack.min,rawEnemyAttack.max,n),def:curve(10,650,n)});
+ const bossStandardBaseline=n=>({...standardBaseline(n),atk:attackCurves?.boss[level(n)-1]??curve(rawEnemyAttack.min,rawEnemyAttack.max,n)});
  const setEnemyAttackCurves=(normal,boss)=>{
-  for(const [values,max]of [[normal,125000],[boss,attackReference.atk]])if(values.length!==60||values[0]!==35||values[59]!==max||values.some((v,i)=>!Number.isFinite(v)||v<=0||i>0&&(v<values[i-1]||v>Math.floor(values[i-1]*1.22))))throw Error('Progresión de ataque inválida.');
+  for(const values of [normal,boss])if(values.length!==60||values[0]!==rawEnemyAttack.min||values[59]!==rawEnemyAttack.max||values.some((v,i)=>!Number.isFinite(v)||v<=0||i>0&&(v<values[i-1]||v>Math.floor(values[i-1]*1.22))))throw Error('Progresión de ataque inválida.');
   attackCurves={normal:[...normal],boss:[...boss]};
  };
  const hash=s=>{let h=2166136261;for(const c of String(s))h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0;};
@@ -12791,7 +12794,7 @@ const __v105Scale=(()=>{
   if(id==='supreme_emperor')return{maxHp:48000,atk:attackReference.atk,def:450};
   const b={...(bossAttack?bossStandardBaseline(n):standardBaseline(n))};if(rank==='boss'){b.maxHp*=2;b.def=Math.round(b.def*1.5);}
   const p=id==='slime'&&level(n)===1?[1,1,1]:profile(id,rank),keys=['maxHp','atk','def'],o={};
-  keys.forEach((k,i)=>{const cap=k==='atk'?(bossAttack?attackReference.atk:125000):Infinity;o[k]=Math.max(Math.ceil(b[k]/1.2),Math.min(cap,Math.floor(b[k]*1.2),Math.round(b[k]*p[i])));});return o;
+  keys.forEach((k,i)=>{const cap=k==='atk'?rawEnemyAttack.max:Infinity;o[k]=Math.max(Math.ceil(b[k]/1.2),Math.min(cap,Math.floor(b[k]*1.2),Math.round(b[k]*p[i])));});return o;
  };
  // Friendly Forjabrasa defenders retain their former attack progression.
  const defender=(n,id)=>{const o=enemyBaseline(n,id,'elite'),base=curve(6,65000,n);o.atk=Math.max(Math.ceil(base/1.2),Math.min(Math.floor(base*1.2),Math.round(base*profile(id,'elite')[1])));return o;};
@@ -12805,7 +12808,7 @@ const __v105Scale=(()=>{
  const mana=n=>curve(100,5000,n);
  // Whole HP: round once at the point of damage; a positive attack always causes at least 1 HP.
  const damage=(atk,def)=>{atk=Number(atk);def=Number(def);if(!Number.isFinite(atk)||atk<=0)return 0;if(!Number.isFinite(def)||def<=0)def=1;return Math.max(1,Math.round(atk/def*8));};
- return{level,curve,hero,standard,bossStandard,standardBaseline,bossStandardBaseline,enemyBaseline,attack,attackMultiplier,profile,enemy,defender,gear,magic,mana,damage,armorEnds,attackReference,calibrateEnemyAttack,setEnemyAttackCurves,variation:{min:1/1.2,max:1.2}};
+ return{level,curve,hero,standard,bossStandard,standardBaseline,bossStandardBaseline,enemyBaseline,attack,attackMultiplier,enemyAttack,profile,enemy,defender,gear,magic,mana,damage,armorEnds,attackReference,calibrateEnemyAttack,setEnemyAttackCurves,variation:{min:1/1.2,max:1.2}};
 })();
 if(typeof module!=='undefined'&&module.exports)module.exports=__v105Scale;
 
@@ -12865,8 +12868,8 @@ __v87HeroDamage=function(c,amount,kind){
  if(c.__v87BarrierTime>0&&c.__v87BarrierHP>0){const absorbed=Math.min(damage,c.__v87BarrierHP);c.__v87BarrierHP-=absorbed;damage-=absorbed;if(c.__v87BarrierHP<=0)c.__v87BarrierTime=0;}
  return damage;
 };
-__v87EnemyDamage=function(c,power=1){return __v105Damage(c.damage*power,_g4().def);};
-// Levels affect actual attributes, never an additional hidden incoming damage multiplier.
+__v87EnemyDamage=function(c,power=1){return __v105Damage(c.damage*power*__v111IncomingScale(c),_g4().def);};
+// The enemy level sets the reference; the player's actual defense still determines incoming damage.
 _cz=function(c,amount,kind='physical'){if(c.dead)return;_c8(c,amount,kind);if(c.dead&&c.specialAction)_d3(c);};
 function __v105Spells(){
  for(const s of _5n){
@@ -13580,23 +13583,35 @@ function __v110SortPicker(){
 }
 const __v110Picker=$('mobile-picker');if(__v110Picker)new MutationObserver(__v110SortPicker).observe(__v110Picker,{attributes:true,attributeFilter:['hidden']});
 
-/* Calibrate against obtainable equipment, never against a percentage of the current player's HP. */
-const __v111EnemyBalance={reference:null,pieces:[]};
+/* Fixed enemy ATK endpoints; obtainable equipment shapes the progression between levels. */
+const __v111EnemyBalance={reference:null,pieces:[],levels:[],incoming:[],targetFraction:.125};
+function __v111BestArmor(slot,level){return _5l.filter(i=>i.slot===slot&&__v105GearLevel(i)<=level).reduce((best,i)=>!best||i.def>best.def||i.def===best.def&&(i.hp||0)>(best.hp||0)?i:best,null);}
 function __v111HeroReference(level,lag=0){
- const hero=__v105Scale.hero(level),equipmentLevel=Math.max(1,level-lag),pieces=__v105Slots.filter(slot=>slot!=='weapon').map(slot=>_5l.filter(i=>i.slot===slot&&__v105GearLevel(i)<=equipmentLevel).reduce((best,i)=>!best||i.def>best.def?i:best,null)).filter(Boolean);
- return{level,maxHp:hero.maxHp,baseDef:hero.def,def:hero.def+pieces.reduce((sum,i)=>sum+i.def,0),pieces:pieces.map(i=>({id:i.id,level:__v105GearLevel(i),def:i.def}))};
+ const hero=__v105Scale.hero(level),equipmentLevel=Math.max(1,level-lag),pieces=__v105Slots.filter(slot=>slot!=='weapon').map(slot=>__v111BestArmor(slot,equipmentLevel)).filter(Boolean);
+ return{level,maxHp:hero.maxHp+pieces.reduce((sum,i)=>sum+(i.hp||0),0),baseDef:hero.def,def:hero.def+pieces.reduce((sum,i)=>sum+i.def,0),pieces:pieces.map(i=>({id:i.id,level:__v105GearLevel(i),def:i.def}))};
 }
+// Calibrate to same-level obtainable armor, not the current player's HP or equipment.
+// The existing combat layer applies x1.5 after integer damage, so compensate exactly once here.
+function __v111IncomingScale(c){
+ if(!c?.hostile)return 1;
+ const level=__v105Scale.level(c.level),base=__v111EnemyBalance.incoming[level-1]||1;
+ return c.boss==='azrakh'||c.spec?.id==='supreme_emperor'?base*__v105Scale.standard(level).atk/__v105Scale.enemyAttack.emperor:base;
+}
+function __v111ReferenceDamage(c,def,power=1){return Math.round(__v105Damage(c.damage*power*__v111IncomingScale(c),def)*1.5);}
 function __v111Calibrate(){
- const pieces=__v105Slots.filter(slot=>slot!=='weapon'&&_5l.some(i=>i.slot===slot)).map(slot=>_5l.filter(i=>i.slot===slot&&__v105GearLevel(i)<=60).reduce((best,i)=>!best||i.def>best.def?i:best,null));
+ const pieces=__v105Slots.filter(slot=>slot!=='weapon'&&_5l.some(i=>i.slot===slot)).map(slot=>__v111BestArmor(slot,60));
  if(pieces.some(i=>!i))throw Error('Falta una pieza de armadura para calibrar el combate.');
  const defense=__v105Scale.hero(60).def+pieces.reduce((sum,i)=>sum+i.def,0);
  __v111EnemyBalance.reference=__v105Scale.calibrateEnemyAttack(defense);
  __v111EnemyBalance.pieces=pieces.map(i=>({id:i.id,name:i.name,slot:i.slot,level:__v105GearLevel(i),def:i.def}));
  // Gear unlocks used to produce a mid-game damage peak. Bound damage against actual same-level
  // equipment, then limit growth between levels while preserving both user-specified endpoints.
- const heroes=Array.from({length:60},(_,i)=>__v111HeroReference(i+1)),start=35*8/(heroes[0].maxHp*heroes[0].def),growth=1.22;
- const makeCurve=end=>{const required=Array(60);required[59]=end;for(let i=58;i>=0;i--)required[i]=Math.ceil(required[i+1]/growth);const values=[];const endRatio=end*8/(heroes[59].maxHp*heroes[59].def);for(let i=0;i<60;i++){const h=heroes[i],targetRatio=start*Math.pow(endRatio/start,i/59),fair=Math.round(h.maxHp*h.def*targetRatio/8),raw=__v105Scale.curve(35,end,i+1);values.push(i===0?35:Math.max(required[i],Math.min(raw,fair,Math.floor(values[i-1]*growth))));}return values;};
- __v105Scale.setEnemyAttackCurves(makeCurve(125000),makeCurve(__v111EnemyBalance.reference.atk));
+ const minimum=__v105Scale.enemyAttack.min/__v105Scale.attackMultiplier,maximum=__v105Scale.enemyAttack.max/__v105Scale.attackMultiplier;
+ const heroes=Array.from({length:60},(_,i)=>__v111HeroReference(i+1)),start=minimum*8/(heroes[0].maxHp*heroes[0].def),growth=1.22;
+ const makeCurve=end=>{const required=Array(60);required[59]=end;for(let i=58;i>=0;i--)required[i]=Math.ceil(required[i+1]/growth);const values=[];const endRatio=end*8/(heroes[59].maxHp*heroes[59].def);for(let i=0;i<60;i++){const h=heroes[i],targetRatio=start*Math.pow(endRatio/start,i/59),fair=Math.round(h.maxHp*h.def*targetRatio/8),raw=__v105Scale.curve(minimum,end,i+1);values.push(i===0?minimum:Math.max(required[i],Math.min(raw,fair,Math.floor(values[i-1]*growth))));}return values;};
+ __v105Scale.setEnemyAttackCurves(makeCurve(maximum),makeCurve(maximum));
+ __v111EnemyBalance.levels=heroes;
+ __v111EnemyBalance.incoming=heroes.map(h=>h.maxHp*__v111EnemyBalance.targetFraction*h.def/(__v105Scale.standard(h.level).atk*8*1.5));
 }
 function __v111Refresh(){__v111Calibrate();for(const c of _m)if(c.hostile){__v87EnemyStats(c);__v109Ensure(c);}}
 __v111Calibrate();
@@ -13604,11 +13619,11 @@ const __v111World=_bj;_bj=function(...args){const r=__v111World(...args);__v111R
 const __v111Load=_dn;_dn=function(...args){const r=__v111Load(...args);__v111Refresh();return r;};
 function __v111Comparison(){
  const pct=(damage,hp)=>Math.round(damage/hp*10000)/100;
- const levels=Array.from({length:60},(_,i)=>{const level=i+1,h=__v111HeroReference(level),normalATK=__v105Scale.standard(level).atk,bossATK=__v105Scale.bossStandard(level).atk,normalDamage=__v105Damage(normalATK,h.def),bossDamage=__v105Damage(bossATK,h.def),bossSpecial=__v105Damage(bossATK*1.5,h.def);return{level,hp:h.maxHp,def:h.def,pieces:h.pieces,normalATK,normalDamage,normalPct:pct(normalDamage,h.maxHp),bossATK,bossDamage,bossPct:pct(bossDamage,h.maxHp),bossSpecial,bossSpecialPct:pct(bossSpecial,h.maxHp)};});
- const enemies=_m.filter(c=>c.hostile&&!c.dead).map(c=>{const h=__v111HeroReference(c.level),older=__v111HeroReference(c.level,5),power=Math.max(1,...(c.__v68Skills||[]).filter(s=>s.power>0).map(s=>s.power)),damage=__v105Damage(c.damage,h.def),special=__v105Damage(c.damage*power,h.def);return{id:c.spawnId,name:c.name||c.spec.name,level:c.level,boss:__v109Context(c).boss,elite:!!(c.elite||c.questElite),atk:c.damage,heroHP:h.maxHp,heroDEF:h.def,damage,pct:pct(damage,h.maxHp),special,specialPct:pct(special,h.maxHp),hitsToDefeatHero:Math.ceil(h.maxHp/damage),unarmoredPct:pct(__v105Damage(c.damage,h.baseDef),h.maxHp),olderEquipmentPct:pct(__v105Damage(c.damage,older.def),h.maxHp)};});
+ const levels=Array.from({length:60},(_,i)=>{const level=i+1,h=__v111HeroReference(level),normalATK=__v105Scale.standard(level).atk,bossATK=__v105Scale.bossStandard(level).atk,normal={hostile:true,level,damage:normalATK},boss={hostile:true,level,damage:bossATK},normalDamage=__v111ReferenceDamage(normal,h.def),bossDamage=__v111ReferenceDamage(boss,h.def),bossSpecial=__v111ReferenceDamage(boss,h.def,1.5);return{level,hp:h.maxHp,def:h.def,pieces:h.pieces,normalATK,normalDamage,normalPct:pct(normalDamage,h.maxHp),bossATK,bossDamage,bossPct:pct(bossDamage,h.maxHp),bossSpecial,bossSpecialPct:pct(bossSpecial,h.maxHp)};});
+ const enemies=_m.filter(c=>c.hostile&&!c.dead).map(c=>{const h=__v111HeroReference(c.level),older=__v111HeroReference(c.level,5),power=Math.max(1,...(c.__v68Skills||[]).filter(s=>s.power>0).map(s=>s.power)),damage=__v111ReferenceDamage(c,h.def),special=__v111ReferenceDamage(c,h.def,power);return{id:c.spawnId,name:c.name||c.spec.name,level:c.level,boss:__v109Context(c).boss,elite:!!(c.elite||c.questElite),atk:c.damage,heroHP:h.maxHp,heroDEF:h.def,damage,pct:pct(damage,h.maxHp),special,specialPct:pct(special,h.maxHp),hitsToDefeatHero:Math.ceil(h.maxHp/damage),unarmoredPct:pct(__v111ReferenceDamage(c,h.baseDef),h.maxHp),olderEquipmentPct:pct(__v111ReferenceDamage(c,older.def),h.maxHp)};});
  return{levels,enemies};
 }
-window.__AURELIA_ENEMY_BALANCE111__={audit:()=>({...__v111EnemyBalance.reference,atk:__v105Scale.attack(__v111EnemyBalance.reference.atk),targetDamage:__v105Damage(__v105Scale.attack(__v111EnemyBalance.reference.atk),__v111EnemyBalance.reference.def),attackMultiplier:__v105Scale.attackMultiplier,pieces:__v111EnemyBalance.pieces.map(p=>({...p})),hostiles:_m.filter(c=>c.hostile).length,slimeATK:__v105Scale.standard(1).atk,normalMaxATK:__v105Scale.standard(60).atk,bossMaxATK:__v105Scale.bossStandard(60).atk}),compare:__v111Comparison};
+window.__AURELIA_ENEMY_BALANCE111__={audit:()=>({...__v111EnemyBalance.reference,maxHp:__v111EnemyBalance.levels[59].maxHp,atk:__v105Scale.attack(__v111EnemyBalance.reference.atk),targetDamage:__v111ReferenceDamage({hostile:true,level:60,boss:'azrakh',damage:__v105Scale.enemyAttack.emperor},__v111EnemyBalance.reference.def),targetPercent:__v111EnemyBalance.targetFraction*100,attackMultiplier:__v105Scale.attackMultiplier,pieces:__v111EnemyBalance.pieces.map(p=>({...p})),hostiles:_m.filter(c=>c.hostile).length,slimeATK:__v105Scale.standard(1).atk,normalMaxATK:__v105Scale.standard(60).atk,bossMaxATK:__v105Scale.bossStandard(60).atk}),compare:__v111Comparison};
 
 /* Faster hostile attacks and prompt visual recognition; movement, geometry and strategy stay shared. */
 __v109Combat.aggression*=2;

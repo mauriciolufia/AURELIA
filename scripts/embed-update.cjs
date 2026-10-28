@@ -279,8 +279,8 @@ else {
   if (!html.includes(marker)) throw new Error('Missing game initialization marker');
   html = html.replace(marker, block + marker);
 }
-html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v135 Pociones, elixires y personaje 3D</title>');
-html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v135-pociones-elixires-personaje">');
+html=html.replace(/<title>[^<]*<\/title>/, '<title>Aurelia RPG · v136 Ataque enemigo y daño equilibrado</title>');
+html=html.replace(/<meta name="aurelia-build" content="[^"]*">/, '<meta name="aurelia-build" content="v136-ataque-dano-equilibrado">');
 fs.writeFileSync(file, html);
-console.log('Embedded Aurelia update 135');
+console.log('Embedded Aurelia update 136');
 require('./package-standalone116.cjs')(root);
