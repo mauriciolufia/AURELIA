@@ -1,6 +1,6 @@
 {
   "name": "aurelia-rpg",
-  "version": "134.0.0",
+  "version": "135.0.0",
   "private": true,
   "description": "Aurelia RPG, juego HTML autónomo",
   "scripts": {
@@ -93,7 +93,9 @@
     "test:eclipse:133": "node tests/infernal131.cjs --combat --population",
     "test:eclipse:133:mobile": "node tests/infernal131.cjs --mobile --combat --population",
     "test:equipment": "node tests/equipment134.cjs",
-    "test:equipment:mobile": "node tests/equipment134.cjs --mobile"
+    "test:equipment:mobile": "node tests/equipment134.cjs --mobile",
+    "test:potions": "node tests/potions135.cjs --world",
+    "test:potions:mobile": "node tests/potions135.cjs --mobile"
   },
   "devDependencies": {
     "playwright": "1.62.1"

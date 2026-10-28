@@ -84,8 +84,8 @@ if (__v60Mobile) {
    const known=_5n.filter(s=>rpg.known.includes(s.id)&&rpg.level>=s.level);
    for(const s of known){const b=button('choose-'+s.id,s.name+' · '+s.cost+' MP',()=>{rpg.spell=s.id;close();_fl();_iv();});b.setAttribute('aria-pressed',String(rpg.spell===s.id));tray.append(b);}
    if(!known.length){const p=document.createElement('p');p.textContent='Aprende una técnica en una torre de magia.';tray.append(p);}
-  }else for(const [id,label] of [['hp','Poción de salud'],['mp','Poción de maná'],['panacea','Panacea']]){
-   if(!_9j[id])continue;const b=button('use-'+id,label+' · '+(_9e[id]||0),()=>{close();_9r(id);_fl();_iv();});b.disabled=!(_9e[id]>0);tray.append(b);
+  }else for(const id of ['hp','hpSuper','hpMega','hpUltra','mp','mpSuper','mpMega','mpUltra','panacea']){
+   const p=_9j[id];if(!p)continue;const b=button('use-'+id,p.name+(p.ratio?' · '+Math.round(p.ratio*100)+' %':'')+' · '+(_9e[id]||0),()=>{close();_9r(id);_fl();_iv();});b.disabled=!(_9e[id]>0);tray.append(b);
   }
   const cancel=button('picker-close','Volver al juego',close);tray.append(cancel);tray.hidden=false;cancel.focus({preventScroll:true});
  }

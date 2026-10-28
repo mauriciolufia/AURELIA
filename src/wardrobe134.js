@@ -1,5 +1,5 @@
 /* An on-demand 3D character sheet. The game pauses, and no preview frames run while closed. */
-const __v134UI={slot:'weapon',order:'desc',view:null,avatar:null,signature:null,yaw:-.22,pitch:.08,distance:5.2,raf:0,timer:null,returnFocus:null,dirtyStats:null};
+const __v134UI={slot:'weapon',order:'desc',view:null,avatar:null,signature:null,yaw:-.22,pitch:.08,distance:5.2,raf:0,timer:null,returnFocus:null,restorePause:false,dirtyStats:null};
 const __v134Panel=document.createElement('section');__v134Panel.id='ag-character134';__v134Panel.hidden=true;__v134Panel.setAttribute('role','dialog');__v134Panel.setAttribute('aria-modal','true');__v134Panel.setAttribute('aria-labelledby','ag-character134-title');
 __v134Panel.innerHTML=`<div class="wardrobe134-shell">
  <header class="wardrobe134-head"><div><span class="wardrobe134-eyebrow">AURELIA · TU PERSONAJE</span><h2 id="ag-character134-title">Equipo del héroe</h2><p id="ag-character134-summary"></p></div><button type="button" id="ag-character134-close">Cerrar · V / Esc</button></header>
@@ -81,12 +81,12 @@ function __v134Draw(){
  v.camera.aspect=rect.width/rect.height;v.camera.updateProjectionMatrix();const targetY=v.height*.5,d=__v134UI.distance;v.camera.position.set(0,targetY+Math.sin(__v134UI.pitch)*d,-Math.cos(__v134UI.pitch)*d);v.camera.lookAt(0,targetY,0);if(__v134UI.avatar)__v134UI.avatar.rotation.y=__v134UI.yaw;v.renderer.render(v.scene,v.camera);
 }
 function __v134Open(){
- if(!_u||_72)return false;if(!__v134Panel.hidden){__v134Refresh();return true;}__v134UI.returnFocus=document.activeElement;const p=__v76Panel();if(p&&p!==__v134Panel)__v76ClosePanel(p);_dp(false);_75();__v64EndLook();__v65ReleaseJoy();_9i=false;
+ if(!_u||_72)return false;if(!__v134Panel.hidden){__v134Refresh();return true;}__v134UI.returnFocus=document.activeElement;__v134UI.restorePause=!!__v59ManualPause;if(__v134UI.restorePause)__v124SetPause(false);const p=__v76Panel();if(p&&p!==__v134Panel)__v76ClosePanel(p);_dp(false);_75();__v64EndLook();__v65ReleaseJoy();_9i=false;
  __v134Panel.hidden=false;__v134Panel.querySelector('.wardrobe134-body').scrollTop=0;__v134UI.signature=null;__v134Refresh();__v134UI.timer=setInterval(__v134StatView,250);__v76Focus();__v87Cursor();return true;
 }
 function __v134Close(){
  if(__v134Panel.hidden)return;__v134Panel.hidden=true;if(__v134UI.raf)cancelAnimationFrame(__v134UI.raf);__v134UI.raf=0;clearInterval(__v134UI.timer);__v134UI.timer=null;__v134Pointers.clear();__v134Pinch=0;
- if(__v134UI.avatar){__v134UI.avatar.removeFromParent();__v134UI.avatar=null;}__v134UI.view?.renderer.renderLists.dispose();_75();__v64EndLook();__v65ReleaseJoy();__v76Focus();__v87Cursor();const focus=__v134UI.returnFocus;if(focus?.isConnected&&!focus.closest('[hidden]'))focus.focus({preventScroll:true});
+ if(__v134UI.avatar){__v134UI.avatar.removeFromParent();__v134UI.avatar=null;}__v134UI.view?.renderer.renderLists.dispose();_75();__v64EndLook();__v65ReleaseJoy();const restore=__v134UI.restorePause;__v134UI.restorePause=false;if(restore)__v124SetPause(true);__v76Focus();__v87Cursor();const focus=__v134UI.returnFocus;if(focus?.isConnected&&!focus.closest('[hidden]'))focus.focus({preventScroll:true});
 }
 __v134El('close').onclick=__v134Close;__v134El('unequip').onclick=()=>{const name=_5l.find(i=>i.id===rpg.equipped[__v134UI.slot])?.name;if(__v134Unequip(__v134UI.slot))__v134El('message').textContent=name+' retirado.';};
 __v134El('order').onchange=e=>{__v134UI.order=e.target.value;__v134Refresh();};
