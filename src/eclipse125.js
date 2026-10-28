@@ -47,22 +47,24 @@ __v94EmperorTick=function(dt){
  const e=__v94Emperor,c=e.boss;if(!c||!_u||_74())return;dt=Math.max(0,Math.min(dt,.06));
  const local=__v83Local(e.area,_14.x,_14.z),r=e.room,inside=local[0]>r[0]&&local[0]<r[2]&&local[1]>r[1]&&local[1]<r[3];
  if(c.dead||!__v92SameFloor(c)||!inside){__v94EmperorClear();return;}
- __v94EmperorFX(dt);if(!__v118Slot(c))return;
+ __v94EmperorFX(dt);
  c.stun=Math.max(0,c.stun-dt);if(c.stun>0||__v119Disabled(c))return;e.clock+=dt;
  const p=c.g.position,dist=Math.hypot(_14.x-p.x,_14.z-p.z);e.move125-=dt;
- if(!e.goal125||e.move125<=0||Math.hypot(e.goal125.x-p.x,e.goal125.z-p.z)<2){
+ if(!e.route132?.length&&!e.nav132&&(!e.goal125||e.move125<=0||Math.hypot(e.goal125.x-p.x,e.goal125.z-p.z)<2)){
   const hero=__v83Local(e.area,_14.x,_14.z),me=__v83Local(e.area,p.x,p.z),heading=Math.atan2(me[0]-hero[0],me[1]-hero[1]),radius=dist<8?17:dist>32?11:18,side=e.cursor++%2?1:-1;
   const angle=heading+side*(.9+(e.cursor%3)*.35),target=[_18(hero[0]+Math.sin(angle)*radius,r[0]+7,r[2]-7),_18(hero[1]+Math.cos(angle)*radius,r[1]+7,r[3]-7)];
   e.goal125=__v83Point(e.area,target);e.move125=1.6;
  }
- const angle=Math.atan2(e.goal125.x-p.x,e.goal125.z-p.z),step=Math.min(Math.hypot(e.goal125.x-p.x,e.goal125.z-p.z),dt*(c.hp<c.maxHp*.4?12:10));let moved=false;
- for(const turn of[0,.4,-.4,.8,-.8,1.2,-1.2,1.6,-1.6,2.2,-2.2]){
+ const goal=__v132Goal(e,c,dt),angle=Math.atan2(goal.x-p.x,goal.z-p.z),step=Math.min(Math.hypot(goal.x-p.x,goal.z-p.z),dt*(c.hp<c.maxHp*.4?12:10));let moved=false;
+ for(const turn of[0,.4,-.4,.8,-.8,1.2,-1.2,1.6,-1.6,2.2,-2.2,Math.PI]){
   const x=p.x+Math.sin(angle+turn)*step,z=p.z+Math.cos(angle+turn)*step,q=__v83Local(e.area,x,z);if(q[0]<r[0]+3||q[0]>r[2]-3||q[1]<r[1]+3||q[1]>r[3]-3)continue;
   const y=_9b(c,x,z);if(y===false)continue;const before=p.clone();p.set(x,y,z);__v91Guard(c);const travel=before.distanceTo(p);if(travel>.001){__v125.distance+=travel;e.audit.moved+=travel;moved=true;break;}
  }
- if(!moved){e.move125=0;__v125.recoveries++;}c.g.rotation.y=Math.atan2(p.x-_14.x,p.z-_14.z);
+ if(!moved){if(!e.nav132&&!e.route132?.length)e.move125=0;__v125.recoveries++;}c.g.rotation.y=Math.atan2(p.x-_14.x,p.z-_14.z);
+ for(const[i,leg]of(c.legs||[]).entries())leg.rotation.x=Math.sin(e.clock*9+i*Math.PI)*.34;
+ if(!__v118Slot(c))return;
  if(e.action){e.action.time-=dt;for(const arm of c.parts||[])arm.rotation.x=-Math.sin(Math.max(0,e.action.time)*4)*.9;if(e.action.time<=0){const kind=e.action.kind;__v94EmperorRelease(kind);__v125.casts[kind]++;e.recent125.push(kind);if(e.recent125.length>3)e.recent125.shift();e.action=null;e.next=e.clock+1.1;}return;}
- if(e.clock<e.next||!__v92LOS(c))return;
+ if(!__v92LOS(c)){if(!e.nav132&&!e.route132?.length){e.goal125={x:_14.x,z:_14.z};e.move125=.8;}return;}if(e.clock<e.next)return;
  // Every four decisions cover all four techniques; distance changes their order.
  const options=['energy','darkness','pulse','physical'].filter(k=>!e.recent125.includes(k));
  let kind=dist<__v117MeleeReach(c)*1.2&&options.includes('physical')?'physical':dist<13&&options.includes('pulse')?'pulse':options.includes('energy')?'energy':options[0];
@@ -75,7 +77,7 @@ __v109Techniques.build=function(ctx){const plan=__v125Plan(ctx);if(plan.family!=
 window.__AURELIA_ECLIPSE125__={audit:()=>({floors:__v88Eclipse.areas.length,stairs:__v88Eclipse.stairs.length,casts:{...__v125.casts},moved:__v125.distance,recoveries:__v125.recoveries,statueTemplates:__v125StatueTemplates.size,barriers:_q.filter(c=>c.spikes88).length})};
 
 const __v125SlotsUpdate=__v118SlotsUpdate;__v118SlotsUpdate=function(force=false){
- const e=__v94Emperor,c=e.boss;if(c&&!c.dead&&__v92SameFloor(c)&&__v118WantsHero(c)){const p=__v83Local(e.area,_14.x,_14.z),r=e.room;if(p[0]>r[0]&&p[0]<r[2]&&p[1]>r[1]&&p[1]<r[3]&&!__v118Slots.active.has(c)){
+ const e=__v94Emperor,c=e.boss;if(c&&!c.dead&&_2l>0&&__v92SameFloor(c)){const p=__v83Local(e.area,_14.x,_14.z),r=e.room;if(p[0]>r[0]&&p[0]<r[2]&&p[1]>r[1]&&p[1]<r[3]&&!__v118Slots.active.has(c)){
   if(__v118Slots.active.size>=3){const victim=[...__v118Slots.active.keys()].filter(n=>n!==c&&!__v118Pending(n)).at(-1);if(victim){__v118Slots.active.delete(victim);__v118StopWaiting(victim);}}
   if(__v118Slots.active.size<3)__v118Slots.active.set(c,{seen:performance.now()});
  }}return __v125SlotsUpdate(force);

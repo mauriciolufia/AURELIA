@@ -1,5 +1,7 @@
 # Aurelia RPG
 
+Actualización 133: magma en la planta 4, metal infernal en la 5 y arquitectura imperial con eclipse en la 6 del Trono del Eclipse y movimiento del Emperador Supremo con recuperación de ruta frente a obstáculos. La población hostil del exterior del último bioma se reduce a la mitad, conservando misiones e interiores. [Detalles](ACTUALIZACION133.md).
+
 Juego autónomo en `index.html` y `play.html`, ambos con todos los recursos incluidos. Puedes abrir el archivo descargado directamente en un navegador o servir la carpeta con:
 
 ```sh
