@@ -1,5 +1,7 @@
 # Aurelia RPG
 
+Actualización 137: enemigos de asalto, tanques, tiradores, magos y especialistas en estados, con atributos y técnicas según especie y nivel. Petrificación y congelación inmovilizan 10 segundos; piedra, hielo, llamas, toxicidad y sueño se ven en enemigos y héroe, con efectos tenues en primera persona. [Detalles](ACTUALIZACION137.md) · [Catálogo por especie](docs/enemigos137.md).
+
 Actualización 136: ATK enemigo hasta **350 000**, Emperador Supremo con **700 000 ATK** y golpes normales equilibrados para quitar aproximadamente **10–15 % del HP** con armaduras del mismo nivel. [Detalles](ACTUALIZACION136.md).
 
 Actualización 135: pociones y elixires de 30 %, 50 %, 75 % y 100 %, con precios de 20, 200, 750 y 2000 de oro; ocho tiendas distintas y recarga compartida de 3 segundos. [Detalles](ACTUALIZACION135.md).
@@ -87,6 +89,9 @@ Descarga la [guía de atributos, equipo y magia en Word](docs/balance105/Aurelia
 ```sh
 npm ci
 npm test
+npm run test:roles
+npm run test:states
+npm run test:states:mobile
 npm run test:scale
 npm run test:load
 npm run test:load:mobile

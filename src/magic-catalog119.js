@@ -79,7 +79,7 @@ function __v119Schools(){
 }
 const __v119SpellInfo=__v75SpellInfo;__v75SpellInfo=function(s){
  const data=__v119Support.get(s.id);if(data)return data.element==='heal'?'Recupera '+data.value+' HP, hasta tu vida máxima.':(data.element==='buff'?'ATK':'DEF')+' +'+Math.round(data.value*100)+'% durante 15 minutos.';
- if(s.elemental119)return 'Poder elemental '+s.power+' · '+_fw(s.element)+' · Alcance '+s.range+' m'+(s.area119?' · Área '+s.areaRadius119.toFixed(1)+' m':' · Un objetivo')+(['ice','nature'].includes(s.element)?' · Inmovilización breve; los jefes la resisten mejor.':'');
+ if(s.elemental119)return 'Poder elemental '+s.power+' · '+_fw(s.element)+' · Alcance '+s.range+' m'+(s.area119?' · Área '+s.areaRadius119.toFixed(1)+' m':' · Un objetivo')+(s.element==='ice'&&s.level>=10?' · Puede congelar durante 10 s':s.element==='fire'&&s.level>=5?' · Puede quemar; daño cada 2 s':s.element==='nature'&&s.level>=20?' · Puede envenenar; daño cada 2 s':'');
  return __v119SpellInfo(s);
 };
 const __v119CatalogCast=_gd;_gd=function(...args){__v119Known();return __v119CatalogCast(...args);};

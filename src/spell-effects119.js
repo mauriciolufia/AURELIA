@@ -1,8 +1,8 @@
 /* Optional volcanic reward and five one-roll enemy afflictions. */
-const __v119Afflictions={sleep:{name:'Sueño',level:5,seconds:8,color:'#cbb3ff'},freeze:{name:'Congelación',level:10,seconds:5,color:'#9deaff'},poison:{name:'Veneno',level:20,seconds:12,color:'#a0e476'},confusion:{name:'Confusión',level:30,seconds:8,color:'#ff9fdd'},stone:{name:'Petrificación',level:40,seconds:6,color:'#d0c5aa'}};
+const __v119Afflictions={sleep:{name:'Sueño',level:5,seconds:10,color:'#cbb3ff'},freeze:{name:'Congelación',level:10,seconds:10,color:'#9deaff'},burn:{name:'Quemadura',level:5,seconds:8,color:'#ff9a45'},poison:{name:'Veneno',level:20,seconds:12,color:'#a0e476'},confusion:{name:'Confusión',level:30,seconds:8,color:'#ff9fdd'},stone:{name:'Petrificación',level:40,seconds:10,color:'#a5a8a5'}};
 const __v119Effects={enemies:new Map(),textures:new Map(),clock:0,attempts:0,successes:0};
 for(const[kind,d]of Object.entries(__v119Afflictions)){
- const s=__v56AddSpell({id:'estado119-'+kind,name:d.name,element:'status119',level:d.level,cost:15+d.level,range:22,power:kind==='poison'?Math.round(__v105Scale.magic(d.level)*.12):0,price:120+d.level*d.level*2,color:d.color,cooldown:2.5,duration:d.seconds,status119:kind});__v119Canonical.set(s.id,s);
+ const s=__v56AddSpell({id:'estado119-'+kind,name:d.name,element:'status119',level:d.level,cost:15+d.level,range:22,power:['poison','burn'].includes(kind)?Math.round(__v105Scale.magic(d.level)*.12):0,price:120+d.level*d.level*2,color:d.color,cooldown:2.5,duration:d.seconds,status119:kind});__v119Canonical.set(s.id,s);
 }
 const __v119Elementalist=__v56AddSpell({id:'elementalista',name:'Elementalista',element:'elementalBuff119',level:40,cost:80,power:0,range:0,price:0,color:'#ffdc91',cooldown:2.5,duration:900,reward119:true});__v119Canonical.set(__v119Elementalist.id,__v119Elementalist);
 _fv.status119='Alteración de estado';_fv.elementalBuff119='Poder elemental';
@@ -27,7 +27,7 @@ function __v119EffectsTick(dt){
  __v119Effects.clock+=dt;
  for(const[c,effects]of __v119Effects.enemies){let index=0;
   for(const[kind,e]of effects){e.remaining=Math.max(0,e.remaining-dt);e.marker.visible=!c.dead&&c.g.visible&&__v92SameFloor(c);e.marker.position.copy(__v92AimPoint(c));e.marker.position.y+=1.4+index++*.6;
-   if(kind==='poison'&&!c.dead){const elapsed=e.duration-e.remaining;while(e.next<=elapsed+1e-7&&e.next<=e.duration){e.next+=2;_fd(c,e.power,'nature');if(c.dead)break;}}
+   if(['poison','burn'].includes(kind)&&!c.dead){const elapsed=e.duration-e.remaining;while(e.next<=elapsed+1e-7&&e.next<=e.duration){e.next+=2;__v119Effects.periodic=true;try{_fd(c,e.power,kind==='burn'?'fire':'nature');}finally{__v119Effects.periodic=false;}if(c.dead)break;}}
    if(c.dead||e.remaining===0){e.marker.removeFromParent();e.marker.material.dispose();effects.delete(kind);}
   }
   if(!effects.size)__v119Effects.enemies.delete(c);
@@ -42,7 +42,7 @@ const __v119EffectCast=_gd;_gd=function(){
  if(rpg.mp<s.cost){_3a('MP insuficientes.');return false;}
  if(s.id==='elementalista'){rpg.mp-=s.cost;_5o=s.cooldown;rpg.elementalBoost119=900;__v68Burst(_14,s.color,'buff',2,.5);_6s('magic');_fl();_iv();return true;}
  const target=__v92Nearest(s,new _0.Vector3(_14.x,_14.y-.12,_14.z));if(!target){_3a('Mira a un enemigo visible dentro del alcance.');return false;}
- rpg.mp-=s.cost;_5o=s.cooldown;const visual={...s,element:s.status119==='freeze'?'ice':s.status119==='poison'?'nature':'shadow',target119:target.c};__v58Launch(visual);_6s('magic');_fl();return true;
+ rpg.mp-=s.cost;_5o=s.cooldown;const visual={...s,element:s.status119==='freeze'?'ice':s.status119==='burn'?'fire':s.status119==='poison'?'nature':'shadow',target119:target.c};__v58Launch(visual);_6s('magic');_fl();return true;
 };
 const __v119StatusImpact=__v92FlightImpact;__v92FlightImpact=function(f){
  if(!f.spell.status119)return __v119StatusImpact(f);if(f.hit92)return;f.hit92=true;
@@ -63,7 +63,7 @@ const __v119StatusAim=__v117EnemyAim;__v117EnemyAim=function(c,origin,speed,rang
 const __v119StatusEmperor=__v94EmperorTick;__v94EmperorTick=function(dt){if(__v119Disabled(__v94Emperor.boss)){__v94EmperorFX(dt);return;}return __v119StatusEmperor(dt);};
 const __v119StatusRaid=__v88DemonTick;__v88DemonTick=function(r,...args){if(__v119Disabled(r.c))return;return __v119StatusRaid(r,...args);};
 const __v119ElementTimer=_ge;_ge=function(dt){if(_u&&!_74())rpg.elementalBoost119=Math.max(0,(rpg.elementalBoost119||0)-dt);return __v119ElementTimer(dt);};
-const __v119EffectInfo=__v75SpellInfo;__v75SpellInfo=function(s){if(s.id==='elementalista')return'Poder de las técnicas elementales +50% durante 15 minutos. Recompensa de Ígneo, en la última planta de la Caldera de Obsidiana.';if(s.status119){const d=__v119Afflictions[s.status119];return d.name+' durante '+d.seconds+' s · Éxito: 50% contra normales y élites; 20% contra jefes · Alcance '+s.range+' m.'+(s.status119==='poison'?' Daño por pulso: (poder '+s.power+' / DEF) ×8, cada 2 s.':'');}return __v119EffectInfo(s);};
+const __v119EffectInfo=__v75SpellInfo;__v75SpellInfo=function(s){if(s.id==='elementalista')return'Poder de las técnicas elementales +50% durante 15 minutos. Recompensa de Ígneo, en la última planta de la Caldera de Obsidiana.';if(s.status119){const d=__v119Afflictions[s.status119];return d.name+' durante '+d.seconds+' s · Éxito: 50% contra normales y élites; 20% contra jefes · Alcance '+s.range+' m.'+(['poison','burn'].includes(s.status119)?' Daño por pulso: (poder '+s.power+' / DEF) ×8, cada 2 s.':'');}return __v119EffectInfo(s);};
 const __v119EffectSources=__v75Sources;__v75Sources=function(s){return s.id==='elementalista'?[{site:__v103.site,label:'Derrota a Ígneo en la quinta planta de la Caldera de Obsidiana. Misión secundaria.'}]:__v119EffectSources(s);};
 const __v119EffectWorld=_bj;_bj=function(...args){__v119EffectsClear();rpg.elementalBoost119=0;const r=__v119EffectWorld(...args);__v119Schools();__v114QuarterMana();__v119GrantElementalist();return r;};
 const __v119EffectLoad=_dn;_dn=function(s,...args){__v119EffectsClear();const r=__v119EffectLoad(s,...args);rpg.elementalBoost119=s?.seed===_f?Math.max(0,Math.min(900,Number(s.magicEffects119?.elementalBoost)||0)):0;__v119GrantElementalist();return r;};
