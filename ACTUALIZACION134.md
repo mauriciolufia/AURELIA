@@ -1,0 +1,13 @@
+# Aurelia RPG · actualización 134
+
+La tecla **V**, libre hasta ahora, abre una nueva pantalla de personaje y equipo. También se puede abrir desde **Menú → Personaje 3D** o desde el inventario. Incluye una vista 3D del personaje real, giro con ratón o gestos táctiles, acercamiento, controles de teclado y siete partes independientes: arma, cabeza, torso, manos, piernas, botas y escudo. Cada pieza poseída puede equiparse o quitarse respetando su nivel requerido.
+
+Las armas y armaduras tienen seis estilos visuales que progresan desde cuero e hierro sencillos hasta acero, ornamentos reales, equipo arcano, piezas celestiales y equipo divino. Los modelos superiores añaden placas articuladas, relieves, coronas, gemas, filigranas, guardas aladas y halos. Los cinco tipos de armas conservan sus propias siluetas. La mejora se aplica al personaje durante la aventura y a la vista previa; en primera persona cambian el arma y los guantes, y sin arma se ven los puños.
+
+Se añaden 88 piezas obtenibles en tiendas, distribuidas en niveles 1, 10, 20, 30, 40, 50, 55 y 60. Las piezas divinas se encuentran en la tienda de la región de mayor nivel. Los guantes dejan de ocupar el torso; se incorporan grebas para las piernas y botas independientes. Los guantes de partidas antiguas que estaban en el torso se trasladan a la ranura de manos sin perder el objeto. Las ranuras vacías también se guardan.
+
+Los atributos muestran **base blanca + equipo verde + técnicas amarillo = total blanco**, con valores enteros y la misma fórmula que utiliza el combate. Se desglosan HP máximo, ATK, DEF y MP máximo. Las bendiciones permanentes forman parte de la base; las técnicas temporales se separan del equipo. Algunas piezas nuevas añaden HP o MP además de defensa. Cambiar equipo ajusta los límites de HP y MP sin rellenarlos gratuitamente.
+
+La geometría se comparte por estilo y se agrupa para mantener bajo el número de dibujos. La vista previa usa una resolución limitada y solo se redibuja al abrir, girar, acercar, redimensionar o cambiar equipo; no ejecuta animaciones ni tareas mientras está cerrada. La escena del juego no recibe luces adicionales.
+
+Pruebas: `npm run test:equipment` y `npm run test:equipment:mobile`. El modo rápido `node tests/equipment134.cjs --quick` comprueba la interfaz y los modelos sin generar todo el mundo. Se verifican las siete ranuras, los 88 artículos, el acceso por nivel y propiedad, las sumas con bendiciones y mejoras temporales, compra y venta, migración de guantes antiguos, guardado y restauración, ranuras vacías, controles reales y vista táctil sin desbordamiento horizontal.

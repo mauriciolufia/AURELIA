@@ -38,7 +38,7 @@ const __v105Scale=(()=>{
  const reduced=stats=>({...stats,atk:attack(stats.atk)});
  const standard=n=>reduced(standardBaseline(n)),bossStandard=n=>reduced(bossStandardBaseline(n));
  const enemy=(...args)=>reduced(enemyBaseline(...args));
- const armorEnds={head:[3,350],body:[5,500],feet:[2,250],shield:[4,450]};
+ const armorEnds={head:[3,350],body:[5,500],hands:[1,90],legs:[1,100],feet:[2,250],shield:[4,450]};
  const gear=(n,slot)=>slot==='weapon'?{atk:2*curve(5,60000,n),def:0}:{atk:0,def:curve(...(armorEnds[slot]||armorEnds.body),n)};
  const magic=n=>{n=level(n);return n<=55?Math.round(100*Math.pow(800,(n-1)/54)):Math.round(80000*Math.pow(1.75,(n-55)/5));};
  const mana=n=>curve(100,5000,n);

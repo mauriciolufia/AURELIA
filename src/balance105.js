@@ -1,7 +1,7 @@
 /* New combat scale, with four simultaneous armor pieces and stable, per-item levels. */
 function __v105Damage(atk,def){return __v105Scale.damage(atk,def);}
 __v87Base=__v105Scale.hero;
-const __v105Slots=['weapon','head','body','feet','shield'];
+const __v105Slots=['weapon','head','body','hands','legs','feet','shield'];
 function __v105GearLevel(i){return __v105Scale.level(i.requiredLevel87||__v78GearReq.get(i.id)||i.minLevel);}
 function __v105Gear(){
  for(let j=0;j<_5l.length;j++){
@@ -10,15 +10,14 @@ function __v105Gear(){
    const old=i;i={...old};_5l[j]=i;
    for(const stock of __v78Stocks.values()){const at=stock.indexOf(old);if(at>=0)stock[at]=i;}
   }
-  // Legacy gloves become an alternative body piece; owned IDs remain usable, with no fifth bonus.
-  if(i.slot==='hands'){i.slot='body';i.__v105LegacyGloves=true;}
   Object.defineProperty(i,'atk',{configurable:true,enumerable:true,get(){return __v105Scale.gear(__v105GearLevel(this),this.slot).atk;}});
   Object.defineProperty(i,'def',{configurable:true,enumerable:true,get(){return __v105Scale.gear(__v105GearLevel(this),this.slot).def;}});
   i.__v105Gear=true;
  }
 }
 function __v105MigrateEquipment(){
- const e=rpg.equipped;if(e.hands&&!e.body)e.body=e.hands;delete e.hands;
+ const e=rpg.equipped,legacy=_5l.find(i=>i.id===e.body);
+ if(legacy?.slot==='hands'){if(!e.hands)e.hands=e.body;delete e.body;}
  for(const slot of Object.keys(e))if(!__v105Slots.includes(slot))delete e[slot];
 }
 _g4=function(){
@@ -77,7 +76,7 @@ const __v105Think=_d4;_d4=function(c,...args){if(c?.hostile&&c.__v105Level!==c.l
 const __v105World=_bj;_bj=function(...args){const result=__v105World(...args);__v105Refresh();_2l=_g4().maxHp;return result;};
 const __v105Reset=_5v;_5v=function(...args){const r=__v105Reset(...args);__v105MigrateEquipment();_2l=_g4().maxHp;return r;};
 const __v105Load=_dn;_dn=function(s){
- if(s?.equipped?.hands){s={...s,equipped:{...s.equipped}};if(!s.equipped.body)s.equipped.body=s.equipped.hands;delete s.equipped.hands;}
+ if(s?.equipped?.body&&_5l.find(i=>i.id===s.equipped.body)?.slot==='hands'){s={...s,equipped:{...s.equipped}};if(!s.equipped.hands)s.equipped.hands=s.equipped.body;delete s.equipped.body;}
  const result=__v105Load(s);if(s?.seed!==_f)return result;
  __v105Refresh();
  if(s.balance105?.version===105){_2l=Math.min(_g4().maxHp,Math.max(0,_2l));}

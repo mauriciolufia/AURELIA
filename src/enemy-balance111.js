@@ -1,11 +1,11 @@
 /* Calibrate against obtainable equipment, never against a percentage of the current player's HP. */
 const __v111EnemyBalance={reference:null,pieces:[]};
 function __v111HeroReference(level,lag=0){
- const hero=__v105Scale.hero(level),equipmentLevel=Math.max(1,level-lag),pieces=['head','body','feet','shield'].map(slot=>_5l.filter(i=>i.slot===slot&&__v105GearLevel(i)<=equipmentLevel).reduce((best,i)=>!best||i.def>best.def?i:best,null)).filter(Boolean);
+ const hero=__v105Scale.hero(level),equipmentLevel=Math.max(1,level-lag),pieces=__v105Slots.filter(slot=>slot!=='weapon').map(slot=>_5l.filter(i=>i.slot===slot&&__v105GearLevel(i)<=equipmentLevel).reduce((best,i)=>!best||i.def>best.def?i:best,null)).filter(Boolean);
  return{level,maxHp:hero.maxHp,baseDef:hero.def,def:hero.def+pieces.reduce((sum,i)=>sum+i.def,0),pieces:pieces.map(i=>({id:i.id,level:__v105GearLevel(i),def:i.def}))};
 }
 function __v111Calibrate(){
- const pieces=['head','body','feet','shield'].map(slot=>_5l.filter(i=>i.slot===slot&&__v105GearLevel(i)<=60).reduce((best,i)=>!best||i.def>best.def?i:best,null));
+ const pieces=__v105Slots.filter(slot=>slot!=='weapon'&&_5l.some(i=>i.slot===slot)).map(slot=>_5l.filter(i=>i.slot===slot&&__v105GearLevel(i)<=60).reduce((best,i)=>!best||i.def>best.def?i:best,null));
  if(pieces.some(i=>!i))throw Error('Falta una pieza de armadura para calibrar el combate.');
  const defense=__v105Scale.hero(60).def+pieces.reduce((sum,i)=>sum+i.def,0);
  __v111EnemyBalance.reference=__v105Scale.calibrateEnemyAttack(defense);
