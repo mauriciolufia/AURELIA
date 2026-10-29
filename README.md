@@ -1,6 +1,6 @@
 # Aurelia RPG
 
-Actualización 141: corregido el bloqueo `d.furniture is not iterable` al abrir el mapa de la torre Carmesí. Rediseño de sus plantas con tres pasillos cerrados, muros hasta el techo y recorrido obligatorio sala 1 → 2 → 3 → 4. Plano con flechas, numeración por recorrido y escaleras. [Detalles](ACTUALIZACION141.md).
+Actualización 141: corregido el bloqueo `d.furniture is not iterable` al abrir el mapa de la torre Carmesí. Rediseño de sus plantas con tres pasillos cerrados, muros hasta el techo y recorrido obligatorio sala 1 → 2 → 3 → 4. En el mapamundi, **Plano de la torre** permite elegir cualquiera de sus diez plantas, con flechas y escaleras. [Detalles](ACTUALIZACION141.md).
 
 Actualización 140: Emperador Supremo con 69 120 HP, defensa con escudo al mantener **T** (80 % de bloqueo), cámara de ratón ×1,5, zoom con rueda en tercera persona y regreso automático al control del ratón al cerrar interfaces. Isla Carmesí ×2,5, plantas y balcones ×2, mar ampliado al sur, puerta de madera y planta baja sin balcones. Más luz, Luz Divina reforzada, escaleras sólidas y optimización del Eclipse. [Detalles](ACTUALIZACION140.md).
 

@@ -8,6 +8,8 @@ Las nueve plantas de cuatro salas tienen tres pasillos independientes en U, cerr
 
 El mapa utiliza esos mismos polígonos y muros, numera las salas según su orden de recorrido y muestra flechas y escaleras. Una partida guardada en el antiguo cruce central se recupera en una sala válida de la misma planta.
 
+Dentro de la torre o en la isla, el mapamundi ofrece **Plano de la torre** y un selector de sus diez plantas. Consultar otro piso no desplaza al héroe; su marcador solo aparece en la planta en la que se encuentra. **Mapamundo** permite volver al mapa general.
+
 La prueba `tests/map141.cjs` reproduce el error en la versión anterior. Comprueba los diez pisos con mapa local, mapamundi, minimapa y marcadores, dibuja los planos de todas las fortalezas y cavernas, y abre y cierra el mapa durante la actualización del juego. El modo `--live` utiliza la entrada gráfica y los fotogramas reales, tras guardar y recargar una partida dentro de la torre.
 
 `tests/circuit141-cases.cjs` comprueba rutas sobre el suelo dibujado y colisiones reales, recorre los pasillos con los controles del héroe en ambos sentidos y trata de atravesar los laterales hacia el centro. Esta última prueba falla con el diseño anterior.

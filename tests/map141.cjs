@@ -29,6 +29,20 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
   }
   await run(`active=false;_v=false;__v59ManualPause=false;for(const id of['quick-menu','settings','atlas','dialogue','rpg-panel'])$(id).hidden=true;`);
   if(process.argv.includes('--circuit'))for(const[name,code]of require('./circuit141-cases.cjs'))console.log('PASS '+name,JSON.stringify(await run(code)));
+  await run(`(()=>{const a=__v139.areas[2];_14.set(a.entry.x,a.y+1.85,a.entry.z);__v76WorldOverride=false;_fm(true);})()`);
+  assert.equal(await page.locator('#ag-tower-plan141').isVisible(),true);
+  const hero=await run(`_14.toArray()`);
+  await page.selectOption('#ag-tower-floor141','9');
+  assert.match(await page.locator('.atlas-head h2').textContent(),/Planta 10/);
+  assert.deepEqual(await run(`_14.toArray()`),hero);
+  assert.match(await page.locator('.atlas-legend').textContent(),/Salón del Dragón/);
+  await run(`_fm(false);_14.set(__v88Island.x+65,__v88Island.y+1.85,__v88Island.z);_fm(true);`);
+  await page.locator('#ag-tower-plan141').click({force:true});
+  await page.selectOption('#ag-tower-floor141','4');
+  assert.match(await page.locator('.atlas-head h2').textContent(),/Planta 5/);
+  assert.equal(await run(`__v75At()?.tower139===true`),false);
+  console.log('PASS island and interior map controls preview tower floors without moving the hero');
+  await run(`_fm(false);__v141Map.floor=null;`);
   const floors=await run(`(()=>{const canvas=document.createElement('canvas');canvas.width=760;canvas.height=650;const c=canvas.getContext('2d'),results=[];for(const a of __v139.areas){_14.set(a.entry.x,a.y+1.85,a.entry.z);__v76WorldOverride=false;__v88MapTimers().cartografia=__v88MapTimers().tesoro_guia=900;__v83DrawPlan(c,760,650,a,false);__v83DrawPlan(c,760,650,a,true);_fm(true);_fo();__v87MiniDraw();if(!a.mapTransform||!Number.isFinite(a.mapTransform.scale))throw Error('Missing map transform '+a.key);const pixels=c.getImageData(0,0,760,650).data;let ink=0;for(let i=0;i<pixels.length;i+=4)if(pixels[i]>80)ink++;if(ink<100)throw Error('Empty floor map '+a.key);__v76WorldOverride=true;_fo();_fm(false);results.push(a.key);}return results;})()`);
   assert.equal(floors.length,10);console.log('PASS local/world maps and minimaps on all ten tower floors',JSON.stringify(floors));
   const areas=await run(`(()=>{const c=document.createElement('canvas').getContext('2d');c.canvas.width=760;c.canvas.height=650;for(const a of __v83.areas){_14.set(a.entry.x,a.y+1.85,a.entry.z);for(const markers of[false,true])__v83DrawPlan(c,760,650,a,markers);}return __v83.areas.length;})()`);
