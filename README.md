@@ -1,5 +1,7 @@
 # Aurelia RPG
 
+Actualización 139: torre medieval de diez pisos en la isla de la Aurora Carmesí. Nueve plantas de cuatro salas en recorrido obligatorio, 36 guardianes de cuatro especies exclusivas (niveles 35–45), balcones transitables independientes y dragón con su tesoro en el salón superior. Suelo de losas con imagen propia, antorchas en los muros e iluminación tenue que cambia entre día y noche. [Detalles](ACTUALIZACION139.md) · [Planos por planta](docs/torre139/).
+
 Actualización 138: escaleras al final del recorrido de las fortalezas, llegadas y subidas en extremos opuestos, y plantas alternas del Eclipse invertidas para recorrer todas sus salas antes del Emperador. [Detalles](ACTUALIZACION138.md).
 
 Actualización 137: enemigos de asalto, tanques, tiradores, magos y especialistas en estados, con atributos y técnicas según especie y nivel. Petrificación y congelación inmovilizan 10 segundos; piedra, hielo, llamas, toxicidad y sueño se ven en enemigos y héroe, con efectos tenues en primera persona. [Detalles](ACTUALIZACION137.md) · [Catálogo por especie](docs/enemigos137.md).
@@ -91,6 +93,8 @@ Descarga la [guía de atributos, equipo y magia en Word](docs/balance105/Aurelia
 ```sh
 npm ci
 npm test
+npm run test:tower
+npm run test:tower:mobile
 npm run test:routes
 npm run test:routes:mobile
 npm run test:roles
