@@ -1,19 +1,20 @@
 /* Exercise the full map renderer and its live-frame callers, including every tower floor. */
 const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:http'),path=require('node:path'),assert=require('node:assert/strict');
 (async()=>{
- const root=path.resolve(__dirname,'..'),mobile=process.argv.includes('--mobile'),live=process.argv.includes('--live'),errors=[];
+ const root=path.resolve(__dirname,'..'),mobile=process.argv.includes('--mobile'),live=process.argv.includes('--live'),release142=process.argv.includes('--release142'),legacy=process.argv.includes('--legacy-save'),errors=[];
  const hook=live?'':`const __raf141=requestAnimationFrame;_5.render=()=>{};window.requestAnimationFrame=cb=>cb===frame?0:__raf141(cb);__v122Prepare=async()=>{clearTimeout(__v122Timer);__v121Boot.phase='playing';__v121Entry.hidden=true;};`;
- const html=fs.readFileSync(path.join(root,'index.html'),'utf8').replace('const _ix=_7q();',hook+`window.__test141=s=>eval(s);const _ix=_7q();`);
+ const html=fs.readFileSync(path.join(root,release142?'version142.html':'index.html'),'utf8').replace('const _ix=_7q();',hook+`window.__test141=s=>eval(s);const _ix=_7q();`);
  const server=http.createServer((q,r)=>{r.setHeader('Content-Type','text/html; charset=utf-8');r.end(html);});await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;
  try{
   browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox','--js-flags=--max-old-space-size=4096']});
   const page=await browser.newPage(mobile?{viewport:{width:844,height:390},isMobile:true,hasTouch:true,userAgent:'Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 Chrome/142.0.0.0 Mobile Safari/537.36'}:{viewport:{width:1280,height:720}});
   page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')console.error(m.text().slice(0,1200));});
+  if(legacy)await page.addInitScript(()=>localStorage.setItem('aurelia-rpg-v15',JSON.stringify({seed:2847,player:[-662,66.05,2307.8],level:40,gold:4321,health:9999,mp:120,known:['cura','luz_divina'],spell:'cura',dayTime:9,magicCatalog119:119,island140:{version:140},tower139:{dead:[]},fortress75:{version:3,mapMagic88:{cartografia:700,tesoro_guia:700}}})));
   await page.goto('http://127.0.0.1:'+server.address().port,{waitUntil:'domcontentloaded',timeout:180000});
   await page.waitForFunction(()=>window.__AURELIA_BOOT121__&&['ready','failed'].includes(window.__AURELIA_BOOT121__.audit().phase),null,{timeout:240000});
   assert.equal(await page.locator('#ag-error').isVisible(),false,await page.locator('#ag-error').textContent());
   const run=s=>page.evaluate(s=>window.__test141(s),s);
-  if(live){
+  if(live&&!legacy){
    // Continue an existing tower save through the normal save loader and real GPU entry.
    await run(`(()=>{const a=__v139.areas[6];_14.set(a.entry.x,a.y+1.85,a.entry.z);__v88MapTimers().cartografia=900;__v88MapTimers().tesoro_guia=900;_u=true;_iv();_u=false;const raw=localStorage.getItem('aurelia-rpg-v15');if(!raw)throw Error('Save not written');window.__save141=raw;})()`);
    await page.reload({waitUntil:'domcontentloaded',timeout:180000});
@@ -21,6 +22,8 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    assert.equal(await page.locator('#ag-start').textContent(),'Continuar aventura');
    assert.equal(await run(`__v75At()?.key`),'aurora139-6');
   }
+  if(legacy){assert.equal(await run(`__v75At()?.key`),'aurora139-6');assert.equal(await run(`rpg.gold`),4321);console.log('PASS version 140 save loads in the same tower floor with progress intact');}
+  if(release142){assert.equal(await page.locator('#ag-version142').isVisible(),true);assert.match(await page.locator('#ag-version142').textContent(),/142/);}
   await page.locator('#ag-start').click();
   if(live){
    await page.waitForFunction(()=>{const b=window.__AURELIA_BOOT121__.audit();return b.frames>=3||b.phase==='failed-entry';},null,{timeout:120000});
@@ -28,6 +31,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),http=require('node:
    console.log('PASS real GPU entry after restoring a tower save',JSON.stringify({frames:boot.frames,player:boot.player}));
   }
   await run(`active=false;_v=false;__v59ManualPause=false;for(const id of['quick-menu','settings','atlas','dialogue','rpg-panel'])$(id).hidden=true;`);
+  if(release142){assert.equal(await page.locator('#ag-build142').isVisible(),true);for(const[name,code]of require('./release142-cases.cjs'))console.log('PASS '+name,JSON.stringify(await run(code)));}
   if(process.argv.includes('--circuit'))for(const[name,code]of require('./circuit141-cases.cjs'))console.log('PASS '+name,JSON.stringify(await run(code)));
   await run(`(()=>{const a=__v139.areas[2];_14.set(a.entry.x,a.y+1.85,a.entry.z);__v76WorldOverride=false;_fm(true);})()`);
   assert.equal(await page.locator('#ag-tower-plan141').isVisible(),true);
