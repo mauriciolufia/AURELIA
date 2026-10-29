@@ -1,6 +1,6 @@
 {
   "name": "aurelia-rpg",
-  "version": "137.0.0",
+  "version": "138.0.0",
   "private": true,
   "description": "Aurelia RPG, juego HTML aut\u00f3nomo",
   "scripts": {
@@ -100,7 +100,9 @@
     "test:enemy-attack:mobile": "node tests/enemy-attack136.cjs --mobile",
     "test:roles": "node tests/roles137.cjs",
     "test:states": "node tests/states137.cjs",
-    "test:states:mobile": "node tests/states137.cjs --mobile"
+    "test:states:mobile": "node tests/states137.cjs --mobile",
+    "test:routes": "node tests/routes138.cjs",
+    "test:routes:mobile": "node tests/routes138.cjs --mobile"
   },
   "devDependencies": {
     "playwright": "1.62.1"

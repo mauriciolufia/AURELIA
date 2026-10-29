@@ -1,5 +1,7 @@
 # Aurelia RPG
 
+Actualización 138: escaleras al final del recorrido de las fortalezas, llegadas y subidas en extremos opuestos, y plantas alternas del Eclipse invertidas para recorrer todas sus salas antes del Emperador. [Detalles](ACTUALIZACION138.md).
+
 Actualización 137: enemigos de asalto, tanques, tiradores, magos y especialistas en estados, con atributos y técnicas según especie y nivel. Petrificación y congelación inmovilizan 10 segundos; piedra, hielo, llamas, toxicidad y sueño se ven en enemigos y héroe, con efectos tenues en primera persona. [Detalles](ACTUALIZACION137.md) · [Catálogo por especie](docs/enemigos137.md).
 
 Actualización 136: ATK enemigo hasta **350 000**, Emperador Supremo con **700 000 ATK** y golpes normales equilibrados para quitar aproximadamente **10–15 % del HP** con armaduras del mismo nivel. [Detalles](ACTUALIZACION136.md).
@@ -89,6 +91,8 @@ Descarga la [guía de atributos, equipo y magia en Word](docs/balance105/Aurelia
 ```sh
 npm ci
 npm test
+npm run test:routes
+npm run test:routes:mobile
 npm run test:roles
 npm run test:states
 npm run test:states:mobile
