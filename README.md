@@ -1,5 +1,7 @@
 # Aurelia RPG
 
+Actualización 140: Emperador Supremo con 69 120 HP, defensa con escudo al mantener **T** (80 % de bloqueo), cámara de ratón ×1,5, zoom con rueda en tercera persona y regreso automático al control del ratón al cerrar interfaces. Isla Carmesí ×2,5, plantas y balcones ×2, mar ampliado al sur, puerta de madera y planta baja sin balcones. Más luz, Luz Divina reforzada, escaleras sólidas y optimización del Eclipse. [Detalles](ACTUALIZACION140.md).
+
 Actualización 139: torre medieval de diez pisos en la isla de la Aurora Carmesí. Nueve plantas de cuatro salas en recorrido obligatorio, 36 guardianes de cuatro especies exclusivas (niveles 35–45), balcones transitables independientes y dragón con su tesoro en el salón superior. Suelo de losas con imagen propia, antorchas en los muros e iluminación tenue que cambia entre día y noche. [Detalles](ACTUALIZACION139.md) · [Planos por planta](docs/torre139/).
 
 Actualización 138: escaleras al final del recorrido de las fortalezas, llegadas y subidas en extremos opuestos, y plantas alternas del Eclipse invertidas para recorrer todas sus salas antes del Emperador. [Detalles](ACTUALIZACION138.md).
@@ -95,6 +97,8 @@ npm ci
 npm test
 npm run test:tower
 npm run test:tower:mobile
+npm run test:update:140
+npm run test:update:140:mobile
 npm run test:routes
 npm run test:routes:mobile
 npm run test:roles

@@ -47,7 +47,7 @@ function __v139Torches(a){
  g.add(flames,cores);flames.instanceMatrix.setUsage(_0.DynamicDrawUsage);cores.instanceMatrix.setUsage(_0.DynamicDrawUsage);flames.frustumCulled=cores.frustumCulled=false;
  a.torches={fixtures,flames,cores,g};__v85.torchAreas.push(a);__v85Flame(a,0);
 }
-function __v139Balcony(a){return !!a?.tower139&&Math.abs(__v83Local(a,_14.x,_14.z)[0])>16;}
+function __v139Balcony(a){return !!a?.tower139&&Math.abs(__v83Local(a,_14.x,_14.z)[0])>16*(__v139.scale140||1);}
 const __v139Interior=__v126Interior;__v126Interior=function(a){return a?.tower139&&__v139Balcony(a)?false:__v139Interior(a);};
 const __v139InteriorLight=__v106InteriorLight;
 __v106InteriorLight=function(){
@@ -87,11 +87,11 @@ function __v139Floor(index){
  const d={key:'aurora139-'+index,name:'Torre de la Aurora · Planta '+(index+1),bounds:[-20,-16,20,16],centers,rects,main:top?[0]:index%2?[3,2,1,0]:[0,1,2,3],rooms:top?['Salón del Dragón']:['Vestíbulo','Sala de Basalto','Sala del Oráculo','Escalinata'],room_fills:rects.map(r=>({polygon:__v95Ring(r),color:'#657d90'})),constructionWalls85:[],walls:[],trap_info:[],secretRooms85:[],arrowTraps85:[],markers:{J:top?[[7,-7]]:[],A:[],B:[],F1:[],F2:[],MP:[],U:[]},props:{fountains:[],barrels:[],enemies:[]},roofPolygons85:[{outer,holes:outgoing?[__v139Hole(outgoing)]:[]}],roofOpenings85:outgoing?[{outer:__v139Hole(outgoing),holes:[]}]:[],polygons:[{outer,holes:incoming?[__v139Hole(incoming)]:[]}],accent:'#697f90',floor:'#8193a0',boss:'Dragón de la Aurora Carmesí'};
  const a={key:d.key,name:d.name,site:__v88IslandSite,x:s.x,z:s.z,y:s.y+index*10,cx:0,cz:0,w:20,d:16,rank:6,level:Math.min(45,35+Math.round(index*10/8)),biome:'volcano',tower139:true,floor139:index,ceilingHeight88:h,design:d,groups:[],members:[],doors:[],colliders:[],traps:[],pads:[],stairs:[],platforms:[],annexRooms:[],incoming139:incoming,balconies139:[]};
  __v139.areas.push(a);__v83.areas.push(a);__v75.areas.push(a);a.rooms=centers.map(p=>__v83Point(a,p));a.path=d.main.map(i=>a.rooms[i]);
- if(!top)d.rooms=centers.map((p,i)=>'Sala '+(d.main.indexOf(i)+1));a.entry=incoming?{...__v83Point(a,[incoming.x,incoming.z1+Math.sign(incoming.z1-incoming.z0)*.9]),y:a.y}:{...__v83Point(a,[-8,-15]),y:a.y};a.exit=a.entry;
+ if(!top)d.rooms=centers.map((p,i)=>'Sala '+(d.main.indexOf(i)+1));a.entry=incoming?{...__v83Point(a,[incoming.x,incoming.z1+Math.sign(incoming.z1-incoming.z0)*.9]),y:a.y}:{...__v83Point(a,[-15,-8]),y:a.y};a.exit=a.entry;
  __v85PlanMesh(a,d.polygons[0],0,'floor');__v85PlanMesh(a,d.roofPolygons85[0],h,'roof');a.roof={height:a.y+h,polygons:d.roofPolygons85,holes:d.roofOpenings85,groups:[]};
- __v139Span(a,'x',-16,-16,16,index?[]:[-8],true);__v139Span(a,'x',16,-16,16,[],true);
+ __v139Span(a,'x',-16,-16,16,[],true);__v139Span(a,'x',16,-16,16,[],true);
  for(const side of [-1,1]){
-  __v139Span(a,'z',side*16,-16,16,[-8,8],true);
+  __v139Span(a,'z',side*16,-16,16,index?[-8,8]:side<0?[-8]:[],true);if(!index)continue;
   for(const z of [-8,8]){const r=side<0?[-20,z-3,-16,z+3]:[16,z-3,20,z+3];a.balconies139.push(r);__v85PlanMesh(a,{outer:__v95Ring(r),holes:[]},0,'floor');
    for(const l of [[r[0],r[1],r[2],r[1]],[r[0],r[3],r[2],r[3]],[side*20,r[1],side*20,r[3]]])__v139Wall(a,l.slice(0,2),l.slice(2),1.25);
   }
@@ -143,7 +143,7 @@ function __v139Build(){
 function __v139Contains(a,x,z,pad=0){const p=__v83Local(a,x,z);return(a.walk139||a.design.rects).some(r=>p[0]>=r[0]-pad&&p[0]<=r[2]+pad&&p[1]>=r[1]-pad&&p[1]<=r[3]+pad)||a.balconies139.some(r=>p[0]>=r[0]+pad&&p[0]<=r[2]-pad&&p[1]>=r[1]+pad&&p[1]<=r[3]-pad);}
 const __v139At=__v75At;__v75At=function(x=_14.x,z=_14.z,y=_14.y-1.85){for(const a of __v139.areas)if(y>=a.y-1&&y<a.y+a.ceilingHeight88-1&&__v139Contains(a,x,z))return a;return __v139At(x,z,y);};
 const __v139Ground=_ei;_ei=function(x,z){const feet=_14.y-1.85;
- for(const s of __v139.stairs){const p=__v83Local(s.lower,x,z);if(Math.abs(p[0]-s.x)<1.8&&p[1]>=Math.min(s.z0,s.z1)-.8&&p[1]<=Math.max(s.z0,s.z1)+.8){const h=s.lower.y+_18((p[1]-s.z0)/(s.z1-s.z0),0,1)*10;if(feet>=s.lower.y-1&&feet<=s.upper.y+1.1&&h<=feet+1.1)return h;}}
+ for(const s of __v139.stairs){const p=__v83Local(s.lower,x,z);if(Math.abs(p[0]-s.x)<1.8*(__v139.scale140||1)&&p[1]>=Math.min(s.z0,s.z1)-.8&&p[1]<=Math.max(s.z0,s.z1)+.8){const h=s.lower.y+_18((p[1]-s.z0)/(s.z1-s.z0),0,1)*10;if(feet>=s.lower.y-1&&feet<=s.upper.y+1.1&&h<=feet+1.1)return h;}}
  for(const a of [...__v139.areas].reverse())if(feet>=a.y-1.05&&feet<a.y+a.ceilingHeight88&&__v139Contains(a,x,z)){if(a.incoming139&&__v84PointInRing(__v83Local(a,x,z),__v139Hole(a.incoming139)))return a.y-10;return a.y;}
  return __v139Ground(x,z);
 };
@@ -151,7 +151,7 @@ const __v139Walk=__v83Walkable;__v83Walkable=function(a,x,z,pad=0){if(!a?.tower1
 const __v139EnemyWalk=_9b;_9b=function(c,x,z){const a=__v139.areas.find(a=>a.key===c?.__v83Area);if(!a)return __v139EnemyWalk(c,x,z);if(!__v83Walkable(a,x,z,.6)||_i7(x,z,a.y+1.85)||!__v91SegmentClear(c,c.g.position,{x,z,y:a.y}))return false;c.__v91Permit={x,z,y:a.y};return a.y;};
 const __v139Respawn=__v87CanRespawn;__v87CanRespawn=function(c){return c?.__v139Guard?false:__v139Respawn(c);};
 const __v139Floors=__v127Floors;__v127Floors=function(a){const visible=__v139Floors(a);for(const st of __v139.stairs){if(a===st.lower||a===st.upper){const p=__v83Point(a,[st.x,a===st.lower?st.z0:st.z1]);if(Math.hypot(_14.x-p.x,_14.z-p.z)<8)visible.add(a===st.lower?st.upper:st.lower);}}return visible;};
-const __v139Visibility=__v93Visibility;__v93Visibility=function(...args){const r=__v139Visibility(...args),a=__v75At(),inside=!!a?.tower139,outside=!a||inside&&Math.abs(_14.x-a.x)>16,near=Math.hypot(_14.x-__v88Island.x,_14.z-__v88Island.z)<400,visible=__v127Floors(a);
+const __v139Visibility=__v93Visibility;__v93Visibility=function(...args){const r=__v139Visibility(...args),a=__v75At(),inside=!!a?.tower139,outside=!a||inside&&Math.abs(_14.x-a.x)>16*(__v139.scale140||1),near=Math.hypot(_14.x-__v88Island.x,_14.z-__v88Island.z)<400,visible=__v127Floors(a);
  for(const f of __v139.areas){f.root.visible=outside?near:inside&&visible.has(f);}
  for(const st of __v139.stairs)st.root.visible=inside&&(st.lower===a||st.upper===a);if(__v139.roof)__v139.roof.visible=near&&outside;return r;
 };

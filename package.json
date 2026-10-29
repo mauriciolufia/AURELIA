@@ -1,6 +1,6 @@
 {
   "name": "aurelia-rpg",
-  "version": "139.0.0",
+  "version": "140.0.0",
   "private": true,
   "description": "Aurelia RPG, juego HTML aut\u00f3nomo",
   "scripts": {
@@ -104,7 +104,9 @@
     "test:routes": "node tests/routes138.cjs",
     "test:routes:mobile": "node tests/routes138.cjs --mobile",
     "test:tower": "node tests/tower139.cjs",
-    "test:tower:mobile": "node tests/tower139.cjs --mobile"
+    "test:tower:mobile": "node tests/tower139.cjs --mobile",
+    "test:update:140": "node tests/update140.cjs",
+    "test:update:140:mobile": "node tests/update140.cjs --mobile"
   },
   "devDependencies": {
     "playwright": "1.62.1"

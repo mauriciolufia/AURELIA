@@ -1,7 +1,7 @@
 module.exports=[
 ['ten floors, published room counts and exactly four unique guards per ordinary floor',`(()=>{
  const a=__AURELIA_TOWER139__.audit();if(a.floors.length!==10||a.stairs!==9||a.species.length!==4)throw Error('Incomplete tower');
- for(const f of a.floors)if(f.rooms!==(f.key==='aurora139-9'?1:4)||f.guards!==(f.key==='aurora139-9'?0:4)||f.balconies!==4)throw Error('Wrong roster '+JSON.stringify(f));
+ for(const f of a.floors)if(f.rooms!==(f.key==='aurora139-9'?1:4)||f.guards!==(f.key==='aurora139-9'?0:4)||f.balconies!==(f.key==='aurora139-0'?0:4))throw Error('Wrong roster '+JSON.stringify(f));
  if(a.floors[9].height!==14||a.floors[0].height!==10||a.levels.some(n=>n<35||n>45))throw Error('Wrong height or level');
  for(const f of __v139.areas.slice(0,9)){const groups=f.members.reduce((o,c)=>(o[c.__v75Room]=(o[c.__v75Room]||0)+1,o),{});if(groups[1]!==2||groups[2]!==2||Object.keys(groups).length!==2||new Set(f.members.map(c=>c.spec.id)).size!==4)throw Error('Wrong occupied rooms');}
  return a;
@@ -10,7 +10,7 @@ module.exports=[
  const old=_14.clone(),reports=[];
  try{for(const a of __v139.areas.slice(0,9)){
   _14.y=a.y+1.85;const order=a.design.main,start=__v139.centers[order[0]],end=__v139.centers[order[3]],mask=new Map();
-  for(let x=-20;x<=20;x++)for(let z=-16;z<=16;z++){const p=__v83Point(a,[x,z]);if(__v139Contains(a,p.x,p.z)&&!_i7(p.x,p.z,a.y+1.85))mask.set(x+','+z,true);}
+  for(let x=-40;x<=40;x++)for(let z=-32;z<=32;z++){const p=__v83Point(a,[x,z]);if(__v139Contains(a,p.x,p.z)&&!_i7(p.x,p.z,a.y+1.85))mask.set(x+','+z,true);}
   const reach=omit=>{const q=[start],seen=new Set([start.join(',')]);for(let i=0;i<q.length;i++){const[x,z]=q[i];if(x===end[0]&&z===end[1])return true;for(const[dx,dz]of[[1,0],[-1,0],[0,1],[0,-1]]){const xx=x+dx,zz=z+dz,key=xx+','+zz,r=a.design.rects[omit];if(!mask.has(key)||seen.has(key)||r&&xx>r[0]&&xx<r[2]&&zz>r[1]&&zz<r[3])continue;seen.add(key);q.push([xx,zz]);}}return false;};
   if(!reach(-1)||reach(order[1])||reach(order[2]))throw Error('Broken mandatory chain '+a.key);
   for(const r of a.balconies139){const p=__v83Point(a,[(r[0]+r[2])/2,(r[1]+r[3])/2]);if(Math.abs(_ei(p.x,p.z)-a.y)>.15)throw Error('Balcony has no floor');}
@@ -35,10 +35,10 @@ module.exports=[
  const old={pos:_14.clone(),yaw,cameraYaw:__v95Camera.yaw,joy:{..._16},keys:{..._15},flight:_v,ride:_9d,sprint:_w};let balconies=0;
  try{for(const k of Object.keys(_15))_15[k]=false;_v=false;_9d=null;_w=true;_16.x=0;
  const walk=(a,from,to,limit=200)=>{_14.set(from.x,a.y+1.85,from.z);_12=0;_13=true;_16.y=1;let n=0;while(Math.hypot(_14.x-to.x,_14.z-to.z)>.15&&n++<limit){yaw=Math.atan2(-(to.x-_14.x),-(to.z-_14.z));__v95Camera.yaw=yaw;_3m(.008);}return n;};
- for(const a of __v139.areas)for(const r of a.balconies139){const side=Math.sign(r[0]+r[2]),z=(r[1]+r[3])/2,inside=__v83Point(a,[side*13,z]),balcony=__v83Point(a,[side*18,z]);
+ for(const a of __v139.areas)for(const r of a.balconies139){const side=Math.sign(r[0]+r[2]),z=(r[1]+r[3])/2,inside=__v83Point(a,[side*26,z]),balcony=__v83Point(a,[side*36,z]);
   if(walk(a,inside,balcony)>=200||Math.abs(_14.y-a.y-1.85)>.3||__v75At()!==a||!__v139Balcony(a)||__v126Interior(a))throw Error('Cannot access balcony '+a.key+'/'+side+'/'+z);
   __v123Refresh(true);_bg(true);__v93Visibility();if(!__v139.roof.visible||!a.root.visible)throw Error('Exterior facade missing');
-  walk(a,balcony,__v83Point(a,[side*22,z]),100);if(Math.abs(__v83Local(a,_14.x,_14.z)[0])>20||Math.abs(_14.y-a.y-1.85)>.3)throw Error('Rail does not stop player');
+  walk(a,balcony,__v83Point(a,[side*44,z]),100);if(Math.abs(__v83Local(a,_14.x,_14.z)[0])>40||Math.abs(_14.y-a.y-1.85)>.3)throw Error('Rail does not stop player');
   if(walk(a,balcony,inside)>=200||__v139Balcony(a))throw Error('Cannot return inside');balconies++;
  }return{balconies,returnPaths:balconies,rails:balconies};
  }finally{_14.copy(old.pos);yaw=old.yaw;__v95Camera.yaw=old.cameraYaw;_16.x=old.joy.x;_16.y=old.joy.y;Object.assign(_15,old.keys);_v=old.flight;_9d=old.ride;_w=old.sprint;}
@@ -50,8 +50,8 @@ module.exports=[
  for(const f of __v139.areas)if(f.torches.fixtures.length!==8||!f.torches.flames.isInstancedMesh)throw Error('Missing wall torches '+f.key);
  try{const p=__v83Point(a,[-8,-8]);_14.set(p.x,a.y+1.85,p.z);const samples=[];
  for(const h of[0,12]){_x=h;for(let i=0;i<50;i++){_10+=.04;_fk();__v106TorchLight(.04,true);}samples.push({hour:h,fill:_9.intensity,exposure:_5.toneMappingExposure,torch:Math.max(...__v85.lights.map(l=>l.intensity))});}
- if(samples[0].fill>=samples[1].fill||samples[0].fill>.4||samples[1].fill>.7||samples.some(s=>s.torch<=10||s.torch>24))throw Error('Wrong interior light '+JSON.stringify(samples));
- const p2=__v83Point(a,[-18,-8]);_14.set(p2.x,a.y+1.85,p2.z);for(let i=0;i<50;i++){_10+=.04;_fk();__v106TorchLight(.04,true);}
+ if(samples[0].fill>=samples[1].fill||samples[0].fill>.7||samples[1].fill>1.3||samples.some(s=>s.torch<=10||s.torch>48))throw Error('Wrong interior light '+JSON.stringify(samples));
+ const p2=__v83Point(a,[-36,-16]);_14.set(p2.x,a.y+1.85,p2.z);for(let i=0;i<50;i++){_10+=.04;_fk();__v106TorchLight(.04,true);}
  if(_9.intensity<1||__v85.lights.some(l=>l.intensity>.01))throw Error('Balcony did not restore exterior light');return{texture:[texture.image.width,texture.image.height],torches:80,samples,balconyFill:_9.intensity};
  }finally{_14.copy(old);_x=hour;}
 })()`],

@@ -1,0 +1,19 @@
+# Actualización 140 · Escudo, cámara, Eclipse e isla Carmesí
+
+El Emperador Supremo pasa de **34 560 a 69 120 HP**. Se conserva la proporción de salud al recalcular atributos y cargar partidas: la ampliación se aplica una vez y los jefes derrotados siguen derrotados.
+
+Mantén **T** con un escudo equipado para bloquear el **80 % del daño enemigo directo**, físico o mágico. En móvil aparece un botón que se mantiene pulsado. El héroe levanta el escudo y aparta el arma; la postura se ve en primera y tercera persona. Soltar el botón, perder el foco o quitar el escudo termina la defensa. No permite atacar con el arma ni conjurar mientras se sostiene la defensa. El veneno y las quemaduras ya aplicados mantienen sus pulsos de daño.
+
+El ratón gira la cámara con sensibilidad **×1,5** y la primera persona tiene amortiguación independiente de los FPS. La rueda acerca o aleja la cámara en tercera persona, entre 1,8 y 18 metros, conservando la prevención de colisiones y la preferencia entre sesiones. Los menús mantienen su propio desplazamiento. Al cerrar inventario, equipo, mapa, diálogos, ajustes, pausa o menú, se solicita de nuevo el control del ratón sin otro clic en la escena. La cámara actualiza sus matrices antes de dibujar, incluidos los modelos que sostiene el héroe en primera persona.
+
+Las animaciones de ataque utilizan hombros y brazos reales cuando la especie los tiene, con anticipación, golpe o lanzamiento, inclinación del torso y apoyo de las piernas. Los animales conservan su anatomía. La animación se limita a enemigos cercanos y visibles; los estados de inmovilización se respetan.
+
+El Eclipse evita actualizar ramas estáticas que no se han movido y dibujar detalles lejanos de una planta contigua cuando solo se ve su escalera. Se conservan el salón de llegada, los huecos y toda la arquitectura que los cruza. Los enemigos del Eclipse agrupan detalles estáticos dentro de cada cuerpo o articulación; el Emperador también agrupa sus alas. Se mantienen los brazos, piernas y alas articulados. Las habitaciones cerradas prescinden del pase de sombras exterior del sol y la luna; los exteriores recuperan su configuración. Se mantienen texturas, resolución, enemigos y objetos interactivos.
+
+La isla de la Aurora Carmesí aumenta **×2,5 en ancho y largo** y se traslada a `(-640, 2280)`, a unos 756 m del Mirador Austral frente a los 310 m anteriores. El límite del mar se extiende hasta `z = 2740`. La torre aumenta **×2 en ancho y largo**: el cuerpo de cada planta mide 64 × 64 m. Los balcones, puertas y pasillos crecen en proporción. La planta baja tiene una puerta de madera con apertura y colisión, en el lateral de la sala 1, y ningún balcón. Las otras nueve plantas conservan cuatro balcones independientes cada una, 36 en total.
+
+Las nueve escaleras de la torre recorren 20 m para subir 10 m. Un índice espacial comprueba sus volúmenes sólidos y los de otras fortalezas: se pueden recorrer los escalones y se bloquea la entrada a través del cuerpo o los laterales de la escalera. El recorrido sala 1 → 2 → 3 → 4 sigue siendo obligatorio; los guardias, sus niveles y el dragón del piso 10 se conservan.
+
+La luz tenue de la torre se duplica y mantiene la diferencia entre día y noche. **Luz Divina** también funciona en salas normales de esta torre: aumenta la iluminación sobre la luz base durante 900 segundos, con el coste y el tiempo de recarga habituales. Las partidas de la torre anterior se trasladan a la nueva ubicación. El índice de escenarios conserva también los edificios descargados para que la torre se vea al aproximarse desde el mar.
+
+Validación: `test:update:140` y su variante móvil comprueban salud, bloqueo con golpes reales, posturas, controles, ampliación, migración, Luz Divina, puerta, colisión y dibujo. `test:tower` y su variante móvil recorren las escaleras y los 36 balcones con el controlador real. Se revisan las rutas del resto de fortalezas, los estados y el paquete autónomo.
