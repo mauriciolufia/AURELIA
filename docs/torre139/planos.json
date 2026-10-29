@@ -1,0 +1,356 @@
+[
+  {
+    "floor": 1,
+    "height": 10,
+    "rooms": 4,
+    "order": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "doors": [
+      [
+        0,
+        -8
+      ],
+      [
+        8,
+        0
+      ],
+      [
+        0,
+        8
+      ]
+    ],
+    "enemies": [
+      {
+        "room": 1,
+        "count": 2,
+        "level": 35
+      },
+      {
+        "room": 2,
+        "count": 2,
+        "level": 36
+      }
+    ],
+    "boss": false
+  },
+  {
+    "floor": 2,
+    "height": 10,
+    "rooms": 4,
+    "order": [
+      3,
+      2,
+      1,
+      0
+    ],
+    "doors": [
+      [
+        0,
+        -8
+      ],
+      [
+        8,
+        0
+      ],
+      [
+        0,
+        8
+      ]
+    ],
+    "enemies": [
+      {
+        "room": 1,
+        "count": 2,
+        "level": 36
+      },
+      {
+        "room": 2,
+        "count": 2,
+        "level": 37
+      }
+    ],
+    "boss": false
+  },
+  {
+    "floor": 3,
+    "height": 10,
+    "rooms": 4,
+    "order": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "doors": [
+      [
+        0,
+        -8
+      ],
+      [
+        8,
+        0
+      ],
+      [
+        0,
+        8
+      ]
+    ],
+    "enemies": [
+      {
+        "room": 1,
+        "count": 2,
+        "level": 37
+      },
+      {
+        "room": 2,
+        "count": 2,
+        "level": 38
+      }
+    ],
+    "boss": false
+  },
+  {
+    "floor": 4,
+    "height": 10,
+    "rooms": 4,
+    "order": [
+      3,
+      2,
+      1,
+      0
+    ],
+    "doors": [
+      [
+        0,
+        -8
+      ],
+      [
+        8,
+        0
+      ],
+      [
+        0,
+        8
+      ]
+    ],
+    "enemies": [
+      {
+        "room": 1,
+        "count": 2,
+        "level": 39
+      },
+      {
+        "room": 2,
+        "count": 2,
+        "level": 40
+      }
+    ],
+    "boss": false
+  },
+  {
+    "floor": 5,
+    "height": 10,
+    "rooms": 4,
+    "order": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "doors": [
+      [
+        0,
+        -8
+      ],
+      [
+        8,
+        0
+      ],
+      [
+        0,
+        8
+      ]
+    ],
+    "enemies": [
+      {
+        "room": 1,
+        "count": 2,
+        "level": 40
+      },
+      {
+        "room": 2,
+        "count": 2,
+        "level": 41
+      }
+    ],
+    "boss": false
+  },
+  {
+    "floor": 6,
+    "height": 10,
+    "rooms": 4,
+    "order": [
+      3,
+      2,
+      1,
+      0
+    ],
+    "doors": [
+      [
+        0,
+        -8
+      ],
+      [
+        8,
+        0
+      ],
+      [
+        0,
+        8
+      ]
+    ],
+    "enemies": [
+      {
+        "room": 1,
+        "count": 2,
+        "level": 41
+      },
+      {
+        "room": 2,
+        "count": 2,
+        "level": 42
+      }
+    ],
+    "boss": false
+  },
+  {
+    "floor": 7,
+    "height": 10,
+    "rooms": 4,
+    "order": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "doors": [
+      [
+        0,
+        -8
+      ],
+      [
+        8,
+        0
+      ],
+      [
+        0,
+        8
+      ]
+    ],
+    "enemies": [
+      {
+        "room": 1,
+        "count": 2,
+        "level": 43
+      },
+      {
+        "room": 2,
+        "count": 2,
+        "level": 44
+      }
+    ],
+    "boss": false
+  },
+  {
+    "floor": 8,
+    "height": 10,
+    "rooms": 4,
+    "order": [
+      3,
+      2,
+      1,
+      0
+    ],
+    "doors": [
+      [
+        0,
+        -8
+      ],
+      [
+        8,
+        0
+      ],
+      [
+        0,
+        8
+      ]
+    ],
+    "enemies": [
+      {
+        "room": 1,
+        "count": 2,
+        "level": 44
+      },
+      {
+        "room": 2,
+        "count": 2,
+        "level": 45
+      }
+    ],
+    "boss": false
+  },
+  {
+    "floor": 9,
+    "height": 10,
+    "rooms": 4,
+    "order": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "doors": [
+      [
+        0,
+        -8
+      ],
+      [
+        8,
+        0
+      ],
+      [
+        0,
+        8
+      ]
+    ],
+    "enemies": [
+      {
+        "room": 1,
+        "count": 2,
+        "level": 45
+      },
+      {
+        "room": 2,
+        "count": 2,
+        "level": 45
+      }
+    ],
+    "boss": false
+  },
+  {
+    "floor": 10,
+    "height": 14,
+    "rooms": 1,
+    "order": [
+      3,
+      1
+    ],
+    "doors": [],
+    "enemies": [],
+    "boss": true
+  }
+]
