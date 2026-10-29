@@ -2,6 +2,8 @@
 
 Diez planos individuales, en PNG y SVG, y una galería en `index.html`.
 
+Versión 141: los pasillos se rediseñan como tres conexiones cerradas con muros hasta el techo, sin cruce central. El mapa del juego muestra la geometría actual, las salas numeradas según el recorrido y flechas hasta la subida. Estos archivos conservan el diseño original de la versión 139; véase [la actualización 141](../../ACTUALIZACION141.md).
+
 - Pisos 1–9: cuatro salas en cadena, sin puerta entre las salas occidentales.
 - Dos enemigos en cada sala oriental; cuatro por planta, de nivel 35 a 45.
 - Cuatro especies: Guardián de Basalto, Bestia de Brasa, Vigía Carmesí y Oráculo de Ceniza.

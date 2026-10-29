@@ -73,7 +73,7 @@ const __v139Mat=__v85Mat;__v85Mat=function(a,role){return a?.tower139?__v139Mate
 function __v139Flight(index){return index%2?{x:-11,z0:-3,z1:-13}:{x:-11,z0:3,z1:13};}
 function __v139Hole(st){const sign=Math.sign(st.z1-st.z0),lo=Math.min(st.z0-sign*.25,st.z1+sign*.25),hi=Math.max(st.z0-sign*.25,st.z1+sign*.25);return[[st.x-2,lo],[st.x+2,lo],[st.x+2,hi],[st.x-2,hi]];}
 function __v139Wall(a,p,q,h=a.ceilingHeight88,base=0,exterior=false){
- const root=__v84Wall(a,p,q,h,base,.65,'aurora139-wall');a.design.constructionWalls85.push([...p,...q]);
+ const root=__v84Wall(a,p,q,h,base,.65,'aurora139-wall');if(base<.1)a.design.constructionWalls85.push([...p,...q]);
  if(exterior&&root){const w=Math.hypot(q[0]-p[0],q[1]-p[1]),m=new _0.Mesh(__v85BoxGeo(w,h,.12),__v139Material('stone'));m.position.set(0,h/2,p[0]===q[0]?Math.sign(p[0])*.4:-Math.sign(p[1])*.4);root.add(m);}
 }
 function __v139Span(a,axis,pos,lo,hi,doors=[],exterior=false){
@@ -84,11 +84,14 @@ function __v139Span(a,axis,pos,lo,hi,doors=[],exterior=false){
 function __v139Floor(index){
  const s=__v88Island,top=index===9,h=top?14:10,incoming=index?__v139Flight(index-1):null,outgoing=top?null:__v139Flight(index),outer=__v95Ring([-16,-16,16,16]);
  const rects=top?[[-16,-16,16,16]]:[[-16,-16,-2,-2],[2,-16,16,-2],[2,2,16,16],[-16,2,-2,16]],centers=top?[[0,0]]:__v139.centers.map(p=>[...p]);
- const d={key:'aurora139-'+index,name:'Torre de la Aurora · Planta '+(index+1),bounds:[-20,-16,20,16],centers,rects,main:top?[0]:index%2?[3,2,1,0]:[0,1,2,3],rooms:top?['Salón del Dragón']:['Vestíbulo','Sala de Basalto','Sala del Oráculo','Escalinata'],room_fills:rects.map(r=>({polygon:__v95Ring(r),color:'#657d90'})),constructionWalls85:[],walls:[],trap_info:[],secretRooms85:[],arrowTraps85:[],markers:{J:top?[[7,-7]]:[],A:[],B:[],F1:[],F2:[],MP:[],U:[]},props:{fountains:[],barrels:[],enemies:[]},roofPolygons85:[{outer,holes:outgoing?[__v139Hole(outgoing)]:[]}],roofOpenings85:outgoing?[{outer:__v139Hole(outgoing),holes:[]}]:[],polygons:[{outer,holes:incoming?[__v139Hole(incoming)]:[]}],accent:'#697f90',floor:'#8193a0',boss:'Dragón de la Aurora Carmesí'};
+ // Three enclosed corridors form a U. There is no shared central hall or fourth connection.
+ const corridors=top?[]:[[-2,-9.6,2,-6.4],[6.4,-2,9.6,2],[-2,6.4,2,9.6]],walk=[...rects,...corridors];
+ const d={key:'aurora139-'+index,name:'Torre de la Aurora · Planta '+(index+1),bounds:[-20,-16,20,16],centers,rects,main:top?[0]:index%2?[3,2,1,0]:[0,1,2,3],rooms:top?['Salón del Dragón']:['Vestíbulo','Sala de Basalto','Sala del Oráculo','Escalinata'],room_fills:rects.map(r=>({polygon:__v95Ring(r),color:'#657d90'})),constructionWalls85:[],walls:[],furniture:[],addedTraps85:[],trap_info:[],secretRooms85:[],arrowTraps85:[],markers:{J:top?[[7,-7]]:[],A:[],B:[],F1:[],F2:[],MP:[],U:[]},props:{fountains:[],barrels:[],enemies:[]},roofPolygons85:[{outer,holes:outgoing?[__v139Hole(outgoing)]:[]}],roofOpenings85:outgoing?[{outer:__v139Hole(outgoing),holes:[]}]:[],polygons:[{outer,holes:incoming?[__v139Hole(incoming)]:[]}],accent:'#697f90',floor:'#8193a0',boss:'Dragón de la Aurora Carmesí'};
  const a={key:d.key,name:d.name,site:__v88IslandSite,x:s.x,z:s.z,y:s.y+index*10,cx:0,cz:0,w:20,d:16,rank:6,level:Math.min(45,35+Math.round(index*10/8)),biome:'volcano',tower139:true,floor139:index,ceilingHeight88:h,design:d,groups:[],members:[],doors:[],colliders:[],traps:[],pads:[],stairs:[],platforms:[],annexRooms:[],incoming139:incoming,balconies139:[]};
+ d.polygons=walk.map(r=>({outer:__v95Ring(r),holes:incoming&&__v84PointInRing([incoming.x,(incoming.z0+incoming.z1)/2],__v95Ring(r))?[__v139Hole(incoming)]:[]}));
  __v139.areas.push(a);__v83.areas.push(a);__v75.areas.push(a);a.rooms=centers.map(p=>__v83Point(a,p));a.path=d.main.map(i=>a.rooms[i]);
  if(!top)d.rooms=centers.map((p,i)=>'Sala '+(d.main.indexOf(i)+1));a.entry=incoming?{...__v83Point(a,[incoming.x,incoming.z1+Math.sign(incoming.z1-incoming.z0)*.9]),y:a.y}:{...__v83Point(a,[-15,-8]),y:a.y};a.exit=a.entry;
- __v85PlanMesh(a,d.polygons[0],0,'floor');__v85PlanMesh(a,d.roofPolygons85[0],h,'roof');a.roof={height:a.y+h,polygons:d.roofPolygons85,holes:d.roofOpenings85,groups:[]};
+ for(const poly of d.polygons)__v85PlanMesh(a,poly,0,'floor');__v85PlanMesh(a,d.roofPolygons85[0],h,'roof');a.roof={height:a.y+h,polygons:d.roofPolygons85,holes:d.roofOpenings85,groups:[]};
  __v139Span(a,'x',-16,-16,16,[],true);__v139Span(a,'x',16,-16,16,[],true);
  for(const side of [-1,1]){
   __v139Span(a,'z',side*16,-16,16,index?[-8,8]:side<0?[-8]:[],true);if(!index)continue;
@@ -96,7 +99,13 @@ function __v139Floor(index){
    for(const l of [[r[0],r[1],r[2],r[1]],[r[0],r[3],r[2],r[3]],[side*20,r[1],side*20,r[3]]])__v139Wall(a,l.slice(0,2),l.slice(2),1.25);
   }
  }
- if(!top){for(const x of [-2,2])__v139Span(a,'z',x,-16,16,[-8,8]);for(const z of [-2,2])__v139Span(a,'x',z,-16,16,[8]);} a.walk139=top?rects:[...rects,[-2,-9.6,2,-6.4],[-2,6.4,2,9.6],[6.4,-2,9.6,2]];a.__v92Regions=[...a.walk139,...a.balconies139];d.polygons.push(...a.balconies139.map(r=>({outer:__v95Ring(r),holes:[]})));
+ if(!top){
+  for(const x of [-2,2])__v139Span(a,'z',x,-16,16,[-8,8]);for(const z of [-2,2])__v139Span(a,'x',z,-16,16,[8]);
+  // Seal both sides of each corridor with masonry all the way to the ceiling.
+  for(const z of [-9.6,-6.4,6.4,9.6])__v139Wall(a,[-2.25,z],[2.25,z]);
+  for(const x of [6.4,9.6])__v139Wall(a,[x,-2.25],[x,2.25]);
+ }
+ a.walk139=walk;a.__v92Regions=[...a.walk139,...a.balconies139];d.polygons.push(...a.balconies139.map(r=>({outer:__v95Ring(r),holes:[]})));
  __v139Torches(a);
  const root=new _0.Group();root.name=d.name;_8.add(root);for(const g of a.groups)root.attach(g);a.root=root;a.groups=[root];__v85MergeArchitecture(a);
  _e7.push({key:a.key,x:a.x,z:a.z,y:a.y,path:a.path,cell:8,kind:'aurora139'});return a;
